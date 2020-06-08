@@ -7,7 +7,7 @@ rvm:
 before_install:
   - git clone https://github.com/slatedocs/slate.git slate
   - rm -r slate/source
-  - cp source slate/source
+  - cp -r source slate/source
   - cd slate
   - gem update --system
   - gem install bundler
