@@ -13,7 +13,7 @@ before_install:
   - gem install bundler
 
 script:
-  - exec middleman build
+  - ./deploy.sh --source-only
 
 deploy:
   provider: pages
