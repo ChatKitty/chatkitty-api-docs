@@ -7,10 +7,13 @@ rvm:
 before_install:
   - gem update --system
   - gem install bundler
-  - chmod +x deploy.sh
+  - git clone https://github.com/slatedocs/slate.git slate
 
 script:
-  - ./deploy.sh
+  - rm -r slate/source
+  - cp source slate/source
+  - cd slate
+  - exec middleman build
 
 deploy:
   provider: pages
