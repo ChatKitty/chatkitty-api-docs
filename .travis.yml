@@ -10,7 +10,7 @@ cache:
 
 before_install:
   - cd slate
-  - git clone https://github.com/slatedocs/slate.git
+  - git clone https://github.com/slatedocs/slate.git .
   - rm -r ./source/*
   - cp -r ../source ./source
   - gem update --system
