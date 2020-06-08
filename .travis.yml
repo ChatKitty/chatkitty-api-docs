@@ -4,6 +4,8 @@ cache: bundler
 rvm:
   - 2.5.3
 
+gemfile: slate/Gemfile
+
 before_install:
   - git clone https://github.com/slatedocs/slate.git slate
   - rm -r slate/source
