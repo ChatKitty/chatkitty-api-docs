@@ -5,6 +5,7 @@ rvm:
 
 cache:
   directories:
+    - vendor/bundle
     - /home/travis/.rvm/
     - $HOME/.gem
 
