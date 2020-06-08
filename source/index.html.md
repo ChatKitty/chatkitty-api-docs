@@ -8,7 +8,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - javascript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
+  - <a href='https://www.chatkitty.com'>&copy; ChatKitty 2020. All rights reserved</a>
 
 includes:
   - errors
