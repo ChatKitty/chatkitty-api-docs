@@ -9,8 +9,9 @@ cache:
     - slate/vendor/bundle
 
 before_install:
-  - git clone https://github.com/slatedocs/slate.git slate
-  - rm -r slate/source
+  - git clone https://github.com/slatedocs/slate.git temp
+  - rm -r temp/source
+  - mv temp slate
   - cp -r source slate/source
   - cd slate
   - gem update --system
