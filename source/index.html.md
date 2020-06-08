@@ -3,7 +3,9 @@ title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
-  - kotlin
+  - ruby
+  - python
+  - javascript
 
 toc_footers:
   - <a href='https://www.chatkitty.com'>&copy; ChatKitty 2020. All rights reserved</a>
@@ -26,10 +28,28 @@ This example API documentation page was created with [Slate](https://github.com/
 
 > To authorize, use this code:
 
-```kotlin
-import com.chatkitty.Kittn
+```ruby
+require 'kittn'
 
-val api = Kittn.authorize('meowmeowmeow')
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+```
+
+```python
+import kittn
+
+api = kittn.authorize('meowmeowmeow')
+```
+
+```shell
+# With shell, you can just pass the correct header with each request
+curl "api_endpoint_here"
+  -H "Authorization: meowmeowmeow"
+```
+
+```javascript
+const kittn = require('kittn');
+
+let api = kittn.authorize('meowmeowmeow');
 ```
 
 > Make sure to replace `meowmeowmeow` with your API key.
@@ -48,12 +68,30 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 
 ## Get All Kittens
 
-```kotlin
-import com.chatkitty.Kittn
+```ruby
+require 'kittn'
 
-val api = Kittn.authorize('meowmeowmeow')
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+api.kittens.get
+```
 
-api.kittens()
+```python
+import kittn
+
+api = kittn.authorize('meowmeowmeow')
+api.kittens.get()
+```
+
+```shell
+curl "http://example.com/api/kittens"
+  -H "Authorization: meowmeowmeow"
+```
+
+```javascript
+const kittn = require('kittn');
+
+let api = kittn.authorize('meowmeowmeow');
+let kittens = api.kittens.get();
 ```
 
 > The above command returns JSON structured like this:
@@ -96,12 +134,30 @@ Remember — a happy kitten is an authenticated kitten!
 
 ## Get a Specific Kitten
 
-```kotlin
-import com.chatkitty.Kittn
+```ruby
+require 'kittn'
 
-val api = Kittn.authorize('meowmeowmeow')
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+api.kittens.get(2)
+```
 
-val kitten = api.kittens()[2]
+```python
+import kittn
+
+api = kittn.authorize('meowmeowmeow')
+api.kittens.get(2)
+```
+
+```shell
+curl "http://example.com/api/kittens/2"
+  -H "Authorization: meowmeowmeow"
+```
+
+```javascript
+const kittn = require('kittn');
+
+let api = kittn.authorize('meowmeowmeow');
+let max = api.kittens.get(2);
 ```
 
 > The above command returns JSON structured like this:
@@ -132,12 +188,31 @@ ID | The ID of the kitten to retrieve
 
 ## Delete a Specific Kitten
 
-```kotlin
-import com.chatkitty.Kittn
+```ruby
+require 'kittn'
 
-val api = Kittn.authorize('meowmeowmeow')
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+api.kittens.delete(2)
+```
 
-api.kittens()[2].delete()
+```python
+import kittn
+
+api = kittn.authorize('meowmeowmeow')
+api.kittens.delete(2)
+```
+
+```shell
+curl "http://example.com/api/kittens/2"
+  -X DELETE
+  -H "Authorization: meowmeowmeow"
+```
+
+```javascript
+const kittn = require('kittn');
+
+let api = kittn.authorize('meowmeowmeow');
+let max = api.kittens.delete(2);
 ```
 
 > The above command returns JSON structured like this:
