@@ -1,5 +1,5 @@
 ---
-title: ChatKitty
+title: ChatKitty API Docs
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
