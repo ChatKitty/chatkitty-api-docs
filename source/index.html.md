@@ -2,10 +2,7 @@
 title: ChatKitty API Documentation
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - ruby
-  - python
-  - javascript
+  - java
 
 toc_footers:
   - <a href='https://www.chatkitty.com'>&copy; ChatKitty 2020. All rights reserved</a>
@@ -16,13 +13,16 @@ includes:
 search: true
 ---
 
-# Introduction
+# Overview
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+ChatKitty provides a **Platform API**, and a number of client SDKs to directly interact with the different types of resources representing data in your ChatKitty application.
+The ChatKitty Platform API is RESTful, using the HTTP protocol to expose discoverable [HAL](http://stateless.co/hal_specification.html) resources.
+The client libraries provide an asynchronous WebSocket based interface to ChatKitty's user-side functionality.  While the client SDKs handle the requests and responses at the client-side,
+the Platform API provides an interface for you to manage and control your application server-side.
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
+<aside class="notice">
+Note: The Platform API is not designed for client-side use.
+</aside>
 
 # Authentication
 
