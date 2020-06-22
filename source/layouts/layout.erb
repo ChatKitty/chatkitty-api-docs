@@ -86,6 +86,11 @@ under the License.
             <% end %>
           </li>
         <% end %>
+        <% if current_page.url == '/' %>
+          <li>
+            <a href="/platform" class="toc-h1 toc-link" data-title="Platform">Platform API</a>
+          </li>
+        <% end %>
       </ul>
       <% if current_page.data.toc_footers %>
         <ul class="toc-footer">
