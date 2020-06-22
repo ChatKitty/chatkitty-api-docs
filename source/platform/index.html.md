@@ -32,11 +32,6 @@ to access protected resources. A valid access token can be retrieved from the Ch
 using your application's client ID and client secret. 
 
 # Authentication
-Retrieve an **OAuth 2.0 Bearer access token** with the client credentials OAuth flow.
-
-Retrieving a Bearer access token requires a ChatKitty application client ID and client secret. 
-
-You can create a ChatKitty application and receive client credentials by [contacting us](https://www.chatkitty.com/contact/).
 
 > To authorize use this replacing `acme` with your client ID and `acmesecret` with your client secret:
 
@@ -62,6 +57,12 @@ curl --location --request POST 'https://staging-authorization.chatkitty.com/oaut
 > `access_token` is the bearer access token.
 > `expires_in` represents the access token's validity in seconds.
 
+Retrieve an **OAuth 2.0 Bearer access token** with the client credentials OAuth flow.
+
+Retrieving a Bearer access token requires a ChatKitty application client ID and client secret. 
+
+You can create a ChatKitty application and receive client credentials by [contacting us](https://www.chatkitty.com/contact/).
+
 ChatKitty expects a valid Bearer access token to be included in all API requests like this:
 
 `Authorization: Bearer {{access_token}}`
@@ -81,7 +82,7 @@ curl --location --request GET 'https://staging-api.chatkitty.com/v1' \
 --header 'Authorization: Bearer {{access_token}}'
 ```
 
-> The above command returns a HAL resource with links to top-level ChatKitty resources:
+> The command above returns a HAL resource with links to top-level ChatKitty resources:
 
 ```json
 {
@@ -102,70 +103,62 @@ This endpoint returns the root of your ChatKitty application graph.
 
 `GET https://staging-api.chatkitty.com/v1`
 
+### HAL links
+Link | Methods | Description
+--------- | ----------- | -----------
+[self](#v1-api) | GET | Self link to the V1 API. 
+[application](#application) | GET | The ChatKitty application currently authenticated.
 
 <aside class="success">
 This is the only URL needed to discover the rest of the Platform API as every other URL is returned as a REST link.
 </aside>
 
-## Get a Specific Kitten
+# Application
+An application represents the current ChatKitty application and can be used to configure the application.
+
+## Properties
+Name | Type | Description 
+--------- | ----------- | -----------
+id | Long | 64 bit Integer identifier associated with this application 
+name | String | The name of the ChatKitty application 
+key | String | Unique string used as an API key for this application client-side 
+
+### HAL links
+Link | Methods | Description
+--------- | ----------- | -----------
+[self](#application) | GET | Self link to this application. 
+[users](#user) | POST, GET | Users belonging to this application.
+[channels](#channel) | POST, GET | Channels belonging to this application.
+[organization](#organization) | GET | Organization this application belongs to. 
+
+## Get an Application
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
+curl --location --request GET '{{application_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}'
 ```
 
-> The above command returns JSON structured like this:
+> The command above returns an application HAL resource:
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "id": 52,
+  "name": "ChatKitty",
+  "key": "107a326f-bfab-4d2c-9a5a-fa79bd896929",
+  "_links": {
+    "self": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/52"
+    },
+    "users": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/52/users"
+    },
+    "channels": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/52/channels"
+    },
+    "organization": {
+      "href": "https://staging-api.chatkitty.com/v1/organizations/52"
+    }
+  }
 }
 ```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
-
