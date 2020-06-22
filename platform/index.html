@@ -235,11 +235,16 @@
                   <li>
                     <a href="#get-api-root" class="toc-h2 toc-link" data-title="Get API Root">Get API Root</a>
                   </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#application" class="toc-h1 toc-link" data-title="Application">Application</a>
+              <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#properties" class="toc-h2 toc-link" data-title="Properties">Properties</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#get-an-application" class="toc-h2 toc-link" data-title="Get an Application">Get an Application</a>
                   </li>
               </ul>
           </li>
@@ -271,12 +276,6 @@ access the Platform API.</p>
 to access protected resources. A valid access token can be retrieved from the ChatKitty Authorization Service 
 using your application&#39;s client ID and client secret. </p>
 <h1 id='authentication'>Authentication</h1>
-<p>Retrieve an <strong>OAuth 2.0 Bearer access token</strong> with the client credentials OAuth flow.</p>
-
-<p>Retrieving a Bearer access token requires a ChatKitty application client ID and client secret. </p>
-
-<p>You can create a ChatKitty application and receive client credentials by <a href="https://www.chatkitty.com/contact/">contacting us</a>.</p>
-
 <blockquote>
 <p>To authorize use this replacing <code>acme</code> with your client ID and <code>acmesecret</code> with your client secret:</p>
 </blockquote>
@@ -301,6 +300,12 @@ using your application&#39;s client ID and client secret. </p>
 <code>expires_in</code> represents the access token&#39;s validity in seconds.</p>
 </blockquote>
 
+<p>Retrieve an <strong>OAuth 2.0 Bearer access token</strong> with the client credentials OAuth flow.</p>
+
+<p>Retrieving a Bearer access token requires a ChatKitty application client ID and client secret. </p>
+
+<p>You can create a ChatKitty application and receive client credentials by <a href="https://www.chatkitty.com/contact/">contacting us</a>.</p>
+
 <p>ChatKitty expects a valid Bearer access token to be included in all API requests like this:</p>
 
 <p><code>Authorization: Bearer {{access_token}}</code></p>
@@ -315,7 +320,7 @@ You must replace <code>{{access_token}}</code> with an access token gotten using
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
 </code></pre></div>
 <blockquote>
-<p>The above command returns a HAL resource with links to top-level ChatKitty resources:</p>
+<p>The command above returns a HAL resource with links to top-level ChatKitty resources:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -331,69 +336,111 @@ You must replace <code>{{access_token}}</code> with an access token gotten using
 <p>This endpoint returns the root of your ChatKitty application graph. </p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>GET https://staging-api.chatkitty.com/v1</code></p>
+<h3 id='hal-links'>HAL links</h3>
+<table><thead>
+<tr>
+<th>Link</th>
+<th>Methods</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="#v1-api">self</a></td>
+<td>GET</td>
+<td>Self link to the V1 API.</td>
+</tr>
+<tr>
+<td><a href="#application">application</a></td>
+<td>GET</td>
+<td>The ChatKitty application currently authenticated.</td>
+</tr>
+</tbody></table>
 
 <aside class="success">
 This is the only URL needed to discover the rest of the Platform API as every other URL is returned as a REST link.
 </aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
+<h1 id='application'>Application</h1>
+<p>An application represents the current ChatKitty application and can be used to configure the application.</p>
+<h2 id='properties'>Properties</h2>
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Name</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>id</td>
+<td>Long</td>
+<td>64 bit Integer identifier associated with this application</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The name of the ChatKitty application</td>
+</tr>
+<tr>
+<td>key</td>
+<td>String</td>
+<td>Unique string used as an API key for this application client-side</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  <span class="nt">-X</span> DELETE
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
+<h3 id='hal-links-2'>HAL links</h3>
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Link</th>
+<th>Methods</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
+<td><a href="#application">self</a></td>
+<td>GET</td>
+<td>Self link to this application.</td>
+</tr>
+<tr>
+<td><a href="#user">users</a></td>
+<td>POST, GET</td>
+<td>Users belonging to this application.</td>
+</tr>
+<tr>
+<td><a href="#channel">channels</a></td>
+<td>POST, GET</td>
+<td>Channels belonging to this application.</td>
+</tr>
+<tr>
+<td><a href="#organization">organization</a></td>
+<td>GET</td>
+<td>Organization this application belongs to.</td>
 </tr>
 </tbody></table>
-<h1 id='errors'>Errors</h1>
+<h2 id='get-an-application'>Get an Application</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{application_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div>
+<blockquote>
+<p>The command above returns an application HAL resource:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">52</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ChatKitty"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"107a326f-bfab-4d2c-9a5a-fa79bd896929"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/channels"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"organization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/organizations/52"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h1 id='errors'>Errors</h1>
 <aside class="notice">
 The Platform API may return any of these HTTP error codes
 </aside>
