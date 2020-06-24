@@ -17,8 +17,10 @@ search: true
 The Platform API provides a RESTful interface for administrators and server-side back-ends to manage
 their ChatKitty applications. 
 
-ChatKitty provides a [API Explorer](https://staging-api.chatkitty.com/v1/explorer/index.html#hkey0=Content-Type&hval0=application/json&uri=/v1/applications/me) to 
+<aside class="success">
+ChatKitty provides a <a href="https://staging-api.chatkitty.com/v1/explorer/index.html#hkey0=Content-Type&hval0=application/json&uri=/v1/applications/me">API Explorer</a> to 
 access the Platform API.
+</aside>
 
 # Headers
 Making a request to the Platform API requires HTTP `Content-Type` and `Authorization` headers.
@@ -77,8 +79,8 @@ The following describes endpoints and resources exposed by the V1 ChatKitty API.
 ## HAL links
 Link | Methods | Description
 --------- | ----------- | -----------
-[self](#v1-api) | GET | Self link to the V1 API. 
-[application](#application) | GET | The ChatKitty application currently authenticated.
+[self](#v1-api) | [GET](#get-api-root) | Self link to the V1 API. 
+[application](#application) | [GET](#get-application) | The ChatKitty application currently authenticated.
 
 ## Get API Root
 
@@ -126,12 +128,12 @@ key | String | Unique string used as an API key for this application client-side
 ## HAL links
 Link | Methods | Description
 --------- | ----------- | -----------
-[self](#application) | [GET](#get-an-application) | Self link to this application. 
+[self](#application) | [GET](#get-application) | Self link to this application. 
 [users](#user) | [POST](#create-a-user), [GET](#get-users) | Users belonging to this application.
 [channels](#channel) | [POST](#create-a-channel), [GET](#get-channel) | Channels belonging to this application.
 [organization](#organization) | [GET](#get-organization) | Organization this application belongs to. 
 
-## Get an Application
+## Get Application
 
 ```shell
 curl --location --request GET '{{application_link}}' \
@@ -169,7 +171,7 @@ This endpoint returns a resource representing your ChatKitty application.
 `GET {{application_link}}`
 
 # User
-Users can chat with each other by joining channels. They are identified by their own unique ID.
+Users can chat with each other by joining channels. They are identified by their own unique user name.
 
 ## Properties
 Name | Type | Description 
@@ -182,7 +184,7 @@ Link | Methods | Description
 --------- | ----------- | -----------
 [self](#user) | [GET](#get-a-user) | Self link to this user.
 [channels](#channel) | [GET](#get-a-channel) | Channels this user has access to - meaning the user has joined or can join. 
-[application](#application) | [GET](#get-an-application) | Link to your application resource. 
+[application](#application) | [GET](#get-application) | Link to your application resource. 
 
 ## Get Users
 
@@ -212,27 +214,54 @@ curl --location --request GET '{{users_link}}' \
             "href": "https://staging-api.chatkitty.com/v1/applications/52"
           }
         }
+      },
+      {
+        "id": 54,
+        "name": "1027466852",
+        "_links": {
+          "self": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/52/users/54"
+          },
+          "channels": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/52/users/54/channels"
+          },
+          "application": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/52"
+          }
+        }
       }
     ]
   },
   "_links": {
+    "first": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/52/users?page=0&size=2"
+    },
+    "prev": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/52/users?page=0&size=2"
+    },
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/52/users?page=0&size=20"
+      "href": "https://staging-api.chatkitty.com/v1/applications/52/users?page=1&size=2"
+    },
+    "next": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/52/users?page=2&size=2"
+    },
+    "last": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/52/users?page=2&size=2"
     }
   },
   "page": {
-    "size": 1,
-    "totalElements": 3,
+    "size": 2,
+    "totalElements": 6,
     "totalPages": 3,
     "number": 1
   }
 }
 ```
 
-This endpoint returns a resource representing a ChatKitty user.
+This endpoint returns a page resource of ChatKitty users.
 
 ### HTTP Request
-`GET {{user_link}}`
+`GET {{users_link}}`
 
 ## Get a User
 
