@@ -233,6 +233,9 @@
             <a href="#v1-api" class="toc-h1 toc-link" data-title="V1 API">V1 API</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#hal-links" class="toc-h2 toc-link" data-title="HAL links">HAL links</a>
+                  </li>
+                  <li>
                     <a href="#get-api-root" class="toc-h2 toc-link" data-title="Get API Root">Get API Root</a>
                   </li>
               </ul>
@@ -244,7 +247,27 @@
                     <a href="#properties" class="toc-h2 toc-link" data-title="Properties">Properties</a>
                   </li>
                   <li>
+                    <a href="#hal-links-2" class="toc-h2 toc-link" data-title="HAL links">HAL links</a>
+                  </li>
+                  <li>
                     <a href="#get-an-application" class="toc-h2 toc-link" data-title="Get an Application">Get an Application</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#user" class="toc-h1 toc-link" data-title="User">User</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#properties-2" class="toc-h2 toc-link" data-title="Properties">Properties</a>
+                  </li>
+                  <li>
+                    <a href="#hal-links-3" class="toc-h2 toc-link" data-title="HAL links">HAL links</a>
+                  </li>
+                  <li>
+                    <a href="#get-users" class="toc-h2 toc-link" data-title="Get Users">Get Users</a>
+                  </li>
+                  <li>
+                    <a href="#get-a-user" class="toc-h2 toc-link" data-title="Get a User">Get a User</a>
                   </li>
               </ul>
           </li>
@@ -315,6 +338,25 @@ You must replace <code>{{access_token}}</code> with an access token gotten using
 </aside>
 <h1 id='v1-api'>V1 API</h1>
 <p>The following describes endpoints and resources exposed by the V1 ChatKitty API.</p>
+<h2 id='hal-links'>HAL links</h2>
+<table><thead>
+<tr>
+<th>Link</th>
+<th>Methods</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="#v1-api">self</a></td>
+<td>GET</td>
+<td>Self link to the V1 API.</td>
+</tr>
+<tr>
+<td><a href="#application">application</a></td>
+<td>GET</td>
+<td>The ChatKitty application currently authenticated.</td>
+</tr>
+</tbody></table>
 <h2 id='get-api-root'>Get API Root</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://staging-api.chatkitty.com/v1'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
@@ -336,31 +378,12 @@ You must replace <code>{{access_token}}</code> with an access token gotten using
 <p>This endpoint returns the root of your ChatKitty application graph. </p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>GET https://staging-api.chatkitty.com/v1</code></p>
-<h3 id='hal-links'>HAL links</h3>
-<table><thead>
-<tr>
-<th>Link</th>
-<th>Methods</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><a href="#v1-api">self</a></td>
-<td>GET</td>
-<td>Self link to the V1 API.</td>
-</tr>
-<tr>
-<td><a href="#application">application</a></td>
-<td>GET</td>
-<td>The ChatKitty application currently authenticated.</td>
-</tr>
-</tbody></table>
 
 <aside class="success">
 This is the only URL needed to discover the rest of the Platform API as every other URL is returned as a REST link.
 </aside>
 <h1 id='application'>Application</h1>
-<p>An application represents the current ChatKitty application and can be used to configure the application.</p>
+<p>An application resource represents the current ChatKitty application and can be used to configure the application.</p>
 <h2 id='properties'>Properties</h2>
 <table><thead>
 <tr>
@@ -372,7 +395,7 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 <tr>
 <td>id</td>
 <td>Long</td>
-<td>64 bit Integer identifier associated with this application</td>
+<td>64 bit integer identifier associated with this application</td>
 </tr>
 <tr>
 <td>name</td>
@@ -385,7 +408,7 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 <td>Unique string used as an API key for this application client-side</td>
 </tr>
 </tbody></table>
-<h3 id='hal-links-2'>HAL links</h3>
+<h2 id='hal-links-2'>HAL links</h2>
 <table><thead>
 <tr>
 <th>Link</th>
@@ -395,22 +418,22 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 </thead><tbody>
 <tr>
 <td><a href="#application">self</a></td>
-<td>GET</td>
+<td><a href="#get-an-application">GET</a></td>
 <td>Self link to this application.</td>
 </tr>
 <tr>
 <td><a href="#user">users</a></td>
-<td>POST, GET</td>
+<td><a href="#create-a-user">POST</a>, <a href="#get-users">GET</a></td>
 <td>Users belonging to this application.</td>
 </tr>
 <tr>
 <td><a href="#channel">channels</a></td>
-<td>POST, GET</td>
+<td><a href="#create-a-channel">POST</a>, <a href="#get-channel">GET</a></td>
 <td>Channels belonging to this application.</td>
 </tr>
 <tr>
 <td><a href="#organization">organization</a></td>
-<td>GET</td>
+<td><a href="#get-organization">GET</a></td>
 <td>Organization this application belongs to.</td>
 </tr>
 </tbody></table>
@@ -440,12 +463,130 @@ This is the only URL needed to discover the rest of the Platform API as every ot
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h1 id='errors'>Errors</h1>
+</span></code></pre></div>
+<p>This endpoint returns a resource representing your ChatKitty application.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET {{application_link}}</code></p>
+<h1 id='user'>User</h1>
+<p>Users can chat with each other by joining channels. They are identified by their own unique ID.</p>
+<h2 id='properties-2'>Properties</h2>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Long</td>
+<td>64 bit integer identifier associated with this user</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The unique name of the user.</td>
+</tr>
+</tbody></table>
+<h2 id='hal-links-3'>HAL links</h2>
+<table><thead>
+<tr>
+<th>Link</th>
+<th>Methods</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="#user">self</a></td>
+<td><a href="#get-a-user">GET</a></td>
+<td>Self link to this user.</td>
+</tr>
+<tr>
+<td><a href="#channel">channels</a></td>
+<td><a href="#get-a-channel">GET</a></td>
+<td>Channels this user has access to - meaning the user has joined or can join.</td>
+</tr>
+<tr>
+<td><a href="#application">application</a></td>
+<td><a href="#get-an-application">GET</a></td>
+<td>Link to your application resource.</td>
+</tr>
+</tbody></table>
+<h2 id='get-users'>Get Users</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{users_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div>
+<blockquote>
+<p>The command above returns a user page HAL resource:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">53</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1017562554"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users/53"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users/53/channels"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users?page=0&amp;size=20"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalElements"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalPages"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"number"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint returns a resource representing a ChatKitty user.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET {{user_link}}</code></p>
+<h2 id='get-a-user'>Get a User</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{user_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div>
+<blockquote>
+<p>The command above returns a user HAL resource:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">53</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1017562554"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users/53"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users/53/channels"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint returns a resource representing a ChatKitty user.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET {{user_link}}</code></p>
+<h1 id='errors'>Errors</h1>
 <aside class="notice">
 The Platform API may return any of these HTTP error codes
 </aside>
 
-<p>The Kittn API uses the following error codes:</p>
+<p>The ChatKitty Platform API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -483,7 +624,7 @@ The Platform API may return any of these HTTP error codes
 </tr>
 <tr>
 <td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too resource kittens! Slow down!</td>
+<td>Too Many Requests -- You&#39;re making too many requests.</td>
 </tr>
 <tr>
 <td>500</td>
