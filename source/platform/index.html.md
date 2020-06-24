@@ -74,6 +74,12 @@ You must replace <code>{{access_token}}</code> with an access token gotten using
 # V1 API
 The following describes endpoints and resources exposed by the V1 ChatKitty API.
 
+## HAL links
+Link | Methods | Description
+--------- | ----------- | -----------
+[self](#v1-api) | GET | Self link to the V1 API. 
+[application](#application) | GET | The ChatKitty application currently authenticated.
+
 ## Get API Root
 
 ```shell
@@ -103,33 +109,27 @@ This endpoint returns the root of your ChatKitty application graph.
 
 `GET https://staging-api.chatkitty.com/v1`
 
-### HAL links
-Link | Methods | Description
---------- | ----------- | -----------
-[self](#v1-api) | GET | Self link to the V1 API. 
-[application](#application) | GET | The ChatKitty application currently authenticated.
-
 <aside class="success">
 This is the only URL needed to discover the rest of the Platform API as every other URL is returned as a REST link.
 </aside>
 
 # Application
-An application represents the current ChatKitty application and can be used to configure the application.
+An application resource represents the current ChatKitty application and can be used to configure the application.
 
 ## Properties
 Name | Type | Description 
 --------- | ----------- | -----------
-id | Long | 64 bit Integer identifier associated with this application 
+id | Long | 64 bit integer identifier associated with this application 
 name | String | The name of the ChatKitty application 
 key | String | Unique string used as an API key for this application client-side 
 
-### HAL links
+## HAL links
 Link | Methods | Description
 --------- | ----------- | -----------
-[self](#application) | GET | Self link to this application. 
-[users](#user) | POST, GET | Users belonging to this application.
-[channels](#channel) | POST, GET | Channels belonging to this application.
-[organization](#organization) | GET | Organization this application belongs to. 
+[self](#application) | [GET](#get-an-application) | Self link to this application. 
+[users](#user) | [POST](#create-a-user), [GET](#get-users) | Users belonging to this application.
+[channels](#channel) | [POST](#create-a-channel), [GET](#get-channel) | Channels belonging to this application.
+[organization](#organization) | [GET](#get-organization) | Organization this application belongs to. 
 
 ## Get an Application
 
@@ -162,3 +162,107 @@ curl --location --request GET '{{application_link}}' \
   }
 }
 ```
+
+This endpoint returns a resource representing your ChatKitty application.
+
+### HTTP Request
+`GET {{application_link}}`
+
+# User
+Users can chat with each other by joining channels. They are identified by their own unique ID.
+
+## Properties
+Name | Type | Description 
+--------- | ----------- | -----------
+id | Long | 64 bit integer identifier associated with this user 
+name | String | The unique name of the user.
+
+## HAL links
+Link | Methods | Description
+--------- | ----------- | -----------
+[self](#user) | [GET](#get-a-user) | Self link to this user.
+[channels](#channel) | [GET](#get-a-channel) | Channels this user has access to - meaning the user has joined or can join. 
+[application](#application) | [GET](#get-an-application) | Link to your application resource. 
+
+## Get Users
+
+```shell
+curl --location --request GET '{{users_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}'
+```
+
+> The command above returns a user page HAL resource:
+
+```json
+{
+  "_embedded": {
+    "users": [
+      {
+        "id": 53,
+        "name": "1017562554",
+        "_links": {
+          "self": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/52/users/53"
+          },
+          "channels": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/52/users/53/channels"
+          },
+          "application": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/52"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "self": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/52/users?page=0&size=20"
+    }
+  },
+  "page": {
+    "size": 1,
+    "totalElements": 3,
+    "totalPages": 3,
+    "number": 1
+  }
+}
+```
+
+This endpoint returns a resource representing a ChatKitty user.
+
+### HTTP Request
+`GET {{user_link}}`
+
+## Get a User
+
+```shell
+curl --location --request GET '{{user_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}'
+```
+
+> The command above returns a user HAL resource:
+
+```json
+{
+  "id": 53,
+  "name": "1017562554",
+  "_links": {
+    "self": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/52/users/53"
+    },
+    "channels": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/52/users/53/channels"
+    },
+    "application": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/52"
+    }
+  }
+}
+```
+
+This endpoint returns a resource representing a ChatKitty user.
+
+### HTTP Request
+`GET {{user_link}}`
