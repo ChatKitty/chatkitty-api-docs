@@ -52,7 +52,7 @@ curl --location --request POST 'https://staging-authorization.chatkitty.com/oaut
   "access_token": "d4327889-26a8-49ac-997c-56d8b1bcb09c",
   "token_type": "bearer",
   "expires_in": 42892,
-  "scope": "org:52:app"
+  "scope": "org:1:app"
 }
 ```
 
@@ -93,28 +93,28 @@ curl --location --request GET '{{users_link}}' \
         "name": "1017562554",
         "_links": {
           "self": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/52/users/53"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53"
           },
           "channels": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/52/users/53/channels"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53/channels"
           },
           "application": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/52"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1"
           }
         }
       },
       {
         "id": 54,
-        "name": "1027466852",
+        "name": "102746681",
         "_links": {
           "self": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/52/users/54"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/54"
           },
           "channels": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/52/users/54/channels"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/54/channels"
           },
           "application": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/52"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1"
           }
         }
       }
@@ -122,19 +122,19 @@ curl --location --request GET '{{users_link}}' \
   },
   "_links": {
     "first": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/52/users?page=0&size=2"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=0&size=2"
     },
     "prev": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/52/users?page=0&size=2"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=0&size=2"
     },
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/52/users?page=1&size=2"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=1&size=2"
     },
     "next": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/52/users?page=2&size=2"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=2&size=2"
     },
     "last": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/52/users?page=2&size=2"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=2&size=2"
     }
   },
   "page": {
@@ -179,13 +179,13 @@ A single property with the name is the resource collection name, and a value tha
         "name": "1017562554",
         "_links": {
           "self": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/52/users/53"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53"
           },
           "channels": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/52/users/53/channels"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53/channels"
           },
           "application": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/52"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1"
           }
         }
       },
@@ -276,18 +276,18 @@ curl --location --request GET '{{application_link}}' \
 
 ```json
 {
-  "id": 52,
-  "name": "ChatKitty",
+  "id": 1,
+  "name": "ChatKitty Application",
   "key": "107a326f-bfab-4d2c-9a5a-fa79bd896929",
   "_links": {
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/52"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1"
     },
     "users": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/52/users"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users"
     },
     "channels": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/52/channels"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels"
     }
   }
 }
@@ -332,13 +332,13 @@ curl --location --request POST '{{users_link}}' \
   "name": "37282832193",
   "_links": {
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/2/users/402"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/402"
     },
     "channels": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/2/users/402/channels"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/402/channels"
     },
     "application": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/2"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1"
     }
   }
 }
@@ -372,28 +372,28 @@ curl --location --request GET '{{users_link}}' \
         "name": "1017562554",
         "_links": {
           "self": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/52/users/53"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53"
           },
           "channels": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/52/users/53/channels"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53/channels"
           },
           "application": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/52"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1"
           }
         }
       },
       {
         "id": 54,
-        "name": "1027466852",
+        "name": "102746681",
         "_links": {
           "self": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/52/users/54"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/54"
           },
           "channels": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/52/users/54/channels"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/54/channels"
           },
           "application": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/52"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1"
           }
         }
       }
@@ -401,19 +401,19 @@ curl --location --request GET '{{users_link}}' \
   },
   "_links": {
     "first": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/52/users?page=0&size=2"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=0&size=2"
     },
     "prev": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/52/users?page=0&size=2"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=0&size=2"
     },
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/52/users?page=1&size=2"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=1&size=2"
     },
     "next": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/52/users?page=2&size=2"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=2&size=2"
     },
     "last": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/52/users?page=2&size=2"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=2&size=2"
     }
   },
   "page": {
@@ -425,7 +425,7 @@ curl --location --request GET '{{users_link}}' \
 }
 ```
 
-This endpoint returns a [page](#pagination) resource of ChatKitty users.
+This endpoint returns a user [page](#pagination) resource.
 
 ### HTTP Request
 `GET {{users_link}}`
@@ -445,13 +445,13 @@ curl --location --request GET '{{user_link}}' \
   "name": "1017562554",
   "_links": {
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/52/users/53"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53"
     },
     "channels": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/52/users/53/channels"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53/channels"
     },
     "application": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/52"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1"
     }
   }
 }
@@ -473,18 +473,18 @@ curl --location --request DELETE '{{user_link}}' \
 
 ```json
 {
-  "id": 52,
-  "name": "ChatKitty",
+  "id": 1,
+  "name": "ChatKitty Application",
   "key": "107a326f-bfab-4d2c-9a5a-fa79bd896929",
   "_links": {
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/52"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1"
     },
     "users": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/52/users"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users"
     },
     "channels": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/52/channels"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels"
     }
   }
 }
@@ -494,3 +494,216 @@ This endpoint deletes a ChatKitty user and returns the application the user belo
 
 ### HTTP Request
 `DELETE {{user_link}}`
+
+# Channel
+Channels form the basis of the ChatKitty chat experience. [Users](#user) can join channels and receive 
+or send [messages](#message). ChatKitty broadcasts messages created in channels to channel members via 
+a chat session or push notifications.
+
+There are three types of channels; [Open Channels](#open-channel), [Public Channels](#public-channel), 
+and [Private Channels](#private-channel).
+
+## Open Channel
+Open channels provide Twitch-style chats where many users can join the chat without invites and send 
+messages. 
+
+<aside class="notice">
+Messages sent in open channels are **ephemeral** and not persisted by ChatKitty.
+</aside>
+
+## Public Channel
+Users can join public channels by themselves (like an open chat) or via invites from an existing channel member.
+ChatKitty persists messages sent in public channels by default but this behaviour can be configured.
+
+## Private Channel
+Users can only join private channels via invites from an existing channel member.
+ChatKitty persists messages sent in private channels by default but this behaviour can be configured.
+
+## Properties
+Name | Type | Description 
+--------- | ----------- | -----------
+id | Long | 64 bit integer identifier associated with this user 
+type | Enum | The type of this channel. __Possible values__ are [OPEN](#open-channel), [PUBLIC](#public-channel), and [PRIVATE](#private-channel)
+name | String | The name of this channel
+
+## HAL links
+Link | Methods | Description
+--------- | ----------- | -----------
+[self](#channel) | [GET](#get-a-channel), [DELETE](#delete-a-channel) | Self link to this channel.
+[messages](#messages) | [POST](#create-a-message), [GET](#get-messages) | Messages sent in this channel. 
+[application](#application) | [GET](#get-application) | Link to your application resource. 
+
+## Create a Channel
+```shell
+curl --location --request POST '{{channels_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}' \
+--data-raw '{
+    "type": "OPEN"
+    "name": "Open Chat"
+}'
+```
+
+> The command above returns a channel HAL resource:
+
+```json
+{
+  "id": 1,
+  "type": "OPEN",
+  "name": "Open Chat",
+  "_links": {
+    "self": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/1"
+    },
+    "messages": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/1/messages"
+    },
+    "application": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1"
+    }
+  }
+}
+```
+
+This endpoint creates a new channel.
+
+### HTTP Request
+`POST {{channels_link}}`
+
+### Request Body (JSON)
+Parameter | Type | Description 
+--------- | ----------- | -----------
+type | Enum | The type of the channel. __Possible values__ are [OPEN](#open-channel), [PUBLIC](#public-channel), and [PRIVATE](#private-channel)
+name | String | The name of the channel
+
+## Get Channels
+```shell
+curl --location --request GET '{{channels_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}'
+```
+
+> The command above returns a channel page HAL resource:
+
+```json
+{
+  "_embedded": {
+    "channels": [
+      {
+        "id": 1,
+        "type": "OPEN",
+        "name": "Open Chat",
+        "_links": {
+          "self": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/1"
+          },
+          "messages": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/1/messages"
+          },
+          "application": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/1"
+          }
+        }
+      },
+      {
+        "id": 2,
+        "type": "PUBLIC",
+        "name": "Public Chat",
+        "_links": {
+          "self": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/2"
+          },
+          "messages": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/2/channels/2/messages"
+          },
+          "application": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/1"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "self": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels?page=0&size=20"
+    }
+  },
+  "page": {
+    "size": 20,
+    "totalElements": 2,
+    "totalPages": 1,
+    "number": 0
+  }
+}
+```
+
+This endpoint returns a channel [page](#pagination) resource.
+
+### HTTP Request
+`GET {{channels_link}}`
+
+## Get a Channel
+```shell
+curl --location --request GET '{{channel_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}'
+```
+
+> The command above returns a channel HAL resource:
+
+```json
+{
+  "id": 1,
+  "type": "OPEN",
+  "name": "Open Chat",
+  "_links": {
+    "self": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/1"
+    },
+    "messages": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/1/messages"
+    },
+    "application": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1"
+    }
+  }
+}
+```
+
+This endpoint returns a channel resource.
+
+### HTTP Request
+`GET {{channel_link}}`
+
+## Delete a Channel
+```shell
+curl --location --request DELETE '{{channel_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}'
+```
+
+> The command above returns your application's HAL resource:
+
+```json
+{
+  "id": 1,
+  "name": "ChatKitty Application",
+  "key": "107a326f-bfab-4d2c-9a5a-fa79bd896929",
+  "_links": {
+    "self": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1"
+    },
+    "users": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users"
+    },
+    "channels": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels"
+    }
+  }
+}
+```
+
+This endpoint deletes a channel and returns your application resource.
+
+### HTTP Request
+`DELETE {{channel_link}}`
