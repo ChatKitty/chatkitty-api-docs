@@ -298,203 +298,6 @@ This endpoint returns a resource representing your ChatKitty application.
 ### HTTP Request
 `GET {{application_link}}`
 
-# User
-Users can chat with each other by joining channels. They are identified by their own unique user name.
-
-## Properties
-Name | Type | Description 
---------- | ----------- | -----------
-id | Long | 64 bit integer identifier associated with this user 
-name | String | The unique name of the user.
-
-## HAL links
-Link | Methods | Description
---------- | ----------- | -----------
-[self](#user) | [GET](#get-a-user), [DELETE](#delete-a-user) | Self link to this user.
-[channels](#channel) | [GET](#get-channels) | Channels this user has access to - meaning the user has joined or can join. 
-[application](#application) | [GET](#get-application) | Link to your application resource. 
-
-## Create a User
-```shell
-curl --location --request POST '{{users_link}}' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer {{access_token}}' \
---data-raw '{
-    "name": "37282832193"
-}'
-```
-
-> The command above returns a user HAL resource:
-
-```json
-{
-  "id": 402,
-  "name": "37282832193",
-  "_links": {
-    "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/402"
-    },
-    "channels": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/402/channels"
-    },
-    "application": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1"
-    }
-  }
-}
-```
-
-This endpoint creates a new ChatKitty user.
-
-### HTTP Request
-`POST {{users_link}}`
-
-### Request Body (JSON)
-Parameter | Type | Description 
---------- | ----------- | -----------
-name | String | The unique name of the user.
-
-## Get Users
-```shell
-curl --location --request GET '{{users_link}}' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer {{access_token}}'
-```
-
-> The command above returns a user page HAL resource:
-
-```json
-{
-  "_embedded": {
-    "users": [
-      {
-        "id": 53,
-        "name": "1017562554",
-        "_links": {
-          "self": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53"
-          },
-          "channels": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53/channels"
-          },
-          "application": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1"
-          }
-        }
-      },
-      {
-        "id": 54,
-        "name": "102746681",
-        "_links": {
-          "self": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/54"
-          },
-          "channels": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/54/channels"
-          },
-          "application": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1"
-          }
-        }
-      }
-    ]
-  },
-  "_links": {
-    "first": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=0&size=2"
-    },
-    "prev": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=0&size=2"
-    },
-    "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=1&size=2"
-    },
-    "next": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=2&size=2"
-    },
-    "last": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=2&size=2"
-    }
-  },
-  "page": {
-    "size": 2,
-    "totalElements": 6,
-    "totalPages": 3,
-    "number": 1
-  }
-}
-```
-
-This endpoint returns a user [page](#pagination) resource.
-
-### HTTP Request
-`GET {{users_link}}`
-
-## Get a User
-```shell
-curl --location --request GET '{{user_link}}' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer {{access_token}}'
-```
-
-> The command above returns a user HAL resource:
-
-```json
-{
-  "id": 53,
-  "name": "1017562554",
-  "_links": {
-    "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53"
-    },
-    "channels": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53/channels"
-    },
-    "application": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1"
-    }
-  }
-}
-```
-
-This endpoint returns a resource representing a ChatKitty user.
-
-### HTTP Request
-`GET {{user_link}}`
-
-## Delete a User
-```shell
-curl --location --request DELETE '{{user_link}}' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer {{access_token}}'
-```
-
-> The command above returns your application's HAL resource:
-
-```json
-{
-  "id": 1,
-  "name": "ChatKitty Application",
-  "key": "107a326f-bfab-4d2c-9a5a-fa79bd896929",
-  "_links": {
-    "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1"
-    },
-    "users": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users"
-    },
-    "channels": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels"
-    }
-  }
-}
-```
-
-This endpoint deletes a ChatKitty user and returns the application the user belonged to.
-
-### HTTP Request
-`DELETE {{user_link}}`
-
 # Channel
 Channels form the basis of the ChatKitty chat experience. [Users](#user) can join channels and receive 
 or send [messages](#message). ChatKitty broadcasts messages created in channels to channel members via 
@@ -508,7 +311,7 @@ Open channels provide Twitch-style chats where many users can join the chat with
 messages. 
 
 <aside class="notice">
-Messages sent in open channels are **ephemeral** and not persisted by ChatKitty.
+Messages sent in open channels are <b>ephemeral</b> and not persisted by ChatKitty.
 </aside>
 
 ## Public Channel
@@ -707,3 +510,200 @@ This endpoint deletes a channel and returns your application resource.
 
 ### HTTP Request
 `DELETE {{channel_link}}`
+
+# User
+Users can chat with each other by joining channels. They are identified by their own unique user name.
+
+## Properties
+Name | Type | Description 
+--------- | ----------- | -----------
+id | Long | 64 bit integer identifier associated with this user 
+name | String | The unique name of the user.
+
+## HAL links
+Link | Methods | Description
+--------- | ----------- | -----------
+[self](#user) | [GET](#get-a-user), [DELETE](#delete-a-user) | Self link to this user.
+[channels](#channel) | [GET](#get-channels) | Channels this user has access to - meaning the user has joined or can join. 
+[application](#application) | [GET](#get-application) | Link to your application resource. 
+
+## Create a User
+```shell
+curl --location --request POST '{{users_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}' \
+--data-raw '{
+    "name": "37282832193"
+}'
+```
+
+> The command above returns a user HAL resource:
+
+```json
+{
+  "id": 402,
+  "name": "37282832193",
+  "_links": {
+    "self": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/402"
+    },
+    "channels": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/402/channels"
+    },
+    "application": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1"
+    }
+  }
+}
+```
+
+This endpoint creates a new ChatKitty user.
+
+### HTTP Request
+`POST {{users_link}}`
+
+### Request Body (JSON)
+Parameter | Type | Description 
+--------- | ----------- | -----------
+name | String | The unique name of the user.
+
+## Get Users
+```shell
+curl --location --request GET '{{users_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}'
+```
+
+> The command above returns a user page HAL resource:
+
+```json
+{
+  "_embedded": {
+    "users": [
+      {
+        "id": 53,
+        "name": "1017562554",
+        "_links": {
+          "self": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53"
+          },
+          "channels": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53/channels"
+          },
+          "application": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/1"
+          }
+        }
+      },
+      {
+        "id": 54,
+        "name": "102746681",
+        "_links": {
+          "self": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/54"
+          },
+          "channels": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/54/channels"
+          },
+          "application": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/1"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "first": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=0&size=2"
+    },
+    "prev": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=0&size=2"
+    },
+    "self": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=1&size=2"
+    },
+    "next": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=2&size=2"
+    },
+    "last": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=2&size=2"
+    }
+  },
+  "page": {
+    "size": 2,
+    "totalElements": 6,
+    "totalPages": 3,
+    "number": 1
+  }
+}
+```
+
+This endpoint returns a user [page](#pagination) resource.
+
+### HTTP Request
+`GET {{users_link}}`
+
+## Get a User
+```shell
+curl --location --request GET '{{user_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}'
+```
+
+> The command above returns a user HAL resource:
+
+```json
+{
+  "id": 53,
+  "name": "1017562554",
+  "_links": {
+    "self": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53"
+    },
+    "channels": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53/channels"
+    },
+    "application": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1"
+    }
+  }
+}
+```
+
+This endpoint returns a resource representing a ChatKitty user.
+
+### HTTP Request
+`GET {{user_link}}`
+
+## Delete a User
+```shell
+curl --location --request DELETE '{{user_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}'
+```
+
+> The command above returns your application's HAL resource:
+
+```json
+{
+  "id": 1,
+  "name": "ChatKitty Application",
+  "key": "107a326f-bfab-4d2c-9a5a-fa79bd896929",
+  "_links": {
+    "self": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1"
+    },
+    "users": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users"
+    },
+    "channels": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels"
+    }
+  }
+}
+```
+
+This endpoint deletes a ChatKitty user and returns the application the user belonged to.
+
+### HTTP Request
+`DELETE {{user_link}}`
