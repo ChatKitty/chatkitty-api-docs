@@ -89,14 +89,14 @@ curl --location --request GET '{{users_link}}' \
   "_embedded": {
     "users": [
       {
-        "id": 53,
+        "id": 1,
         "name": "1017562554",
         "_links": {
           "self": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/1"
           },
           "channels": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53/channels"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/1/channels"
           },
           "application": {
             "href": "https://staging-api.chatkitty.com/v1/applications/1"
@@ -104,14 +104,14 @@ curl --location --request GET '{{users_link}}' \
         }
       },
       {
-        "id": 54,
+        "id": 2,
         "name": "102746681",
         "_links": {
           "self": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/54"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/2"
           },
           "channels": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/54/channels"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/2/channels"
           },
           "application": {
             "href": "https://staging-api.chatkitty.com/v1/applications/1"
@@ -160,10 +160,10 @@ Name | Type | Description
 Link | Methods | Description
 --------- | ----------- | -----------
 [self](#pagination) | [GET](#pagination) | Self link to this page.
-[first](#pagination) | [GET](#pagination) | __Optional:__ Link to the first page of this collection. Present if known.
-[prev](#pagination) | [GET](#pagination) | __Optional:__ Link to the previous page of this collection. Present if there are more items before the first item in this page.
-[next](#pagination) | [GET](#pagination) | __Optional:__ Link to the next page of this collection. Present if there are more items after the last item in this page.
-[last](#pagination) | [GET](#pagination) | __Optional:__ Link to the last page of this collection. Present if known.
+[first](#pagination) | [GET](#pagination) | __Optional:__ Link to the first page of this collection. __Present if__ known.
+[prev](#pagination) | [GET](#pagination) | __Optional:__ Link to the previous page of this collection. __Present if__ there are more items before the first item in this page.
+[next](#pagination) | [GET](#pagination) | __Optional:__ Link to the next page of this collection. __Present if__ there are more items after the last item in this page.
+[last](#pagination) | [GET](#pagination) | __Optional:__ Link to the last page of this collection. __Present if__ known.
 
 ## Embedded properties 
 A single property with the name is the resource collection name, and a value that is an array of resource content of the page.
@@ -175,14 +175,14 @@ A single property with the name is the resource collection name, and a value tha
   "_embedded": {
     "users": [
       {
-        "id": 53,
+        "id": 1,
         "name": "1017562554",
         "_links": {
           "self": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/1"
           },
           "channels": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53/channels"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/1/channels"
           },
           "application": {
             "href": "https://staging-api.chatkitty.com/v1/applications/1"
@@ -204,9 +204,9 @@ Metadata about a page containing its size, total number of elements in the colle
 Name | Type | Description 
 --------- | ----------- | -----------
 size | Int | The number of elements in this page.
-number | Int | __Optional:__ The zero-based index of this page. Present if known.
-totalElements | Long | __Optional:__ The total number of elements in the collection. Present if known.
-totalPages | Int | __Optional:__ The total number of pages in the collection. Present if known.
+number | Int | __Optional:__ The zero-based index of this page. __Present if__ known.
+totalElements | Long | __Optional:__ The total number of elements in the collection. __Present if__ known.
+totalPages | Int | __Optional:__ The total number of pages in the collection. __Present if__ known.
 
 # V1 API
 The following describes endpoints and resources exposed by the V1 ChatKitty API.
@@ -263,7 +263,7 @@ Link | Methods | Description
 --------- | ----------- | -----------
 [self](#application) | [GET](#get-application) | Self link to this application. 
 [users](#user) | [POST](#create-a-user), [GET](#get-users) | Users belonging to this application.
-[channels](#channel) | [POST](#create-a-channel), [GET](#get-channel) | Channels belonging to this application.
+[channels](#channel) | [POST](#create-a-channel), [GET](#get-a-channel) | Channels belonging to this application.
 
 ## Get Application
 ```shell
@@ -299,7 +299,7 @@ This endpoint returns a resource representing your ChatKitty application.
 `GET {{application_link}}`
 
 # Channel
-Channels form the basis of the ChatKitty chat experience. [Users](#user) can join channels and receive 
+Channels are the backbone of the ChatKitty chat experience. [Users](#user) can join channels and receive 
 or send [messages](#message). ChatKitty broadcasts messages created in channels to channel members via 
 a chat session or push notifications.
 
@@ -325,7 +325,7 @@ ChatKitty persists messages sent in private channels by default but this behavio
 ## Properties
 Name | Type | Description 
 --------- | ----------- | -----------
-id | Long | 64 bit integer identifier associated with this user 
+id | Long | 64 bit integer identifier associated with this channel 
 type | Enum | The type of this channel. __Possible values__ are [OPEN](#open-channel), [PUBLIC](#public-channel), and [PRIVATE](#private-channel)
 name | String | The name of this channel
 
@@ -333,7 +333,7 @@ name | String | The name of this channel
 Link | Methods | Description
 --------- | ----------- | -----------
 [self](#channel) | [GET](#get-a-channel), [DELETE](#delete-a-channel) | Self link to this channel.
-[messages](#messages) | [POST](#create-a-message), [GET](#get-messages) | Messages sent in this channel. 
+[messages](#message) | [POST](#create-a-message), [GET](#get-messages) | Messages sent in this channel. 
 [application](#application) | [GET](#get-application) | Link to your application resource. 
 
 ## Create a Channel
@@ -506,10 +506,222 @@ curl --location --request DELETE '{{channel_link}}' \
 }
 ```
 
-This endpoint deletes a channel and returns your application resource.
+This endpoint deletes a channel.
 
 ### HTTP Request
 `DELETE {{channel_link}}`
+
+# Message
+[Users](#user) send messages through your application and administrators can send messages through the Platform API. 
+
+There are four types of messages; [Text Messages](#text-message), [File Messages](#file-message), 
+[System Text Messages](#system-text-message), and [System File Messages](#system-file-message).
+
+## Text Message
+Users can send text messages containing a unicode text body. These messages can contain emojis and other unicode characters
+ but have no file attachments.
+
+## File Message
+Users can send files messages with one, or many file attachments.
+
+## System Text Message
+Administrators can send text messages containing a unicode text body. These messages can contain emojis and other unicode characters
+ but have no file attachments.
+
+## System File Message
+Administrators can send files messages with one, or many file attachments.
+
+<aside class="notice">
+System messages can only be sent using the Platform API
+</aside>
+
+## Properties
+Name | Type | Description 
+--------- | ----------- | -----------
+id | Long | __Optional:__ 64 bit integer identifier associated with this message. __Present if__ this message is persistent.
+type | Enum | The type of this message. __Possible values__ are [TEXT](#text-message), [FILE](#file-message), [SYSTEM_TEXT](#system-text-message), and [SYSTEM_FILE](#system-file-message)
+body | String | __Optional:__ Text body of this message. __Present if__ this is a [text message](#text-message) or [system text message](#system-text-message).
+
+## HAL links
+Link | Methods | Description
+--------- | ----------- | -----------
+[self](#message) | [GET](#get-a-message), [DELETE](#delete-a-message) | __Optional:__ Self link to this message. __Present if__ this message is persistent.
+[channel](#channel) | [GET](#get-a-channel) | Link to channel this message was sent in.
+[user](#user) | [GET](#get-a-user) | __Optional:__ Link to the user who sent this message. __Present if__ this is a [text message](#text-message) or [file message](#file-message).
+[application](#application) | [GET](#get-application) | Link to your application resource. 
+
+## Create a Message
+```shell
+curl --location --request POST '{{messages_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}' \
+--data-raw '{
+    "name": "Hello world!"
+}'
+```
+
+> The command above returns a message HAL resource:
+
+```json
+{
+  "id": 1,
+  "type": "SYSTEM_TEXT",
+  "body": "Hello world!",
+  "_links": {
+    "self": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/messages/1"
+    },
+    "channel": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/2"
+    },
+    "application": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1"
+    }
+  }
+}
+```
+
+This endpoint creates a new message.
+
+### HTTP Request
+`POST {{messages_link}}`
+
+### Request Body (JSON)
+Parameter | Type | Description 
+--------- | ----------- | -----------
+body | String | The text body of the message
+
+## Get Messages
+```shell
+curl --location --request GET '{{messages_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}'
+```
+
+> The command above returns a message page HAL resource:
+
+```json
+{
+  "_embedded": {
+    "messages": [
+      {
+        "id": 2,
+        "type": "TEXT",
+        "body": "Hello from client!",
+        "_links": {
+          "self": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/messages/2"
+          },
+          "user": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/1"
+          },
+          "channel": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/2"
+          },
+          "application": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/1"
+          }
+        }
+      },
+      {
+        "id": 1,
+        "type": "SYSTEM_TEXT",
+        "body": "Hello world!",
+        "_links": {
+          "self": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/messages/1"
+          },
+          "channel": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/2"
+          },
+          "application": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/1"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "self": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/2/messages?start=8184870605946882&size=20&relation=SELF"
+    }
+  },
+  "page": {
+    "size": 2
+  }
+}
+```
+
+This endpoint returns a message [page](#pagination) resource.
+
+### HTTP Request
+`GET {{messages_link}}`
+
+## Get a Message
+```shell
+curl --location --request GET '{{message_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}'
+```
+
+> The command above returns a message HAL resource:
+
+```json
+{
+  "id": 1,
+  "type": "SYSTEM_TEXT",
+  "body": "Hello world!",
+  "_links": {
+    "self": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/messages/1"
+    },
+    "channel": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/2"
+    },
+    "application": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1"
+    }
+  }
+}
+```
+
+This endpoint returns a message resource.
+
+### HTTP Request
+`GET {{message_link}}`
+
+## Delete a Message
+```shell
+curl --location --request DELETE '{message_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}'
+```
+
+> The command above returns the message channel's HAL resource:
+
+```json
+{
+  "id": 2,
+  "type": "PUBLIC",
+  "name": "Public Chat",
+  "_links": {
+    "self": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/2"
+    },
+    "messages": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/2/channels/2/messages"
+    },
+    "application": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/1"
+    }
+  }
+}
+```
+
+This endpoint deletes a message.
+
+### HTTP Request
+`DELETE {{message_link}}`
 
 # User
 Users can chat with each other by joining channels. They are identified by their own unique user name.
@@ -541,14 +753,14 @@ curl --location --request POST '{{users_link}}' \
 
 ```json
 {
-  "id": 402,
+  "id": 1,
   "name": "37282832193",
   "_links": {
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/402"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/1"
     },
     "channels": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/402/channels"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/1/channels"
     },
     "application": {
       "href": "https://staging-api.chatkitty.com/v1/applications/1"
@@ -581,14 +793,14 @@ curl --location --request GET '{{users_link}}' \
   "_embedded": {
     "users": [
       {
-        "id": 53,
+        "id": 1,
         "name": "1017562554",
         "_links": {
           "self": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/1"
           },
           "channels": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53/channels"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/1/channels"
           },
           "application": {
             "href": "https://staging-api.chatkitty.com/v1/applications/1"
@@ -596,14 +808,14 @@ curl --location --request GET '{{users_link}}' \
         }
       },
       {
-        "id": 54,
+        "id": 2,
         "name": "102746681",
         "_links": {
           "self": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/54"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/2"
           },
           "channels": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/54/channels"
+            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/2/channels"
           },
           "application": {
             "href": "https://staging-api.chatkitty.com/v1/applications/1"
@@ -654,14 +866,14 @@ curl --location --request GET '{{user_link}}' \
 
 ```json
 {
-  "id": 53,
+  "id": 1,
   "name": "1017562554",
   "_links": {
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/1"
     },
     "channels": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/53/channels"
+      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/1/channels"
     },
     "application": {
       "href": "https://staging-api.chatkitty.com/v1/applications/1"
@@ -703,7 +915,7 @@ curl --location --request DELETE '{{user_link}}' \
 }
 ```
 
-This endpoint deletes a ChatKitty user and returns the application the user belonged to.
+This endpoint deletes a ChatKitty user.
 
 ### HTTP Request
 `DELETE {{user_link}}`
