@@ -292,6 +292,9 @@
                   <li>
                     <a href="#create-a-user" class="toc-h2 toc-link" data-title="Create a User">Create a User</a>
                   </li>
+                  <li>
+                    <a href="#delete-a-user" class="toc-h2 toc-link" data-title="Delete a User">Delete a User</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -639,11 +642,6 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 <td><a href="#create-a-channel">POST</a>, <a href="#get-channel">GET</a></td>
 <td>Channels belonging to this application.</td>
 </tr>
-<tr>
-<td><a href="#organization">organization</a></td>
-<td><a href="#get-organization">GET</a></td>
-<td>Organization this application belongs to.</td>
-</tr>
 </tbody></table>
 <h2 id='get-application'>Get Application</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{application_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
@@ -665,9 +663,6 @@ This is the only URL needed to discover the rest of the Platform API as every ot
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/channels"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"organization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/organizations/52"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -706,12 +701,12 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 </thead><tbody>
 <tr>
 <td><a href="#user">self</a></td>
-<td><a href="#get-a-user">GET</a></td>
+<td><a href="#get-a-user">GET</a>, <a href="#delete-a-user">DELETE</a></td>
 <td>Self link to this user.</td>
 </tr>
 <tr>
 <td><a href="#channel">channels</a></td>
-<td><a href="#get-a-channel">GET</a></td>
+<td><a href="#get-channels">GET</a></td>
 <td>Channels this user has access to - meaning the user has joined or can join.</td>
 </tr>
 <tr>
@@ -845,6 +840,47 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 <p>This endpoint creates a new ChatKitty user.</p>
 <h3 id='http-request-5'>HTTP Request</h3>
 <p><code>POST {{users_link}}</code></p>
+<h3 id='request-body-json'>Request Body (JSON)</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The unique name of the user.</td>
+</tr>
+</tbody></table>
+<h2 id='delete-a-user'>Delete a User</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'{{user_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div>
+<blockquote>
+<p>The command above returns your application&#39;s HAL resource:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">52</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ChatKitty"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"107a326f-bfab-4d2c-9a5a-fa79bd896929"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/channels"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint deletes a ChatKitty user and returns the application the user belonged to.</p>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>DELETE {{user_link}}</code></p>
 <h1 id='errors'>Errors</h1>
 <aside class="notice">
 The Platform API may return any of these HTTP error codes
