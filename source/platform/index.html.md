@@ -531,6 +531,8 @@ Administrators can send text messages containing a unicode text body. These mess
 ## System File Message
 Administrators can send files messages with one, or many file attachments.
 
+---
+
 <aside class="notice">
 System messages can only be sent using the Platform API
 </aside>
