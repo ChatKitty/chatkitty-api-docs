@@ -11,6 +11,8 @@ includes:
   - platform_errors
 
 search: true
+
+code_clipboard: true
 ---
 # Introduction
 The Platform API provides a RESTful interface for administrators and server-side back-ends to manage
