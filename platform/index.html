@@ -393,13 +393,48 @@
               </ul>
           </li>
           <li>
-            <a href="#user" class="toc-h1 toc-link" data-title="User">User</a>
+            <a href="#message" class="toc-h1 toc-link" data-title="Message">Message</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#text-message" class="toc-h2 toc-link" data-title="Text Message">Text Message</a>
+                  </li>
+                  <li>
+                    <a href="#file-message" class="toc-h2 toc-link" data-title="File Message">File Message</a>
+                  </li>
+                  <li>
+                    <a href="#system-text-message" class="toc-h2 toc-link" data-title="System Text Message">System Text Message</a>
+                  </li>
+                  <li>
+                    <a href="#system-file-message" class="toc-h2 toc-link" data-title="System File Message">System File Message</a>
+                  </li>
                   <li>
                     <a href="#properties-5" class="toc-h2 toc-link" data-title="Properties">Properties</a>
                   </li>
                   <li>
                     <a href="#hal-links-5" class="toc-h2 toc-link" data-title="HAL links">HAL links</a>
+                  </li>
+                  <li>
+                    <a href="#create-a-message" class="toc-h2 toc-link" data-title="Create a Message">Create a Message</a>
+                  </li>
+                  <li>
+                    <a href="#get-messages" class="toc-h2 toc-link" data-title="Get Messages">Get Messages</a>
+                  </li>
+                  <li>
+                    <a href="#get-a-message" class="toc-h2 toc-link" data-title="Get a Message">Get a Message</a>
+                  </li>
+                  <li>
+                    <a href="#delete-a-message" class="toc-h2 toc-link" data-title="Delete a Message">Delete a Message</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#user" class="toc-h1 toc-link" data-title="User">User</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#properties-6" class="toc-h2 toc-link" data-title="Properties">Properties</a>
+                  </li>
+                  <li>
+                    <a href="#hal-links-6" class="toc-h2 toc-link" data-title="HAL links">HAL links</a>
                   </li>
                   <li>
                     <a href="#create-a-user" class="toc-h2 toc-link" data-title="Create a User">Create a User</a>
@@ -497,14 +532,14 @@ You must replace <code>{{access_token}}</code> with an access token gotten using
   </span><span class="nl">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">53</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1017562554"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/53"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/53/channels"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/1/channels"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
@@ -512,14 +547,14 @@ You must replace <code>{{access_token}}</code> with an access token gotten using
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">54</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"102746681"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/54"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/2"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/54/channels"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/2/channels"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
@@ -587,22 +622,22 @@ the first page of the collection optionally with HAL hypermedia links to the sub
 <tr>
 <td><a href="#pagination">first</a></td>
 <td><a href="#pagination">GET</a></td>
-<td><strong>Optional:</strong> Link to the first page of this collection. Present if known.</td>
+<td><strong>Optional:</strong> Link to the first page of this collection. <strong>Present if</strong> known.</td>
 </tr>
 <tr>
 <td><a href="#pagination">prev</a></td>
 <td><a href="#pagination">GET</a></td>
-<td><strong>Optional:</strong> Link to the previous page of this collection. Present if there are more items before the first item in this page.</td>
+<td><strong>Optional:</strong> Link to the previous page of this collection. <strong>Present if</strong> there are more items before the first item in this page.</td>
 </tr>
 <tr>
 <td><a href="#pagination">next</a></td>
 <td><a href="#pagination">GET</a></td>
-<td><strong>Optional:</strong> Link to the next page of this collection. Present if there are more items after the last item in this page.</td>
+<td><strong>Optional:</strong> Link to the next page of this collection. <strong>Present if</strong> there are more items after the last item in this page.</td>
 </tr>
 <tr>
 <td><a href="#pagination">last</a></td>
 <td><a href="#pagination">GET</a></td>
-<td><strong>Optional:</strong> Link to the last page of this collection. Present if known.</td>
+<td><strong>Optional:</strong> Link to the last page of this collection. <strong>Present if</strong> known.</td>
 </tr>
 </tbody></table>
 <h2 id='embedded-properties'>Embedded properties</h2>
@@ -615,14 +650,14 @@ the first page of the collection optionally with HAL hypermedia links to the sub
   </span><span class="nl">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">53</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1017562554"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/53"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/53/channels"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/1/channels"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
@@ -652,17 +687,17 @@ the first page of the collection optionally with HAL hypermedia links to the sub
 <tr>
 <td>number</td>
 <td>Int</td>
-<td><strong>Optional:</strong> The zero-based index of this page. Present if known.</td>
+<td><strong>Optional:</strong> The zero-based index of this page. <strong>Present if</strong> known.</td>
 </tr>
 <tr>
 <td>totalElements</td>
 <td>Long</td>
-<td><strong>Optional:</strong> The total number of elements in the collection. Present if known.</td>
+<td><strong>Optional:</strong> The total number of elements in the collection. <strong>Present if</strong> known.</td>
 </tr>
 <tr>
 <td>totalPages</td>
 <td>Int</td>
-<td><strong>Optional:</strong> The total number of pages in the collection. Present if known.</td>
+<td><strong>Optional:</strong> The total number of pages in the collection. <strong>Present if</strong> known.</td>
 </tr>
 </tbody></table>
 <h1 id='v1-api'>V1 API</h1>
@@ -757,7 +792,7 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 </tr>
 <tr>
 <td><a href="#channel">channels</a></td>
-<td><a href="#create-a-channel">POST</a>, <a href="#get-channel">GET</a></td>
+<td><a href="#create-a-channel">POST</a>, <a href="#get-a-channel">GET</a></td>
 <td>Channels belonging to this application.</td>
 </tr>
 </tbody></table>
@@ -789,7 +824,7 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET {{application_link}}</code></p>
 <h1 id='channel'>Channel</h1>
-<p>Channels form the basis of the ChatKitty chat experience. <a href="#user">Users</a> can join channels and receive 
+<p>Channels are the backbone of the ChatKitty chat experience. <a href="#user">Users</a> can join channels and receive 
 or send <a href="#message">messages</a>. ChatKitty broadcasts messages created in channels to channel members via 
 a chat session or push notifications.</p>
 
@@ -819,7 +854,7 @@ ChatKitty persists messages sent in private channels by default but this behavio
 <tr>
 <td>id</td>
 <td>Long</td>
-<td>64 bit integer identifier associated with this user</td>
+<td>64 bit integer identifier associated with this channel</td>
 </tr>
 <tr>
 <td>type</td>
@@ -846,7 +881,7 @@ ChatKitty persists messages sent in private channels by default but this behavio
 <td>Self link to this channel.</td>
 </tr>
 <tr>
-<td><a href="#messages">messages</a></td>
+<td><a href="#message">messages</a></td>
 <td><a href="#create-a-message">POST</a>, <a href="#get-messages">GET</a></td>
 <td>Messages sent in this channel.</td>
 </tr>
@@ -1017,12 +1052,242 @@ ChatKitty persists messages sent in private channels by default but this behavio
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint deletes a channel and returns your application resource.</p>
+<p>This endpoint deletes a channel.</p>
 <h3 id='http-request-6'>HTTP Request</h3>
 <p><code>DELETE {{channel_link}}</code></p>
+<h1 id='message'>Message</h1>
+<p><a href="#user">Users</a> send messages through your application and administrators can send messages through the Platform API. </p>
+
+<p>There are four types of messages; <a href="#text-message">Text Messages</a>, <a href="#file-message">File Messages</a>, 
+<a href="#system-text-message">System Text Messages</a>, and <a href="#system-file-message">System File Messages</a>.</p>
+<h2 id='text-message'>Text Message</h2>
+<p>Users can send text messages containing a unicode text body. These messages can contain emojis and other unicode characters
+ but have no file attachments.</p>
+<h2 id='file-message'>File Message</h2>
+<p>Users can send files messages with one, or many file attachments.</p>
+<h2 id='system-text-message'>System Text Message</h2>
+<p>Administrators can send text messages containing a unicode text body. These messages can contain emojis and other unicode characters
+ but have no file attachments.</p>
+<h2 id='system-file-message'>System File Message</h2>
+<p>Administrators can send files messages with one, or many file attachments.</p>
+
+<aside class="notice">
+System messages can only be sent using the Platform API
+</aside>
+<h2 id='properties-5'>Properties</h2>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Long</td>
+<td><strong>Optional:</strong> 64 bit integer identifier associated with this message. <strong>Present if</strong> this message is persistent.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>Enum</td>
+<td>The type of this message. <strong>Possible values</strong> are <a href="#text-message">TEXT</a>, <a href="#file-message">FILE</a>, <a href="#system-text-message">SYSTEM_TEXT</a>, and <a href="#system-file-message">SYSTEM_FILE</a></td>
+</tr>
+<tr>
+<td>body</td>
+<td>String</td>
+<td><strong>Optional:</strong> Text body of this message. <strong>Present if</strong> this is a <a href="#text-message">text message</a> or <a href="#system-text-message">system text message</a>.</td>
+</tr>
+</tbody></table>
+<h2 id='hal-links-5'>HAL links</h2>
+<table><thead>
+<tr>
+<th>Link</th>
+<th>Methods</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="#message">self</a></td>
+<td><a href="#get-a-message">GET</a>, <a href="#delete-a-message">DELETE</a></td>
+<td><strong>Optional:</strong> Self link to this message. <strong>Present if</strong> this message is persistent.</td>
+</tr>
+<tr>
+<td><a href="#channel">channel</a></td>
+<td><a href="#get-a-channel">GET</a></td>
+<td>Link to channel this message was sent in.</td>
+</tr>
+<tr>
+<td><a href="#user">user</a></td>
+<td><a href="#get-a-user">GET</a></td>
+<td><strong>Optional:</strong> Link to the user who sent this message. <strong>Present if</strong> this is a <a href="#text-message">text message</a> or <a href="#file-message">file message</a>.</td>
+</tr>
+<tr>
+<td><a href="#application">application</a></td>
+<td><a href="#get-application">GET</a></td>
+<td>Link to your application resource.</td>
+</tr>
+</tbody></table>
+<h2 id='create-a-message'>Create a Message</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'{{messages_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "name": "Hello world!"
+}'</span>
+</code></pre></div>
+<blockquote>
+<p>The command above returns a message HAL resource:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SYSTEM_TEXT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello world!"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/messages/1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels/2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint creates a new message.</p>
+<h3 id='http-request-7'>HTTP Request</h3>
+<p><code>POST {{messages_link}}</code></p>
+<h3 id='request-body-json-2'>Request Body (JSON)</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>body</td>
+<td>String</td>
+<td>The text body of the message</td>
+</tr>
+</tbody></table>
+<h2 id='get-messages'>Get Messages</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{messages_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div>
+<blockquote>
+<p>The command above returns a message page HAL resource:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TEXT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello from client!"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/messages/2"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels/2"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SYSTEM_TEXT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello world!"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/messages/1"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels/2"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels/2/messages?start=8184870605946882&amp;size=20&amp;relation=SELF"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint returns a message <a href="#pagination">page</a> resource.</p>
+<h3 id='http-request-8'>HTTP Request</h3>
+<p><code>GET {{messages_link}}</code></p>
+<h2 id='get-a-message'>Get a Message</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{message_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div>
+<blockquote>
+<p>The command above returns a message HAL resource:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SYSTEM_TEXT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello world!"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/messages/1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels/2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint returns a message resource.</p>
+<h3 id='http-request-9'>HTTP Request</h3>
+<p><code>GET {{message_link}}</code></p>
+<h2 id='delete-a-message'>Delete a Message</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'{message_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div>
+<blockquote>
+<p>The command above returns the message channel&#39;s HAL resource:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PUBLIC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Public Chat"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels/2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/2/channels/2/messages"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint deletes a message.</p>
+<h3 id='http-request-10'>HTTP Request</h3>
+<p><code>DELETE {{message_link}}</code></p>
 <h1 id='user'>User</h1>
 <p>Users can chat with each other by joining channels. They are identified by their own unique user name.</p>
-<h2 id='properties-5'>Properties</h2>
+<h2 id='properties-6'>Properties</h2>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1041,7 +1306,7 @@ ChatKitty persists messages sent in private channels by default but this behavio
 <td>The unique name of the user.</td>
 </tr>
 </tbody></table>
-<h2 id='hal-links-5'>HAL links</h2>
+<h2 id='hal-links-6'>HAL links</h2>
 <table><thead>
 <tr>
 <th>Link</th>
@@ -1076,14 +1341,14 @@ ChatKitty persists messages sent in private channels by default but this behavio
 <p>The command above returns a user HAL resource:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">402</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"37282832193"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/402"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/402/channels"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/1/channels"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
@@ -1092,9 +1357,9 @@ ChatKitty persists messages sent in private channels by default but this behavio
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint creates a new ChatKitty user.</p>
-<h3 id='http-request-7'>HTTP Request</h3>
+<h3 id='http-request-11'>HTTP Request</h3>
 <p><code>POST {{users_link}}</code></p>
-<h3 id='request-body-json-2'>Request Body (JSON)</h3>
+<h3 id='request-body-json-3'>Request Body (JSON)</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1119,14 +1384,14 @@ ChatKitty persists messages sent in private channels by default but this behavio
   </span><span class="nl">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">53</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1017562554"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/53"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/53/channels"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/1/channels"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
@@ -1134,14 +1399,14 @@ ChatKitty persists messages sent in private channels by default but this behavio
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">54</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"102746681"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/54"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/2"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/54/channels"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/2/channels"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
@@ -1176,7 +1441,7 @@ ChatKitty persists messages sent in private channels by default but this behavio
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint returns a user <a href="#pagination">page</a> resource.</p>
-<h3 id='http-request-8'>HTTP Request</h3>
+<h3 id='http-request-12'>HTTP Request</h3>
 <p><code>GET {{users_link}}</code></p>
 <h2 id='get-a-user'>Get a User</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{user_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
@@ -1186,14 +1451,14 @@ ChatKitty persists messages sent in private channels by default but this behavio
 <p>The command above returns a user HAL resource:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">53</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1017562554"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/53"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/53/channels"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/1/channels"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
@@ -1202,7 +1467,7 @@ ChatKitty persists messages sent in private channels by default but this behavio
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint returns a resource representing a ChatKitty user.</p>
-<h3 id='http-request-9'>HTTP Request</h3>
+<h3 id='http-request-13'>HTTP Request</h3>
 <p><code>GET {{user_link}}</code></p>
 <h2 id='delete-a-user'>Delete a User</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'{{user_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
@@ -1228,8 +1493,8 @@ ChatKitty persists messages sent in private channels by default but this behavio
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint deletes a ChatKitty user and returns the application the user belonged to.</p>
-<h3 id='http-request-10'>HTTP Request</h3>
+<p>This endpoint deletes a ChatKitty user.</p>
+<h3 id='http-request-14'>HTTP Request</h3>
 <p><code>DELETE {{user_link}}</code></p>
 <h1 id='errors'>Errors</h1>
 <aside class="notice">
