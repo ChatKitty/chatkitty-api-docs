@@ -13,7 +13,6 @@ includes:
 search: true
 ---
 # Introduction
-
 The Platform API provides a RESTful interface for administrators and server-side back-ends to manage
 their ChatKitty applications. 
 
@@ -34,7 +33,6 @@ to access protected resources. A valid access token can be retrieved from the Ch
 using your application's client ID and client secret. 
 
 # Authentication
-
 > To authorize use this replacing `acme` with your client ID and `acmesecret` with your client secret:
 
 ```shell
@@ -73,6 +71,141 @@ ChatKitty expects a valid Bearer access token to be included in all API requests
 You must replace <code>{{access_token}}</code> with an access token gotten using your client credentials.
 </aside>
 
+# Pagination
+> This requests a user resource page
+
+```shell
+curl --location --request GET '{{users_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}'
+```
+
+> The command above returns a user page HAL resource.
+
+```json
+{
+  "_embedded": {
+    "users": [
+      {
+        "id": 53,
+        "name": "1017562554",
+        "_links": {
+          "self": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/52/users/53"
+          },
+          "channels": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/52/users/53/channels"
+          },
+          "application": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/52"
+          }
+        }
+      },
+      {
+        "id": 54,
+        "name": "1027466852",
+        "_links": {
+          "self": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/52/users/54"
+          },
+          "channels": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/52/users/54/channels"
+          },
+          "application": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/52"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "first": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/52/users?page=0&size=2"
+    },
+    "prev": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/52/users?page=0&size=2"
+    },
+    "self": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/52/users?page=1&size=2"
+    },
+    "next": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/52/users?page=2&size=2"
+    },
+    "last": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/52/users?page=2&size=2"
+    }
+  },
+  "page": {
+    "size": 2,
+    "totalElements": 6,
+    "totalPages": 3,
+    "number": 1
+  }
+}
+```
+
+ChatKitty **paginates** all collection resources. Requesting a resource collection returns 
+the first page of the collection optionally with HAL hypermedia links to the subsequent pages if more pages are available.
+
+Traverse the page links to iterate through a collection.
+ 
+## Properties
+Name | Type | Description 
+--------- | ----------- | -----------
+[page](#page-metadata) | PageMetadata | Metadata about the page
+
+## HAL links
+Link | Methods | Description
+--------- | ----------- | -----------
+[self](#pagination) | [GET](#pagination) | Self link to this page.
+[first](#pagination) | [GET](#pagination) | __Optional:__ Link to the first page of this collection. Present if known.
+[prev](#pagination) | [GET](#pagination) | __Optional:__ Link to the previous page of this collection. Present if there are more items before the first item in this page.
+[next](#pagination) | [GET](#pagination) | __Optional:__ Link to the next page of this collection. Present if there are more items after the last item in this page.
+[last](#pagination) | [GET](#pagination) | __Optional:__ Link to the last page of this collection. Present if known.
+
+## Embedded properties 
+A single property with the name is the resource collection name, and a value that is an array of resource content of the page.
+
+> `users` is the name of a user resource collection
+
+```json
+{
+  "_embedded": {
+    "users": [
+      {
+        "id": 53,
+        "name": "1017562554",
+        "_links": {
+          "self": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/52/users/53"
+          },
+          "channels": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/52/users/53/channels"
+          },
+          "application": {
+            "href": "https://staging-api.chatkitty.com/v1/applications/52"
+          }
+        }
+      },
+      ...
+    ]
+  },
+  ...
+}
+```
+
+
+## Page Metadata
+Metadata about a page containing its size, total number of elements in the collection, total number of pages in the collection, and the page number.
+
+## Properties
+Name | Type | Description 
+--------- | ----------- | -----------
+size | Int | The number of elements in this page.
+number | Int | __Optional:__ The zero-based index of this page. Present if known.
+totalElements | Long | __Optional:__ The total number of elements in the collection. Present if known.
+totalPages | Int | __Optional:__ The total number of pages in the collection. Present if known.
+
 # V1 API
 The following describes endpoints and resources exposed by the V1 ChatKitty API.
 
@@ -83,7 +216,6 @@ Link | Methods | Description
 [application](#application) | [GET](#get-application) | The ChatKitty application currently authenticated.
 
 ## Get API Root
-
 ```shell
 curl --location --request GET 'https://staging-api.chatkitty.com/v1' \
 --header 'Content-Type: application/json' \
@@ -108,7 +240,6 @@ curl --location --request GET 'https://staging-api.chatkitty.com/v1' \
 This endpoint returns the root of your ChatKitty application graph. 
 
 ### HTTP Request
-
 `GET https://staging-api.chatkitty.com/v1`
 
 <aside class="success">
@@ -134,7 +265,6 @@ Link | Methods | Description
 [organization](#organization) | [GET](#get-organization) | Organization this application belongs to. 
 
 ## Get Application
-
 ```shell
 curl --location --request GET '{{application_link}}' \
 --header 'Content-Type: application/json' \
@@ -187,7 +317,6 @@ Link | Methods | Description
 [application](#application) | [GET](#get-application) | Link to your application resource. 
 
 ## Get Users
-
 ```shell
 curl --location --request GET '{{users_link}}' \
 --header 'Content-Type: application/json' \
@@ -258,13 +387,12 @@ curl --location --request GET '{{users_link}}' \
 }
 ```
 
-This endpoint returns a page resource of ChatKitty users.
+This endpoint returns a [page](#pagination) resource of ChatKitty users.
 
 ### HTTP Request
 `GET {{users_link}}`
 
 ## Get a User
-
 ```shell
 curl --location --request GET '{{user_link}}' \
 --header 'Content-Type: application/json' \
