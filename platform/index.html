@@ -230,10 +230,30 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
+            <a href="#pagination" class="toc-h1 toc-link" data-title="Pagination">Pagination</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#properties" class="toc-h2 toc-link" data-title="Properties">Properties</a>
+                  </li>
+                  <li>
+                    <a href="#hal-links" class="toc-h2 toc-link" data-title="HAL links">HAL links</a>
+                  </li>
+                  <li>
+                    <a href="#embedded-properties" class="toc-h2 toc-link" data-title="Embedded properties">Embedded properties</a>
+                  </li>
+                  <li>
+                    <a href="#page-metadata" class="toc-h2 toc-link" data-title="Page Metadata">Page Metadata</a>
+                  </li>
+                  <li>
+                    <a href="#properties-2" class="toc-h2 toc-link" data-title="Properties">Properties</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#v1-api" class="toc-h1 toc-link" data-title="V1 API">V1 API</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#hal-links" class="toc-h2 toc-link" data-title="HAL links">HAL links</a>
+                    <a href="#hal-links-2" class="toc-h2 toc-link" data-title="HAL links">HAL links</a>
                   </li>
                   <li>
                     <a href="#get-api-root" class="toc-h2 toc-link" data-title="Get API Root">Get API Root</a>
@@ -244,13 +264,13 @@
             <a href="#application" class="toc-h1 toc-link" data-title="Application">Application</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#properties" class="toc-h2 toc-link" data-title="Properties">Properties</a>
+                    <a href="#properties-3" class="toc-h2 toc-link" data-title="Properties">Properties</a>
                   </li>
                   <li>
-                    <a href="#hal-links-2" class="toc-h2 toc-link" data-title="HAL links">HAL links</a>
+                    <a href="#hal-links-3" class="toc-h2 toc-link" data-title="HAL links">HAL links</a>
                   </li>
                   <li>
-                    <a href="#get-an-application" class="toc-h2 toc-link" data-title="Get an Application">Get an Application</a>
+                    <a href="#get-application" class="toc-h2 toc-link" data-title="Get Application">Get Application</a>
                   </li>
               </ul>
           </li>
@@ -258,10 +278,10 @@
             <a href="#user" class="toc-h1 toc-link" data-title="User">User</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#properties-2" class="toc-h2 toc-link" data-title="Properties">Properties</a>
+                    <a href="#properties-4" class="toc-h2 toc-link" data-title="Properties">Properties</a>
                   </li>
                   <li>
-                    <a href="#hal-links-3" class="toc-h2 toc-link" data-title="HAL links">HAL links</a>
+                    <a href="#hal-links-4" class="toc-h2 toc-link" data-title="HAL links">HAL links</a>
                   </li>
                   <li>
                     <a href="#get-users" class="toc-h2 toc-link" data-title="Get Users">Get Users</a>
@@ -286,8 +306,10 @@
 <p>The Platform API provides a RESTful interface for administrators and server-side back-ends to manage
 their ChatKitty applications. </p>
 
-<p>ChatKitty provides a <a href="https://staging-api.chatkitty.com/v1/explorer/index.html#hkey0=Content-Type&amp;hval0=application/json&amp;uri=/v1/applications/me">API Explorer</a> to 
-access the Platform API.</p>
+<aside class="success">
+ChatKitty provides a <a href="https://staging-api.chatkitty.com/v1/explorer/index.html#hkey0=Content-Type&hval0=application/json&uri=/v1/applications/me">API Explorer</a> to 
+access the Platform API.
+</aside>
 <h1 id='headers'>Headers</h1>
 <p>Making a request to the Platform API requires HTTP <code>Content-Type</code> and <code>Authorization</code> headers.</p>
 
@@ -336,8 +358,95 @@ using your application&#39;s client ID and client secret. </p>
 <aside class="notice">
 You must replace <code>{{access_token}}</code> with an access token gotten using your client credentials.
 </aside>
-<h1 id='v1-api'>V1 API</h1>
-<p>The following describes endpoints and resources exposed by the V1 ChatKitty API.</p>
+<h1 id='pagination'>Pagination</h1>
+<blockquote>
+<p>This requests a user resource page</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{users_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div>
+<blockquote>
+<p>The command above returns a user page HAL resource.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">53</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1017562554"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users/53"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users/53/channels"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">54</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1027466852"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users/54"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users/54/channels"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"first"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users?page=0&amp;size=2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"prev"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users?page=0&amp;size=2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users?page=1&amp;size=2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"next"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users?page=2&amp;size=2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"last"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users?page=2&amp;size=2"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalElements"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalPages"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"number"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>ChatKitty <strong>paginates</strong> all collection resources. Requesting a resource collection returns 
+the first page of the collection optionally with HAL hypermedia links to the subsequent pages if more pages are available.</p>
+
+<p>Traverse the page links to iterate through a collection.</p>
+<h2 id='properties'>Properties</h2>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="#page-metadata">page</a></td>
+<td>PageMetadata</td>
+<td>Metadata about the page</td>
+</tr>
+</tbody></table>
 <h2 id='hal-links'>HAL links</h2>
 <table><thead>
 <tr>
@@ -347,13 +456,109 @@ You must replace <code>{{access_token}}</code> with an access token gotten using
 </tr>
 </thead><tbody>
 <tr>
+<td><a href="#pagination">self</a></td>
+<td><a href="#pagination">GET</a></td>
+<td>Self link to this page.</td>
+</tr>
+<tr>
+<td><a href="#pagination">first</a></td>
+<td><a href="#pagination">GET</a></td>
+<td><strong>Optional:</strong> Link to the first page of this collection. Present if known.</td>
+</tr>
+<tr>
+<td><a href="#pagination">prev</a></td>
+<td><a href="#pagination">GET</a></td>
+<td><strong>Optional:</strong> Link to the previous page of this collection. Present if there are more items before the first item in this page.</td>
+</tr>
+<tr>
+<td><a href="#pagination">next</a></td>
+<td><a href="#pagination">GET</a></td>
+<td><strong>Optional:</strong> Link to the next page of this collection. Present if there are more items after the last item in this page.</td>
+</tr>
+<tr>
+<td><a href="#pagination">last</a></td>
+<td><a href="#pagination">GET</a></td>
+<td><strong>Optional:</strong> Link to the last page of this collection. Present if known.</td>
+</tr>
+</tbody></table>
+<h2 id='embedded-properties'>Embedded properties</h2>
+<p>A single property with the name is the resource collection name, and a value that is an array of resource content of the page.</p>
+
+<blockquote>
+<p><code>users</code> is the name of a user resource collection</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">53</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1017562554"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users/53"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users/53/channels"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='page-metadata'>Page Metadata</h2>
+<p>Metadata about a page containing its size, total number of elements in the collection, total number of pages in the collection, and the page number.</p>
+<h2 id='properties-2'>Properties</h2>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>size</td>
+<td>Int</td>
+<td>The number of elements in this page.</td>
+</tr>
+<tr>
+<td>number</td>
+<td>Int</td>
+<td><strong>Optional:</strong> The zero-based index of this page. Present if known.</td>
+</tr>
+<tr>
+<td>totalElements</td>
+<td>Long</td>
+<td><strong>Optional:</strong> The total number of elements in the collection. Present if known.</td>
+</tr>
+<tr>
+<td>totalPages</td>
+<td>Int</td>
+<td><strong>Optional:</strong> The total number of pages in the collection. Present if known.</td>
+</tr>
+</tbody></table>
+<h1 id='v1-api'>V1 API</h1>
+<p>The following describes endpoints and resources exposed by the V1 ChatKitty API.</p>
+<h2 id='hal-links-2'>HAL links</h2>
+<table><thead>
+<tr>
+<th>Link</th>
+<th>Methods</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
 <td><a href="#v1-api">self</a></td>
-<td>GET</td>
+<td><a href="#get-api-root">GET</a></td>
 <td>Self link to the V1 API.</td>
 </tr>
 <tr>
 <td><a href="#application">application</a></td>
-<td>GET</td>
+<td><a href="#get-application">GET</a></td>
 <td>The ChatKitty application currently authenticated.</td>
 </tr>
 </tbody></table>
@@ -384,7 +589,7 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 </aside>
 <h1 id='application'>Application</h1>
 <p>An application resource represents the current ChatKitty application and can be used to configure the application.</p>
-<h2 id='properties'>Properties</h2>
+<h2 id='properties-3'>Properties</h2>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -408,7 +613,7 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 <td>Unique string used as an API key for this application client-side</td>
 </tr>
 </tbody></table>
-<h2 id='hal-links-2'>HAL links</h2>
+<h2 id='hal-links-3'>HAL links</h2>
 <table><thead>
 <tr>
 <th>Link</th>
@@ -418,7 +623,7 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 </thead><tbody>
 <tr>
 <td><a href="#application">self</a></td>
-<td><a href="#get-an-application">GET</a></td>
+<td><a href="#get-application">GET</a></td>
 <td>Self link to this application.</td>
 </tr>
 <tr>
@@ -437,7 +642,7 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 <td>Organization this application belongs to.</td>
 </tr>
 </tbody></table>
-<h2 id='get-an-application'>Get an Application</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{application_link}}'</span> <span class="se">\</span>
+<h2 id='get-application'>Get Application</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{application_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
 </code></pre></div>
@@ -468,8 +673,8 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET {{application_link}}</code></p>
 <h1 id='user'>User</h1>
-<p>Users can chat with each other by joining channels. They are identified by their own unique ID.</p>
-<h2 id='properties-2'>Properties</h2>
+<p>Users can chat with each other by joining channels. They are identified by their own unique user name.</p>
+<h2 id='properties-4'>Properties</h2>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -488,7 +693,7 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 <td>The unique name of the user.</td>
 </tr>
 </tbody></table>
-<h2 id='hal-links-3'>HAL links</h2>
+<h2 id='hal-links-4'>HAL links</h2>
 <table><thead>
 <tr>
 <th>Link</th>
@@ -508,7 +713,7 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 </tr>
 <tr>
 <td><a href="#application">application</a></td>
-<td><a href="#get-an-application">GET</a></td>
+<td><a href="#get-application">GET</a></td>
 <td>Link to your application resource.</td>
 </tr>
 </tbody></table>
@@ -536,25 +741,52 @@ This is the only URL needed to discover the rest of the Platform API as every ot
             </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">54</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1027466852"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users/54"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users/54/channels"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"first"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users?page=0&amp;size=2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"prev"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users?page=0&amp;size=2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users?page=0&amp;size=20"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users?page=1&amp;size=2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"next"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users?page=2&amp;size=2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"last"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/52/users?page=2&amp;size=2"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"totalElements"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalElements"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
     </span><span class="nl">"totalPages"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
     </span><span class="nl">"number"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint returns a resource representing a ChatKitty user.</p>
+<p>This endpoint returns a <a href="#pagination">page</a> resource of ChatKitty users.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
-<p><code>GET {{user_link}}</code></p>
+<p><code>GET {{users_link}}</code></p>
 <h2 id='get-a-user'>Get a User</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{user_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
