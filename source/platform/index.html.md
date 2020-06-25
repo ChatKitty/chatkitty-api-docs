@@ -262,7 +262,6 @@ Link | Methods | Description
 [self](#application) | [GET](#get-application) | Self link to this application. 
 [users](#user) | [POST](#create-a-user), [GET](#get-users) | Users belonging to this application.
 [channels](#channel) | [POST](#create-a-channel), [GET](#get-channel) | Channels belonging to this application.
-[organization](#organization) | [GET](#get-organization) | Organization this application belongs to. 
 
 ## Get Application
 ```shell
@@ -287,9 +286,6 @@ curl --location --request GET '{{application_link}}' \
     },
     "channels": {
       "href": "https://staging-api.chatkitty.com/v1/applications/52/channels"
-    },
-    "organization": {
-      "href": "https://staging-api.chatkitty.com/v1/organizations/52"
     }
   }
 }
@@ -458,3 +454,8 @@ This endpoint creates a new ChatKitty user.
 
 ### HTTP Request
 `POST {{users_link}}`
+
+### Request Body (JSON)
+Parameter | Type | Description 
+--------- | ----------- | -----------
+name | String | The unique name of the user.
