@@ -308,8 +308,8 @@ name | String | The unique name of the user.
 ## HAL links
 Link | Methods | Description
 --------- | ----------- | -----------
-[self](#user) | [GET](#get-a-user) | Self link to this user.
-[channels](#channel) | [GET](#get-a-channel) | Channels this user has access to - meaning the user has joined or can join. 
+[self](#user) | [GET](#get-a-user), [DELETE](#delete-a-user) | Self link to this user.
+[channels](#channel) | [GET](#get-channels) | Channels this user has access to - meaning the user has joined or can join. 
 [application](#application) | [GET](#get-application) | Link to your application resource. 
 
 ## Get Users
@@ -459,3 +459,36 @@ This endpoint creates a new ChatKitty user.
 Parameter | Type | Description 
 --------- | ----------- | -----------
 name | String | The unique name of the user.
+
+## Delete a User
+```shell
+curl --location --request DELETE '{{user_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}'
+```
+
+> The command above returns your application's HAL resource:
+
+```json
+{
+  "id": 52,
+  "name": "ChatKitty",
+  "key": "107a326f-bfab-4d2c-9a5a-fa79bd896929",
+  "_links": {
+    "self": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/52"
+    },
+    "users": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/52/users"
+    },
+    "channels": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/52/channels"
+    }
+  }
+}
+```
+
+This endpoint deletes a ChatKitty user and returns the application the user belonged to.
+
+### HTTP Request
+`DELETE {{user_link}}`
