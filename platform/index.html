@@ -367,13 +367,13 @@
                     <a href="#hal-links-4" class="toc-h2 toc-link" data-title="HAL links">HAL links</a>
                   </li>
                   <li>
+                    <a href="#create-a-user" class="toc-h2 toc-link" data-title="Create a User">Create a User</a>
+                  </li>
+                  <li>
                     <a href="#get-users" class="toc-h2 toc-link" data-title="Get Users">Get Users</a>
                   </li>
                   <li>
                     <a href="#get-a-user" class="toc-h2 toc-link" data-title="Get a User">Get a User</a>
-                  </li>
-                  <li>
-                    <a href="#create-a-user" class="toc-h2 toc-link" data-title="Create a User">Create a User</a>
                   </li>
                   <li>
                     <a href="#delete-a-user" class="toc-h2 toc-link" data-title="Delete a User">Delete a User</a>
@@ -798,6 +798,49 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 <td>Link to your application resource.</td>
 </tr>
 </tbody></table>
+<h2 id='create-a-user'>Create a User</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'{{users_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "name": "37282832193"
+}'</span>
+</code></pre></div>
+<blockquote>
+<p>The command above returns a user HAL resource:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">402</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"37282832193"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/2/users/402"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/2/users/402/channels"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/2"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint creates a new ChatKitty user.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>POST {{users_link}}</code></p>
+<h3 id='request-body-json'>Request Body (JSON)</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The unique name of the user.</td>
+</tr>
+</tbody></table>
 <h2 id='get-users'>Get Users</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{users_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
@@ -866,7 +909,7 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint returns a <a href="#pagination">page</a> resource of ChatKitty users.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
+<h3 id='http-request-4'>HTTP Request</h3>
 <p><code>GET {{users_link}}</code></p>
 <h2 id='get-a-user'>Get a User</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{user_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
@@ -892,51 +935,8 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint returns a resource representing a ChatKitty user.</p>
-<h3 id='http-request-4'>HTTP Request</h3>
-<p><code>GET {{user_link}}</code></p>
-<h2 id='create-a-user'>Create a User</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'{{users_link}}'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span> <span class="se">\</span>
-<span class="nt">--data-raw</span> <span class="s1">'{
-    "name": "37282832193"
-}'</span>
-</code></pre></div>
-<blockquote>
-<p>The command above returns a user HAL resource:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">402</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"37282832193"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/2/users/402"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/2/users/402/channels"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/2"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint creates a new ChatKitty user.</p>
 <h3 id='http-request-5'>HTTP Request</h3>
-<p><code>POST {{users_link}}</code></p>
-<h3 id='request-body-json'>Request Body (JSON)</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>name</td>
-<td>String</td>
-<td>The unique name of the user.</td>
-</tr>
-</tbody></table>
+<p><code>GET {{user_link}}</code></p>
 <h2 id='delete-a-user'>Delete a User</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'{{user_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
