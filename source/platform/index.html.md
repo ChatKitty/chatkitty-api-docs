@@ -312,6 +312,46 @@ Link | Methods | Description
 [channels](#channel) | [GET](#get-channels) | Channels this user has access to - meaning the user has joined or can join. 
 [application](#application) | [GET](#get-application) | Link to your application resource. 
 
+## Create a User
+```shell
+curl --location --request POST '{{users_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}' \
+--data-raw '{
+    "name": "37282832193"
+}'
+```
+
+> The command above returns a user HAL resource:
+
+```json
+{
+  "id": 402,
+  "name": "37282832193",
+  "_links": {
+    "self": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/2/users/402"
+    },
+    "channels": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/2/users/402/channels"
+    },
+    "application": {
+      "href": "https://staging-api.chatkitty.com/v1/applications/2"
+    }
+  }
+}
+```
+
+This endpoint creates a new ChatKitty user.
+
+### HTTP Request
+`POST {{users_link}}`
+
+### Request Body (JSON)
+Parameter | Type | Description 
+--------- | ----------- | -----------
+name | String | The unique name of the user.
+
 ## Get Users
 ```shell
 curl --location --request GET '{{users_link}}' \
@@ -419,46 +459,6 @@ This endpoint returns a resource representing a ChatKitty user.
 
 ### HTTP Request
 `GET {{user_link}}`
-
-## Create a User
-```shell
-curl --location --request POST '{{users_link}}' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer {{access_token}}' \
---data-raw '{
-    "name": "37282832193"
-}'
-```
-
-> The command above returns a user HAL resource:
-
-```json
-{
-  "id": 402,
-  "name": "37282832193",
-  "_links": {
-    "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/2/users/402"
-    },
-    "channels": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/2/users/402/channels"
-    },
-    "application": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/2"
-    }
-  }
-}
-```
-
-This endpoint creates a new ChatKitty user.
-
-### HTTP Request
-`POST {{users_link}}`
-
-### Request Body (JSON)
-Parameter | Type | Description 
---------- | ----------- | -----------
-name | String | The unique name of the user.
 
 ## Delete a User
 ```shell
