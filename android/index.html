@@ -309,6 +309,9 @@
           <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
+          <li>
+            <a href="/references/android/index.html" class="toc-h1 toc-link" data-title="Reference">SDK Reference</a>
+          </li>
       </ul>
         <ul class="toc-footer">
             <li><a href='https://www.chatkitty.com'>&copy; ChatKitty 2020. All rights reserved</a></li>
@@ -321,7 +324,7 @@
 <p>Integrate real-time chat into your Android application with the ChatKitty SDK for Android. The Android SDK handles 
 integrating chat features from your ChatKitty application with your Android client app.   </p>
 <h1 id='authentication'>Authentication</h1>
-<p><strong>Initialize the Chat SDK with your API key</strong></p>
+<p><strong>Initialize the Chat SDK with your API key</strong>  </p>
 
 <blockquote>
 <p>Get a ChatKitty instance with your application API key</p>
@@ -330,7 +333,41 @@ integrating chat features from your ChatKitty application with your Android clie
 </code></pre></div>
 <p>Get a <code>ChatKitty</code> instance by passing your application&#39;s API key to the <code>ChatKitty.getInstance()</code> method as a parameter.</p>
 
-<p><strong>Begin a user session with a user name</strong></p>
+<p><strong>Begin a user session</strong><br>
+To make calls to ChatKitty through the Chat SDK, a user session must be initiated.</p>
+
+<p>You can initiate a user session using the <a href="/platform#properties-6">unique username</a> of a user, or 
+with the user&#39;s name and a <strong>challenge code</strong> if the user isn&#39;t a guest.</p>
+
+<aside class="notice">
+ A username must be unique within a ChatKitty application.<br/>
+ We recommend you use as a hashed email address or phone number as your ChatKitty usernames.
+</aside>
+
+<p><strong>Begin a user session with a user name (Guest user session)</strong>  </p>
+
+<blockquote>
+<p>Starting a guest user session</p>
+</blockquote>
+<div class="highlight"><pre class="highlight java tab-java"><code><span class="n">kitty</span><span class="o">.</span><span class="na">startSession</span><span class="o">(</span><span class="no">CHATKITTY_USERNAME</span><span class="o">,</span> <span class="k">new</span> <span class="nc">ChatKittyCallback</span><span class="o">&lt;</span><span class="nc">SessionStartResult</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">(</span><span class="nc">SessionStartResult</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Handle result</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCancel</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// Handle session request cancellation</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onError</span><span class="o">(</span><span class="nc">ChatKittyException</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Handle error</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre></div>
+<p>If your application has the <strong>guest user</strong> feature enabled, you can begin a user session by calling the 
+<code>ChatKitty.startSession(CHATKITTY_USERNAME)</code> method.</p>
 
       </div>
       <div class="dark-box">
