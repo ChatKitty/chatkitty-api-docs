@@ -105,6 +105,11 @@ under the License.
             <a href="/platform" class="toc-h1 toc-link" data-title="Platform">Platform API</a>
           </li>
         <% end %>
+        <% if current_page.url == '/android/' %>
+          <li>
+            <a href="/references/android/index.html" class="toc-h1 toc-link" data-title="Reference">SDK Reference</a>
+          </li>
+        <% end %>
       </ul>
       <% if current_page.data.toc_footers %>
         <ul class="toc-footer">
