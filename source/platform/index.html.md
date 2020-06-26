@@ -520,21 +520,31 @@ There are four types of messages; [Text Messages](#text-message), [File Messages
 ## Text Message
 Users can send text messages containing a unicode text body. These messages can contain emojis and other unicode characters
  but have no file attachments.
+ 
+ <aside class="notice">
+  Text messages cannot be sent using the Platform API.
+ </aside>
 
 ## File Message
 Users can send files messages with one, or many file attachments.
 
+<aside class="notice">
+ File messages cannot be sent using the Platform API.
+</aside>
+
 ## System Text Message
 Administrators can send text messages containing a unicode text body. These messages can contain emojis and other unicode characters
  but have no file attachments.
+ 
+<aside class="notice">
+ System text messages can only be sent using the Platform API.
+</aside>
 
 ## System File Message
 Administrators can send files messages with one, or many file attachments.
 
----
-
 <aside class="notice">
-System messages can only be sent using the Platform API
+ System file messages can only be sent using the Platform API.
 </aside>
 
 ## Properties
