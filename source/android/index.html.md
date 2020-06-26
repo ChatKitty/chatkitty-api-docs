@@ -59,3 +59,11 @@ kitty.startSession(CHATKITTY_USERNAME, new ChatKittyCallback<SessionStartResult>
 
 If your application has the **guest user** feature enabled, you can begin a user session by calling the 
 `ChatKitty.startSession(CHATKITTY_USERNAME)` method.
+
+<aside class="success">
+  Go to the <a href="#callbacks">Callbacks</a> page to learn more about ChatKitty callbacks.
+</aside>
+
+<aside class="notice">
+ Guest users are appropriate when your application in development, if your application supports anonymous chat, or if you don't have back-end authentication.
+</aside>
