@@ -6,7 +6,7 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="../images/favicon-7d95b84d.ico" rel="icon" type="image/ico" />
-    <title>Platform API Documentation</title>
+    <title>Android SDK Documentation</title>
 
     <style media="screen">
       .highlight table td { padding: 5px; }
@@ -284,6 +284,9 @@
     <link href="../stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
       <script src="../javascripts/all-e9bde216.js"></script>
 
+    <script>
+      $(function() { setupCodeCopy(); });
+    </script>
   </head>
 
   <body class="android android_index" data-languages="[&quot;java&quot;]">
@@ -308,6 +311,36 @@
           </li>
           <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#begin-a-user-session" class="toc-h2 toc-link" data-title="Begin a user session">Begin a user session</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#current-user" class="toc-h1 toc-link" data-title="Current User">Current User</a>
+          </li>
+          <li>
+            <a href="#channels" class="toc-h1 toc-link" data-title="Channels">Channels</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#channel-types" class="toc-h2 toc-link" data-title="Channel Types">Channel Types</a>
+                  </li>
+                  <li>
+                    <a href="#get-channels" class="toc-h2 toc-link" data-title="Get channels">Get channels</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#messages" class="toc-h1 toc-link" data-title="Messages">Messages</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#messages-types" class="toc-h2 toc-link" data-title="Messages Types">Messages Types</a>
+                  </li>
+                  <li>
+                    <a href="#get-messages" class="toc-h2 toc-link" data-title="Get messages">Get messages</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="/reference/android/index.html" class="toc-h1 toc-link" data-title="Reference">SDK Reference</a>
@@ -331,10 +364,9 @@ integrating chat features from your ChatKitty application with your Android clie
 </blockquote>
 <div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">ChatKitty</span> <span class="n">kitty</span> <span class="o">=</span> <span class="nc">ChatKitty</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="no">CHATKITTY_API_KEY</span><span class="o">);</span>
 </code></pre></div>
-<p>Get a <code>ChatKitty</code> instance by passing your application&#39;s API key to the <code>ChatKitty.getInstance()</code> method as a parameter.</p>
-
-<p><strong>Begin a user session</strong><br>
-To make calls to ChatKitty through the Chat SDK, a user session must be initiated.</p>
+<p>Get a <code>ChatKitty</code> instance by passing your application&#39;s API key to the <code>ChatKitty.getInstance(String)</code> method as a parameter.</p>
+<h2 id='begin-a-user-session'>Begin a user session</h2>
+<p>To make calls to ChatKitty through the Chat SDK, a user session must be initiated.</p>
 
 <p>You can initiate a user session using the <a href="/platform#properties-6">unique username</a> of a user, or 
 with the user&#39;s name and a <strong>challenge code</strong> if the user isn&#39;t a guest.</p>
@@ -357,7 +389,7 @@ with the user&#39;s name and a <strong>challenge code</strong> if the user isn&#
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCancel</span><span class="o">()</span> <span class="o">{</span>
-        <span class="c1">// Handle session request cancellation</span>
+        <span class="c1">// Handle request cancellation</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
@@ -367,7 +399,135 @@ with the user&#39;s name and a <strong>challenge code</strong> if the user isn&#
 <span class="o">});</span>
 </code></pre></div>
 <p>If your application has the <strong>guest user</strong> feature enabled, you can begin a user session by calling the 
-<code>ChatKitty.startSession(CHATKITTY_USERNAME)</code> method.</p>
+<code>ChatKitty.startSession(String, ChatKittyCallback&lt;SessionStartResult&gt;)</code> method with your user&#39;s unique name.</p>
+
+<aside class="notice">
+ Guest users are appropriate when your application in development, if your application supports anonymous chat, or if you don't have back-end authentication.
+</aside>
+
+<aside class="success">
+  Go to the <a href="#callbacks">Callbacks</a> page to learn more about ChatKitty callbacks.
+</aside>
+<h1 id='current-user'>Current User</h1>
+<blockquote>
+<p>Get the current user</p>
+</blockquote>
+<div class="highlight"><pre class="highlight java tab-java"><code><span class="n">kitty</span><span class="o">.</span><span class="na">getCurrentUser</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChatKittyCallback</span><span class="o">&lt;</span><span class="nc">GetCurrentUserResult</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">(</span><span class="nc">GetCurrentUserResult</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Handle result</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCancel</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// Handle request cancellation</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onError</span><span class="o">(</span><span class="nc">ChatKittyException</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Handle error</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre></div>
+<p>After starting a ChatKitty <a href="#begin-a-user-session">user session</a>, you can request the current user 
+anytime by calling the <code>ChatKitty.getCurrentUser(ChatKittyCallback&lt;GetCurrentUserResult&gt;)</code> method.</p>
+<h1 id='channels'>Channels</h1>
+<p>Channels are the backbone of the ChatKitty chat experience. Users can join channels and receive 
+or send messages. ChatKitty broadcasts messages created in channels to <strong>channel members</strong> via 
+a <strong>chat session</strong> or <strong>push notifications</strong>.</p>
+<h2 id='channel-types'>Channel Types</h2>
+<p>There are three types of channels;</p>
+<h3 id='open-channel'>Open Channel</h3>
+<p>Open channels provide Twitch-style chats where many users can join the chat without invites and send 
+messages. </p>
+
+<aside class="notice">
+Messages sent in open channels are <b>ephemeral</b> and not persisted by ChatKitty.
+</aside>
+<h3 id='public-channel'>Public Channel</h3>
+<p>Users can join public channels by themselves (like an open chat) or via invites from an existing channel member.
+ChatKitty persists messages sent in public channels by default but this behaviour can be configured.</p>
+<h3 id='private-channel'>Private Channel</h3>
+<p>Users can only join private channels via invites from an existing channel member.
+ChatKitty persists messages sent in private channels by default but this behaviour can be configured.</p>
+<h2 id='get-channels'>Get channels</h2>
+<blockquote>
+<p>Get channels accessible by the current user</p>
+</blockquote>
+<div class="highlight"><pre class="highlight java tab-java"><code><span class="n">kitty</span><span class="o">.</span><span class="na">getChannels</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChatKittyCallback</span><span class="o">&lt;</span><span class="nc">GetChannelsResult</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">(</span><span class="nc">GetChannelsResult</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">PageIterator</span><span class="o">&lt;</span><span class="nc">Channel</span><span class="o">&gt;</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">iterator</span><span class="o">;</span>
+
+        <span class="k">while</span><span class="o">(</span><span class="n">iterator</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+            <span class="nc">Channel</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">iterator</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+
+            <span class="c1">// Handle channel</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCancel</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// Handle request cancellation</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onError</span><span class="o">(</span><span class="nc">ChatKittyException</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Handle error</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre></div>
+<p>You can get channels the current user has joined or can join by calling the <code>ChatKitty.getChannels(ChatKittyCallback&lt;GetChannelsResult&gt;)</code> method.</p>
+<h1 id='messages'>Messages</h1>
+<p>Users send messages through your application and administrators can send messages through the Platform API. </p>
+<h2 id='messages-types'>Messages Types</h2>
+<p>There are four types of messages;</p>
+<h3 id='text-message'>Text Message</h3>
+<p>Users can send text messages containing a unicode text body. These messages can contain emojis and other unicode characters
+ but have no file attachments.</p>
+<h3 id='file-message'>File Message</h3>
+<p>Users can send files messages with one, or many file attachments.</p>
+<h3 id='system-text-message'>System Text Message</h3>
+<p>Administrators can send text messages containing a unicode text body. These messages can contain emojis and other unicode characters
+ but have no file attachments.</p>
+
+<aside class="notice">
+ System text messages can only be sent using the Platform API.
+</aside>
+<h3 id='system-file-message'>System File Message</h3>
+<p>Administrators can send files messages with one, or many file attachments.</p>
+
+<aside class="notice">
+ System file messages can only be sent using the Platform API.
+</aside>
+<h2 id='get-messages'>Get messages</h2>
+<blockquote>
+<p>Get messages inside a channel</p>
+</blockquote>
+<div class="highlight"><pre class="highlight java tab-java"><code><span class="n">kitty</span><span class="o">.</span><span class="na">getChannelMessages</span><span class="o">(</span><span class="n">channel</span><span class="o">,</span> <span class="k">new</span> <span class="nc">ChatKittyCallback</span><span class="o">&lt;</span><span class="nc">GetMessagesResult</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">(</span><span class="nc">GetMessagesResult</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">PageIterator</span><span class="o">&lt;</span><span class="nc">Message</span><span class="o">&gt;</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">iterator</span><span class="o">;</span>
+
+        <span class="k">while</span><span class="o">(</span><span class="n">iterator</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+            <span class="nc">Message</span> <span class="n">messages</span> <span class="o">=</span> <span class="n">iterator</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+
+            <span class="c1">// Handle messages</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCancel</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// Handle request cancellation</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onError</span><span class="o">(</span><span class="nc">ChatKittyException</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Handle error</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre></div>
+<p>You can get messages in a <a href="#channels">channel</a> by calling the <code>ChatKitty.getChannelMessages(Channel, ChatKittyCallback&lt;GetMessagesResult&gt;)</code> method.</p>
 
       </div>
       <div class="dark-box">
