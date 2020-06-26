@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href="images/favicon-7d95b84d.ico" rel="icon" type="image/ico" />
-    <title>ChatKitty API Documentation</title>
+    <link href="../images/favicon-7d95b84d.ico" rel="icon" type="image/ico" />
+    <title>Platform API Documentation</title>
 
     <style media="screen">
       .highlight table td { padding: 5px; }
@@ -280,30 +280,34 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-c9d8fa83.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all_nosearch-ea811c3e.js"></script>
+    <link href="../stylesheets/screen-c9d8fa83.css" rel="stylesheet" media="screen" />
+    <link href="../stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
+      <script src="../javascripts/all-e9bde216.js"></script>
 
   </head>
 
-  <body class="index" data-languages="[]">
+  <body class="android android_index" data-languages="[&quot;java&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
-        <img src="images/navbar-cad8cdcb.png" alt="" />
+        <img src="../images/navbar-cad8cdcb.png" alt="" />
       </span>
     </a>
     <div class="toc-wrapper">
-      <a href="/"><img src="images/logo-2664c69a.png" class="logo" alt="" /></a>
+      <a href="/"><img src="../images/logo-2664c69a.png" class="logo" alt="" /></a>
+        <div class="lang-selector">
+              <a href="#" data-language-name="java">java</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
-            <a href="#overview" class="toc-h1 toc-link" data-title="Overview">Overview</a>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
-            <a href="/android" class="toc-h1 toc-link" data-title="Android">Android SDK</a>
-          </li>
-          <li>
-            <a href="/platform" class="toc-h1 toc-link" data-title="Platform">Platform API</a>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
       </ul>
         <ul class="toc-footer">
@@ -313,18 +317,26 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='overview'>Overview</h1>
-<p>ChatKitty provides a <strong>Platform API</strong>, and a number of client SDKs to directly interact with the different types of resources representing data in your ChatKitty application.
-The ChatKitty Platform API is RESTful, using the HTTP protocol to expose discoverable <a href="http://stateless.co/hal_specification.html">HAL</a> resources.
-The client libraries provide an asynchronous WebSocket based interface to ChatKitty&#39;s user-side functionality.  While the client SDKs handle the requests and responses at the client-side,
-the Platform API provides an interface for you to manage and control your application server-side.</p>
+        <h1 id='introduction'>Introduction</h1>
+<p>Integrate real-time chat into your Android application with the ChatKitty SDK for Android. The Android SDK handles 
+integrating chat features from your ChatKitty application with your Android client app.   </p>
+<h1 id='authentication'>Authentication</h1>
+<p><strong>Initialize the Chat SDK with your API key</strong></p>
 
-<aside class="notice">
-Note: The Platform API is not designed for client-side use.
-</aside>
+<blockquote>
+<p>Get a ChatKitty instance with your application API key</p>
+</blockquote>
+<div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">ChatKitty</span> <span class="n">kitty</span> <span class="o">=</span> <span class="nc">ChatKitty</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="no">CHATKITTY_API_KEY</span><span class="o">);</span>
+</code></pre></div>
+<p>Get a <code>ChatKitty</code> instance by passing your application&#39;s API key to the <code>ChatKitty.getInstance()</code> method as a parameter.</p>
+
+<p><strong>Begin a user session with a user name</strong></p>
 
       </div>
       <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="java">java</a>
+          </div>
       </div>
     </div>
   </body>
