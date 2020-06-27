@@ -44,6 +44,8 @@ using a username and a **challenge code** if the user isn't a guest.
 kitty.startSession(CHATKITTY_USERNAME, new ChatKittyCallback<SessionStartResult>() {
     @Override
     public void onSuccess(SessionStartResult result) {
+         CurrentUser user = result.getCurrentUser();
+
         // Handle result
     }
     
@@ -77,7 +79,9 @@ If your application has the **guest user** feature enabled, you can begin a user
 kitty.getCurrentUser(new ChatKittyCallback<GetCurrentUserResult>() {
     @Override
     public void onSuccess(GetCurrentUserResult result) {
-        // Handle result
+        CurrentUser user = result.getCurrentUser();
+
+        // Handle user
     }
     
     @Override
