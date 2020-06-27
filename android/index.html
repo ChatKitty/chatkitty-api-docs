@@ -343,6 +343,9 @@
                   <li>
                     <a href="#get-messages" class="toc-h2 toc-link" data-title="Get messages">Get messages</a>
                   </li>
+                  <li>
+                    <a href="#sena-a-message" class="toc-h2 toc-link" data-title="Sena a message">Sena a message</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -555,6 +558,13 @@ This method returns a <code>ChannelEventListenerRegistration</code> object.</p>
 <span class="o">});</span>
 </code></pre></div>
 <p>You can get messages in a <a href="#channels">channel</a> by calling the <code>ChatKitty.getChannelMessages(Channel, ChatKittyCallback&lt;GetMessagesResult&gt;)</code> method.</p>
+<h2 id='sena-a-message'>Sena a message</h2>
+<blockquote>
+<p>Send a message to a channel</p>
+</blockquote>
+<div class="highlight"><pre class="highlight java tab-java"><code><span class="n">kitty</span><span class="o">.</span><span class="na">sendChannelMessage</span><span class="o">(</span><span class="n">channel</span><span class="o">,</span> <span class="k">new</span> <span class="nc">CreateTextMessageRequest</span><span class="o">(</span><span class="s">"Hello world!"</span><span class="o">));</span>
+</code></pre></div>
+<p>You can send a message to a <a href="#channels">channel</a> by calling the <code>ChatKitty.sendChannelMessage(Channel, CreateMessageRequest)</code> method.</p>
 
       </div>
       <div class="dark-box">
