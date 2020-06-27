@@ -388,6 +388,8 @@ using a username and a <strong>challenge code</strong> if the user isn&#39;t a g
 <div class="highlight"><pre class="highlight java tab-java"><code><span class="n">kitty</span><span class="o">.</span><span class="na">startSession</span><span class="o">(</span><span class="no">CHATKITTY_USERNAME</span><span class="o">,</span> <span class="k">new</span> <span class="nc">ChatKittyCallback</span><span class="o">&lt;</span><span class="nc">SessionStartResult</span><span class="o">&gt;()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">(</span><span class="nc">SessionStartResult</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+         <span class="nc">CurrentUser</span> <span class="n">user</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">getCurrentUser</span><span class="o">();</span>
+
         <span class="c1">// Handle result</span>
     <span class="o">}</span>
 
@@ -419,7 +421,9 @@ using a username and a <strong>challenge code</strong> if the user isn&#39;t a g
 <div class="highlight"><pre class="highlight java tab-java"><code><span class="n">kitty</span><span class="o">.</span><span class="na">getCurrentUser</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChatKittyCallback</span><span class="o">&lt;</span><span class="nc">GetCurrentUserResult</span><span class="o">&gt;()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">(</span><span class="nc">GetCurrentUserResult</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// Handle result</span>
+        <span class="nc">CurrentUser</span> <span class="n">user</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">getCurrentUser</span><span class="o">();</span>
+
+        <span class="c1">// Handle user</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
