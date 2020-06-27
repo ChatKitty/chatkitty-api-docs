@@ -242,7 +242,24 @@ You can get messages in a [channel](#channels) by calling the `ChatKitty.getChan
 > Send a message to a channel
 
 ```java
-kitty.sendChannelMessage(channel, new CreateTextMessageRequest("Hello world!"));
+kitty.sendChannelMessage(channel, new CreateTextMessageRequest("Hello world!"), new ChatKittyCallback<CreateMessageResult>() {
+    @Override
+    public void onSuccess(CreateMessageResult result) {
+        Message message = result.getMessage();
+
+        // Handle message
+    }
+    
+    @Override
+    public void onCancel() {
+        // Handle request cancellation
+    }
+
+    @Override
+    public void onError(ChatKittyException error) {
+        // Handle error
+    }
+});
 ```
 
 You can send a message to a [channel](#channels) by calling the `ChatKitty.sendChannelMessage(Channel, CreateMessageRequest)` method.
