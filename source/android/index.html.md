@@ -96,8 +96,8 @@ anytime by calling the `ChatKitty.getCurrentUser(ChatKittyCallback<GetCurrentUse
 
 # Channels
 Channels are the backbone of the ChatKitty chat experience. Users can join channels and receive 
-or send messages. ChatKitty broadcasts messages created in channels to **channel members** via 
-a **chat session** or **push notifications**.
+or send messages. ChatKitty broadcasts messages created in channels to **channel members** with active 
+**chat sessions** and sends **push notifications** to offline members.
 
 ## Channel Types
 
