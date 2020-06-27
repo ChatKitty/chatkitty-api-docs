@@ -178,7 +178,7 @@ registration.deregister(); // ChannelEventListenerRegistration
 ```
 
 Deregister a `ChannelEventListener` by calling the `ChannelEventListenerRegistration.deregister()` method on 
-`ChannelEventListenerRegistration` returned from registering the event listener.
+`ChannelEventListenerRegistration` object returned from registering the event listener.
 
 # Messages
 Users send messages through your application and administrators can send messages through the Platform API. 
