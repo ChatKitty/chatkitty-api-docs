@@ -589,7 +589,7 @@ You must replace <code>{{access_token}}</code> with an access token gotten using
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>ChatKitty <strong>paginates</strong> all collection resources. Requesting a resource collection returns 
-the first page of the collection optionally with HAL hypermedia links to the subsequent pages if more pages are available.</p>
+the first page of the collection optionally with HAL hypermedia links to subsequent pages if more pages are available.</p>
 
 <p>Traverse the page links to iterate through a collection.</p>
 <h2 id='properties'>Properties</h2>
@@ -641,7 +641,9 @@ the first page of the collection optionally with HAL hypermedia links to the sub
 </tr>
 </tbody></table>
 <h2 id='embedded-properties'>Embedded properties</h2>
-<p>A single property with the name is the resource collection name, and a value that is an array of resource content of the page.</p>
+<p>A page resources embeds a slice of a resource collection in a JSON array property with the same name 
+as the resource collection. For example, with a collection of users resources, the resource collection name would be <code>users</code>, 
+and the page would include a JSON array in its <code>_embedded</code> property named <code>users</code>, as per the <a href="http://stateless.co/hal_specification.html">HAL</a> specification.</p>
 
 <blockquote>
 <p><code>users</code> is the name of a user resource collection</p>
