@@ -37,7 +37,7 @@ with the username and a **challenge code** if the user isn't a guest.
  We recommend you use as a hashed email address or phone number as your ChatKitty usernames.
 </aside>
 
-**Begin a user session with a user name (Guest user session)**  
+### Begin a user session with a user name (Guest user session)  
 > Starting a guest user session
 
 ```java
@@ -126,7 +126,7 @@ ChatKitty persists messages sent in private channels by default but this behavio
 kitty.getChannels(new ChatKittyCallback<GetChannelsResult>() {
     @Override
     public void onSuccess(GetChannelsResult result) {
-        PageIterator<Channel> iterator = result.iterator;
+        PageIterator<Channel> iterator = result.iterator();
 
         while(iterator.hasNext()) {
             Channel channel = iterator.next();
@@ -148,6 +148,37 @@ kitty.getChannels(new ChatKittyCallback<GetChannelsResult>() {
 ```
 
 You can get channels the current user has joined or can join by calling the `ChatKitty.getChannels(ChatKittyCallback<GetChannelsResult>)` method.
+
+## Listen to channel events
+When an event involving a channel happens, like a message sent in the channel or a user joining the channel, 
+a `ChannelEvent` to sent to registered `ChannelEventListener`s.
+
+### Registering a channel event listener
+> Register a channel event listener
+
+```java
+ChannelEventListenerRegistration registration = kitty.registerChannelEventListener(channel, new ChannelEventListener() {
+        @Override
+        public void onMessageReceived(MessageReceivedEvent event) { 
+            Message message = event.getMessage();
+    
+            // Handle message
+        }
+    });
+```
+
+Register a `ChannelEventListener` by calling the `ChatKitty.registerChannelEventListener(Channel, ChannelEventListener)` method. 
+This method returns a `ChannelEventListenerRegistration` object.
+
+### Deregistering a channel event listener
+> Deregister a channel event listener
+
+```java
+registration.deregister(); // ChannelEventListenerRegistration
+```
+
+Deregister a `ChannelEventListener` by calling the `ChannelEventListenerRegistration.deregister()` method on 
+`ChannelEventListenerRegistration` returned from registering the event listener.
 
 # Messages
 Users send messages through your application and administrators can send messages through the Platform API. 
@@ -184,7 +215,7 @@ Administrators can send files messages with one, or many file attachments.
 kitty.getChannelMessages(channel, new ChatKittyCallback<GetMessagesResult>() {
     @Override
     public void onSuccess(GetMessagesResult result) {
-        PageIterator<Message> iterator = result.iterator;
+        PageIterator<Message> iterator = result.iterator();
 
         while(iterator.hasNext()) {
             Message messages = iterator.next();
