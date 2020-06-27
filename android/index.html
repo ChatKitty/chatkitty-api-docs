@@ -329,6 +329,9 @@
                   <li>
                     <a href="#get-channels" class="toc-h2 toc-link" data-title="Get channels">Get channels</a>
                   </li>
+                  <li>
+                    <a href="#listen-to-channel-events" class="toc-h2 toc-link" data-title="Listen to channel events">Listen to channel events</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -375,9 +378,7 @@ with the username and a <strong>challenge code</strong> if the user isn&#39;t a 
  A username must be unique within a ChatKitty application.<br/>
  We recommend you use as a hashed email address or phone number as your ChatKitty usernames.
 </aside>
-
-<p><strong>Begin a user session with a user name (Guest user session)</strong>  </p>
-
+<h3 id='begin-a-user-session-with-a-user-name-guest-user-session'>Begin a user session with a user name (Guest user session)</h3>
 <blockquote>
 <p>Starting a guest user session</p>
 </blockquote>
@@ -457,7 +458,7 @@ ChatKitty persists messages sent in private channels by default but this behavio
 <div class="highlight"><pre class="highlight java tab-java"><code><span class="n">kitty</span><span class="o">.</span><span class="na">getChannels</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChatKittyCallback</span><span class="o">&lt;</span><span class="nc">GetChannelsResult</span><span class="o">&gt;()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">(</span><span class="nc">GetChannelsResult</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">PageIterator</span><span class="o">&lt;</span><span class="nc">Channel</span><span class="o">&gt;</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">iterator</span><span class="o">;</span>
+        <span class="nc">PageIterator</span><span class="o">&lt;</span><span class="nc">Channel</span><span class="o">&gt;</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
 
         <span class="k">while</span><span class="o">(</span><span class="n">iterator</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
             <span class="nc">Channel</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">iterator</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
@@ -478,6 +479,32 @@ ChatKitty persists messages sent in private channels by default but this behavio
 <span class="o">});</span>
 </code></pre></div>
 <p>You can get channels the current user has joined or can join by calling the <code>ChatKitty.getChannels(ChatKittyCallback&lt;GetChannelsResult&gt;)</code> method.</p>
+<h2 id='listen-to-channel-events'>Listen to channel events</h2>
+<p>When an event involving a channel happens, like a message sent in the channel or a user joining the channel, 
+a <code>ChannelEvent</code> to sent to registered <code>ChannelEventListener</code>s.</p>
+<h3 id='registering-a-channel-event-listener'>Registering a channel event listener</h3>
+<blockquote>
+<p>Register a channel event listener</p>
+</blockquote>
+<div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">ChannelEventListenerRegistration</span> <span class="n">registration</span> <span class="o">=</span> <span class="n">kitty</span><span class="o">.</span><span class="na">registerChannelEventListener</span><span class="o">(</span><span class="n">channel</span><span class="o">,</span> <span class="k">new</span> <span class="nc">ChannelEventListener</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onMessageReceived</span><span class="o">(</span><span class="nc">MessageReceivedEvent</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span> 
+            <span class="nc">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getMessage</span><span class="o">();</span>
+
+            <span class="c1">// Handle message</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+</code></pre></div>
+<p>Register a <code>ChannelEventListener</code> by calling the <code>ChatKitty.registerChannelEventListener(Channel, ChannelEventListener)</code> method. 
+This method returns a <code>ChannelEventListenerRegistration</code> object.</p>
+<h3 id='deregistering-a-channel-event-listener'>Deregistering a channel event listener</h3>
+<blockquote>
+<p>Deregister a channel event listener</p>
+</blockquote>
+<div class="highlight"><pre class="highlight java tab-java"><code><span class="n">registration</span><span class="o">.</span><span class="na">deregister</span><span class="o">();</span> <span class="c1">// ChannelEventListenerRegistration</span>
+</code></pre></div>
+<p>Deregister a <code>ChannelEventListener</code> by calling the <code>ChannelEventListenerRegistration.deregister()</code> method on 
+<code>ChannelEventListenerRegistration</code> returned from registering the event listener.</p>
 <h1 id='messages'>Messages</h1>
 <p>Users send messages through your application and administrators can send messages through the Platform API. </p>
 <h2 id='messages-types'>Messages Types</h2>
@@ -507,7 +534,7 @@ ChatKitty persists messages sent in private channels by default but this behavio
 <div class="highlight"><pre class="highlight java tab-java"><code><span class="n">kitty</span><span class="o">.</span><span class="na">getChannelMessages</span><span class="o">(</span><span class="n">channel</span><span class="o">,</span> <span class="k">new</span> <span class="nc">ChatKittyCallback</span><span class="o">&lt;</span><span class="nc">GetMessagesResult</span><span class="o">&gt;()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">(</span><span class="nc">GetMessagesResult</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">PageIterator</span><span class="o">&lt;</span><span class="nc">Message</span><span class="o">&gt;</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">iterator</span><span class="o">;</span>
+        <span class="nc">PageIterator</span><span class="o">&lt;</span><span class="nc">Message</span><span class="o">&gt;</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
 
         <span class="k">while</span><span class="o">(</span><span class="n">iterator</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
             <span class="nc">Message</span> <span class="n">messages</span> <span class="o">=</span> <span class="n">iterator</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
