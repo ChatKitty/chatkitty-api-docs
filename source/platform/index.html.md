@@ -147,7 +147,7 @@ curl --location --request GET '{{users_link}}' \
 ```
 
 ChatKitty **paginates** all collection resources. Requesting a resource collection returns 
-the first page of the collection optionally with HAL hypermedia links to the subsequent pages if more pages are available.
+the first page of the collection optionally with HAL hypermedia links to subsequent pages if more pages are available.
 
 Traverse the page links to iterate through a collection.
  
@@ -166,7 +166,9 @@ Link | Methods | Description
 [last](#pagination) | [GET](#pagination) | __Optional:__ Link to the last page of this collection. __Present if__ known.
 
 ## Embedded properties 
-A single property with the name is the resource collection name, and a value that is an array of resource content of the page.
+A page resources embeds a slice of a resource collection in a JSON array property with the same name 
+as the resource collection. For example, with a collection of users resources, the resource collection name would be `users`, 
+and the page would include a JSON array in its `_embedded` property named `users`, as per the [HAL](http://stateless.co/hal_specification.html) specification.
 
 > `users` is the name of a user resource collection
 

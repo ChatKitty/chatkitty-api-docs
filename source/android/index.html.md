@@ -30,7 +30,7 @@ Get a `ChatKitty` instance by passing your application's API key to the `ChatKit
 To make calls to ChatKitty through the Chat SDK, a user session must be initiated.
 
 You can initiate a user session using the [unique username](/platform#properties-6) of a user, or 
-with the username and a **challenge code** if the user isn't a guest.
+with a username and a **challenge code** if the user isn't a guest.
 
 <aside class="notice">
  A username must be unique within a ChatKitty application.<br/>
@@ -238,7 +238,7 @@ kitty.getChannelMessages(channel, new ChatKittyCallback<GetMessagesResult>() {
 
 You can get messages in a [channel](#channels) by calling the `ChatKitty.getChannelMessages(Channel, ChatKittyCallback<GetMessagesResult>)` method.
 
-## Sena a message
+## Send a message
 > Send a message to a channel
 
 ```java
