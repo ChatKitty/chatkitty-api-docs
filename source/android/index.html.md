@@ -155,7 +155,7 @@ You can get channels the current user has joined or can join by calling the `Cha
 
 ## Listen to channel events
 When an event involving a channel happens, like a message sent in the channel or a user joining the channel, 
-a `ChannelEvent` to sent to registered `ChannelEventListener`s.
+a `ChannelEvent` is sent to registered `ChannelEventListener`s.
 
 ### Registering a channel event listener
 > Register a channel event listener
