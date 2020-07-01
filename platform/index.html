@@ -466,7 +466,7 @@
 their ChatKitty applications. </p>
 
 <aside class="success">
-ChatKitty provides a <a href="https://staging-api.chatkitty.com/v1/explorer/index.html#hkey0=Content-Type&hval0=application/json&uri=/v1/applications/me">API Explorer</a> to 
+ChatKitty provides a <a href="https://api.chatkitty.com/v1/explorer/index.html#hkey0=Content-Type&hval0=application/json&uri=/v1/applications/me">API Explorer</a> to 
 access the Platform API.
 </aside>
 <h1 id='headers'>Headers</h1>
@@ -483,7 +483,7 @@ using your application&#39;s client ID and client secret. </p>
 <blockquote>
 <p>To authorize use this replacing <code>acme</code> with your client ID and <code>acmesecret</code> with your client secret:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://staging-authorization.chatkitty.com/oauth/token'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://authorization.chatkitty.com/oauth/token'</span> <span class="se">\</span>
 <span class="nt">--user</span> <span class="s1">'acme:acmesecret'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'grant_type=client_credentials'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'username=acme'</span> <span class="se">\</span>
@@ -536,13 +536,13 @@ You must replace <code>{{access_token}}</code> with an access token gotten using
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1017562554"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/1/channels"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1/channels"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
@@ -551,13 +551,13 @@ You must replace <code>{{access_token}}</code> with an access token gotten using
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"102746681"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/2"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/2"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/2/channels"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/2/channels"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -565,19 +565,19 @@ You must replace <code>{{access_token}}</code> with an access token gotten using
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"first"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users?page=0&amp;size=2"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users?page=0&amp;size=2"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"prev"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users?page=0&amp;size=2"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users?page=0&amp;size=2"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users?page=1&amp;size=2"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users?page=1&amp;size=2"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"next"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users?page=2&amp;size=2"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users?page=2&amp;size=2"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"last"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users?page=2&amp;size=2"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users?page=2&amp;size=2"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -656,13 +656,13 @@ and the page would include a JSON array in its <code>_embedded</code> property n
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1017562554"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/1/channels"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1/channels"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
@@ -723,7 +723,7 @@ and the page would include a JSON array in its <code>_embedded</code> property n
 <td>The ChatKitty application currently authenticated.</td>
 </tr>
 </tbody></table>
-<h2 id='get-api-root'>Get API Root</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://staging-api.chatkitty.com/v1'</span> <span class="se">\</span>
+<h2 id='get-api-root'>Get API Root</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://api.chatkitty.com/v1'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
 </code></pre></div>
@@ -733,17 +733,17 @@ and the page would include a JSON array in its <code>_embedded</code> property n
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/me"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/me"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint returns the root of your ChatKitty application graph. </p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET https://staging-api.chatkitty.com/v1</code></p>
+<p><code>GET https://api.chatkitty.com/v1</code></p>
 
 <aside class="success">
 This is the only URL needed to discover the rest of the Platform API as every other URL is returned as a REST link.
@@ -811,13 +811,13 @@ This is the only URL needed to discover the rest of the Platform API as every ot
   </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"107a326f-bfab-4d2c-9a5a-fa79bd896929"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -910,13 +910,13 @@ ChatKitty persists messages sent in private channels by default but this behavio
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Open Chat"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels/1"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/1"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels/1/messages"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/1/messages"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -959,13 +959,13 @@ ChatKitty persists messages sent in private channels by default but this behavio
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Open Chat"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels/1"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/1"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels/1/messages"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/1/messages"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
@@ -975,13 +975,13 @@ ChatKitty persists messages sent in private channels by default but this behavio
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Public Chat"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels/2"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/2"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/2/channels/2/messages"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/2/channels/2/messages"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -989,7 +989,7 @@ ChatKitty persists messages sent in private channels by default but this behavio
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels?page=0&amp;size=20"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels?page=0&amp;size=20"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1016,13 +1016,13 @@ ChatKitty persists messages sent in private channels by default but this behavio
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Open Chat"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels/1"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/1"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels/1/messages"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/1/messages"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1043,13 +1043,13 @@ ChatKitty persists messages sent in private channels by default but this behavio
   </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"107a326f-bfab-4d2c-9a5a-fa79bd896929"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1157,13 +1157,13 @@ ChatKitty persists messages sent in private channels by default but this behavio
   </span><span class="nl">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello world!"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/messages/1"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/messages/1"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels/2"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/2"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1201,16 +1201,16 @@ ChatKitty persists messages sent in private channels by default but this behavio
         </span><span class="nl">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello from client!"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/messages/2"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/messages/2"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels/2"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/2"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
@@ -1220,13 +1220,13 @@ ChatKitty persists messages sent in private channels by default but this behavio
         </span><span class="nl">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello world!"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/messages/1"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/messages/1"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels/2"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/2"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -1234,7 +1234,7 @@ ChatKitty persists messages sent in private channels by default but this behavio
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels/2/messages?start=8184870605946882&amp;size=20&amp;relation=SELF"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/2/messages?start=8184870605946882&amp;size=20&amp;relation=SELF"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1258,13 +1258,13 @@ ChatKitty persists messages sent in private channels by default but this behavio
   </span><span class="nl">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello world!"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/messages/1"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/messages/1"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels/2"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/2"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1285,13 +1285,13 @@ ChatKitty persists messages sent in private channels by default but this behavio
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Public Chat"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels/2"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/2"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/2/channels/2/messages"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/2/channels/2/messages"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1359,13 +1359,13 @@ ChatKitty persists messages sent in private channels by default but this behavio
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"37282832193"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/1/channels"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1/channels"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1402,13 +1402,13 @@ ChatKitty persists messages sent in private channels by default but this behavio
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1017562554"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/1/channels"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1/channels"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
@@ -1417,13 +1417,13 @@ ChatKitty persists messages sent in private channels by default but this behavio
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"102746681"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/2"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/2"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/2/channels"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/2/channels"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -1431,19 +1431,19 @@ ChatKitty persists messages sent in private channels by default but this behavio
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"first"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users?page=0&amp;size=2"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users?page=0&amp;size=2"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"prev"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users?page=0&amp;size=2"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users?page=0&amp;size=2"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users?page=1&amp;size=2"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users?page=1&amp;size=2"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"next"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users?page=2&amp;size=2"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users?page=2&amp;size=2"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"last"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users?page=2&amp;size=2"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users?page=2&amp;size=2"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1469,13 +1469,13 @@ ChatKitty persists messages sent in private channels by default but this behavio
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1017562554"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users/1/channels"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1/channels"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1496,13 +1496,13 @@ ChatKitty persists messages sent in private channels by default but this behavio
   </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"107a326f-bfab-4d2c-9a5a-fa79bd896929"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/users"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://staging-api.chatkitty.com/v1/applications/1/channels"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
