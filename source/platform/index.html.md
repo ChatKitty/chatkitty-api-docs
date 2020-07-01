@@ -19,7 +19,7 @@ The Platform API provides a RESTful interface for administrators and server-side
 their ChatKitty applications. 
 
 <aside class="success">
-ChatKitty provides a <a href="https://staging-api.chatkitty.com/v1/explorer/index.html#hkey0=Content-Type&hval0=application/json&uri=/v1/applications/me">API Explorer</a> to 
+ChatKitty provides a <a href="https://api.chatkitty.com/v1/explorer/index.html#hkey0=Content-Type&hval0=application/json&uri=/v1/applications/me">API Explorer</a> to 
 access the Platform API.
 </aside>
 
@@ -38,7 +38,7 @@ using your application's client ID and client secret.
 > To authorize use this replacing `acme` with your client ID and `acmesecret` with your client secret:
 
 ```shell
-curl --location --request POST 'https://staging-authorization.chatkitty.com/oauth/token' \
+curl --location --request POST 'https://authorization.chatkitty.com/oauth/token' \
 --user 'acme:acmesecret' \
 --form 'grant_type=client_credentials' \
 --form 'username=acme' \
@@ -93,13 +93,13 @@ curl --location --request GET '{{users_link}}' \
         "name": "1017562554",
         "_links": {
           "self": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/1"
+            "href": "https://api.chatkitty.com/v1/applications/1/users/1"
           },
           "channels": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/1/channels"
+            "href": "https://api.chatkitty.com/v1/applications/1/users/1/channels"
           },
           "application": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1"
+            "href": "https://api.chatkitty.com/v1/applications/1"
           }
         }
       },
@@ -108,13 +108,13 @@ curl --location --request GET '{{users_link}}' \
         "name": "102746681",
         "_links": {
           "self": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/2"
+            "href": "https://api.chatkitty.com/v1/applications/1/users/2"
           },
           "channels": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/2/channels"
+            "href": "https://api.chatkitty.com/v1/applications/1/users/2/channels"
           },
           "application": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1"
+            "href": "https://api.chatkitty.com/v1/applications/1"
           }
         }
       }
@@ -122,19 +122,19 @@ curl --location --request GET '{{users_link}}' \
   },
   "_links": {
     "first": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=0&size=2"
+      "href": "https://api.chatkitty.com/v1/applications/1/users?page=0&size=2"
     },
     "prev": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=0&size=2"
+      "href": "https://api.chatkitty.com/v1/applications/1/users?page=0&size=2"
     },
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=1&size=2"
+      "href": "https://api.chatkitty.com/v1/applications/1/users?page=1&size=2"
     },
     "next": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=2&size=2"
+      "href": "https://api.chatkitty.com/v1/applications/1/users?page=2&size=2"
     },
     "last": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=2&size=2"
+      "href": "https://api.chatkitty.com/v1/applications/1/users?page=2&size=2"
     }
   },
   "page": {
@@ -181,13 +181,13 @@ and the page would include a JSON array in its `_embedded` property named `users
         "name": "1017562554",
         "_links": {
           "self": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/1"
+            "href": "https://api.chatkitty.com/v1/applications/1/users/1"
           },
           "channels": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/1/channels"
+            "href": "https://api.chatkitty.com/v1/applications/1/users/1/channels"
           },
           "application": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1"
+            "href": "https://api.chatkitty.com/v1/applications/1"
           }
         }
       },
@@ -221,7 +221,7 @@ Link | Methods | Description
 
 ## Get API Root
 ```shell
-curl --location --request GET 'https://staging-api.chatkitty.com/v1' \
+curl --location --request GET 'https://api.chatkitty.com/v1' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer {{access_token}}'
 ```
@@ -232,10 +232,10 @@ curl --location --request GET 'https://staging-api.chatkitty.com/v1' \
 {
   "_links": {
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1"
+      "href": "https://api.chatkitty.com/v1"
     },
     "application": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/me"
+      "href": "https://api.chatkitty.com/v1/applications/me"
     }
   }
 }
@@ -244,7 +244,7 @@ curl --location --request GET 'https://staging-api.chatkitty.com/v1' \
 This endpoint returns the root of your ChatKitty application graph. 
 
 ### HTTP Request
-`GET https://staging-api.chatkitty.com/v1`
+`GET https://api.chatkitty.com/v1`
 
 <aside class="success">
 This is the only URL needed to discover the rest of the Platform API as every other URL is returned as a REST link.
@@ -283,13 +283,13 @@ curl --location --request GET '{{application_link}}' \
   "key": "107a326f-bfab-4d2c-9a5a-fa79bd896929",
   "_links": {
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1"
+      "href": "https://api.chatkitty.com/v1/applications/1"
     },
     "users": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users"
+      "href": "https://api.chatkitty.com/v1/applications/1/users"
     },
     "channels": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels"
+      "href": "https://api.chatkitty.com/v1/applications/1/channels"
     }
   }
 }
@@ -358,13 +358,13 @@ curl --location --request POST '{{channels_link}}' \
   "name": "Open Chat",
   "_links": {
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/1"
+      "href": "https://api.chatkitty.com/v1/applications/1/channels/1"
     },
     "messages": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/1/messages"
+      "href": "https://api.chatkitty.com/v1/applications/1/channels/1/messages"
     },
     "application": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1"
+      "href": "https://api.chatkitty.com/v1/applications/1"
     }
   }
 }
@@ -400,13 +400,13 @@ curl --location --request GET '{{channels_link}}' \
         "name": "Open Chat",
         "_links": {
           "self": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/1"
+            "href": "https://api.chatkitty.com/v1/applications/1/channels/1"
           },
           "messages": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/1/messages"
+            "href": "https://api.chatkitty.com/v1/applications/1/channels/1/messages"
           },
           "application": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1"
+            "href": "https://api.chatkitty.com/v1/applications/1"
           }
         }
       },
@@ -416,13 +416,13 @@ curl --location --request GET '{{channels_link}}' \
         "name": "Public Chat",
         "_links": {
           "self": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/2"
+            "href": "https://api.chatkitty.com/v1/applications/1/channels/2"
           },
           "messages": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/2/channels/2/messages"
+            "href": "https://api.chatkitty.com/v1/applications/2/channels/2/messages"
           },
           "application": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1"
+            "href": "https://api.chatkitty.com/v1/applications/1"
           }
         }
       }
@@ -430,7 +430,7 @@ curl --location --request GET '{{channels_link}}' \
   },
   "_links": {
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels?page=0&size=20"
+      "href": "https://api.chatkitty.com/v1/applications/1/channels?page=0&size=20"
     }
   },
   "page": {
@@ -463,13 +463,13 @@ curl --location --request GET '{{channel_link}}' \
   "name": "Open Chat",
   "_links": {
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/1"
+      "href": "https://api.chatkitty.com/v1/applications/1/channels/1"
     },
     "messages": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/1/messages"
+      "href": "https://api.chatkitty.com/v1/applications/1/channels/1/messages"
     },
     "application": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1"
+      "href": "https://api.chatkitty.com/v1/applications/1"
     }
   }
 }
@@ -496,13 +496,13 @@ curl --location --request DELETE '{{channel_link}}' \
   "key": "107a326f-bfab-4d2c-9a5a-fa79bd896929",
   "_links": {
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1"
+      "href": "https://api.chatkitty.com/v1/applications/1"
     },
     "users": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users"
+      "href": "https://api.chatkitty.com/v1/applications/1/users"
     },
     "channels": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels"
+      "href": "https://api.chatkitty.com/v1/applications/1/channels"
     }
   }
 }
@@ -583,13 +583,13 @@ curl --location --request POST '{{messages_link}}' \
   "body": "Hello world!",
   "_links": {
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/messages/1"
+      "href": "https://api.chatkitty.com/v1/applications/1/messages/1"
     },
     "channel": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/2"
+      "href": "https://api.chatkitty.com/v1/applications/1/channels/2"
     },
     "application": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1"
+      "href": "https://api.chatkitty.com/v1/applications/1"
     }
   }
 }
@@ -624,16 +624,16 @@ curl --location --request GET '{{messages_link}}' \
         "body": "Hello from client!",
         "_links": {
           "self": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/messages/2"
+            "href": "https://api.chatkitty.com/v1/applications/1/messages/2"
           },
           "user": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/1"
+            "href": "https://api.chatkitty.com/v1/applications/1/users/1"
           },
           "channel": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/2"
+            "href": "https://api.chatkitty.com/v1/applications/1/channels/2"
           },
           "application": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1"
+            "href": "https://api.chatkitty.com/v1/applications/1"
           }
         }
       },
@@ -643,13 +643,13 @@ curl --location --request GET '{{messages_link}}' \
         "body": "Hello world!",
         "_links": {
           "self": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/messages/1"
+            "href": "https://api.chatkitty.com/v1/applications/1/messages/1"
           },
           "channel": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/2"
+            "href": "https://api.chatkitty.com/v1/applications/1/channels/2"
           },
           "application": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1"
+            "href": "https://api.chatkitty.com/v1/applications/1"
           }
         }
       }
@@ -657,7 +657,7 @@ curl --location --request GET '{{messages_link}}' \
   },
   "_links": {
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/2/messages?start=8184870605946882&size=20&relation=SELF"
+      "href": "https://api.chatkitty.com/v1/applications/1/channels/2/messages?start=8184870605946882&size=20&relation=SELF"
     }
   },
   "page": {
@@ -687,13 +687,13 @@ curl --location --request GET '{{message_link}}' \
   "body": "Hello world!",
   "_links": {
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/messages/1"
+      "href": "https://api.chatkitty.com/v1/applications/1/messages/1"
     },
     "channel": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/2"
+      "href": "https://api.chatkitty.com/v1/applications/1/channels/2"
     },
     "application": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1"
+      "href": "https://api.chatkitty.com/v1/applications/1"
     }
   }
 }
@@ -720,13 +720,13 @@ curl --location --request DELETE '{message_link}}' \
   "name": "Public Chat",
   "_links": {
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels/2"
+      "href": "https://api.chatkitty.com/v1/applications/1/channels/2"
     },
     "messages": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/2/channels/2/messages"
+      "href": "https://api.chatkitty.com/v1/applications/2/channels/2/messages"
     },
     "application": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1"
+      "href": "https://api.chatkitty.com/v1/applications/1"
     }
   }
 }
@@ -771,13 +771,13 @@ curl --location --request POST '{{users_link}}' \
   "name": "37282832193",
   "_links": {
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/1"
+      "href": "https://api.chatkitty.com/v1/applications/1/users/1"
     },
     "channels": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/1/channels"
+      "href": "https://api.chatkitty.com/v1/applications/1/users/1/channels"
     },
     "application": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1"
+      "href": "https://api.chatkitty.com/v1/applications/1"
     }
   }
 }
@@ -811,13 +811,13 @@ curl --location --request GET '{{users_link}}' \
         "name": "1017562554",
         "_links": {
           "self": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/1"
+            "href": "https://api.chatkitty.com/v1/applications/1/users/1"
           },
           "channels": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/1/channels"
+            "href": "https://api.chatkitty.com/v1/applications/1/users/1/channels"
           },
           "application": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1"
+            "href": "https://api.chatkitty.com/v1/applications/1"
           }
         }
       },
@@ -826,13 +826,13 @@ curl --location --request GET '{{users_link}}' \
         "name": "102746681",
         "_links": {
           "self": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/2"
+            "href": "https://api.chatkitty.com/v1/applications/1/users/2"
           },
           "channels": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1/users/2/channels"
+            "href": "https://api.chatkitty.com/v1/applications/1/users/2/channels"
           },
           "application": {
-            "href": "https://staging-api.chatkitty.com/v1/applications/1"
+            "href": "https://api.chatkitty.com/v1/applications/1"
           }
         }
       }
@@ -840,19 +840,19 @@ curl --location --request GET '{{users_link}}' \
   },
   "_links": {
     "first": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=0&size=2"
+      "href": "https://api.chatkitty.com/v1/applications/1/users?page=0&size=2"
     },
     "prev": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=0&size=2"
+      "href": "https://api.chatkitty.com/v1/applications/1/users?page=0&size=2"
     },
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=1&size=2"
+      "href": "https://api.chatkitty.com/v1/applications/1/users?page=1&size=2"
     },
     "next": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=2&size=2"
+      "href": "https://api.chatkitty.com/v1/applications/1/users?page=2&size=2"
     },
     "last": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users?page=2&size=2"
+      "href": "https://api.chatkitty.com/v1/applications/1/users?page=2&size=2"
     }
   },
   "page": {
@@ -884,13 +884,13 @@ curl --location --request GET '{{user_link}}' \
   "name": "1017562554",
   "_links": {
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/1"
+      "href": "https://api.chatkitty.com/v1/applications/1/users/1"
     },
     "channels": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users/1/channels"
+      "href": "https://api.chatkitty.com/v1/applications/1/users/1/channels"
     },
     "application": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1"
+      "href": "https://api.chatkitty.com/v1/applications/1"
     }
   }
 }
@@ -917,13 +917,13 @@ curl --location --request DELETE '{{user_link}}' \
   "key": "107a326f-bfab-4d2c-9a5a-fa79bd896929",
   "_links": {
     "self": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1"
+      "href": "https://api.chatkitty.com/v1/applications/1"
     },
     "users": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/users"
+      "href": "https://api.chatkitty.com/v1/applications/1/users"
     },
     "channels": {
-      "href": "https://staging-api.chatkitty.com/v1/applications/1/channels"
+      "href": "https://api.chatkitty.com/v1/applications/1/channels"
     }
   }
 }
