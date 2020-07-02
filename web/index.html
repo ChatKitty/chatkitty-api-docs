@@ -482,8 +482,8 @@ a <code>ChannelEvent</code> is sent to registered channel event listeners.</p>
   <span class="c1">// Handle message</span>
 <span class="p">});</span>
 </code></pre></div>
-<p>Register a channel event listener by calling the <code>ChatKitty.registerChannelEventListener(Channel, String, function)</code> method.
-The <code>String</code> passed is the <a href="#channel-event-types">type</a> of event the passed-in function handles.<br>
+<p>To beginning listening to channel events, register a channel event listener by calling the <code>ChatKitty.registerChannelEventListener(Channel, String, function)</code> method.
+Where <code>String</code> is the <a href="#channel-event-types">type</a> of event the function handles.<br>
 This method returns a <code>ChannelEventListenerRegistration</code> object.</p>
 <h4 id='channel-event-types'>Channel Event Types</h4>
 <table><thead>
@@ -503,7 +503,8 @@ This method returns a <code>ChannelEventListenerRegistration</code> object.</p>
 </blockquote>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">registration</span><span class="p">.</span><span class="nx">deregister</span><span class="p">();</span> <span class="c1">// ChannelEventListenerRegistration</span>
 </code></pre></div>
-<p>Deregister a <code>ChannelEventListener</code> by calling the <code>ChannelEventListenerRegistration.deregister()</code> method on 
+<p>If you no longer wish to receive events with a channel event listener, deregister it by 
+calling the <code>ChannelEventListenerRegistration.deregister()</code> method on 
 <code>ChannelEventListenerRegistration</code> object returned from registering the event listener.</p>
 <h1 id='messages'>Messages</h1>
 <p>Users send messages through your application and administrators can send messages through the Platform API. </p>
@@ -531,7 +532,7 @@ This method returns a <code>ChannelEventListenerRegistration</code> object.</p>
 <blockquote>
 <p>Get messages inside a channel</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">getMessages</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">getChannelMessages</span><span class="p">(</span><span class="nx">channel</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">let</span> <span class="nx">iterator</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">iterator</span><span class="p">();</span>
 
