@@ -6,7 +6,7 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="../images/favicon-7d95b84d.ico" rel="icon" type="image/ico" />
-    <title>Android SDK Documentation</title>
+    <title>Web SDK Documentation</title>
 
     <style media="screen">
       .highlight table td { padding: 5px; }
@@ -289,7 +289,7 @@
     </script>
   </head>
 
-  <body class="android android_index" data-languages="[&quot;java&quot;]">
+  <body class="web web_index" data-languages="[&quot;javascript&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -299,7 +299,7 @@
     <div class="toc-wrapper">
       <a href="/"><img src="../images/logo-2664c69a.png" class="logo" alt="" /></a>
         <div class="lang-selector">
-              <a href="#" data-language-name="java">java</a>
+              <a href="#" data-language-name="javascript">javascript</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -348,9 +348,6 @@
                   </li>
               </ul>
           </li>
-          <li>
-            <a href="/reference/android/index.html" class="toc-h1 toc-link" data-title="Reference">SDK Reference</a>
-          </li>
       </ul>
         <ul class="toc-footer">
             <li><a href='https://www.chatkitty.com'>&copy; ChatKitty 2020. All rights reserved</a></li>
@@ -360,14 +357,14 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Integrate <strong>real-time chat</strong> into your Android application with the ChatKitty SDK for Android.   </p>
+<p>Integrate <strong>real-time chat</strong> into your Web application with the ChatKitty SDK for Web.  </p>
 <h1 id='authentication'>Authentication</h1>
 <p><strong>Initialize the Chat SDK with your API key</strong>  </p>
 
 <blockquote>
 <p>Get a ChatKitty instance with your application API key</p>
 </blockquote>
-<div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">ChatKitty</span> <span class="n">kitty</span> <span class="o">=</span> <span class="nc">ChatKitty</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="no">CHATKITTY_API_KEY</span><span class="o">);</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">kitty</span> <span class="o">=</span> <span class="nx">ChatKitty</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">(</span><span class="nx">CHATKITTY_API_KEY</span><span class="p">);</span>
 </code></pre></div>
 <p>Get a <code>ChatKitty</code> instance by passing your application&#39;s API key to the <code>ChatKitty.getInstance(String)</code> method as a parameter.</p>
 <h2 id='begin-a-user-session'>Begin a user session</h2>
@@ -384,60 +381,50 @@ using a username and a <strong>challenge code</strong> if the user isn&#39;t a g
 <blockquote>
 <p>Starting a guest user session</p>
 </blockquote>
-<div class="highlight"><pre class="highlight java tab-java"><code><span class="n">kitty</span><span class="o">.</span><span class="na">startSession</span><span class="o">(</span><span class="no">CHATKITTY_USERNAME</span><span class="o">,</span> <span class="k">new</span> <span class="nc">ChatKittyCallback</span><span class="o">&lt;</span><span class="nc">SessionStartResult</span><span class="o">&gt;()</span> <span class="o">{</span>
-  <span class="nd">@Override</span>
-  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">(</span><span class="nc">SessionStartResult</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
-    <span class="nc">CurrentUser</span> <span class="n">user</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">getCurrentUser</span><span class="o">();</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">startSession</span><span class="p">(</span><span class="nx">CHATKITTY_USERNAME</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">currentUser</span><span class="p">;</span>
 
     <span class="c1">// Handle user</span>
-  <span class="o">}</span>
+  <span class="p">}</span>
 
-  <span class="nd">@Override</span>
-  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCancel</span><span class="o">()</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Handle request cancellation</span>
-  <span class="o">}</span>
+  <span class="p">}</span>
 
-  <span class="nd">@Override</span>
-  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onError</span><span class="o">(</span><span class="nc">ChatKittyException</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Handle error</span>
-  <span class="o">}</span>
-<span class="o">});</span>
+  <span class="p">}</span>
+<span class="p">});</span>
 </code></pre></div>
 <p>If your application has the <strong>guest user</strong> feature enabled, you can begin a user session by calling the 
-<code>ChatKitty.startSession(String, ChatKittyCallback&lt;SessionStartResult&gt;)</code> method with your user&#39;s unique name.</p>
+<code>ChatKitty.startSession(String, function)</code> method with your user&#39;s unique name.</p>
 
 <aside class="notice">
  Guest users are appropriate when your application in development, if your application supports anonymous chat, or if you don't have back-end authentication.
-</aside>
-
-<aside class="success">
-  Go to the <a href="#callbacks">Callbacks</a> page to learn more about ChatKitty callbacks.
 </aside>
 <h1 id='current-user'>Current User</h1>
 <blockquote>
 <p>Get the current user</p>
 </blockquote>
-<div class="highlight"><pre class="highlight java tab-java"><code><span class="n">kitty</span><span class="o">.</span><span class="na">getCurrentUser</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChatKittyCallback</span><span class="o">&lt;</span><span class="nc">GetCurrentUserResult</span><span class="o">&gt;()</span> <span class="o">{</span>
-  <span class="nd">@Override</span>
-  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">(</span><span class="nc">GetCurrentUserResult</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
-    <span class="nc">CurrentUser</span> <span class="n">user</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">getCurrentUser</span><span class="o">();</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">getCurrentUser</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">currentUser</span><span class="p">;</span>
 
     <span class="c1">// Handle user</span>
-  <span class="o">}</span>
+  <span class="p">}</span>
 
-  <span class="nd">@Override</span>
-  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCancel</span><span class="o">()</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Handle request cancellation</span>
-  <span class="o">}</span>
+  <span class="p">}</span>
 
-  <span class="nd">@Override</span>
-  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onError</span><span class="o">(</span><span class="nc">ChatKittyException</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Handle error</span>
-  <span class="o">}</span>
-<span class="o">});</span>
+  <span class="p">}</span>
+<span class="p">});</span>
 </code></pre></div>
 <p>After starting a ChatKitty <a href="#begin-a-user-session">user session</a>, you can request the current user 
-anytime by calling the <code>ChatKitty.getCurrentUser(ChatKittyCallback&lt;GetCurrentUserResult&gt;)</code> method.</p>
+anytime by calling the <code>ChatKitty.getCurrentUser(function)</code> method.</p>
 <h1 id='channels'>Channels</h1>
 <p>Channels are the backbone of the ChatKitty chat experience. Users can join channels and receive 
 or send messages. ChatKitty broadcasts messages created in channels to <strong>channel members</strong> with active 
@@ -461,53 +448,60 @@ ChatKitty persists messages sent in private channels by default but this behavio
 <blockquote>
 <p>Get channels accessible by the current user</p>
 </blockquote>
-<div class="highlight"><pre class="highlight java tab-java"><code><span class="n">kitty</span><span class="o">.</span><span class="na">getChannels</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChatKittyCallback</span><span class="o">&lt;</span><span class="nc">GetChannelsResult</span><span class="o">&gt;()</span> <span class="o">{</span>
-  <span class="nd">@Override</span>
-  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">(</span><span class="nc">GetChannelsResult</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
-    <span class="nc">PageIterator</span><span class="o">&lt;</span><span class="nc">Channel</span><span class="o">&gt;</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">getChannels</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">iterator</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">iterator</span><span class="p">();</span>
 
-    <span class="k">while</span><span class="o">(</span><span class="n">iterator</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
-      <span class="nc">Channel</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">iterator</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nx">iterator</span><span class="p">.</span><span class="nx">hasNext</span><span class="p">())</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">channel</span> <span class="o">=</span> <span class="nx">iterator</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
 
       <span class="c1">// Handle channel</span>
-    <span class="o">}</span>
-  <span class="o">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
 
-  <span class="nd">@Override</span>
-  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCancel</span><span class="o">()</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Handle request cancellation</span>
-  <span class="o">}</span>
+  <span class="p">}</span>
 
-  <span class="nd">@Override</span>
-  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onError</span><span class="o">(</span><span class="nc">ChatKittyException</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Handle error</span>
-  <span class="o">}</span>
-<span class="o">});</span>
+  <span class="p">}</span>
+<span class="p">});</span>
 </code></pre></div>
-<p>You can get channels the current user has joined or can join by calling the <code>ChatKitty.getChannels(ChatKittyCallback&lt;GetChannelsResult&gt;)</code> method.</p>
+<p>You can get channels the current user has joined or can join by calling the <code>ChatKitty.getChannels(function)</code> method.</p>
 <h2 id='listen-to-channel-events'>Listen to channel events</h2>
 <p>When an event involving a channel happens, like a message sent in the channel or a user joining the channel, 
-a <code>ChannelEvent</code> is sent to registered <code>ChannelEventListener</code>s.</p>
+a <code>ChannelEvent</code> is sent to registered channel event listeners.</p>
 <h3 id='registering-a-channel-event-listener'>Registering a channel event listener</h3>
 <blockquote>
 <p>Register a channel event listener</p>
 </blockquote>
-<div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">ChannelEventListenerRegistration</span> <span class="n">registration</span> <span class="o">=</span> <span class="n">kitty</span><span class="o">.</span><span class="na">registerChannelEventListener</span><span class="o">(</span><span class="n">channel</span><span class="o">,</span> <span class="k">new</span> <span class="nc">ChannelEventListener</span><span class="o">()</span> <span class="o">{</span>
-  <span class="nd">@Override</span>
-  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onMessageReceived</span><span class="o">(</span><span class="nc">MessageReceivedEvent</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span> 
-    <span class="nc">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getMessage</span><span class="o">();</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">registration</span> <span class="o">=</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">registerChannelEventListener</span><span class="p">(</span><span class="nx">channel</span><span class="p">,</span> <span class="dl">'</span><span class="s1">message.received</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span>
 
-    <span class="c1">// Handle message</span>
-  <span class="o">}</span>
-<span class="o">});</span>
+  <span class="c1">// Handle message</span>
+<span class="p">});</span>
 </code></pre></div>
-<p>Register a <code>ChannelEventListener</code> by calling the <code>ChatKitty.registerChannelEventListener(Channel, ChannelEventListener)</code> method. 
+<p>Register a channel event listener by calling the <code>ChatKitty.registerChannelEventListener(Channel, String, function)</code> method.
+The <code>String</code> passed is the <a href="#channel-event-types">type</a> of event the passed-in function handles.<br>
 This method returns a <code>ChannelEventListenerRegistration</code> object.</p>
+<h4 id='channel-event-types'>Channel Event Types</h4>
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>message.received</code></td>
+<td>Fired when the device receives a sent message.</td>
+</tr>
+</tbody></table>
 <h3 id='deregistering-a-channel-event-listener'>Deregistering a channel event listener</h3>
 <blockquote>
 <p>Deregister a channel event listener</p>
 </blockquote>
-<div class="highlight"><pre class="highlight java tab-java"><code><span class="n">registration</span><span class="o">.</span><span class="na">deregister</span><span class="o">();</span> <span class="c1">// ChannelEventListenerRegistration</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">registration</span><span class="p">.</span><span class="nx">deregister</span><span class="p">();</span> <span class="c1">// ChannelEventListenerRegistration</span>
 </code></pre></div>
 <p>Deregister a <code>ChannelEventListener</code> by calling the <code>ChannelEventListenerRegistration.deregister()</code> method on 
 <code>ChannelEventListenerRegistration</code> object returned from registering the event listener.</p>
@@ -537,61 +531,57 @@ This method returns a <code>ChannelEventListenerRegistration</code> object.</p>
 <blockquote>
 <p>Get messages inside a channel</p>
 </blockquote>
-<div class="highlight"><pre class="highlight java tab-java"><code><span class="n">kitty</span><span class="o">.</span><span class="na">getChannelMessages</span><span class="o">(</span><span class="n">channel</span><span class="o">,</span> <span class="k">new</span> <span class="nc">ChatKittyCallback</span><span class="o">&lt;</span><span class="nc">GetMessagesResult</span><span class="o">&gt;()</span> <span class="o">{</span>
-  <span class="nd">@Override</span>
-  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">(</span><span class="nc">GetMessagesResult</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
-    <span class="nc">PageIterator</span><span class="o">&lt;</span><span class="nc">Message</span><span class="o">&gt;</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">getMessages</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">iterator</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">iterator</span><span class="p">();</span>
 
-    <span class="k">while</span><span class="o">(</span><span class="n">iterator</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
-      <span class="nc">Message</span> <span class="n">messages</span> <span class="o">=</span> <span class="n">iterator</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nx">iterator</span><span class="p">.</span><span class="nx">hasNext</span><span class="p">())</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">iterator</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
 
-      <span class="c1">// Handle messages</span>
-    <span class="o">}</span>
-  <span class="o">}</span>
+      <span class="c1">// Handle message</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
 
-  <span class="nd">@Override</span>
-  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCancel</span><span class="o">()</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Handle request cancellation</span>
-  <span class="o">}</span>
+  <span class="p">}</span>
 
-  <span class="nd">@Override</span>
-  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onError</span><span class="o">(</span><span class="nc">ChatKittyException</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Handle error</span>
-  <span class="o">}</span>
-<span class="o">});</span>
+  <span class="p">}</span>
+<span class="p">});</span>
 </code></pre></div>
-<p>You can get messages in a <a href="#channels">channel</a> by calling the <code>ChatKitty.getChannelMessages(Channel, ChatKittyCallback&lt;GetMessagesResult&gt;)</code> method.</p>
+<p>You can get messages in a <a href="#channels">channel</a> by calling the <code>ChatKitty.getChannelMessages(Channel, function)</code> method.</p>
 <h2 id='send-a-message'>Send a message</h2>
 <blockquote>
 <p>Send a message to a channel</p>
 </blockquote>
-<div class="highlight"><pre class="highlight java tab-java"><code><span class="n">kitty</span><span class="o">.</span><span class="na">sendChannelMessage</span><span class="o">(</span><span class="n">channel</span><span class="o">,</span> 
-  <span class="k">new</span> <span class="nf">CreateTextMessageRequest</span><span class="o">(</span><span class="s">"Hello world!"</span><span class="o">),</span> 
-  <span class="k">new</span> <span class="nc">ChatKittyCallback</span><span class="o">&lt;</span><span class="nc">CreateMessageResult</span><span class="o">&gt;()</span> <span class="o">{</span>
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">(</span><span class="nc">CreateMessageResult</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
-      <span class="nc">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">getMessage</span><span class="o">();</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">sendChannelMessage</span><span class="p">(</span>
+  <span class="nx">channel</span><span class="p">,</span>
+  <span class="k">new</span> <span class="nx">CreateTextMessageRequest</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello world!</span><span class="dl">'</span><span class="p">),</span>
+  <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span>
 
       <span class="c1">// Handle message</span>
-    <span class="o">}</span>
+    <span class="p">}</span>
 
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCancel</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// Handle request cancellation</span>
-    <span class="o">}</span>
+    <span class="p">}</span>
 
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onError</span><span class="o">(</span><span class="nc">ChatKittyException</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// Handle error</span>
-    <span class="o">}</span>
-<span class="o">});</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">);</span>
 </code></pre></div>
-<p>You can send a message to a <a href="#channels">channel</a> by calling the <code>ChatKitty.sendChannelMessage(Channel, CreateMessageRequest, ChatKittyCallback&lt;CreateMessageResult&gt;)</code> method.</p>
+<p>You can send a message to a <a href="#channels">channel</a> by calling the <code>ChatKitty.sendChannelMessage(Channel, CreateMessageRequest, function)</code> method.</p>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="java">java</a>
+                <a href="#" data-language-name="javascript">javascript</a>
           </div>
       </div>
     </div>
