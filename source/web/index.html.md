@@ -1,8 +1,8 @@
 ---
-title: Android SDK Documentation
+title: Web SDK Documentation
 
 language_tabs:
-  - java
+  - javascript
 
 toc_footers:
   - <a href='https://www.chatkitty.com'>&copy; ChatKitty 2020. All rights reserved</a>
@@ -12,15 +12,15 @@ search: true
 code_clipboard: true
 ---
 # Introduction
-Integrate **real-time chat** into your Android application with the ChatKitty SDK for Android.   
+Integrate **real-time chat** into your Web application with the ChatKitty SDK for Web.  
 
 # Authentication
 
 **Initialize the Chat SDK with your API key**  
 > Get a ChatKitty instance with your application API key
 
-```java
-ChatKitty kitty = ChatKitty.getInstance(CHATKITTY_API_KEY);
+```javascript
+let kitty = ChatKitty.getInstance(CHATKITTY_API_KEY);
 ```
 
 Get a `ChatKitty` instance by passing your application's API key to the `ChatKitty.getInstance(String)` method as a parameter.
@@ -39,63 +39,53 @@ using a username and a **challenge code** if the user isn't a guest.
 ### Begin a user session with a user name (Guest user session)  
 > Starting a guest user session
 
-```java
-kitty.startSession(CHATKITTY_USERNAME, new ChatKittyCallback<SessionStartResult>() {
-  @Override
-  public void onSuccess(SessionStartResult result) {
-    CurrentUser user = result.getCurrentUser();
+```javascript
+kitty.startSession(CHATKITTY_USERNAME, function(result) {
+  if (result.isSuccess) {
+    let user = result.currentUser;
 
     // Handle user
   }
-    
-  @Override
-  public void onCancel() {
+
+  if (result.isCancelled) {
     // Handle request cancellation
   }
 
-  @Override
-  public void onError(ChatKittyException error) {
+  if (result.isError) {
     // Handle error
   }
 });
 ```
 
 If your application has the **guest user** feature enabled, you can begin a user session by calling the 
-`ChatKitty.startSession(String, ChatKittyCallback<SessionStartResult>)` method with your user's unique name.
+`ChatKitty.startSession(String, function)` method with your user's unique name.
 
 <aside class="notice">
  Guest users are appropriate when your application in development, if your application supports anonymous chat, or if you don't have back-end authentication.
 </aside>
 
-<aside class="success">
-  Go to the <a href="#callbacks">Callbacks</a> page to learn more about ChatKitty callbacks.
-</aside>
-
 # Current User
 > Get the current user
 
-```java
-kitty.getCurrentUser(new ChatKittyCallback<GetCurrentUserResult>() {
-  @Override
-  public void onSuccess(GetCurrentUserResult result) {
-    CurrentUser user = result.getCurrentUser();
+```javascript
+kitty.getCurrentUser(function(result) {
+  if (result.isSuccess) {
+    let user = result.currentUser;
 
     // Handle user
   }
-    
-  @Override
-  public void onCancel() {
+
+  if (result.isCancelled) {
     // Handle request cancellation
   }
 
-  @Override
-  public void onError(ChatKittyException error) {
+  if (result.isError) {
     // Handle error
   }
 });
 ```
 After starting a ChatKitty [user session](#begin-a-user-session), you can request the current user 
-anytime by calling the `ChatKitty.getCurrentUser(ChatKittyCallback<GetCurrentUserResult>)` method.
+anytime by calling the `ChatKitty.getCurrentUser(function)` method.
 
 # Channels
 Channels are the backbone of the ChatKitty chat experience. Users can join channels and receive 
@@ -125,58 +115,58 @@ ChatKitty persists messages sent in private channels by default but this behavio
 ## Get channels
 > Get channels accessible by the current user
 
-```java
-kitty.getChannels(new ChatKittyCallback<GetChannelsResult>() {
-  @Override
-  public void onSuccess(GetChannelsResult result) {
-    PageIterator<Channel> iterator = result.iterator();
+```javascript
+kitty.getChannels(function(result) {
+  if (result.isSuccess) {
+    let iterator = result.iterator();
 
-    while(iterator.hasNext()) {
-      Channel channel = iterator.next();
-            
+    while (iterator.hasNext()) {
+      let channel = iterator.next();
+
       // Handle channel
     }
   }
-    
-  @Override
-  public void onCancel() {
+
+  if (result.isCancelled) {
     // Handle request cancellation
   }
 
-  @Override
-  public void onError(ChatKittyException error) {
+  if (result.isError) {
     // Handle error
   }
 });
 ```
 
-You can get channels the current user has joined or can join by calling the `ChatKitty.getChannels(ChatKittyCallback<GetChannelsResult>)` method.
+You can get channels the current user has joined or can join by calling the `ChatKitty.getChannels(function)` method.
 
 ## Listen to channel events
 When an event involving a channel happens, like a message sent in the channel or a user joining the channel, 
-a `ChannelEvent` is sent to registered `ChannelEventListener`s.
+a `ChannelEvent` is sent to registered channel event listeners.
 
 ### Registering a channel event listener
 > Register a channel event listener
 
-```java
-ChannelEventListenerRegistration registration = kitty.registerChannelEventListener(channel, new ChannelEventListener() {
-  @Override
-  public void onMessageReceived(MessageReceivedEvent event) { 
-    Message message = event.getMessage();
-    
-    // Handle message
-  }
+```javascript
+let registration = kitty.registerChannelEventListener(channel, 'message.received', function(event) {
+  let message = event.message;
+
+  // Handle message
 });
 ```
 
-Register a `ChannelEventListener` by calling the `ChatKitty.registerChannelEventListener(Channel, ChannelEventListener)` method. 
+Register a channel event listener by calling the `ChatKitty.registerChannelEventListener(Channel, String, function)` method.
+The `String` passed is the [type](#channel-event-types) of event the passed-in function handles.  
 This method returns a `ChannelEventListenerRegistration` object.
+
+#### Channel Event Types
+Type | Description 
+---- | -----------
+`message.received` | Fired when the device receives a sent message.
 
 ### Deregistering a channel event listener
 > Deregister a channel event listener
 
-```java
+```javascript
 registration.deregister(); // ChannelEventListenerRegistration
 ```
 
@@ -214,57 +204,53 @@ Administrators can send files messages with one, or many file attachments.
 ## Get messages
 > Get messages inside a channel
 
-```java
-kitty.getChannelMessages(channel, new ChatKittyCallback<GetMessagesResult>() {
-  @Override
-  public void onSuccess(GetMessagesResult result) {
-    PageIterator<Message> iterator = result.iterator();
+```javascript
+kitty.getMessages(function(result) {
+  if (result.isSuccess) {
+    let iterator = result.iterator();
 
-    while(iterator.hasNext()) {
-      Message messages = iterator.next();
-            
-      // Handle messages
+    while (iterator.hasNext()) {
+      let message = iterator.next();
+
+      // Handle message
     }
   }
-    
-  @Override
-  public void onCancel() {
+
+  if (result.isCancelled) {
     // Handle request cancellation
   }
 
-  @Override
-  public void onError(ChatKittyException error) {
+  if (result.isError) {
     // Handle error
   }
 });
 ```
 
-You can get messages in a [channel](#channels) by calling the `ChatKitty.getChannelMessages(Channel, ChatKittyCallback<GetMessagesResult>)` method.
+You can get messages in a [channel](#channels) by calling the `ChatKitty.getChannelMessages(Channel, function)` method.
 
 ## Send a message
 > Send a message to a channel
 
-```java
-kitty.sendChannelMessage(channel, 
-  new CreateTextMessageRequest("Hello world!"), 
-  new ChatKittyCallback<CreateMessageResult>() {
-    @Override
-    public void onSuccess(CreateMessageResult result) {
-      Message message = result.getMessage();
-  
+```javascript
+kitty.sendChannelMessage(
+  channel,
+  new CreateTextMessageRequest('Hello world!'),
+  function(result) {
+    if (result.isSuccess) {
+      let message = result.message;
+
       // Handle message
     }
-      
-    @Override
-    public void onCancel() {
+
+    if (result.isCancelled) {
       // Handle request cancellation
     }
-  
-    @Override
-    public void onError(ChatKittyException error) {
+
+    if (result.isError) {
       // Handle error
     }
-});
+  }
+);
 ```
 
-You can send a message to a [channel](#channels) by calling the `ChatKitty.sendChannelMessage(Channel, CreateMessageRequest, ChatKittyCallback<CreateMessageResult>)` method.
+You can send a message to a [channel](#channels) by calling the `ChatKitty.sendChannelMessage(Channel, CreateMessageRequest, function)` method.
