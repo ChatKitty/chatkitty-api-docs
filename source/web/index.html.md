@@ -154,8 +154,8 @@ let registration = kitty.registerChannelEventListener(channel, 'message.received
 });
 ```
 
-Register a channel event listener by calling the `ChatKitty.registerChannelEventListener(Channel, String, function)` method.
-The `String` passed is the [type](#channel-event-types) of event the passed-in function handles.  
+To beginning listening to channel events, register a channel event listener by calling the `ChatKitty.registerChannelEventListener(Channel, String, function)` method.
+Where `String` is the [type](#channel-event-types) of event the function handles.  
 This method returns a `ChannelEventListenerRegistration` object.
 
 #### Channel Event Types
@@ -170,7 +170,8 @@ Type | Description
 registration.deregister(); // ChannelEventListenerRegistration
 ```
 
-Deregister a `ChannelEventListener` by calling the `ChannelEventListenerRegistration.deregister()` method on 
+If you no longer wish to receive events with a channel event listener, deregister it by 
+calling the `ChannelEventListenerRegistration.deregister()` method on 
 `ChannelEventListenerRegistration` object returned from registering the event listener.
 
 # Messages
@@ -205,7 +206,7 @@ Administrators can send files messages with one, or many file attachments.
 > Get messages inside a channel
 
 ```javascript
-kitty.getMessages(function(result) {
+kitty.getChannelMessages(channel, function(result) {
   if (result.isSuccess) {
     let iterator = result.iterator();
 
