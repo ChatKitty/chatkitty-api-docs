@@ -419,7 +419,7 @@ curl --location --request GET '{{channels_link}}' \
             "href": "https://api.chatkitty.com/v1/applications/1/channels/2"
           },
           "messages": {
-            "href": "https://api.chatkitty.com/v1/applications/2/channels/2/messages"
+            "href": "https://api.chatkitty.com/v1/applications/1/channels/2/messages"
           },
           "application": {
             "href": "https://api.chatkitty.com/v1/applications/1"
