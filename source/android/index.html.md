@@ -137,7 +137,7 @@ or send messages. ChatKitty broadcasts messages created in channels to **channel
 
 ## Channel Types
 
-There are three types of channels;
+There are four types of channels;
 
 ### Open Channel
 Open channels provide Twitch-style chats where many users can join the chat without invites and send 
