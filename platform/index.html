@@ -373,6 +373,9 @@
                     <a href="#private-channel" class="toc-h2 toc-link" data-title="Private Channel">Private Channel</a>
                   </li>
                   <li>
+                    <a href="#direct-channel" class="toc-h2 toc-link" data-title="Direct Channel">Direct Channel</a>
+                  </li>
+                  <li>
                     <a href="#properties-4" class="toc-h2 toc-link" data-title="Properties">Properties</a>
                   </li>
                   <li>
@@ -386,6 +389,12 @@
                   </li>
                   <li>
                     <a href="#get-a-channel" class="toc-h2 toc-link" data-title="Get a Channel">Get a Channel</a>
+                  </li>
+                  <li>
+                    <a href="#add-a-channel-member" class="toc-h2 toc-link" data-title="Add a Channel Member">Add a Channel Member</a>
+                  </li>
+                  <li>
+                    <a href="#get-channel-members" class="toc-h2 toc-link" data-title="Get Channel Members">Get Channel Members</a>
                   </li>
                   <li>
                     <a href="#delete-a-channel" class="toc-h2 toc-link" data-title="Delete a Channel">Delete a Channel</a>
@@ -845,6 +854,9 @@ ChatKitty persists messages sent in public channels by default but this behaviou
 <h2 id='private-channel'>Private Channel</h2>
 <p>Users can only join private channels via invites from an existing channel member.
 ChatKitty persists messages sent in private channels by default but this behaviour can be configured.</p>
+<h2 id='direct-channel'>Direct Channel</h2>
+<p>Direct channels let users have private conversations between <strong>up to 9</strong> other users.
+New users cannot be added to a direct channel and there can only exist one direct channel between a set of users.</p>
 <h2 id='properties-4'>Properties</h2>
 <table><thead>
 <tr>
@@ -861,7 +873,7 @@ ChatKitty persists messages sent in private channels by default but this behavio
 <tr>
 <td>type</td>
 <td>Enum</td>
-<td>The type of this channel. <strong>Possible values</strong> are <a href="#open-channel">OPEN</a>, <a href="#public-channel">PUBLIC</a>, and <a href="#private-channel">PRIVATE</a></td>
+<td>The type of this channel. <strong>Possible values</strong> are <a href="#open-channel">OPEN</a>, <a href="#public-channel">PUBLIC</a>, <a href="#private-channel">PRIVATE</a>, and <a href="#direct-channel">DIRECT</a></td>
 </tr>
 <tr>
 <td>name</td>
@@ -891,6 +903,20 @@ ChatKitty persists messages sent in private channels by default but this behavio
 <td><a href="#application">application</a></td>
 <td><a href="#get-application">GET</a></td>
 <td>Link to your application resource.</td>
+</tr>
+</tbody></table>
+<h3 id='group-channel-hal-links'>Group Channel HAL links</h3>
+<table><thead>
+<tr>
+<th>Link</th>
+<th>Methods</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="#user">members</a></td>
+<td><a href="#add-a-channel-member">POST</a>, <a href="#get-channel-members">GET</a></td>
+<td>Users that are members of this channel.</td>
 </tr>
 </tbody></table>
 <h2 id='create-a-channel'>Create a Channel</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'{{channels_link}}'</span> <span class="se">\</span>
@@ -924,7 +950,7 @@ ChatKitty persists messages sent in private channels by default but this behavio
 <p>This endpoint creates a new channel.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
 <p><code>POST {{channels_link}}</code></p>
-<h3 id='request-body-json'>Request Body (JSON)</h3>
+<h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -935,12 +961,26 @@ ChatKitty persists messages sent in private channels by default but this behavio
 <tr>
 <td>type</td>
 <td>Enum</td>
-<td>The type of the channel. <strong>Possible values</strong> are <a href="#open-channel">OPEN</a>, <a href="#public-channel">PUBLIC</a>, and <a href="#private-channel">PRIVATE</a></td>
+<td>The type of the channel. <strong>Possible values</strong> are <a href="#open-channel">OPEN</a>, <a href="#public-channel">PUBLIC</a>, <a href="#private-channel">PRIVATE</a>, and <a href="#direct-channel">DIRECT</a></td>
 </tr>
 <tr>
 <td>name</td>
 <td>String</td>
 <td>The name of the channel</td>
+</tr>
+</tbody></table>
+<h4 id='direct-channel-2'>Direct Channel</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>members</td>
+<td>Link Array</td>
+<td>Self links of the members of this channel. The same direct channel is always returned for the same set of members</td>
 </tr>
 </tbody></table>
 <h2 id='get-channels'>Get Channels</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{channels_link}}'</span> <span class="se">\</span>
@@ -1030,6 +1070,120 @@ ChatKitty persists messages sent in private channels by default but this behavio
 <p>This endpoint returns a channel resource.</p>
 <h3 id='http-request-5'>HTTP Request</h3>
 <p><code>GET {{channel_link}}</code></p>
+<h2 id='add-a-channel-member'>Add a Channel Member</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'{{channels_members_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "href": "{{user_link}}"
+}'</span>
+</code></pre></div>
+<blockquote>
+<p>The command above returns a channel HAL resource:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PUBLIC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Public Chat"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/2/messages"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint adds a new member to a channel.</p>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>POST {{channels_members_link}}</code></p>
+<h3 id='request-parameters-2'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>href</td>
+<td>String</td>
+<td>The link href of the user to be added as a member</td>
+</tr>
+</tbody></table>
+<h2 id='get-channel-members'>Get Channel Members</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{channels_members_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div>
+<blockquote>
+<p>The command above returns a page of channel members:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1017562554"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1/channels"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"102746681"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/2"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/2/channels"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"first"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/group_channels/2/members?page=0&amp;size=2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"prev"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/group_channels/2/members?page=0&amp;size=2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users?page=1&amp;size=2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"next"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users?page=2&amp;size=2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"last"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users?page=2&amp;size=2"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalElements"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalPages"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"number"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint returns a user <a href="#pagination">page</a> resource of channel members.</p>
+<h3 id='http-request-7'>HTTP Request</h3>
+<p><code>GET {{channels_members_link}}</code></p>
 <h2 id='delete-a-channel'>Delete a Channel</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'{{channel_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
@@ -1055,7 +1209,7 @@ ChatKitty persists messages sent in private channels by default but this behavio
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint deletes a channel.</p>
-<h3 id='http-request-6'>HTTP Request</h3>
+<h3 id='http-request-8'>HTTP Request</h3>
 <p><code>DELETE {{channel_link}}</code></p>
 <h1 id='message'>Message</h1>
 <p><a href="#user">Users</a> send messages through your application and administrators can send messages through the Platform API. </p>
@@ -1107,9 +1261,37 @@ ChatKitty persists messages sent in private channels by default but this behavio
 <td>The type of this message. <strong>Possible values</strong> are <a href="#text-message">TEXT</a>, <a href="#file-message">FILE</a>, <a href="#system-text-message">SYSTEM_TEXT</a>, and <a href="#system-file-message">SYSTEM_FILE</a></td>
 </tr>
 <tr>
+<td>createdTime</td>
+<td>String</td>
+<td>ISO 8601 instant when this message was created</td>
+</tr>
+</tbody></table>
+<h3 id='text-message-and-system-text-message-properties'>Text Message And System Text Message Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
 <td>body</td>
 <td>String</td>
-<td><strong>Optional:</strong> Text body of this message. <strong>Present if</strong> this is a <a href="#text-message">text message</a> or <a href="#system-text-message">system text message</a>.</td>
+<td>Text body of this message.</td>
+</tr>
+</tbody></table>
+<h3 id='file-message-and-system-file-message-properties'>File Message And System File Message Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>file.url</td>
+<td>String</td>
+<td>URL of the file attached to this message.</td>
 </tr>
 </tbody></table>
 <h2 id='hal-links-5'>HAL links</h2>
@@ -1131,14 +1313,23 @@ ChatKitty persists messages sent in private channels by default but this behavio
 <td>Link to channel this message was sent in.</td>
 </tr>
 <tr>
-<td><a href="#user">user</a></td>
-<td><a href="#get-a-user">GET</a></td>
-<td><strong>Optional:</strong> Link to the user who sent this message. <strong>Present if</strong> this is a <a href="#text-message">text message</a> or <a href="#file-message">file message</a>.</td>
-</tr>
-<tr>
 <td><a href="#application">application</a></td>
 <td><a href="#get-application">GET</a></td>
 <td>Link to your application resource.</td>
+</tr>
+</tbody></table>
+<h3 id='text-message-and-file-message-hal-links'>Text Message and File Message HAL links</h3>
+<table><thead>
+<tr>
+<th>Link</th>
+<th>Methods</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="#user">user</a></td>
+<td><a href="#get-a-user">GET</a></td>
+<td>Link to the user who sent this message.</td>
 </tr>
 </tbody></table>
 <h2 id='create-a-message'>Create a Message</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'{{messages_link}}'</span> <span class="se">\</span>
@@ -1169,9 +1360,9 @@ ChatKitty persists messages sent in private channels by default but this behavio
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint creates a new message.</p>
-<h3 id='http-request-7'>HTTP Request</h3>
+<h3 id='http-request-9'>HTTP Request</h3>
 <p><code>POST {{messages_link}}</code></p>
-<h3 id='request-body-json-2'>Request Body (JSON)</h3>
+<h3 id='request-parameters-3'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1243,7 +1434,7 @@ ChatKitty persists messages sent in private channels by default but this behavio
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint returns a message <a href="#pagination">page</a> resource.</p>
-<h3 id='http-request-8'>HTTP Request</h3>
+<h3 id='http-request-10'>HTTP Request</h3>
 <p><code>GET {{messages_link}}</code></p>
 <h2 id='get-a-message'>Get a Message</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{message_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
@@ -1270,7 +1461,7 @@ ChatKitty persists messages sent in private channels by default but this behavio
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint returns a message resource.</p>
-<h3 id='http-request-9'>HTTP Request</h3>
+<h3 id='http-request-11'>HTTP Request</h3>
 <p><code>GET {{message_link}}</code></p>
 <h2 id='delete-a-message'>Delete a Message</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'{message_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
@@ -1297,7 +1488,7 @@ ChatKitty persists messages sent in private channels by default but this behavio
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint deletes a message.</p>
-<h3 id='http-request-10'>HTTP Request</h3>
+<h3 id='http-request-12'>HTTP Request</h3>
 <p><code>DELETE {{message_link}}</code></p>
 <h1 id='user'>User</h1>
 <p>Users can chat with each other by joining channels. They are identified by their own unique user name.</p>
@@ -1371,9 +1562,9 @@ ChatKitty persists messages sent in private channels by default but this behavio
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint creates a new ChatKitty user.</p>
-<h3 id='http-request-11'>HTTP Request</h3>
+<h3 id='http-request-13'>HTTP Request</h3>
 <p><code>POST {{users_link}}</code></p>
-<h3 id='request-body-json-3'>Request Body (JSON)</h3>
+<h3 id='request-parameters-4'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1455,7 +1646,7 @@ ChatKitty persists messages sent in private channels by default but this behavio
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint returns a user <a href="#pagination">page</a> resource.</p>
-<h3 id='http-request-12'>HTTP Request</h3>
+<h3 id='http-request-14'>HTTP Request</h3>
 <p><code>GET {{users_link}}</code></p>
 <h2 id='get-a-user'>Get a User</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{user_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
@@ -1481,7 +1672,7 @@ ChatKitty persists messages sent in private channels by default but this behavio
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint returns a resource representing a ChatKitty user.</p>
-<h3 id='http-request-13'>HTTP Request</h3>
+<h3 id='http-request-15'>HTTP Request</h3>
 <p><code>GET {{user_link}}</code></p>
 <h2 id='delete-a-user'>Delete a User</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'{{user_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
@@ -1508,7 +1699,7 @@ ChatKitty persists messages sent in private channels by default but this behavio
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint deletes a ChatKitty user.</p>
-<h3 id='http-request-14'>HTTP Request</h3>
+<h3 id='http-request-16'>HTTP Request</h3>
 <p><code>DELETE {{user_link}}</code></p>
 <h1 id='errors'>Errors</h1>
 <aside class="notice">
