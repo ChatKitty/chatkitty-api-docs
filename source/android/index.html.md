@@ -28,12 +28,45 @@ Get a `ChatKitty` instance by passing your application's API key to the `ChatKit
 ## Begin a user session
 To make calls to ChatKitty through the Chat SDK, a user session must be initiated.
 
-You can initiate a user session using the [unique username](/platform#properties-6) of a user, or 
-using a username and a **challenge code** if the user isn't a guest.
+You can initiate a user session using the unique **username** of a user and a **challenge token**, or 
+using a just username if the user is a guest.
 
 <aside class="notice">
  A username must be unique within a ChatKitty application.<br/>
  We recommend you use as a hashed email address or phone number as your ChatKitty usernames.
+</aside>
+
+### Begin a user session with a user name and challenge token  
+> Starting a user session
+
+```java
+kitty.startSession(CHATKITTY_USERNAME, CHATKITTY_CHALLENGE_TOKEN, new ChatKittyCallback<SessionStartResult>() {
+  @Override
+  public void onSuccess(SessionStartResult result) {
+    CurrentUser user = result.getCurrentUser();
+
+    // Handle user
+  }
+    
+  @Override
+  public void onCancel() {
+    // Handle request cancellation
+  }
+
+  @Override
+  public void onError(ChatKittyException error) {
+    // Handle error
+  }
+});
+```
+
+Create a challenge token for a user server-side using the **Platform API**. You can then begin a user session by calling the 
+`ChatKitty.startSession(String, String, ChatKittyCallback<SessionStartResult>)` method with your user's unique name and challenge token.
+
+<aside class="notice">
+ You should store user challenge tokens securely to your persistent storage. <br>
+ When a user logs into your client application, load the user's username and challenge token from storage 
+ and use them to start a user session. 
 </aside>
 
 ### Begin a user session with a user name (Guest user session)  
@@ -121,6 +154,10 @@ ChatKitty persists messages sent in public channels by default but this behaviou
 ### Private Channel
 Users can only join private channels via invites from an existing channel member.
 ChatKitty persists messages sent in private channels by default but this behaviour can be configured.
+
+### Direct Channel
+Direct channels let users have private conversations between **up to 9** other users.
+New users cannot be added to a direct channel and there can only exist one direct channel between a set of users.
 
 ## Get channels
 > Get channels accessible by the current user
