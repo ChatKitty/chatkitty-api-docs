@@ -899,6 +899,7 @@ Link | Methods | Description
 --------- | ----------- | -----------
 [self](#user) | [GET](#get-a-user), [DELETE](#delete-a-user) | Self link to this user.
 [channels](#channel) | [GET](#get-channels) | Channels this user has access to - meaning the user has joined or can join. 
+tokens | [POST](#add-a-user-token), [GET](#get-user-tokens) | Challenge tokens used to authenticate this user's sessions client-side. 
 [application](#application) | [GET](#get-application) | Link to your application resource. 
 
 ## Create a User
@@ -1048,6 +1049,68 @@ This endpoint returns a resource representing a ChatKitty user.
 
 ### HTTP Request
 `GET {{user_link}}`
+
+## Add a User Token
+```shell
+curl --location --request POST '{{user_tokens_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}' \
+--data-raw '{}'
+```
+
+> The command above returns a user token resource:
+
+```json
+{
+    "token": "1bfd29e7-26f6-4a8e-aa89-45c9bb53f1e4"
+}
+```
+
+This endpoint adds a new challenge token. The challenge token can be used client-side to authenticate this user.
+
+<aside class="notice">
+A <b>maximum of 10</b> challenge tokens can exists for a user.
+</aside>
+
+### HTTP Request
+`POST {{user_tokens_link}}`
+
+## Get User Tokens
+```shell
+curl --location --request GET '{{user_tokens_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}'
+```
+
+> The command above returns a page of user challenge tokens:
+
+```json
+{
+    "_embedded": {
+        "tokens": [
+            {
+                "token": "1bfd29e7-26f6-4a8e-aa89-45c9bb53f1e4"
+            }
+        ]
+    },
+    "_links": {
+        "self": {
+            "href": "https://api.chatkitty.com/v1/applications/1/users/1/tokens?page=0&size=20"
+        }
+    },
+    "page": {
+        "size": 20,
+        "totalElements": 1,
+        "totalPages": 1,
+        "number": 0
+    }
+}
+```
+
+This endpoint returns a user challenge token [page](#pagination) resource.
+
+### HTTP Request
+`GET {{users_link}}`
 
 ## Delete a User
 ```shell
