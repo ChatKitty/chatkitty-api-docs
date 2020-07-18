@@ -455,6 +455,12 @@
                     <a href="#get-a-user" class="toc-h2 toc-link" data-title="Get a User">Get a User</a>
                   </li>
                   <li>
+                    <a href="#add-a-user-token" class="toc-h2 toc-link" data-title="Add a User Token">Add a User Token</a>
+                  </li>
+                  <li>
+                    <a href="#get-user-tokens" class="toc-h2 toc-link" data-title="Get User Tokens">Get User Tokens</a>
+                  </li>
+                  <li>
                     <a href="#delete-a-user" class="toc-h2 toc-link" data-title="Delete a User">Delete a User</a>
                   </li>
               </ul>
@@ -1533,6 +1539,11 @@ New users cannot be added to a direct channel and there can only exist one direc
 <td>Channels this user has access to - meaning the user has joined or can join.</td>
 </tr>
 <tr>
+<td>tokens</td>
+<td><a href="#add-a-user-token">POST</a>, <a href="#get-user-tokens">GET</a></td>
+<td>Challenge tokens used to authenticate this user&#39;s sessions client-side.</td>
+</tr>
+<tr>
 <td><a href="#application">application</a></td>
 <td><a href="#get-application">GET</a></td>
 <td>Link to your application resource.</td>
@@ -1677,6 +1688,56 @@ New users cannot be added to a direct channel and there can only exist one direc
 <p>This endpoint returns a resource representing a ChatKitty user.</p>
 <h3 id='http-request-15'>HTTP Request</h3>
 <p><code>GET {{user_link}}</code></p>
+<h2 id='add-a-user-token'>Add a User Token</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'{{user_tokens_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{}'</span>
+</code></pre></div>
+<blockquote>
+<p>The command above returns a user token resource:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1bfd29e7-26f6-4a8e-aa89-45c9bb53f1e4"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint adds a new challenge token. The challenge token can be used client-side to authenticate this user.</p>
+
+<aside class="notice">
+A <b>maximum of 10</b> challenge tokens can exists for a user.
+</aside>
+<h3 id='http-request-16'>HTTP Request</h3>
+<p><code>POST {{user_tokens_link}}</code></p>
+<h2 id='get-user-tokens'>Get User Tokens</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{user_tokens_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div>
+<blockquote>
+<p>The command above returns a page of user challenge tokens:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"tokens"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1bfd29e7-26f6-4a8e-aa89-45c9bb53f1e4"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1/tokens?page=0&amp;size=20"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalElements"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalPages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"number"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint returns a user challenge token <a href="#pagination">page</a> resource.</p>
+<h3 id='http-request-17'>HTTP Request</h3>
+<p><code>GET {{users_link}}</code></p>
 <h2 id='delete-a-user'>Delete a User</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'{{user_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
@@ -1702,7 +1763,7 @@ New users cannot be added to a direct channel and there can only exist one direc
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint deletes a ChatKitty user.</p>
-<h3 id='http-request-16'>HTTP Request</h3>
+<h3 id='http-request-18'>HTTP Request</h3>
 <p><code>DELETE {{user_link}}</code></p>
 <h1 id='errors'>Errors</h1>
 <aside class="notice">
