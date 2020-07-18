@@ -370,12 +370,40 @@
 <h2 id='begin-a-user-session'>Begin a user session</h2>
 <p>To make calls to ChatKitty through the Chat SDK, a user session must be initiated.</p>
 
-<p>You can initiate a user session using the <a href="/platform#properties-6">unique username</a> of a user, or 
-using a username and a <strong>challenge code</strong> if the user isn&#39;t a guest.</p>
+<p>You can initiate a user session using the unique <strong>username</strong> of a user and a <strong>challenge token</strong>, or 
+using a just username if the user is a guest.</p>
 
 <aside class="notice">
  A username must be unique within a ChatKitty application.<br/>
  We recommend you use as a hashed email address or phone number as your ChatKitty usernames.
+</aside>
+<h3 id='begin-a-user-session-with-a-user-name-and-challenge-token'>Begin a user session with a user name and challenge token</h3>
+<blockquote>
+<p>Starting a user session</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">startSession</span><span class="p">(</span><span class="nx">CHATKITTY_USERNAME</span><span class="p">,</span> <span class="nx">CHATKITTY_CHALLENGE_TOKEN</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">currentUser</span><span class="p">;</span>
+
+    <span class="c1">// Handle user</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle request cancellation</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle error</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>Create a challenge token for a user server-side using the <strong>Platform API</strong>. You can then begin a user session by calling the 
+<code>ChatKitty.startSession(String, String, function)</code> method with your user&#39;s unique name and challenge token.</p>
+
+<aside class="notice">
+ You should store user challenge tokens securely to your persistent storage. <br>
+ When a user logs into your client application, load the user's username and challenge token from storage 
+ and use them to start a user session. 
 </aside>
 <h3 id='begin-a-user-session-with-a-user-name-guest-user-session'>Begin a user session with a user name (Guest user session)</h3>
 <blockquote>
@@ -444,6 +472,9 @@ ChatKitty persists messages sent in public channels by default but this behaviou
 <h3 id='private-channel'>Private Channel</h3>
 <p>Users can only join private channels via invites from an existing channel member.
 ChatKitty persists messages sent in private channels by default but this behaviour can be configured.</p>
+<h3 id='direct-channel'>Direct Channel</h3>
+<p>Direct channels let users have private conversations between <strong>up to 9</strong> other users.
+New users cannot be added to a direct channel and there can only exist one direct channel between a set of users.</p>
 <h2 id='get-channels'>Get channels</h2>
 <blockquote>
 <p>Get channels accessible by the current user</p>
