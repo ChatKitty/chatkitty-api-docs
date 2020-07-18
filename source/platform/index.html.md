@@ -324,11 +324,15 @@ ChatKitty persists messages sent in public channels by default but this behaviou
 Users can only join private channels via invites from an existing channel member.
 ChatKitty persists messages sent in private channels by default but this behaviour can be configured.
 
+## Direct Channel
+Direct channels let users have private conversations between **up to 9** other users.
+New users cannot be added to a direct channel and there can only exist one direct channel between a set of users.
+
 ## Properties
 Name | Type | Description 
 --------- | ----------- | -----------
 id | Long | 64 bit integer identifier associated with this channel 
-type | Enum | The type of this channel. __Possible values__ are [OPEN](#open-channel), [PUBLIC](#public-channel), and [PRIVATE](#private-channel)
+type | Enum | The type of this channel. __Possible values__ are [OPEN](#open-channel), [PUBLIC](#public-channel), [PRIVATE](#private-channel), and [DIRECT](#direct-channel)
 name | String | The name of this channel
 
 ## HAL links
@@ -337,6 +341,11 @@ Link | Methods | Description
 [self](#channel) | [GET](#get-a-channel), [DELETE](#delete-a-channel) | Self link to this channel.
 [messages](#message) | [POST](#create-a-message), [GET](#get-messages) | Messages sent in this channel. 
 [application](#application) | [GET](#get-application) | Link to your application resource. 
+
+### Group Channel HAL links
+Link | Methods | Description
+--------- | ----------- | -----------
+[members](#user) | [POST](#add-a-channel-member), [GET](#get-channel-members) | Users that are members of this channel.
 
 ## Create a Channel
 ```shell
@@ -375,11 +384,16 @@ This endpoint creates a new channel.
 ### HTTP Request
 `POST {{channels_link}}`
 
-### Request Body (JSON)
+### Request Parameters
 Parameter | Type | Description 
 --------- | ----------- | -----------
-type | Enum | The type of the channel. __Possible values__ are [OPEN](#open-channel), [PUBLIC](#public-channel), and [PRIVATE](#private-channel)
+type | Enum | The type of the channel. __Possible values__ are [OPEN](#open-channel), [PUBLIC](#public-channel), [PRIVATE](#private-channel), and [DIRECT](#direct-channel)
 name | String | The name of the channel
+
+#### Direct Channel
+Parameter | Type | Description 
+--------- | ----------- | -----------
+members | Link Array | Self links of the members of this channel. The same direct channel is always returned for the same set of members
 
 ## Get Channels
 ```shell
@@ -480,6 +494,123 @@ This endpoint returns a channel resource.
 ### HTTP Request
 `GET {{channel_link}}`
 
+## Add a Channel Member
+```shell
+curl --location --request POST '{{channels_members_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}' \
+--data-raw '{
+    "href": "{{user_link}}"
+}'
+```
+
+> The command above returns a channel HAL resource:
+
+```json
+{
+  "id": 2,
+  "type": "PUBLIC",
+  "name": "Public Chat",
+  "_links": {
+    "self": {
+      "href": "https://api.chatkitty.com/v1/applications/1/channels/2"
+    },
+    "messages": {
+      "href": "https://api.chatkitty.com/v1/applications/1/channels/2/messages"
+    },
+    "application": {
+      "href": "https://api.chatkitty.com/v1/applications/1"
+    }
+  }
+}
+```
+
+This endpoint adds a new member to a channel.
+
+### HTTP Request
+`POST {{channels_members_link}}`
+
+### Request Parameters
+Parameter | Type | Description 
+--------- | ----------- | -----------
+href | String | The link href of the user to be added as a member
+
+## Get Channel Members
+```shell
+curl --location --request GET '{{channels_members_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}'
+```
+
+> The command above returns a page of channel members:
+
+```json
+{
+  "_embedded": {
+    "users": [
+      {
+        "id": 1,
+        "name": "1017562554",
+        "_links": {
+          "self": {
+            "href": "https://api.chatkitty.com/v1/applications/1/users/1"
+          },
+          "channels": {
+            "href": "https://api.chatkitty.com/v1/applications/1/users/1/channels"
+          },
+          "application": {
+            "href": "https://api.chatkitty.com/v1/applications/1"
+          }
+        }
+      },
+      {
+        "id": 2,
+        "name": "102746681",
+        "_links": {
+          "self": {
+            "href": "https://api.chatkitty.com/v1/applications/1/users/2"
+          },
+          "channels": {
+            "href": "https://api.chatkitty.com/v1/applications/1/users/2/channels"
+          },
+          "application": {
+            "href": "https://api.chatkitty.com/v1/applications/1"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "first": {
+      "href": "https://api.chatkitty.com/v1/applications/1/group_channels/2/members?page=0&size=2"
+    },
+    "prev": {
+      "href": "https://api.chatkitty.com/v1/applications/1/group_channels/2/members?page=0&size=2"
+    },
+    "self": {
+      "href": "https://api.chatkitty.com/v1/applications/1/users?page=1&size=2"
+    },
+    "next": {
+      "href": "https://api.chatkitty.com/v1/applications/1/users?page=2&size=2"
+    },
+    "last": {
+      "href": "https://api.chatkitty.com/v1/applications/1/users?page=2&size=2"
+    }
+  },
+  "page": {
+    "size": 2,
+    "totalElements": 6,
+    "totalPages": 3,
+    "number": 1
+  }
+}
+```
+
+This endpoint returns a user [page](#pagination) resource of channel members.
+
+### HTTP Request
+`GET {{channels_members_link}}`
+
 ## Delete a Channel
 ```shell
 curl --location --request DELETE '{{channel_link}}' \
@@ -554,15 +685,29 @@ Name | Type | Description
 --------- | ----------- | -----------
 id | Long | __Optional:__ 64 bit integer identifier associated with this message. __Present if__ this message is persistent.
 type | Enum | The type of this message. __Possible values__ are [TEXT](#text-message), [FILE](#file-message), [SYSTEM_TEXT](#system-text-message), and [SYSTEM_FILE](#system-file-message)
-body | String | __Optional:__ Text body of this message. __Present if__ this is a [text message](#text-message) or [system text message](#system-text-message).
+createdTime | String | ISO 8601 instant when this message was created
+
+### Text Message And System Text Message Properties
+Name | Type | Description 
+--------- | ----------- | -----------
+body | String | Text body of this message.
+
+### File Message And System File Message Properties
+Name | Type | Description 
+--------- | ----------- | -----------
+file.url | String | URL of the file attached to this message.
 
 ## HAL links
 Link | Methods | Description
 --------- | ----------- | -----------
 [self](#message) | [GET](#get-a-message), [DELETE](#delete-a-message) | __Optional:__ Self link to this message. __Present if__ this message is persistent.
 [channel](#channel) | [GET](#get-a-channel) | Link to channel this message was sent in.
-[user](#user) | [GET](#get-a-user) | __Optional:__ Link to the user who sent this message. __Present if__ this is a [text message](#text-message) or [file message](#file-message).
 [application](#application) | [GET](#get-application) | Link to your application resource. 
+
+### Text Message and File Message HAL links
+Link | Methods | Description
+--------- | ----------- | -----------
+[user](#user) | [GET](#get-a-user) | Link to the user who sent this message.
 
 ## Create a Message
 ```shell
@@ -600,7 +745,7 @@ This endpoint creates a new message.
 ### HTTP Request
 `POST {{messages_link}}`
 
-### Request Body (JSON)
+### Request Parameters
 Parameter | Type | Description 
 --------- | ----------- | -----------
 body | String | The text body of the message
@@ -788,7 +933,7 @@ This endpoint creates a new ChatKitty user.
 ### HTTP Request
 `POST {{users_link}}`
 
-### Request Body (JSON)
+### Request Parameters
 Parameter | Type | Description 
 --------- | ----------- | -----------
 name | String | The unique name of the user.
