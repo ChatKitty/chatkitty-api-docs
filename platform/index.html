@@ -839,8 +839,11 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 or send <a href="#message">messages</a>. ChatKitty broadcasts messages created in channels to channel members via 
 a chat session or push notifications.</p>
 
-<p>There are three types of channels; <a href="#open-channel">Open Channels</a>, <a href="#public-channel">Public Channels</a>, 
-and <a href="#private-channel">Private Channels</a>.</p>
+<p>There are four types of channels; <a href="#open-channel">Open Channels</a>, <a href="#public-channel">Public Channels</a>, <a href="#private-channel">Private Channels</a>, 
+and <a href="#direct-channel">Direct Channels</a>. </p>
+
+<p>Public, private and direct channels require users to join the channel before they can send or receive messages from the channels. 
+These channels are known as <strong>Group Channels</strong> </p>
 <h2 id='open-channel'>Open Channel</h2>
 <p>Open channels provide Twitch-style chats where many users can join the chat without invites and send 
 messages. </p>
@@ -1266,7 +1269,7 @@ New users cannot be added to a direct channel and there can only exist one direc
 <td>ISO 8601 instant when this message was created</td>
 </tr>
 </tbody></table>
-<h3 id='text-message-and-system-text-message-properties'>Text Message And System Text Message Properties</h3>
+<h3 id='text-message-properties'>Text Message Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1280,7 +1283,7 @@ New users cannot be added to a direct channel and there can only exist one direc
 <td>Text body of this message.</td>
 </tr>
 </tbody></table>
-<h3 id='file-message-and-system-file-message-properties'>File Message And System File Message Properties</h3>
+<h3 id='file-message-properties'>File Message Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
