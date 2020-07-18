@@ -305,8 +305,11 @@ Channels are the backbone of the ChatKitty chat experience. [Users](#user) can j
 or send [messages](#message). ChatKitty broadcasts messages created in channels to channel members via 
 a chat session or push notifications.
 
-There are three types of channels; [Open Channels](#open-channel), [Public Channels](#public-channel), 
-and [Private Channels](#private-channel).
+There are four types of channels; [Open Channels](#open-channel), [Public Channels](#public-channel), [Private Channels](#private-channel), 
+and [Direct Channels](#direct-channel). 
+
+Public, private and direct channels require users to join the channel before they can send or receive messages from the channels. 
+These channels are known as **Group Channels** 
 
 ## Open Channel
 Open channels provide Twitch-style chats where many users can join the chat without invites and send 
@@ -687,12 +690,12 @@ id | Long | __Optional:__ 64 bit integer identifier associated with this message
 type | Enum | The type of this message. __Possible values__ are [TEXT](#text-message), [FILE](#file-message), [SYSTEM_TEXT](#system-text-message), and [SYSTEM_FILE](#system-file-message)
 createdTime | String | ISO 8601 instant when this message was created
 
-### Text Message And System Text Message Properties
+### Text Message Properties
 Name | Type | Description 
 --------- | ----------- | -----------
 body | String | Text body of this message.
 
-### File Message And System File Message Properties
+### File Message Properties
 Name | Type | Description 
 --------- | ----------- | -----------
 file.url | String | URL of the file attached to this message.
