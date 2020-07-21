@@ -596,15 +596,17 @@ This method returns a <code>ChannelEventListenerRegistration</code> object.</p>
 </code></pre></div>
 <p>You can get messages in a <a href="#channels">channel</a> by calling the <code>ChatKitty.getChannelMessages(Channel, ChatKittyCallback&lt;GetMessagesResult&gt;)</code> method.</p>
 <h2 id='messages-send-a-message'>Send a message</h2>
+<p>You can send a message to a <a href="#channels">channel</a> by calling the <code>ChatKitty.sendChannelMessage(Channel, CreateMessageRequest, ChatKittyCallback&lt;CreateMessageResult&gt;)</code> method.</p>
+<h3 id='messages-send-a-message-sending-a-text-message'>Sending a text message</h3>
 <blockquote>
-<p>Send a message to a channel</p>
+<p>Sending a text message to a channel</p>
 </blockquote>
 <div class="highlight"><pre class="highlight java tab-java"><code><span class="n">kitty</span><span class="o">.</span><span class="na">sendChannelMessage</span><span class="o">(</span><span class="n">channel</span><span class="o">,</span> 
-  <span class="k">new</span> <span class="nf">CreateTextMessageRequest</span><span class="o">(</span><span class="s">"Hello world!"</span><span class="o">),</span> 
-  <span class="k">new</span> <span class="nc">ChatKittyCallback</span><span class="o">&lt;</span><span class="nc">CreateMessageResult</span><span class="o">&gt;()</span> <span class="o">{</span>
+  <span class="nc">CreateMessageRequestBuilder</span><span class="o">.</span><span class="na">textMessage</span><span class="o">(</span><span class="s">"Hello world!"</span><span class="o">).</span><span class="na">build</span><span class="o">(),</span> 
+  <span class="k">new</span> <span class="nc">ChatKittyCallback</span><span class="o">&lt;</span><span class="nc">CreateTextMessageResult</span><span class="o">&gt;()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">(</span><span class="nc">CreateMessageResult</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
-      <span class="nc">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">getMessage</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">(</span><span class="nc">CreateTextMessageResult</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">TextMessage</span> <span class="n">message</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">getMessage</span><span class="o">();</span>
 
       <span class="c1">// Handle message</span>
     <span class="o">}</span>
@@ -620,7 +622,42 @@ This method returns a <code>ChannelEventListenerRegistration</code> object.</p>
     <span class="o">}</span>
 <span class="o">});</span>
 </code></pre></div>
-<p>You can send a message to a <a href="#channels">channel</a> by calling the <code>ChatKitty.sendChannelMessage(Channel, CreateMessageRequest, ChatKittyCallback&lt;CreateMessageResult&gt;)</code> method.</p>
+<p>To send a user text message, call the <code>CreateMessageRequestBuilder.textMessage(String)</code> static factory method 
+which returns a <code>CreateTextMessageRequestBuilder</code> you can configure and build a <code>CreateMessageRequest</code>.</p>
+<h3 id='messages-send-a-message-sending-a-file-message'>Sending a file message</h3>
+<blockquote>
+<p>Sending a file message to a channel</p>
+</blockquote>
+<div class="highlight"><pre class="highlight java tab-java"><code><span class="n">kitty</span><span class="o">.</span><span class="na">sendChannelMessage</span><span class="o">(</span><span class="n">channel</span><span class="o">,</span> 
+  <span class="nc">CreateMessageRequestBuilder</span><span class="o">.</span><span class="na">fileMessage</span><span class="o">(</span><span class="n">file</span><span class="o">).</span><span class="na">build</span><span class="o">(),</span> 
+  <span class="k">new</span> <span class="nc">ChatKittyCallback</span><span class="o">&lt;</span><span class="nc">CreateFileMessageResult</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">(</span><span class="nc">CreateFileMessageResult</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">FileMessage</span> <span class="n">message</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">getMessage</span><span class="o">();</span>
+
+      <span class="c1">// Handle message</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCancel</span><span class="o">()</span> <span class="o">{</span>
+      <span class="c1">// Handle request cancellation</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onError</span><span class="o">(</span><span class="nc">ChatKittyException</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+      <span class="c1">// Handle error</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre></div>
+<p>You can also send any binary file with the SDK. 
+You can send the file by sending the <strong>file itself</strong>, or by sending a <strong>URL</strong>.  </p>
+
+<p>You can send the file itself with the <code>CreateMessageRequestBuilder.fileMessage(File)</code> static factory method,
+which returns a <code>CreateFileUploadMessageRequestBuilder</code>. </p>
+
+<p>To send a URL, use <code>CreateMessageRequestBuilder.fileMessage(String)</code>, which returns a <code>CreateExternalFileMessageRequestBuilder</code>.  </p>
+
+<p>You can configure both request builder types and build a <code>CreateMessageRequest</code>.</p>
 
       </div>
       <div class="dark-box">
