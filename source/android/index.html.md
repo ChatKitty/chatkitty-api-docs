@@ -279,15 +279,18 @@ kitty.getChannelMessages(channel, new ChatKittyCallback<GetMessagesResult>() {
 You can get messages in a [channel](#channels) by calling the `ChatKitty.getChannelMessages(Channel, ChatKittyCallback<GetMessagesResult>)` method.
 
 ## Send a message
-> Send a message to a channel
+You can send a message to a [channel](#channels) by calling the `ChatKitty.sendChannelMessage(Channel, CreateMessageRequest, ChatKittyCallback<CreateMessageResult>)` method.
+
+### Sending a text message
+> Sending a text message to a channel
 
 ```java
 kitty.sendChannelMessage(channel, 
-  new CreateTextMessageRequest("Hello world!"), 
-  new ChatKittyCallback<CreateMessageResult>() {
+  CreateMessageRequestBuilder.textMessage("Hello world!").build(), 
+  new ChatKittyCallback<CreateTextMessageResult>() {
     @Override
-    public void onSuccess(CreateMessageResult result) {
-      Message message = result.getMessage();
+    public void onSuccess(CreateTextMessageResult result) {
+      TextMessage message = result.getMessage();
   
       // Handle message
     }
@@ -302,6 +305,43 @@ kitty.sendChannelMessage(channel,
       // Handle error
     }
 });
-```
+``` 
 
-You can send a message to a [channel](#channels) by calling the `ChatKitty.sendChannelMessage(Channel, CreateMessageRequest, ChatKittyCallback<CreateMessageResult>)` method.
+To send a user text message, call the `CreateMessageRequestBuilder.textMessage(String)` static factory method 
+which returns a `CreateTextMessageRequestBuilder` you can configure and build a `CreateMessageRequest`.
+
+### Sending a file message
+> Sending a file message to a channel
+
+```java
+kitty.sendChannelMessage(channel, 
+  CreateMessageRequestBuilder.fileMessage(file).build(), 
+  new ChatKittyCallback<CreateFileMessageResult>() {
+    @Override
+    public void onSuccess(CreateFileMessageResult result) {
+      FileMessage message = result.getMessage();
+  
+      // Handle message
+    }
+      
+    @Override
+    public void onCancel() {
+      // Handle request cancellation
+    }
+  
+    @Override
+    public void onError(ChatKittyException error) {
+      // Handle error
+    }
+});
+``` 
+
+You can also send any binary file with the SDK. 
+You can send the file by sending the **file itself**, or by sending a **URL**.  
+
+You can send the file itself with the `CreateMessageRequestBuilder.fileMessage(File)` static factory method,
+which returns a `CreateFileUploadMessageRequestBuilder`. 
+ 
+To send a URL, use `CreateMessageRequestBuilder.fileMessage(String)`, which returns a `CreateExternalFileMessageRequestBuilder`.  
+
+You can configure both request builder types and build a `CreateMessageRequest`.
