@@ -466,6 +466,20 @@
               </ul>
           </li>
           <li>
+            <a href="#files" class="toc-h1 toc-link" data-title="Files">Files</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#file-properties" class="toc-h2 toc-link" data-title="File Properties">File Properties</a>
+                  </li>
+                  <li>
+                    <a href="#file-uploads" class="toc-h2 toc-link" data-title="File Uploads">File Uploads</a>
+                  </li>
+                  <li>
+                    <a href="#external-files" class="toc-h2 toc-link" data-title="External Files">External Files</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
@@ -1298,9 +1312,9 @@ New users cannot be added to a direct channel and there can only exist one direc
 </tr>
 </thead><tbody>
 <tr>
-<td>file.url</td>
-<td>String</td>
-<td>URL of the file attached to this message.</td>
+<td>file</td>
+<td>File Properties</td>
+<td><a href="#file-properties">Properties</a> of the file attached to this message.</td>
 </tr>
 </tbody></table>
 <h2 id='hal-links-5'>HAL links</h2>
@@ -1341,15 +1355,20 @@ New users cannot be added to a direct channel and there can only exist one direc
 <td>Link to the user who sent this message.</td>
 </tr>
 </tbody></table>
-<h2 id='create-a-message'>Create a Message</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'{{messages_link}}'</span> <span class="se">\</span>
+<h2 id='create-a-message'>Create a Message</h2>
+<blockquote>
+<p>This creates a new system text message:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'{{messages_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span> <span class="se">\</span>
 <span class="nt">--data-raw</span> <span class="s1">'{
-    "name": "Hello world!"
+    "type": "TEXT",
+    "body": "Hello world!"
 }'</span>
 </code></pre></div>
 <blockquote>
-<p>The command above returns a message HAL resource:</p>
+<p>The command above returns a text message HAL resource:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -1380,9 +1399,87 @@ New users cannot be added to a direct channel and there can only exist one direc
 </tr>
 </thead><tbody>
 <tr>
+<td>type</td>
+<td>Enum</td>
+<td>The type of message. <strong>Possible values</strong> are <a href="#text-message">TEXT</a> and <a href="#file-message">FILE</a></td>
+</tr>
+</tbody></table>
+<h4 id='system-text-message-2'>System Text Message</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
 <td>body</td>
 <td>String</td>
 <td>The text body of the message</td>
+</tr>
+</tbody></table>
+<h4 id='system-file-upload-message'>System File Upload Message</h4>
+<blockquote>
+<p>To upload a system file message:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'{{messages_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: multipart/form-data'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'file=@./files/message_file.png'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'groupTag=my_file_message_group_tag'</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>file</td>
+<td>File</td>
+<td>Multipart file to be <a href="#file-uploads">uploaded</a>.</td>
+</tr>
+<tr>
+<td>groupTag</td>
+<td>String</td>
+<td><strong>Optional:</strong> Tag to group file message by (like an album name). <strong>Present if</strong> this file message is part of a file message group.</td>
+</tr>
+</tbody></table>
+<h4 id='system-external-file-message'>System External File Message</h4>
+<blockquote>
+<p>This creates a new system external file message:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">''</span><span class="o">{{</span>messages_link<span class="o">}}</span><span class="s1">' \
+--header '</span>Content-Type: application/json<span class="s1">' \
+--header '</span>Authorization: Bearer <span class="o">{{</span>access_token<span class="o">}}</span><span class="s1">' \
+--data-raw '</span><span class="o">{</span>
+    <span class="s2">"type"</span>: <span class="s2">"FILE"</span>,
+    <span class="s2">"file"</span>: <span class="o">{</span>
+        <span class="s2">"url"</span>: <span class="s2">"https://www.chatkitty.com/images/logo.png"</span>,
+        <span class="s2">"name"</span>: <span class="s2">"ChatKitty Logo"</span>,
+        <span class="s2">"contentType"</span>: <span class="s2">"image/png"</span>,
+        <span class="s2">"size"</span>: 5393
+    <span class="o">}</span>,
+    <span class="s2">"groupTag"</span>: <span class="s2">"my_file_message_group_tag"</span>
+<span class="o">}</span><span class="s1">'
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>file</td>
+<td>File</td>
+<td><a href="#external-files">External</a> file parameters.</td>
+</tr>
+<tr>
+<td>groupTag</td>
+<td>String</td>
+<td><strong>Optional:</strong> Tag to group file message by (like an album name). <strong>Present if</strong> this file message is part of a file message group.</td>
 </tr>
 </tbody></table>
 <h2 id='get-messages'>Get Messages</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{messages_link}}'</span> <span class="se">\</span>
@@ -1765,6 +1862,113 @@ A <b>maximum of 10</b> challenge tokens can exists for a user.
 <p>This endpoint deletes a ChatKitty user.</p>
 <h3 id='http-request-18'>HTTP Request</h3>
 <p><code>DELETE {{user_link}}</code></p>
+<h1 id='files'>Files</h1>
+<p>Files like pictures, videos, documents, etc. can be uploaded to ChatKitty. 
+If you prefer hosting your own files, you can also create external file references pointing to 
+your file servers.</p>
+<h2 id='file-properties'>File Properties</h2>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>Enum</td>
+<td>The type of this file. <strong>Possible values</strong> are <a href="#file-uploads">HOSTED</a> and <a href="#external-files">EXTERNAL</a></td>
+</tr>
+<tr>
+<td>url</td>
+<td>String</td>
+<td>URL pointing to this file&#39;s content</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The name of this file</td>
+</tr>
+<tr>
+<td>contentType</td>
+<td>String</td>
+<td>MIME type of this file</td>
+</tr>
+<tr>
+<td>size</td>
+<td>Long</td>
+<td>64 bit integer size of this file in bytes</td>
+</tr>
+</tbody></table>
+<h2 id='file-uploads'>File Uploads</h2>
+<blockquote>
+<p>The HTTP request for a file upload looks like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">https://api.chatkitty.com/v1/applications/1/channels/2/messages</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">multipart/form-data; boundary=Your_Boundary_String</span>
+
+Your_Unique_Boundary_String
+Content-Disposition: form-data; name="file"; filename="./file-path/file_name.png"
+Content-Type: image/png
+
+(file data)
+New_Boundary_String
+Content-Disposition: form-data; name="extraProperty"
+
+extraPropertyValue
+Your_Unique_Boundary_String
+</code></pre></div>
+<p>To upload a file to ChatKitty, make a <a href="https://tools.ietf.org/html/rfc2388">multipart form data</a> <code>POST</code> request to a file upload endpoint:</p>
+
+<ul>
+<li>Your HTTP request content type header must be set to <code>multipart/form-data</code>.</li>
+<li>The content-disposition header for the part containing the file content must have 
+a &quot;name&quot; parameter with the value <code>file</code>.</li>
+<li>The form data must be the content of the file.</li>
+</ul>
+<h3 id='additional-file-upload-properties'>Additional file upload properties</h3>
+<ul>
+<li>Additional properties specific to the file upload endpoint can be sent using 
+additional content parts</li>
+<li>The content-disposition header for the part containing the property must have 
+a &quot;name&quot; parameter with the property name.</li>
+<li>The form data must be the value of the property.</li>
+</ul>
+<h2 id='external-files'>External Files</h2>
+<p>If you&#39;d rather host your own files, you can create an external file reference.  </p>
+
+<p>To create an external file reference, set the external file&#39;s parameters on the file property 
+of an endpoint expecting an external file reference:</p>
+<h3 id='external-file-parameters'>External File Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>url</td>
+<td>String</td>
+<td>External URL pointing to this file&#39;s content</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The name of this file</td>
+</tr>
+<tr>
+<td>contentType</td>
+<td>String</td>
+<td>MIME type of this file</td>
+</tr>
+<tr>
+<td>size</td>
+<td>Long</td>
+<td>64 bit integer size of this file in bytes</td>
+</tr>
+</tbody></table>
 <h1 id='errors'>Errors</h1>
 <aside class="notice">
 The Platform API may return any of these HTTP error codes
