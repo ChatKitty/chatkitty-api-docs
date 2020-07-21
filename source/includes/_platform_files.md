@@ -4,7 +4,7 @@ Files like pictures, videos, documents, etc. can be uploaded to ChatKitty.
 If you prefer hosting your own files, you can also create external file references pointing to 
 your file servers.
 
-## File Properties
+## Properties
 Name | Type | Description 
 --------- | ----------- | -----------
 type | Enum | The type of this file. __Possible values__ are [HOSTED](#file-uploads) and [EXTERNAL](#external-files)

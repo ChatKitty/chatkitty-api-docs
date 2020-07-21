@@ -10,7 +10,7 @@ cache:
 
 before_install:
   - mv slate temp
-  - git clone https://github.com/slatedocs/slate.git slate
+  - git clone https://github.com/ChatKitty/slate.git slate
   - rm -r slate/source
   - cp -r source slate/source
   - mv -v temp/* slate/
