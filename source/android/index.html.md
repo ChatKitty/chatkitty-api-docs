@@ -127,7 +127,7 @@ kitty.getCurrentUser(new ChatKittyCallback<GetCurrentUserResult>() {
   }
 });
 ```
-After starting a ChatKitty [user session](#begin-a-user-session), you can request the current user 
+After starting a ChatKitty [user session](#authentication-begin-a-user-session), you can request the current user 
 anytime by calling the `ChatKitty.getCurrentUser(ChatKittyCallback<GetCurrentUserResult>)` method.
 
 # Channels

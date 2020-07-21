@@ -114,7 +114,7 @@ kitty.getCurrentUser(function(result) {
   }
 });
 ```
-After starting a ChatKitty [user session](#begin-a-user-session), you can request the current user 
+After starting a ChatKitty [user session](#authentication-begin-a-user-session), you can request the current user 
 anytime by calling the `ChatKitty.getCurrentUser(function)` method.
 
 # Channels
@@ -189,7 +189,7 @@ let registration = kitty.registerChannelEventListener(channel, 'message.received
 ```
 
 To beginning listening to channel events, register a channel event listener by calling the `ChatKitty.registerChannelEventListener(Channel, String, function)` method.
-Where `String` is the [type](#channel-event-types) of event the function handles.  
+Where `String` is the **type** of event the function handles.  
 This method returns a `ChannelEventListenerRegistration` object.
 
 #### Channel Event Types
