@@ -155,16 +155,16 @@ Traverse the page links to iterate through a collection.
 ## Properties
 Name | Type | Description 
 --------- | ----------- | -----------
-[page](#page-metadata) | PageMetadata | Metadata about the page
+[page](#pagination-page-metadata) | PageMetadata | Metadata about the page
 
 ## HAL links
 Link | Methods | Description
 --------- | ----------- | -----------
-[self](#pagination) | [GET](#pagination) | Self link to this page.
-[first](#pagination) | [GET](#pagination) | __Optional:__ Link to the first page of this collection. __Present if__ known.
-[prev](#pagination) | [GET](#pagination) | __Optional:__ Link to the previous page of this collection. __Present if__ there are more items before the first item in this page.
-[next](#pagination) | [GET](#pagination) | __Optional:__ Link to the next page of this collection. __Present if__ there are more items after the last item in this page.
-[last](#pagination) | [GET](#pagination) | __Optional:__ Link to the last page of this collection. __Present if__ known.
+self | GET | Self link to this page.
+first | GET | __Optional:__ Link to the first page of this collection. __Present if__ known.
+prev | GET | __Optional:__ Link to the previous page of this collection. __Present if__ there are more items before the first item in this page.
+next | GET | __Optional:__ Link to the next page of this collection. __Present if__ there are more items after the last item in this page.
+last | GET | __Optional:__ Link to the last page of this collection. __Present if__ known.
 
 ## Embedded properties 
 A page resources embeds a slice of a resource collection in a JSON array property with the same name 
@@ -217,8 +217,8 @@ The following describes endpoints and resources exposed by the V1 ChatKitty API.
 ## HAL links
 Link | Methods | Description
 --------- | ----------- | -----------
-[self](#v1-api) | [GET](#get-api-root) | Self link to the V1 API. 
-[application](#application) | [GET](#get-application) | The ChatKitty application currently authenticated.
+[self](#v1-api) | [GET](#v1-api-get-api-root) | Self link to the V1 API. 
+[application](#application) | [GET](#application-get-application) | The ChatKitty application currently authenticated.
 
 ## Get API Root
 ```shell
@@ -264,9 +264,9 @@ key | String | Unique string used as an API key for this application client-side
 ## HAL links
 Link | Methods | Description
 --------- | ----------- | -----------
-[self](#application) | [GET](#get-application) | Self link to this application. 
-[users](#user) | [POST](#create-a-user), [GET](#get-users) | Users belonging to this application.
-[channels](#channel) | [POST](#create-a-channel), [GET](#get-a-channel) | Channels belonging to this application.
+[self](#application) | [GET](#application-get-application) | Self link to this application. 
+[users](#user) | [POST](#user-create-a-user), [GET](#user-get-users) | Users belonging to this application.
+[channels](#channel) | [POST](#channel-create-a-channel), [GET](#channel-get-a-channel) | Channels belonging to this application.
 
 ## Get Application
 ```shell
@@ -306,8 +306,8 @@ Channels are the backbone of the ChatKitty chat experience. [Users](#user) can j
 or send [messages](#message). ChatKitty broadcasts messages created in channels to channel members via 
 a chat session or push notifications.
 
-There are four types of channels; [Open Channels](#open-channel), [Public Channels](#public-channel), [Private Channels](#private-channel), 
-and [Direct Channels](#direct-channel). 
+There are four types of channels; [Open Channels](#channel-open-channel), [Public Channels](#channel-public-channel), [Private Channels](#channel-private-channel), 
+and [Direct Channels](#channel-direct-channel). 
 
 Public, private and direct channels require users to join the channel before they can send or receive messages from the channels. 
 These channels are known as **Group Channels** 
@@ -336,20 +336,20 @@ New users cannot be added to a direct channel and there can only exist one direc
 Name | Type | Description 
 --------- | ----------- | -----------
 id | Long | 64 bit integer identifier associated with this channel 
-type | Enum | The type of this channel. __Possible values__ are [OPEN](#open-channel), [PUBLIC](#public-channel), [PRIVATE](#private-channel), and [DIRECT](#direct-channel)
+type | Enum | The type of this channel. __Possible values__ are [OPEN](#channel-open-channel), [PUBLIC](#channel-public-channel), [PRIVATE](#channel-private-channel), and [DIRECT](#channel-direct-channel)
 name | String | The name of this channel
 
 ## HAL links
 Link | Methods | Description
 --------- | ----------- | -----------
-[self](#channel) | [GET](#get-a-channel), [DELETE](#delete-a-channel) | Self link to this channel.
-[messages](#message) | [POST](#create-a-message), [GET](#get-messages) | Messages sent in this channel. 
-[application](#application) | [GET](#get-application) | Link to your application resource. 
+[self](#channel) | [GET](#channel-get-a-channel), [DELETE](#channel-delete-a-channel) | Self link to this channel.
+[messages](#message) | [POST](#message-create-a-message), [GET](#message-get-messages) | Messages sent in this channel. 
+[application](#application) | [GET](#application-get-application) | Link to your application resource. 
 
 ### Group Channel HAL links
 Link | Methods | Description
 --------- | ----------- | -----------
-[members](#user) | [POST](#add-a-channel-member), [GET](#get-channel-members) | Users that are members of this channel.
+[members](#user) | [POST](#channel-add-a-channel-member), [GET](#channel-get-channel-members) | Users that are members of this channel.
 
 ## Create a Channel
 ```shell
@@ -391,7 +391,7 @@ This endpoint creates a new channel.
 ### Request Parameters
 Parameter | Type | Description 
 --------- | ----------- | -----------
-type | Enum | The type of the channel. __Possible values__ are [OPEN](#open-channel), [PUBLIC](#public-channel), [PRIVATE](#private-channel), and [DIRECT](#direct-channel)
+type | Enum | The type of the channel. __Possible values__ are [OPEN](#channel-open-channel), [PUBLIC](#channel-public-channel), [PRIVATE](#channel-private-channel), and [DIRECT](#channel-direct-channel)
 name | String | The name of the channel
 
 #### Direct Channel
@@ -651,8 +651,8 @@ This endpoint deletes a channel.
 # Message
 [Users](#user) send messages through your application and administrators can send messages through the Platform API. 
 
-There are four types of messages; [Text Messages](#text-message), [File Messages](#file-message), 
-[System Text Messages](#system-text-message), and [System File Messages](#system-file-message).
+There are four types of messages; [Text Messages](#message-text-message), [File Messages](#message-file-message), 
+[System Text Messages](#message-system-text-message), and [System File Messages](#message-system-file-message).
 
 ## Text Message
 Users can send text messages containing a unicode text body. These messages can contain emojis and other unicode characters
@@ -688,7 +688,7 @@ Administrators can send files messages with one, or many file attachments.
 Name | Type | Description 
 --------- | ----------- | -----------
 id | Long | __Optional:__ 64 bit integer identifier associated with this message. __Present if__ this message is persistent.
-type | Enum | The type of this message. __Possible values__ are [TEXT](#text-message), [FILE](#file-message), [SYSTEM_TEXT](#system-text-message), and [SYSTEM_FILE](#system-file-message)
+type | Enum | The type of this message. __Possible values__ are [TEXT](#message-text-message), [FILE](#message-file-message), [SYSTEM_TEXT](#message-system-text-message), and [SYSTEM_FILE](#message-system-file-message)
 createdTime | String | ISO 8601 instant when this message was created
 
 ### Text Message Properties
@@ -699,19 +699,19 @@ body | String | Text body of this message.
 ### File Message Properties
 Name | Type | Description 
 --------- | ----------- | -----------
-file | File Properties | [Properties](#file-properties) of the file attached to this message.
+file | File Properties | [Properties](#files-properties) of the file attached to this message.
 
 ## HAL links
 Link | Methods | Description
 --------- | ----------- | -----------
-[self](#message) | [GET](#get-a-message), [DELETE](#delete-a-message) | __Optional:__ Self link to this message. __Present if__ this message is persistent.
-[channel](#channel) | [GET](#get-a-channel) | Link to channel this message was sent in.
-[application](#application) | [GET](#get-application) | Link to your application resource. 
+[self](#message) | [GET](#message-get-a-message), [DELETE](#message-delete-a-message) | __Optional:__ Self link to this message. __Present if__ this message is persistent.
+[channel](#channel) | [GET](#channel-get-a-channel) | Link to channel this message was sent in.
+[application](#application) | [GET](#application-get-application) | Link to your application resource. 
 
 ### Text Message and File Message HAL links
 Link | Methods | Description
 --------- | ----------- | -----------
-[user](#user) | [GET](#get-a-user) | Link to the user who sent this message.
+[user](#user) | [GET](#user-get-a-user) | Link to the user who sent this message.
 
 ## Create a Message
 
@@ -755,7 +755,7 @@ This endpoint creates a new message.
 ### Request Parameters
 Parameter | Type | Description 
 --------- | ----------- | -----------
-type | Enum | The type of message. __Possible values__ are [TEXT](#text-message) and [FILE](#file-message)
+type | Enum | The type of message. __Possible values__ are [TEXT](#message-text-message) and [FILE](#message-file-message)
 
 #### System Text Message
 Parameter | Type | Description 
@@ -775,7 +775,7 @@ curl --location --request POST '{{messages_link}}' \
 ```
 Parameter | Type | Description 
 --------- | ----------- | -----------
-file | File | Multipart file to be [uploaded](#file-uploads).
+file | File | Multipart file to be [uploaded](#files-file-uploads).
 groupTag | String | __Optional:__ Tag to group file message by (like an album name). __Present if__ this file message is part of a file message group.
 
 #### System External File Message
@@ -799,7 +799,7 @@ curl --location --request POST ''{{messages_link}}' \
 ```
 Parameter | Type | Description 
 --------- | ----------- | -----------
-file | File | [External](#external-files) file parameters.
+file | File | [External](#files-external-files) file parameters.
 groupTag | String | __Optional:__ Tag to group file message by (like an album name). __Present if__ this file message is part of a file message group.
 
 ## Get Messages
@@ -946,10 +946,10 @@ name | String | The unique name of the user.
 ## HAL links
 Link | Methods | Description
 --------- | ----------- | -----------
-[self](#user) | [GET](#get-a-user), [DELETE](#delete-a-user) | Self link to this user.
-[channels](#channel) | [GET](#get-channels) | Channels this user has access to - meaning the user has joined or can join. 
-tokens | [POST](#add-a-user-token), [GET](#get-user-tokens) | Challenge tokens used to authenticate this user's sessions client-side. 
-[application](#application) | [GET](#get-application) | Link to your application resource. 
+[self](#user) | [GET](#user-get-a-user), [DELETE](#user-delete-a-user) | Self link to this user.
+[channels](#channel) | [GET](#channel-get-channels) | Channels this user has access to - meaning the user has joined or can join. 
+tokens | [POST](#user-add-a-user-token), [GET](#user-get-user-tokens) | Challenge tokens used to authenticate this user's sessions client-side. 
+[application](#application) | [GET](#application-get-application) | Link to your application resource. 
 
 ## Create a User
 ```shell

@@ -7,7 +7,7 @@ your file servers.
 ## Properties
 Name | Type | Description 
 --------- | ----------- | -----------
-type | Enum | The type of this file. __Possible values__ are [HOSTED](#file-uploads) and [EXTERNAL](#external-files)
+type | Enum | The type of this file. __Possible values__ are [HOSTED](#files-file-uploads) and [EXTERNAL](#files-external-files)
 url | String | URL pointing to this file's content
 name | String | The name of this file
 contentType | String | MIME type of this file
