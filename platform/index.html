@@ -289,7 +289,7 @@
     </script>
   </head>
 
-  <body class="platform platform_index" data-languages="[&quot;shell&quot;]">
+  <body class="platform platform_index" data-languages="[&quot;shell&quot;,&quot;http&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -300,6 +300,7 @@
       <a href="/"><img src="../images/logo-2664c69a.png" class="logo" alt="" /></a>
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="http">http</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -517,6 +518,23 @@ using your application&#39;s client ID and client secret. </p>
 <span class="nt">--form</span> <span class="s1">'grant_type=client_credentials'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'username=acme'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'password=acmesecret'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/oauth/token</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">https://authorization.chatkitty.com/oauth/token</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic YWNtZTphY21lc2VjcmV0Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW</span>
+
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="grant_type"
+
+client_credentials
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="username"
+
+acme
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="password"
+
+acmesecret
+----WebKitFormBoundary7MA4YWxkTrZu0gW
 </code></pre></div>
 <blockquote>
 <p>Returns a JSON response with the Bearer access token.</p>
@@ -553,6 +571,10 @@ You must replace <code>{{access_token}}</code> with an access token gotten using
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{users_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{users_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">{{access_token}}</span>
 </code></pre></div>
 <blockquote>
 <p>The command above returns a user page HAL resource.</p>
@@ -755,6 +777,10 @@ and the page would include a JSON array in its <code>_embedded</code> property n
 <h2 id='v1-api-get-api-root'>Get API Root</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://api.chatkitty.com/v1'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">https://api.chatkitty.com/v1</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
 </code></pre></div>
 <blockquote>
 <p>The command above returns a HAL resource with links to top-level ChatKitty resources:</p>
@@ -830,6 +856,10 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 <h2 id='application-get-application'>Get Application</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{application_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{application_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
 </code></pre></div>
 <blockquote>
 <p>The command above returns an application HAL resource:</p>
@@ -949,7 +979,16 @@ New users cannot be added to a direct channel and there can only exist one direc
     "type": "OPEN"
     "name": "Open Chat"
 }'</span>
-</code></pre></div>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{channels_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
+
+<span class="p">{</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Open Chat"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <blockquote>
 <p>The command above returns a channel HAL resource:</p>
 </blockquote>
@@ -1009,6 +1048,10 @@ New users cannot be added to a direct channel and there can only exist one direc
 <h2 id='channel-get-channels'>Get Channels</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{channels_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{channels_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
 </code></pre></div>
 <blockquote>
 <p>The command above returns a channel page HAL resource:</p>
@@ -1069,6 +1112,10 @@ New users cannot be added to a direct channel and there can only exist one direc
 <h2 id='channel-get-a-channel'>Get a Channel</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{channel_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{channel_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
 </code></pre></div>
 <blockquote>
 <p>The command above returns a channel HAL resource:</p>
@@ -1093,13 +1140,21 @@ New users cannot be added to a direct channel and there can only exist one direc
 <p>This endpoint returns a channel resource.</p>
 <h3 id='channel-get-a-channel-http-request'>HTTP Request</h3>
 <p><code>GET {{channel_link}}</code></p>
-<h2 id='channel-add-a-channel-member'>Add a Channel Member</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'{{channels_members_link}}'</span> <span class="se">\</span>
+<h2 id='channel-add-a-channel-member'>Add a Channel Member</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'{{channel_members_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span> <span class="se">\</span>
 <span class="nt">--data-raw</span> <span class="s1">'{
     "href": "{{user_link}}"
 }'</span>
-</code></pre></div>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{channel_members_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
+
+<span class="p">{</span><span class="w">
+    </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{user_link}}"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <blockquote>
 <p>The command above returns a channel HAL resource:</p>
 </blockquote>
@@ -1122,7 +1177,7 @@ New users cannot be added to a direct channel and there can only exist one direc
 </span></code></pre></div>
 <p>This endpoint adds a new member to a channel.</p>
 <h3 id='channel-add-a-channel-member-http-request'>HTTP Request</h3>
-<p><code>POST {{channels_members_link}}</code></p>
+<p><code>POST {{channel_members_link}}</code></p>
 <h3 id='channel-add-a-channel-member-request-parameters'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -1137,9 +1192,13 @@ New users cannot be added to a direct channel and there can only exist one direc
 <td>The link href of the user to be added as a member</td>
 </tr>
 </tbody></table>
-<h2 id='channel-get-channel-members'>Get Channel Members</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{channels_members_link}}'</span> <span class="se">\</span>
+<h2 id='channel-get-channel-members'>Get Channel Members</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{channel_members_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{channel_members_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
 </code></pre></div>
 <blockquote>
 <p>The command above returns a page of channel members:</p>
@@ -1206,10 +1265,14 @@ New users cannot be added to a direct channel and there can only exist one direc
 </span></code></pre></div>
 <p>This endpoint returns a user <a href="#pagination">page</a> resource of channel members.</p>
 <h3 id='channel-get-channel-members-http-request'>HTTP Request</h3>
-<p><code>GET {{channels_members_link}}</code></p>
+<p><code>GET {{channel_members_link}}</code></p>
 <h2 id='channel-delete-a-channel'>Delete a Channel</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'{{channel_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{channel_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
 </code></pre></div>
 <blockquote>
 <p>The command above returns your application&#39;s HAL resource:</p>
@@ -1366,7 +1429,16 @@ New users cannot be added to a direct channel and there can only exist one direc
     "type": "TEXT",
     "body": "Hello world!"
 }'</span>
-</code></pre></div>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{messages_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
+
+<span class="p">{</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TEXT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello world!"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <blockquote>
 <p>The command above returns a text message HAL resource:</p>
 </blockquote>
@@ -1427,6 +1499,21 @@ New users cannot be added to a direct channel and there can only exist one direc
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'file=@./files/message_file.png'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'groupTag=my_file_message_group_tag'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{messages_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
+
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="./files/message_file.png"
+Content-Type: image/png
+
+(data)
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="groupTag"
+
+my_file_message_group_tag
+----WebKitFormBoundary7MA4YWxkTrZu0gW
 </code></pre></div>
 <table><thead>
 <tr>
@@ -1463,6 +1550,22 @@ New users cannot be added to a direct channel and there can only exist one direc
     <span class="o">}</span>,
     <span class="s2">"groupTag"</span>: <span class="s2">"my_file_message_group_tag"</span>
 <span class="o">}</span><span class="s1">'
+</span></code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{channels_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
+
+<span class="p">{</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FILE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"file"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.chatkitty.com/images/logo.png"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ChatKitty Logo"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"contentType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">5393</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"groupTag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_file_message_group_tag"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
 </span></code></pre></div>
 <table><thead>
 <tr>
@@ -1485,6 +1588,10 @@ New users cannot be added to a direct channel and there can only exist one direc
 <h2 id='message-get-messages'>Get Messages</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{messages_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{messages_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
 </code></pre></div>
 <blockquote>
 <p>The command above returns a message page HAL resource:</p>
@@ -1545,6 +1652,10 @@ New users cannot be added to a direct channel and there can only exist one direc
 <h2 id='message-get-a-message'>Get a Message</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{message_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{message_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
 </code></pre></div>
 <blockquote>
 <p>The command above returns a message HAL resource:</p>
@@ -1572,6 +1683,10 @@ New users cannot be added to a direct channel and there can only exist one direc
 <h2 id='message-delete-a-message'>Delete a Message</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'{message_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{message_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
 </code></pre></div>
 <blockquote>
 <p>The command above returns the message channel&#39;s HAL resource:</p>
@@ -1652,7 +1767,15 @@ New users cannot be added to a direct channel and there can only exist one direc
 <span class="nt">--data-raw</span> <span class="s1">'{
     "name": "37282832193"
 }'</span>
-</code></pre></div>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{users_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
+
+<span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"37282832193"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <blockquote>
 <p>The command above returns a user HAL resource:</p>
 </blockquote>
@@ -1692,6 +1815,10 @@ New users cannot be added to a direct channel and there can only exist one direc
 <h2 id='user-get-users'>Get Users</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{users_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{users_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
 </code></pre></div>
 <blockquote>
 <p>The command above returns a user page HAL resource:</p>
@@ -1762,6 +1889,10 @@ New users cannot be added to a direct channel and there can only exist one direc
 <h2 id='user-get-a-user'>Get a User</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{user_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{user_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
 </code></pre></div>
 <blockquote>
 <p>The command above returns a user HAL resource:</p>
@@ -1789,7 +1920,13 @@ New users cannot be added to a direct channel and there can only exist one direc
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span> <span class="se">\</span>
 <span class="nt">--data-raw</span> <span class="s1">'{}'</span>
-</code></pre></div>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{user_tokens_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
+
+<span class="p">{}</span><span class="w">
+</span></code></pre></div>
 <blockquote>
 <p>The command above returns a user token resource:</p>
 </blockquote>
@@ -1807,6 +1944,10 @@ A <b>maximum of 10</b> challenge tokens can exists for a user.
 <h2 id='user-get-user-tokens'>Get User Tokens</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{user_tokens_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{user_tokens_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
 </code></pre></div>
 <blockquote>
 <p>The command above returns a page of user challenge tokens:</p>
@@ -1838,6 +1979,10 @@ A <b>maximum of 10</b> challenge tokens can exists for a user.
 <h2 id='user-delete-a-user'>Delete a User</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'{{user_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{user_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
 </code></pre></div>
 <blockquote>
 <p>The command above returns your application&#39;s HAL resource:</p>
@@ -1904,8 +2049,13 @@ your file servers.</p>
 <blockquote>
 <p>The HTTP request for a file upload looks like this:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">https://api.chatkitty.com/v1/applications/1/channels/2/messages</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://api.chatkitty.com/v1/file-upload-path'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: multipart/form-data'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'file=@./file-path/file_name.png'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'extraPropertyName=extraPropertyValue'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">https://api.chatkitty.com/v1/file-upload-path</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">multipart/form-data; boundary=Your_Boundary_String</span>
 
 Your_Unique_Boundary_String
@@ -1914,7 +2064,7 @@ Content-Type: image/png
 
 (file data)
 New_Boundary_String
-Content-Disposition: form-data; name="extraProperty"
+Content-Disposition: form-data; name="extraPropertyName"
 
 extraPropertyValue
 Your_Unique_Boundary_String
@@ -2028,6 +2178,7 @@ The Platform API may return any of these HTTP error codes
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="http">http</a>
           </div>
       </div>
     </div>
