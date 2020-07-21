@@ -3,6 +3,7 @@ title: Platform API Documentation
 
 language_tabs:
   - shell
+  - http
 
 toc_footers:
   - <a href='https://www.chatkitty.com'>&copy; ChatKitty 2020. All rights reserved</a>
@@ -46,6 +47,26 @@ curl --location --request POST 'https://authorization.chatkitty.com/oauth/token'
 --form 'password=acmesecret'
 ```
 
+```http
+POST /oauth/token HTTP/1.1
+Host: https://authorization.chatkitty.com/oauth/token
+Authorization: Basic YWNtZTphY21lc2VjcmV0Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="grant_type"
+
+client_credentials
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="username"
+
+acme
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="password"
+
+acmesecret
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+```
+
 > Returns a JSON response with the Bearer access token.
 
 ```json
@@ -81,6 +102,13 @@ You must replace <code>{{access_token}}</code> with an access token gotten using
 curl --location --request GET '{{users_link}}' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer {{access_token}}'
+```
+
+```http
+GET / HTTP/1.1
+Host: {{users_link}}
+Content-Type: application/json
+Authorization: {{access_token}}
 ```
 
 > The command above returns a user page HAL resource.
@@ -227,6 +255,13 @@ curl --location --request GET 'https://api.chatkitty.com/v1' \
 --header 'Authorization: Bearer {{access_token}}'
 ```
 
+```http
+GET / HTTP/1.1
+Host: https://api.chatkitty.com/v1
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+```
+
 > The command above returns a HAL resource with links to top-level ChatKitty resources:
 
 ```json
@@ -273,6 +308,13 @@ Link | Methods | Description
 curl --location --request GET '{{application_link}}' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer {{access_token}}'
+```
+
+```http
+GET / HTTP/1.1
+Host: {{application_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
 ```
 
 > The command above returns an application HAL resource:
@@ -362,6 +404,18 @@ curl --location --request POST '{{channels_link}}' \
 }'
 ```
 
+```http
+POST / HTTP/1.1
+Host: {{channels_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "type": "OPEN",
+    "name": "Open Chat"
+}
+```
+
 > The command above returns a channel HAL resource:
 
 ```json
@@ -404,6 +458,13 @@ members | Link Array | Self links of the members of this channel. The same direc
 curl --location --request GET '{{channels_link}}' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer {{access_token}}'
+```
+
+```http
+GET / HTTP/1.1
+Host: {{channels_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
 ```
 
 > The command above returns a channel page HAL resource:
@@ -472,6 +533,13 @@ curl --location --request GET '{{channel_link}}' \
 --header 'Authorization: Bearer {{access_token}}'
 ```
 
+```http
+GET / HTTP/1.1
+Host: {{channel_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+```
+
 > The command above returns a channel HAL resource:
 
 ```json
@@ -500,12 +568,23 @@ This endpoint returns a channel resource.
 
 ## Add a Channel Member
 ```shell
-curl --location --request POST '{{channels_members_link}}' \
+curl --location --request POST '{{channel_members_link}}' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer {{access_token}}' \
 --data-raw '{
     "href": "{{user_link}}"
 }'
+```
+
+```http
+POST / HTTP/1.1
+Host: {{channel_members_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "href": "{{user_link}}"
+}
 ```
 
 > The command above returns a channel HAL resource:
@@ -532,7 +611,7 @@ curl --location --request POST '{{channels_members_link}}' \
 This endpoint adds a new member to a channel.
 
 ### HTTP Request
-`POST {{channels_members_link}}`
+`POST {{channel_members_link}}`
 
 ### Request Parameters
 Parameter | Type | Description 
@@ -541,9 +620,16 @@ href | String | The link href of the user to be added as a member
 
 ## Get Channel Members
 ```shell
-curl --location --request GET '{{channels_members_link}}' \
+curl --location --request GET '{{channel_members_link}}' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer {{access_token}}'
+```
+
+```http
+GET / HTTP/1.1
+Host: {{channel_members_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
 ```
 
 > The command above returns a page of channel members:
@@ -613,13 +699,20 @@ curl --location --request GET '{{channels_members_link}}' \
 This endpoint returns a user [page](#pagination) resource of channel members.
 
 ### HTTP Request
-`GET {{channels_members_link}}`
+`GET {{channel_members_link}}`
 
 ## Delete a Channel
 ```shell
 curl --location --request DELETE '{{channel_link}}' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer {{access_token}}'
+```
+
+```http
+DELETE / HTTP/1.1
+Host: {{channel_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
 ```
 
 > The command above returns your application's HAL resource:
@@ -727,6 +820,18 @@ curl --location --request POST '{{messages_link}}' \
 }'
 ```
 
+```http
+POST / HTTP/1.1
+Host: {{messages_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "type": "TEXT",
+    "body": "Hello world!"
+}
+```
+
 > The command above returns a text message HAL resource:
 
 ```json
@@ -773,6 +878,24 @@ curl --location --request POST '{{messages_link}}' \
 --form 'file=@./files/message_file.png' \
 --form 'groupTag=my_file_message_group_tag'
 ```
+
+```http
+POST / HTTP/1.1
+Host: {{messages_link}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: Bearer {{access_token}}
+
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="./files/message_file.png"
+Content-Type: image/png
+
+(data)
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="groupTag"
+
+my_file_message_group_tag
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+```
 Parameter | Type | Description 
 --------- | ----------- | -----------
 file | File | Multipart file to be [uploaded](#files-file-uploads).
@@ -797,6 +920,25 @@ curl --location --request POST ''{{messages_link}}' \
     "groupTag": "my_file_message_group_tag"
 }'
 ```
+
+```http
+POST / HTTP/1.1
+Host: {{channels_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "type": "FILE",
+    "file": {
+        "url": "https://www.chatkitty.com/images/logo.png",
+        "name": "ChatKitty Logo",
+        "contentType": "image/png",
+        "size": 5393
+    },
+    "groupTag": "my_file_message_group_tag"
+}
+
+```
 Parameter | Type | Description 
 --------- | ----------- | -----------
 file | File | [External](#files-external-files) file parameters.
@@ -807,6 +949,13 @@ groupTag | String | __Optional:__ Tag to group file message by (like an album na
 curl --location --request GET '{{messages_link}}' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer {{access_token}}'
+```
+
+```http
+GET / HTTP/1.1
+Host: {{messages_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
 ```
 
 > The command above returns a message page HAL resource:
@@ -875,6 +1024,13 @@ curl --location --request GET '{{message_link}}' \
 --header 'Authorization: Bearer {{access_token}}'
 ```
 
+```http
+GET / HTTP/1.1
+Host: {{message_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+```
+
 > The command above returns a message HAL resource:
 
 ```json
@@ -906,6 +1062,13 @@ This endpoint returns a message resource.
 curl --location --request DELETE '{message_link}}' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer {{access_token}}'
+```
+
+```http
+DELETE / HTTP/1.1
+Host: {{message_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
 ```
 
 > The command above returns the message channel's HAL resource:
@@ -961,6 +1124,17 @@ curl --location --request POST '{{users_link}}' \
 }'
 ```
 
+```http
+POST / HTTP/1.1
+Host: {{users_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "name": "37282832193"
+}
+```
+
 > The command above returns a user HAL resource:
 
 ```json
@@ -996,6 +1170,13 @@ name | String | The unique name of the user.
 curl --location --request GET '{{users_link}}' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer {{access_token}}'
+```
+
+```http
+GET / HTTP/1.1
+Host: {{users_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
 ```
 
 > The command above returns a user page HAL resource:
@@ -1074,6 +1255,13 @@ curl --location --request GET '{{user_link}}' \
 --header 'Authorization: Bearer {{access_token}}'
 ```
 
+```http
+GET / HTTP/1.1
+Host: {{user_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+```
+
 > The command above returns a user HAL resource:
 
 ```json
@@ -1107,6 +1295,15 @@ curl --location --request POST '{{user_tokens_link}}' \
 --data-raw '{}'
 ```
 
+```http
+POST / HTTP/1.1
+Host: {{user_tokens_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{}
+```
+
 > The command above returns a user token resource:
 
 ```json
@@ -1129,6 +1326,13 @@ A <b>maximum of 10</b> challenge tokens can exists for a user.
 curl --location --request GET '{{user_tokens_link}}' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer {{access_token}}'
+```
+
+```http
+GET / HTTP/1.1
+Host: {{user_tokens_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
 ```
 
 > The command above returns a page of user challenge tokens:
@@ -1166,6 +1370,13 @@ This endpoint returns a user challenge token [page](#pagination) resource.
 curl --location --request DELETE '{{user_link}}' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer {{access_token}}'
+```
+
+```http
+DELETE / HTTP/1.1
+Host: {{user_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
 ```
 
 > The command above returns your application's HAL resource:

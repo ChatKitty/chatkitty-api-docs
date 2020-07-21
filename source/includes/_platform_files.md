@@ -16,9 +16,17 @@ size | Long | 64 bit integer size of this file in bytes
 ## File Uploads
 > The HTTP request for a file upload looks like this:
 
+```shell
+curl --location --request POST 'https://api.chatkitty.com/v1/file-upload-path' \
+--header 'Content-Type: multipart/form-data' \
+--header 'Authorization: Bearer {{access_token}}' \
+--form 'file=@./file-path/file_name.png' \
+--form 'extraPropertyName=extraPropertyValue'
+```
+
 ```http
 POST / HTTP/1.1
-Host: https://api.chatkitty.com/v1/applications/1/channels/2/messages
+Host: https://api.chatkitty.com/v1/file-upload-path
 Content-Type: multipart/form-data; boundary=Your_Boundary_String
 
 Your_Unique_Boundary_String
@@ -27,7 +35,7 @@ Content-Type: image/png
 
 (file data)
 New_Boundary_String
-Content-Disposition: form-data; name="extraProperty"
+Content-Disposition: form-data; name="extraPropertyName"
 
 extraPropertyValue
 Your_Unique_Boundary_String
