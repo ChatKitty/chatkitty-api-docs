@@ -8,6 +8,7 @@ toc_footers:
   - <a href='https://www.chatkitty.com'>&copy; ChatKitty 2020. All rights reserved</a>
 
 includes:
+  - platform_files
   - platform_errors
 
 search: true
@@ -698,7 +699,7 @@ body | String | Text body of this message.
 ### File Message Properties
 Name | Type | Description 
 --------- | ----------- | -----------
-file.url | String | URL of the file attached to this message.
+file | File Properties | [Properties](#file-properties) of the file attached to this message.
 
 ## HAL links
 Link | Methods | Description
@@ -713,16 +714,20 @@ Link | Methods | Description
 [user](#user) | [GET](#get-a-user) | Link to the user who sent this message.
 
 ## Create a Message
+
+> This creates a new system text message:
+
 ```shell
 curl --location --request POST '{{messages_link}}' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer {{access_token}}' \
 --data-raw '{
-    "name": "Hello world!"
+    "type": "TEXT",
+    "body": "Hello world!"
 }'
 ```
 
-> The command above returns a message HAL resource:
+> The command above returns a text message HAL resource:
 
 ```json
 {
@@ -742,7 +747,6 @@ curl --location --request POST '{{messages_link}}' \
   }
 }
 ```
-
 This endpoint creates a new message.
 
 ### HTTP Request
@@ -751,7 +755,52 @@ This endpoint creates a new message.
 ### Request Parameters
 Parameter | Type | Description 
 --------- | ----------- | -----------
+type | Enum | The type of message. __Possible values__ are [TEXT](#text-message) and [FILE](#file-message)
+
+#### System Text Message
+Parameter | Type | Description 
+--------- | ----------- | -----------
 body | String | The text body of the message
+
+#### System File Upload Message
+
+> To upload a system file message:
+
+```shell
+curl --location --request POST '{{messages_link}}' \
+--header 'Content-Type: multipart/form-data' \
+--header 'Authorization: Bearer {{access_token}}' \
+--form 'file=@./files/message_file.png' \
+--form 'groupTag=my_file_message_group_tag'
+```
+Parameter | Type | Description 
+--------- | ----------- | -----------
+file | File | Multipart file to be [uploaded](#file-uploads).
+groupTag | String | __Optional:__ Tag to group file message by (like an album name). __Present if__ this file message is part of a file message group.
+
+#### System External File Message
+
+> This creates a new system external file message:
+
+```shell
+curl --location --request POST ''{{messages_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}' \
+--data-raw '{
+    "type": "FILE",
+    "file": {
+        "url": "https://www.chatkitty.com/images/logo.png",
+        "name": "ChatKitty Logo",
+        "contentType": "image/png",
+        "size": 5393
+    },
+    "groupTag": "my_file_message_group_tag"
+}'
+```
+Parameter | Type | Description 
+--------- | ----------- | -----------
+file | File | [External](#external-files) file parameters.
+groupTag | String | __Optional:__ Tag to group file message by (like an album name). __Present if__ this file message is part of a file message group.
 
 ## Get Messages
 ```shell
