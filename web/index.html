@@ -1,15 +1,15 @@
 
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href="../images/favicon-7d95b84d.ico" rel="icon" type="image/ico" />
-    <title>Web SDK Documentation</title>
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="../images/favicon-7d95b84d.ico" rel="icon" type="image/ico" />
+  <title>Web SDK Documentation</title>
 
-    <style media="screen">
-      .highlight table td { padding: 5px; }
+  <style media="screen">
+    .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
 .highlight .gh {
   color: #999999;
@@ -196,13 +196,14 @@
 .highlight .o {
   color: #f92672;
 }
-    </style>
-    <style media="print">
-      * {
-        -webkit-transition:none!important;
-        transition:none!important;
-      }
-      .highlight table td { padding: 5px; }
+  </style>
+  <style media="print">
+    * {
+      -webkit-transition: none !important;
+      transition: none !important;
+    }
+
+    .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
 .highlight, .highlight .w {
   color: #586e75;
@@ -279,84 +280,86 @@
 .highlight .ss {
   color: #859900;
 }
-    </style>
-    <link href="../stylesheets/screen-c9d8fa83.css" rel="stylesheet" media="screen" />
-    <link href="../stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
-      <script src="../javascripts/all-e9bde216.js"></script>
+  </style>
+  <link href="../stylesheets/screen-c9d8fa83.css" rel="stylesheet" media="screen" />
+  <link href="../stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
+    <script src="../javascripts/all-e9bde216.js"></script>
 
     <script>
-      $(function() { setupCodeCopy(); });
+        $(function () {
+            setupCodeCopy();
+        });
     </script>
-  </head>
+</head>
 
-  <body class="web web_index" data-languages="[&quot;javascript&quot;]">
-    <a href="#" id="nav-button">
+<body class="web web_index" data-languages="[&quot;javascript&quot;]">
+<a href="#" id="nav-button">
       <span>
         NAV
         <img src="../images/navbar-cad8cdcb.png" alt="" />
       </span>
-    </a>
-    <div class="toc-wrapper">
-      <a href="/"><img src="../images/logo-2664c69a.png" class="logo" alt="" /></a>
-        <div class="lang-selector">
-              <a href="#" data-language-name="javascript">javascript</a>
-        </div>
-        <div class="search">
-          <input type="text" class="search" id="input-search" placeholder="Search">
-        </div>
-        <ul class="search-results"></ul>
-      <ul id="toc" class="toc-list-h1">
-          <li>
-            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
-          </li>
-          <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#authentication-begin-a-user-session" class="toc-h2 toc-link" data-title="Begin a user session">Begin a user session</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#current-user" class="toc-h1 toc-link" data-title="Current User">Current User</a>
-          </li>
-          <li>
-            <a href="#channels" class="toc-h1 toc-link" data-title="Channels">Channels</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#channels-channel-types" class="toc-h2 toc-link" data-title="Channel Types">Channel Types</a>
-                  </li>
-                  <li>
-                    <a href="#channels-get-channels" class="toc-h2 toc-link" data-title="Get channels">Get channels</a>
-                  </li>
-                  <li>
-                    <a href="#channels-listen-to-channel-events" class="toc-h2 toc-link" data-title="Listen to channel events">Listen to channel events</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#messages" class="toc-h1 toc-link" data-title="Messages">Messages</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#messages-messages-types" class="toc-h2 toc-link" data-title="Messages Types">Messages Types</a>
-                  </li>
-                  <li>
-                    <a href="#messages-get-messages" class="toc-h2 toc-link" data-title="Get messages">Get messages</a>
-                  </li>
-                  <li>
-                    <a href="#messages-send-a-message" class="toc-h2 toc-link" data-title="Send a message">Send a message</a>
-                  </li>
-              </ul>
-          </li>
-      </ul>
-        <ul class="toc-footer">
-            <li><a href='https://www.chatkitty.com'>&copy; ChatKitty 2020. All rights reserved</a></li>
-        </ul>
+</a>
+<div class="toc-wrapper">
+  <a href="/"><img src="../images/logo-2664c69a.png" class="logo" alt="" /></a>
+    <div class="lang-selector">
+          <a href="#" data-language-name="javascript">javascript</a>
     </div>
-    <div class="page-wrapper">
-      <div class="dark-box"></div>
-      <div class="content">
-        <h1 id='introduction'>Introduction</h1>
+    <div class="search">
+      <input type="text" class="search" id="input-search" placeholder="Search">
+    </div>
+    <ul class="search-results"></ul>
+  <ul id="toc" class="toc-list-h1">
+      <li>
+        <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+      </li>
+      <li>
+        <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+          <ul class="toc-list-h2">
+              <li>
+                <a href="#authentication-begin-a-user-session" class="toc-h2 toc-link" data-title="Begin a user session">Begin a user session</a>
+              </li>
+          </ul>
+      </li>
+      <li>
+        <a href="#current-user" class="toc-h1 toc-link" data-title="Current User">Current User</a>
+      </li>
+      <li>
+        <a href="#channels" class="toc-h1 toc-link" data-title="Channels">Channels</a>
+          <ul class="toc-list-h2">
+              <li>
+                <a href="#channels-channel-types" class="toc-h2 toc-link" data-title="Channel Types">Channel Types</a>
+              </li>
+              <li>
+                <a href="#channels-get-channels" class="toc-h2 toc-link" data-title="Get channels">Get channels</a>
+              </li>
+              <li>
+                <a href="#channels-listen-to-channel-events" class="toc-h2 toc-link" data-title="Listen to channel events">Listen to channel events</a>
+              </li>
+          </ul>
+      </li>
+      <li>
+        <a href="#messages" class="toc-h1 toc-link" data-title="Messages">Messages</a>
+          <ul class="toc-list-h2">
+              <li>
+                <a href="#messages-messages-types" class="toc-h2 toc-link" data-title="Messages Types">Messages Types</a>
+              </li>
+              <li>
+                <a href="#messages-get-messages" class="toc-h2 toc-link" data-title="Get messages">Get messages</a>
+              </li>
+              <li>
+                <a href="#messages-send-a-message" class="toc-h2 toc-link" data-title="Send a message">Send a message</a>
+              </li>
+          </ul>
+      </li>
+  </ul>
+    <ul class="toc-footer">
+        <li><a href='https://www.chatkitty.com'>&copy; ChatKitty 2020. All rights reserved</a></li>
+    </ul>
+</div>
+<div class="page-wrapper">
+  <div class="dark-box"></div>
+  <div class="content">
+    <h1 id='introduction'>Introduction</h1>
 <p>Integrate <strong>real-time chat</strong> into your Web application with the ChatKitty SDK for Web.  </p>
 <h1 id='authentication'>Authentication</h1>
 <p><strong>Initialize the Chat SDK with your API key</strong>  </p>
@@ -610,12 +613,15 @@ calling the <code>ChannelEventListenerRegistration.deregister()</code> method on
 </code></pre></div>
 <p>You can send a message to a <a href="#channels">channel</a> by calling the <code>ChatKitty.sendChannelMessage(Channel, CreateMessageRequest, function)</code> method.</p>
 
+  </div>
+  <div class="dark-box">
+      <div class="lang-selector">
+            <a href="#" data-language-name="javascript">javascript</a>
       </div>
-      <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="javascript">javascript</a>
-          </div>
-      </div>
-    </div>
-  </body>
+  </div>
+</div>
+<script src="https://www.chatkitty.com/js/plugins.js"></script>
+<script src="https://www.chatkitty.com/js/init.js"></script>
+<script src="https://www.chatkitty.com/js/main.js"></script>
+</body>
 </html>
