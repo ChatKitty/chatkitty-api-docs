@@ -16,14 +16,16 @@ Integrate **real-time chat** into your Web application with the ChatKitty SDK fo
 
 # Authentication
 
-**Initialize the Chat SDK with your API key**  
-> Get a ChatKitty instance with your application API key
+**Initialize the Chat SDK with your App ID**  
+> Get a ChatKitty instance with your application App ID
 
 ```javascript
-let kitty = ChatKitty.getInstance(CHATKITTY_API_KEY);
+let kitty = new ChatKitty({
+                  appID: CHATKITTY_APP_ID,
+                });
 ```
 
-Get a `ChatKitty` instance by passing your application's API key to the `ChatKitty.getInstance(String)` method as a parameter.
+Create a `ChatKitty` instance by passing your application's App ID to the `new ChatKitty(ChatKittyConfiguration)` method as a parameter.
 
 ## Begin a user session
 To make calls to ChatKitty through the Chat SDK, a user session must be initiated.
@@ -40,25 +42,29 @@ using a just username if the user is a guest.
 > Starting a user session
 
 ```javascript
-kitty.startSession(CHATKITTY_USERNAME, CHATKITTY_CHALLENGE_TOKEN, function(result) {
-  if (result.isSuccess) {
-    let user = result.currentUser;
-
-    // Handle user
-  }
-
-  if (result.isCancelled) {
-    // Handle request cancellation
-  }
-
-  if (result.isError) {
-    // Handle error
-  }
-});
+kitty.startSession({
+          username: CHATKITTY_USERNAME,
+          challengeToken: CHATKITTY_CHALLENGE_TOKEN,
+          callback: function(result) {
+              if (result.isSuccess) {
+                let user = result.currentUser;
+            
+                // Handle user
+              }
+            
+              if (result.isCancelled) {
+                // Handle request cancellation
+              }
+            
+              if (result.isError) {
+                // Handle error
+              }
+            }
+        });
 ```
 
 Create a challenge token for a user server-side using the **Platform API**. You can then begin a user session by calling the 
-`ChatKitty.startSession(String, String, function)` method with your user's unique name and challenge token.
+`ChatKitty.startSession(StartSessionParams)` method with your user's unique name and challenge token.
 
 <aside class="notice">
  You should store user challenge tokens securely to your persistent storage. <br>
@@ -70,25 +76,28 @@ Create a challenge token for a user server-side using the **Platform API**. You 
 > Starting a guest user session
 
 ```javascript
-kitty.startSession(CHATKITTY_USERNAME, function(result) {
-  if (result.isSuccess) {
-    let user = result.currentUser;
-
-    // Handle user
-  }
-
-  if (result.isCancelled) {
-    // Handle request cancellation
-  }
-
-  if (result.isError) {
-    // Handle error
-  }
-});
+kitty.startSession({
+          username: CHATKITTY_USERNAME,
+          callback: function(result) {
+              if (result.isSuccess) {
+                let user = result.currentUser;
+            
+                // Handle user
+              }
+            
+              if (result.isCancelled) {
+                // Handle request cancellation
+              }
+            
+              if (result.isError) {
+                // Handle error
+              }
+            }
+        });
 ```
 
 If your application has the **guest user** feature enabled, you can begin a user session by calling the 
-`ChatKitty.startSession(String, function)` method with your user's unique name.
+`ChatKitty.startSession(StartSessionParams)` method with your user's unique name.
 
 <aside class="notice">
  Guest users are appropriate when your application in development, if your application supports anonymous chat, or if you don't have back-end authentication.
@@ -152,12 +161,9 @@ New users cannot be added to a direct channel and there can only exist one direc
 ```javascript
 kitty.getChannels(function(result) {
   if (result.isSuccess) {
-    let iterator = result.iterator();
-
-    while (iterator.hasNext()) {
-      let channel = iterator.next();
-
-      // Handle channel
+    let channels = result.channel
+    for (let channel of channels) {
+       // Handle channel
     }
   }
 
@@ -242,13 +248,8 @@ Administrators can send files messages with one, or many file attachments.
 ```javascript
 kitty.getChannelMessages(channel, function(result) {
   if (result.isSuccess) {
-    let iterator = result.iterator();
-
-    while (iterator.hasNext()) {
-      let message = iterator.next();
-
-      // Handle message
-    }
+    let messages = result.messages
+    // Array of messages
   }
 
   if (result.isCancelled) {
@@ -257,6 +258,15 @@ kitty.getChannelMessages(channel, function(result) {
 
   if (result.isError) {
     // Handle error
+  }
+  
+  // Pagination
+  if (result.next) {
+    kitty.getNextMessages(result, function(result) {
+      if (result.isSuccess) {
+        let nextMessages = result.messages
+      }
+    });
   }
 });
 ```
