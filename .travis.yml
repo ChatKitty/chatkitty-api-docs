@@ -9,6 +9,7 @@ cache:
     - slate/vendor/bundle
 
 before_install:
+  - ls slate
   - mv slate/vendor/bundle temp
   - git clone https://github.com/ChatKitty/slate.git slate
   - rm -r slate/source
