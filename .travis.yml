@@ -9,11 +9,12 @@ cache:
     - slate/vendor/bundle
 
 before_install:
-  - mv slate temp
+  - mv slate/vendor/bundle temp
   - git clone https://github.com/ChatKitty/slate.git slate
   - rm -r slate/source
   - cp -r source slate/source
-  - mv -v temp/* slate/
+  - mkdir slate/vendor/bundle
+  - mv -v temp/* slate/vendor/bundle
   - cd slate
   - gem update --system
   - gem install bundler
