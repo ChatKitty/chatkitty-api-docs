@@ -371,14 +371,16 @@
     <h1 id='introduction'>Introduction</h1>
 <p>Integrate <strong>real-time chat</strong> into your Web application with the ChatKitty SDK for Web.  </p>
 <h1 id='authentication'>Authentication</h1>
-<p><strong>Initialize the Chat SDK with your API key</strong>  </p>
+<p><strong>Initialize the Chat SDK with your App ID</strong>  </p>
 
 <blockquote>
-<p>Get a ChatKitty instance with your application API key</p>
+<p>Get a ChatKitty instance with your application App ID</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">kitty</span> <span class="o">=</span> <span class="nx">ChatKitty</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">(</span><span class="nx">CHATKITTY_API_KEY</span><span class="p">);</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">kitty</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ChatKitty</span><span class="p">({</span>
+                  <span class="na">appID</span><span class="p">:</span> <span class="nx">CHATKITTY_APP_ID</span><span class="p">,</span>
+                <span class="p">});</span>
 </code></pre></div>
-<p>Get a <code>ChatKitty</code> instance by passing your application&#39;s API key to the <code>ChatKitty.getInstance(String)</code> method as a parameter.</p>
+<p>Create a <code>ChatKitty</code> instance by passing your application&#39;s App ID to the <code>new ChatKitty(ChatKittyConfiguration)</code> method as a parameter.</p>
 <h2 id='authentication-begin-a-user-session'>Begin a user session</h2>
 <p>To make calls to ChatKitty through the Chat SDK, a user session must be initiated.</p>
 
@@ -393,24 +395,28 @@ using a just username if the user is a guest.</p>
 <blockquote>
 <p>Starting a user session</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">startSession</span><span class="p">(</span><span class="nx">CHATKITTY_USERNAME</span><span class="p">,</span> <span class="nx">CHATKITTY_CHALLENGE_TOKEN</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">currentUser</span><span class="p">;</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">startSession</span><span class="p">({</span>
+          <span class="na">username</span><span class="p">:</span> <span class="nx">CHATKITTY_USERNAME</span><span class="p">,</span>
+          <span class="na">challengeToken</span><span class="p">:</span> <span class="nx">CHATKITTY_CHALLENGE_TOKEN</span><span class="p">,</span>
+          <span class="na">callback</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+              <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">currentUser</span><span class="p">;</span>
 
-    <span class="c1">// Handle user</span>
-  <span class="p">}</span>
+                <span class="c1">// Handle user</span>
+              <span class="p">}</span>
 
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Handle request cancellation</span>
-  <span class="p">}</span>
+              <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// Handle request cancellation</span>
+              <span class="p">}</span>
 
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Handle error</span>
-  <span class="p">}</span>
-<span class="p">});</span>
+              <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// Handle error</span>
+              <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
 </code></pre></div>
 <p>Create a challenge token for a user server-side using the <strong>Platform API</strong>. You can then begin a user session by calling the 
-<code>ChatKitty.startSession(String, String, function)</code> method with your user&#39;s unique name and challenge token.</p>
+<code>ChatKitty.startSession(StartSessionParams)</code> method with your user&#39;s unique name and challenge token.</p>
 
 <aside class="notice">
  You should store user challenge tokens securely to your persistent storage. <br>
@@ -421,24 +427,27 @@ using a just username if the user is a guest.</p>
 <blockquote>
 <p>Starting a guest user session</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">startSession</span><span class="p">(</span><span class="nx">CHATKITTY_USERNAME</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">currentUser</span><span class="p">;</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">startSession</span><span class="p">({</span>
+          <span class="na">username</span><span class="p">:</span> <span class="nx">CHATKITTY_USERNAME</span><span class="p">,</span>
+          <span class="na">callback</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+              <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">currentUser</span><span class="p">;</span>
 
-    <span class="c1">// Handle user</span>
-  <span class="p">}</span>
+                <span class="c1">// Handle user</span>
+              <span class="p">}</span>
 
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Handle request cancellation</span>
-  <span class="p">}</span>
+              <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// Handle request cancellation</span>
+              <span class="p">}</span>
 
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Handle error</span>
-  <span class="p">}</span>
-<span class="p">});</span>
+              <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// Handle error</span>
+              <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
 </code></pre></div>
 <p>If your application has the <strong>guest user</strong> feature enabled, you can begin a user session by calling the 
-<code>ChatKitty.startSession(String, function)</code> method with your user&#39;s unique name.</p>
+<code>ChatKitty.startSession(StartSessionParams)</code> method with your user&#39;s unique name.</p>
 
 <aside class="notice">
  Guest users are appropriate when your application in development, if your application supports anonymous chat, or if you don't have back-end authentication.
@@ -493,12 +502,9 @@ New users cannot be added to a direct channel and there can only exist one direc
 </blockquote>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">getChannels</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">let</span> <span class="nx">iterator</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">iterator</span><span class="p">();</span>
-
-    <span class="k">while</span> <span class="p">(</span><span class="nx">iterator</span><span class="p">.</span><span class="nx">hasNext</span><span class="p">())</span> <span class="p">{</span>
-      <span class="kd">let</span> <span class="nx">channel</span> <span class="o">=</span> <span class="nx">iterator</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
-
-      <span class="c1">// Handle channel</span>
+    <span class="kd">let</span> <span class="nx">channels</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">channel</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">channel</span> <span class="k">of</span> <span class="nx">channels</span><span class="p">)</span> <span class="p">{</span>
+       <span class="c1">// Handle channel</span>
     <span class="p">}</span>
   <span class="p">}</span>
 
@@ -577,13 +583,8 @@ calling the <code>ChannelEventListenerRegistration.deregister()</code> method on
 </blockquote>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">getChannelMessages</span><span class="p">(</span><span class="nx">channel</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">let</span> <span class="nx">iterator</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">iterator</span><span class="p">();</span>
-
-    <span class="k">while</span> <span class="p">(</span><span class="nx">iterator</span><span class="p">.</span><span class="nx">hasNext</span><span class="p">())</span> <span class="p">{</span>
-      <span class="kd">let</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">iterator</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
-
-      <span class="c1">// Handle message</span>
-    <span class="p">}</span>
+    <span class="kd">let</span> <span class="nx">messages</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">messages</span>
+    <span class="c1">// Array of messages</span>
   <span class="p">}</span>
 
   <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
@@ -592,6 +593,15 @@ calling the <code>ChannelEventListenerRegistration.deregister()</code> method on
 
   <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Handle error</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Pagination</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">kitty</span><span class="p">.</span><span class="nx">getNextMessages</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">nextMessages</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">messages</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
   <span class="p">}</span>
 <span class="p">});</span>
 </code></pre></div>
