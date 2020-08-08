@@ -180,9 +180,19 @@ kitty.getChannels(function(result) {
 You can get channels the current user has joined or can join by calling the `ChatKitty.getChannels(function)` method.
 
 ## Entering a channel
+> Entering a channel
+
+```javascript
+ let registration = kitty.enterChannel(channel, function(result) {
+      if (result.isSuccess) {
+        // Listen to channel events. 
+      }
+    });
+```
+
 You must first enter a channel to receive messages and other events related to the channel.
 
-Enter a channel by calling the `ChatKitty.enterChannel(Channel, ChatKittyCallback<EnterChannelResult>)` method.
+Enter a channel by calling the `ChatKitty.enterChannel(Channel, function)` method. This method returns a `ChannelEnterRegistration` object.
 
 ## Listen to channel events
 When an event involving a channel happens, like a message sent in the channel or a user joining the channel, 
@@ -220,9 +230,15 @@ calling the `ChannelEventListenerRegistration.deregister()` method on
 `ChannelEventListenerRegistration` object returned from registering the event listener.
 
 ## Exiting a channel
+> Exiting a channel
+
+```javascript
+registration.exitChannel(); // ChannelEnterRegistration
+```
+
 If you no longer wish to receive events related to a channel you must exit the channel. 
 
-Exit a channel by calling the `ChatKitty.exitChannel(Channel, ChatKittyCallback<ExitChannelResult>)` method.
+Exit a channel by calling the `ChannelEnterRegistration.exitChannel()` method.
 
 # Messages
 Users send messages through your application and administrators can send messages through the Platform API. 
