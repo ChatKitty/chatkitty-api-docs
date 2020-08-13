@@ -14,6 +14,19 @@ code_clipboard: true
 # Introduction
 Integrate **real-time chat** into your Web application with the ChatKitty SDK for Web.  
 
+# Installation
+ChatKitty is available as an [npm package](https://www.npmjs.com/package/chatkitty-sdk-web).
+
+> Installing ChatKitty npm package.
+
+```
+// with npm
+npm install chatkitty-sdk-web
+
+// with yarn
+yarn add chatkitty-sdk-web
+```
+
 # Authentication
 
 **Initialize the Chat SDK with your App ID**  
@@ -202,10 +215,28 @@ a `ChannelEvent` is sent to registered channel event listeners.
 > Register a channel event listener
 
 ```javascript
-let registration = kitty.registerChannelEventListener(channel, 'message.received', function(event) {
-  let message = event.message;
-
-  // Handle message
+let registration = kitty.registerChannelEventListener(channel, TYPE, function(event) {
+      switch (message.type) {
+          case "MESSAGE.RECEIVED":
+             let message = result.message;
+              // Handle message
+             break
+          case "PARTICIPANT.ENTERED":
+             let enteredUser = result.user;
+              // Handle user who entered.
+             break
+          case "PARTICIPANT.EXITED":
+              let exitedUser = result.user;
+              // Handle user who exited.
+             break
+          case "KEYSTROKES.CREATED":
+             let keystrokeUser = result.user;
+             let keys = result.keys;
+              // Handle typing indicator for user and keys.
+            break
+          default:
+            break
+      }
 });
 ```
 
@@ -216,7 +247,9 @@ This method returns a `ChannelEventListenerRegistration` object.
 #### Channel Event Types
 Type | Description 
 ---- | -----------
-`message.received` | Fired when the device receives a sent message.
+`MESSAGE.RECEIVED` | Fired when the device receives a sent message.
+`PARTICIPANT.ENTERED.EXITED` | Fired when a participant has entered or exited a channel.
+`KEYSTROKES.CREATED` | Fired when a participant has started typing characters.
 
 ### Deregistering a channel event listener
 > Deregister a channel event listener
