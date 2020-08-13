@@ -1097,6 +1097,314 @@ This endpoint deletes a message.
 ### HTTP Request
 `DELETE {{message_link}}`
 
+# Push Notification Credentials
+Register your [Firebase Cloud Messaging](https://firebase.google.com/products/cloud-messaging) ([FCM](#push-notification-credentials-fcm)) 
+and/or [Apple Push Notification service](https://developer.apple.com/go/?id=push-notifications) ([APNs](#push-notification-credentials-apns)) 
+credentials to begin receiving push notifications from the ChatKitty platform. 
+
+## FCM
+Create a new Firebase Cloud Messaging **Server Key**, from the [Firebase Console](https://console.firebase.google.com/) 
+go to **Project settings** > **Cloud Messaging** > **Project credentials** > **Add server key**.
+
+Once you create your Server Key, use it as the **API Key** property in the **Create FCM Credentials** [POST](#push-notification-credentials-create-fcm-credential) 
+request body.
+
+## APNs
+Follow the introductions [here](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_certificate-based_connection_to_apns) 
+to create an APNs certification for your application.
+
+Using `openssl`, extract the public certificate and private key from your .P12 file.
+> Public certificate:
+
+```
+openssl pkcs12 -in your_P12_file.pfx -clcerts -nokeys -out public.pem
+```
+
+> Private key:
+
+```
+openssl pkcs12 -in your_P12_file.pfx -nocerts -out private.pem
+```
+
+Use the contents of the public certificate as the **certificate** property, and the private key as the **private key** 
+property in the **Create FCM Credentials** [POST](#push-notification-credentials-create-apns-credential) 
+
+## Properties
+Name | Type | Description 
+--------- | ----------- | -----------
+type | Enum | The type of this credentials set. __Possible values__ are [FCM](#push-notification-credentials-fcm), and [APNs](#push-notification-credentials-apns)
+
+### FCM Credential Properties
+Name | Type | Description 
+--------- | ----------- | -----------
+apiKey | String | The FCM **Server Key** of this application.
+
+### APNs Credential Properties
+Name | Type | Description 
+--------- | ----------- | -----------
+certificate | String | The APNs **Public certificate** of this application.
+privateKey | String | The APNs **Private key** of this application.
+isSandbox | Boolean | Flag indicating if this APNs was issued as a sandbox certificate.
+
+## HAL links
+Link | Methods | Description
+--------- | ----------- | -----------
+[self](#push-notification-credentials) | [GET](#push-notification-credentials-get-credential), [DELETE](#push-notification-credentials-delete-credential) | Self link to this set of credentials.
+[application](#application) | [GET](#application-get-application) | Link to your application resource. 
+
+## Create FCM Credential
+
+> This creates a new FCM credential:
+
+```shell
+curl --location --request POST '{{push_notification_credentials_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}' \
+--data-raw '{
+    "type": "FCM",
+    "apiKey": "{{your_server_key}}"
+}'
+```
+
+```http
+POST / HTTP/1.1
+Host: {{push_notification_credentials_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "type": "FCM",
+    "apiKey": "{{your_server_key}}"
+}
+```
+
+> The command above returns a FCM push notification credential HAL resource:
+
+```json
+{
+    "type": "FCM",
+    "apiKey": "{{your_server_key}}",
+    "_links": {
+        "self": {
+            "href": "https://api.chatkitty.com/v1/applications/1/push_notification_credentials/1"
+        },
+        "application": {
+            "href": "https://api.chatkitty.com/v1/applications/1"
+        }
+    }
+}
+```
+This endpoint creates a new set of FCM credentials.
+
+### HTTP Request
+`POST {{push_notification_credentials_link}}`
+
+### Request Parameters
+Parameter | Type | Description 
+--------- | ----------- | -----------
+type | Enum | The type of this credentials set. Always [FCM](#push-notification-credentials-fcm).
+apiKey | String | The FCM **Server Key** of this application.
+
+## Create APNs Credential
+
+> This creates a new APNS credential:
+
+```shell
+curl --location --request POST '{{push_notification_credentials_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}' \
+--data-raw '{
+    "type": "APNS",
+    "certificate": "{{your_public_cert}}",
+    "privateKey": "{{your_private_key}}"
+}'
+```
+
+```http
+POST / HTTP/1.1
+Host: {{push_notification_credentials_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "type": "APNS",
+    "certificate": "{{your_public_cert}}",
+    "privateKey": "{{your_private_key}}"
+}
+```
+
+> The command above returns a FCM push notification credential HAL resource:
+
+```json
+{
+    "type": "APNS",
+    "certificate": "{{your_public_cert}}",
+    "privateKey": "{{your_private_key}}",
+    "_links": {
+        "self": {
+            "href": "https://api.chatkitty.com/v1/applications/1/push_notification_credentials/2"
+        },
+        "application": {
+            "href": "https://api.chatkitty.com/v1/applications/1"
+        }
+    }
+}
+```
+This endpoint creates a new set of APNs credentials.
+
+### HTTP Request
+`POST {{push_notification_credentials_link}}`
+
+### Request Parameters
+Parameter | Type | Description 
+--------- | ----------- | -----------
+type | Enum | The type of this credentials set. Always [APNS](#push-notification-credentials-fcm).
+certificate | String | The APNs **Public certificate** of this application.
+privateKey | String | The APNs **Private key** of this application.
+isSandbox | Boolean | Flag indicating if this APNs was issued as a sandbox certificate. **Default: false**
+
+## Get Credentials
+```shell
+curl --location --request GET '{{push_notification_credentials_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}'
+```
+
+```http
+GET / HTTP/1.1
+Host: {{push_notification_credentials_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+```
+
+> The command above returns a push notification credentials page HAL resource:
+
+```json
+{
+    "_embedded": {
+        "credentials": [
+            {
+                "type": "FCM",
+                "apiKey": "{{your_server_key}}",
+                "_links": {
+                    "self": {
+                        "href": "https://api.chatkitty.com/v1/applications/1/push_notification_credentials/1"
+                    },
+                    "application": {
+                        "href": "https://api.chatkitty.com/v1/applications/1"
+                    }
+                }
+            },
+            {
+                "type": "APNS",
+                "certificate": "{{your_public_cert}}",
+                "privateKey": "{{your_private_key}}",
+                "_links": {
+                    "self": {
+                        "href": "https://api.chatkitty.com/v1/applications/1/push_notification_credentials/2"
+                    },
+                    "application": {
+                        "href": "https://api.chatkitty.com/v1/applications/1"
+                    }
+                }
+            }
+        ]
+    },
+    "_links": {
+        "self": {
+            "href": "https://api.chatkitty.com/v1/applications/1/push_notification_credentials?page=0&size=20"
+        }
+    },
+    "page": {
+        "size": 20,
+        "totalElements": 2,
+        "totalPages": 1,
+        "number": 0
+    }
+}
+```
+
+This endpoint returns a push notification credentials [page](#pagination) resource.
+
+### HTTP Request
+`GET {{push_notification_credentials_link}}`
+
+## Get Credential
+```shell
+curl --location --request GET '{{push_notification_credential_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}'
+```
+
+```http
+GET / HTTP/1.1
+Host: {{push_notification_credential_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+```
+
+> The command above returns a push notification credential HAL resource:
+
+```json
+{
+    "type": "FCM",
+    "apiKey": "{{your_server_key}}",
+    "_links": {
+        "self": {
+            "href": "https://api.chatkitty.com/v1/applications/1/push_notification_credentials/1"
+        },
+        "application": {
+            "href": "https://api.chatkitty.com/v1/applications/1"
+        }
+    }
+}
+```
+
+This endpoint returns a push notification credential resource.
+
+### HTTP Request
+`GET {{push_notification_credential_link}}`
+
+## Delete Credential
+```shell
+curl --location --request DELETE '{push_notification_credential_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}'
+```
+
+```http
+DELETE / HTTP/1.1
+Host: {{push_notification_credential_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+```
+
+> The command above returns your application's HAL resource:
+
+```json
+{
+  "id": 1,
+  "name": "ChatKitty Application",
+  "key": "107a326f-bfab-4d2c-9a5a-fa79bd896929",
+  "_links": {
+    "self": {
+      "href": "https://api.chatkitty.com/v1/applications/1"
+    },
+    "users": {
+      "href": "https://api.chatkitty.com/v1/applications/1/users"
+    },
+    "channels": {
+      "href": "https://api.chatkitty.com/v1/applications/1/channels"
+    }
+  }
+}
+```
+
+This endpoint deletes a push notification credential.
+
+### HTTP Request
+`DELETE {{push_notification_credential_link}}`
+
 # User
 Users can chat with each other by joining channels. They are identified by their own unique user name.
 
