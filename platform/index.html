@@ -450,6 +450,38 @@
           </ul>
       </li>
       <li>
+        <a href="#push-notification-credentials" class="toc-h1 toc-link" data-title="Push Notification Credentials">Push Notification Credentials</a>
+          <ul class="toc-list-h2">
+              <li>
+                <a href="#push-notification-credentials-fcm" class="toc-h2 toc-link" data-title="FCM">FCM</a>
+              </li>
+              <li>
+                <a href="#push-notification-credentials-apns" class="toc-h2 toc-link" data-title="APNs">APNs</a>
+              </li>
+              <li>
+                <a href="#push-notification-credentials-properties" class="toc-h2 toc-link" data-title="Properties">Properties</a>
+              </li>
+              <li>
+                <a href="#push-notification-credentials-hal-links" class="toc-h2 toc-link" data-title="HAL links">HAL links</a>
+              </li>
+              <li>
+                <a href="#push-notification-credentials-create-fcm-credential" class="toc-h2 toc-link" data-title="Create FCM Credential">Create FCM Credential</a>
+              </li>
+              <li>
+                <a href="#push-notification-credentials-create-apns-credential" class="toc-h2 toc-link" data-title="Create APNs Credential">Create APNs Credential</a>
+              </li>
+              <li>
+                <a href="#push-notification-credentials-get-credentials" class="toc-h2 toc-link" data-title="Get Credentials">Get Credentials</a>
+              </li>
+              <li>
+                <a href="#push-notification-credentials-get-credential" class="toc-h2 toc-link" data-title="Get Credential">Get Credential</a>
+              </li>
+              <li>
+                <a href="#push-notification-credentials-delete-credential" class="toc-h2 toc-link" data-title="Delete Credential">Delete Credential</a>
+              </li>
+          </ul>
+      </li>
+      <li>
         <a href="#user" class="toc-h1 toc-link" data-title="User">User</a>
           <ul class="toc-list-h2">
               <li>
@@ -1723,6 +1755,351 @@ my_file_message_group_tag
 <p>This endpoint deletes a message.</p>
 <h3 id='message-delete-a-message-http-request'>HTTP Request</h3>
 <p><code>DELETE {{message_link}}</code></p>
+<h1 id='push-notification-credentials'>Push Notification Credentials</h1>
+<p>Register your <a href="https://firebase.google.com/products/cloud-messaging">Firebase Cloud Messaging</a> (<a href="#push-notification-credentials-fcm">FCM</a>) 
+and/or <a href="https://developer.apple.com/go/?id=push-notifications">Apple Push Notification service</a> (<a href="#push-notification-credentials-apns">APNs</a>) 
+credentials to begin receiving push notifications from the ChatKitty platform. </p>
+<h2 id='push-notification-credentials-fcm'>FCM</h2>
+<p>Create a new Firebase Cloud Messaging <strong>Server Key</strong>, from the <a href="https://console.firebase.google.com/">Firebase Console</a> 
+go to <strong>Project settings</strong> &gt; <strong>Cloud Messaging</strong> &gt; <strong>Project credentials</strong> &gt; <strong>Add server key</strong>.</p>
+
+<p>Once you create your Server Key, use it as the <strong>API Key</strong> property in the <strong>Create FCM Credentials</strong> <a href="#push-notification-credentials-create-fcm-credential">POST</a> 
+request body.</p>
+<h2 id='push-notification-credentials-apns'>APNs</h2>
+<p>Follow the introductions <a href="https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_certificate-based_connection_to_apns">here</a> 
+to create an APNs certification for your application.</p>
+
+<p>Using <code>openssl</code>, extract the public certificate and private key from your .P12 file.</p>
+
+<blockquote>
+<p>Public certificate:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>openssl pkcs12 -in your_P12_file.pfx -clcerts -nokeys -out public.pem
+</code></pre></div>
+<blockquote>
+<p>Private key:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>openssl pkcs12 -in your_P12_file.pfx -nocerts -out private.pem
+</code></pre></div>
+<p>Use the contents of the public certificate as the <strong>certificate</strong> property, and the private key as the <strong>private key</strong> 
+property in the <strong>Create FCM Credentials</strong> <a href="#push-notification-credentials-create-apns-credential">POST</a> </p>
+<h2 id='push-notification-credentials-properties'>Properties</h2>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>Enum</td>
+<td>The type of this credentials set. <strong>Possible values</strong> are <a href="#push-notification-credentials-fcm">FCM</a>, and <a href="#push-notification-credentials-apns">APNs</a></td>
+</tr>
+</tbody></table>
+<h3 id='push-notification-credentials-properties-fcm-credential-properties'>FCM Credential Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>apiKey</td>
+<td>String</td>
+<td>The FCM <strong>Server Key</strong> of this application.</td>
+</tr>
+</tbody></table>
+<h3 id='push-notification-credentials-properties-apns-credential-properties'>APNs Credential Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>certificate</td>
+<td>String</td>
+<td>The APNs <strong>Public certificate</strong> of this application.</td>
+</tr>
+<tr>
+<td>privateKey</td>
+<td>String</td>
+<td>The APNs <strong>Private key</strong> of this application.</td>
+</tr>
+<tr>
+<td>isSandbox</td>
+<td>Boolean</td>
+<td>Flag indicating if this APNs was issued as a sandbox certificate.</td>
+</tr>
+</tbody></table>
+<h2 id='push-notification-credentials-hal-links'>HAL links</h2>
+<table><thead>
+<tr>
+<th>Link</th>
+<th>Methods</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="#push-notification-credentials">self</a></td>
+<td><a href="#push-notification-credentials-get-credential">GET</a>, <a href="#push-notification-credentials-delete-credential">DELETE</a></td>
+<td>Self link to this set of credentials.</td>
+</tr>
+<tr>
+<td><a href="#application">application</a></td>
+<td><a href="#application-get-application">GET</a></td>
+<td>Link to your application resource.</td>
+</tr>
+</tbody></table>
+<h2 id='push-notification-credentials-create-fcm-credential'>Create FCM Credential</h2>
+<blockquote>
+<p>This creates a new FCM credential:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'{{push_notification_credentials_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "type": "FCM",
+    "apiKey": "{{your_server_key}}"
+}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{push_notification_credentials_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
+
+<span class="p">{</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FCM"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"apiKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{your_server_key}}"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>The command above returns a FCM push notification credential HAL resource:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FCM"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"apiKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{your_server_key}}"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/push_notification_credentials/1"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint creates a new set of FCM credentials.</p>
+<h3 id='push-notification-credentials-create-fcm-credential-http-request'>HTTP Request</h3>
+<p><code>POST {{push_notification_credentials_link}}</code></p>
+<h3 id='push-notification-credentials-create-fcm-credential-request-parameters'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>Enum</td>
+<td>The type of this credentials set. Always <a href="#push-notification-credentials-fcm">FCM</a>.</td>
+</tr>
+<tr>
+<td>apiKey</td>
+<td>String</td>
+<td>The FCM <strong>Server Key</strong> of this application.</td>
+</tr>
+</tbody></table>
+<h2 id='push-notification-credentials-create-apns-credential'>Create APNs Credential</h2>
+<blockquote>
+<p>This creates a new APNS credential:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'{{push_notification_credentials_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "type": "APNS",
+    "certificate": "{{your_public_cert}}",
+    "privateKey": "{{your_private_key}}"
+}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{push_notification_credentials_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
+
+<span class="p">{</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"APNS"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"certificate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{your_public_cert}}"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"privateKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{your_private_key}}"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>The command above returns a FCM push notification credential HAL resource:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"APNS"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"certificate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{your_public_cert}}"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"privateKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{your_private_key}}"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/push_notification_credentials/2"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint creates a new set of APNs credentials.</p>
+<h3 id='push-notification-credentials-create-apns-credential-http-request'>HTTP Request</h3>
+<p><code>POST {{push_notification_credentials_link}}</code></p>
+<h3 id='push-notification-credentials-create-apns-credential-request-parameters'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>Enum</td>
+<td>The type of this credentials set. Always <a href="#push-notification-credentials-fcm">APNS</a>.</td>
+</tr>
+<tr>
+<td>certificate</td>
+<td>String</td>
+<td>The APNs <strong>Public certificate</strong> of this application.</td>
+</tr>
+<tr>
+<td>privateKey</td>
+<td>String</td>
+<td>The APNs <strong>Private key</strong> of this application.</td>
+</tr>
+<tr>
+<td>isSandbox</td>
+<td>Boolean</td>
+<td>Flag indicating if this APNs was issued as a sandbox certificate. <strong>Default: false</strong></td>
+</tr>
+</tbody></table>
+<h2 id='push-notification-credentials-get-credentials'>Get Credentials</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{push_notification_credentials_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{push_notification_credentials_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
+</code></pre></div>
+<blockquote>
+<p>The command above returns a push notification credentials page HAL resource:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FCM"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"apiKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{your_server_key}}"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/push_notification_credentials/1"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"APNS"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"certificate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{your_public_cert}}"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"privateKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{your_private_key}}"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/push_notification_credentials/2"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/push_notification_credentials?page=0&amp;size=20"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalElements"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalPages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"number"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint returns a push notification credentials <a href="#pagination">page</a> resource.</p>
+<h3 id='push-notification-credentials-get-credentials-http-request'>HTTP Request</h3>
+<p><code>GET {{push_notification_credentials_link}}</code></p>
+<h2 id='push-notification-credentials-get-credential'>Get Credential</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{push_notification_credential_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{push_notification_credential_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
+</code></pre></div>
+<blockquote>
+<p>The command above returns a push notification credential HAL resource:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FCM"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"apiKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{your_server_key}}"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/push_notification_credentials/1"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint returns a push notification credential resource.</p>
+<h3 id='push-notification-credentials-get-credential-http-request'>HTTP Request</h3>
+<p><code>GET {{push_notification_credential_link}}</code></p>
+<h2 id='push-notification-credentials-delete-credential'>Delete Credential</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'{push_notification_credential_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{push_notification_credential_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
+</code></pre></div>
+<blockquote>
+<p>The command above returns your application&#39;s HAL resource:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ChatKitty Application"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"107a326f-bfab-4d2c-9a5a-fa79bd896929"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint deletes a push notification credential.</p>
+<h3 id='push-notification-credentials-delete-credential-http-request'>HTTP Request</h3>
+<p><code>DELETE {{push_notification_credential_link}}</code></p>
 <h1 id='user'>User</h1>
 <p>Users can chat with each other by joining channels. They are identified by their own unique user name.</p>
 <h2 id='user-properties'>Properties</h2>
