@@ -322,6 +322,9 @@
         <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
       </li>
       <li>
+        <a href="#installation" class="toc-h1 toc-link" data-title="Installation">Installation</a>
+      </li>
+      <li>
         <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           <ul class="toc-list-h2">
               <li>
@@ -376,7 +379,18 @@
   <div class="content">
     <h1 id='introduction'>Introduction</h1>
 <p>Integrate <strong>real-time chat</strong> into your Web application with the ChatKitty SDK for Web.  </p>
-<h1 id='authentication'>Authentication</h1>
+<h1 id='installation'>Installation</h1>
+<p>ChatKitty is available as an <a href="https://www.npmjs.com/package/chatkitty-sdk-web">npm package</a>.</p>
+
+<blockquote>
+<p>Installing ChatKitty npm package.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>// with npm
+npm install chatkitty-sdk-web
+
+// with yarn
+yarn add chatkitty-sdk-web
+</code></pre></div><h1 id='authentication'>Authentication</h1>
 <p><strong>Initialize the Chat SDK with your App ID</strong>  </p>
 
 <blockquote>
@@ -544,10 +558,28 @@ a <code>ChannelEvent</code> is sent to registered channel event listeners.</p>
 <blockquote>
 <p>Register a channel event listener</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">registration</span> <span class="o">=</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">registerChannelEventListener</span><span class="p">(</span><span class="nx">channel</span><span class="p">,</span> <span class="dl">'</span><span class="s1">message.received</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span>
-
-  <span class="c1">// Handle message</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">registration</span> <span class="o">=</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">registerChannelEventListener</span><span class="p">(</span><span class="nx">channel</span><span class="p">,</span> <span class="nx">TYPE</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">switch</span> <span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">case</span> <span class="dl">"</span><span class="s2">MESSAGE.RECEIVED</span><span class="dl">"</span><span class="p">:</span>
+             <span class="kd">let</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span>
+              <span class="c1">// Handle message</span>
+             <span class="k">break</span>
+          <span class="k">case</span> <span class="dl">"</span><span class="s2">PARTICIPANT.ENTERED</span><span class="dl">"</span><span class="p">:</span>
+             <span class="kd">let</span> <span class="nx">enteredUser</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
+              <span class="c1">// Handle user who entered.</span>
+             <span class="k">break</span>
+          <span class="k">case</span> <span class="dl">"</span><span class="s2">PARTICIPANT.EXITED</span><span class="dl">"</span><span class="p">:</span>
+              <span class="kd">let</span> <span class="nx">exitedUser</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
+              <span class="c1">// Handle user who exited.</span>
+             <span class="k">break</span>
+          <span class="k">case</span> <span class="dl">"</span><span class="s2">KEYSTROKES.CREATED</span><span class="dl">"</span><span class="p">:</span>
+             <span class="kd">let</span> <span class="nx">keystrokeUser</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
+             <span class="kd">let</span> <span class="nx">keys</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">keys</span><span class="p">;</span>
+              <span class="c1">// Handle typing indicator for user and keys.</span>
+            <span class="k">break</span>
+          <span class="k">default</span><span class="p">:</span>
+            <span class="k">break</span>
+      <span class="p">}</span>
 <span class="p">});</span>
 </code></pre></div>
 <p>To beginning listening to channel events, register a channel event listener by calling the <code>ChatKitty.registerChannelEventListener(Channel, String, function)</code> method.
@@ -561,8 +593,16 @@ This method returns a <code>ChannelEventListenerRegistration</code> object.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td><code>message.received</code></td>
+<td><code>MESSAGE.RECEIVED</code></td>
 <td>Fired when the device receives a sent message.</td>
+</tr>
+<tr>
+<td><code>PARTICIPANT.ENTERED.EXITED</code></td>
+<td>Fired when a participant has entered or exited a channel.</td>
+</tr>
+<tr>
+<td><code>KEYSTROKES.CREATED</code></td>
+<td>Fired when a participant has started typing characters.</td>
 </tr>
 </tbody></table>
 <h3 id='channels-listen-to-channel-events-deregistering-a-channel-event-listener'>Deregistering a channel event listener</h3>
