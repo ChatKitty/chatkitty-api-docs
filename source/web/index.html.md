@@ -17,13 +17,15 @@ Integrate **real-time chat** into your Web application with the ChatKitty SDK fo
 # Installation
 ChatKitty is available as an [npm package](https://www.npmjs.com/package/chatkitty-sdk-web).
 
-> Installing ChatKitty npm package.
+> Install the ChatKitty npm package with npm...
 
-```
-// with npm
+```shell
 npm install chatkitty-sdk-web
+```
 
-// with yarn
+> ...or with yarn
+
+```shell
 yarn add chatkitty-sdk-web
 ```
 
