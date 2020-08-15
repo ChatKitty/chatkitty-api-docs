@@ -250,7 +250,7 @@ This method returns a `ChannelEventListenerRegistration` object.
 Type | Description 
 ---- | -----------
 `MESSAGE.RECEIVED` | Fired when the device receives a sent message.
-`PARTICIPANT.ENTERED.EXITED` | Fired when a participant has entered or exited a channel.
+`PARTICIPANT.CHANGED_STATUS` | Fired when a participant has entered or exited a channel.
 `KEYSTROKES.CREATED` | Fired when a participant has started typing characters.
 
 ### Deregistering a channel event listener
@@ -263,6 +263,32 @@ registration.deregister(); // ChannelEventListenerRegistration
 If you no longer wish to receive events with a channel event listener, deregister it by 
 calling the `ChannelEventListenerRegistration.deregister()` method on 
 `ChannelEventListenerRegistration` object returned from registering the event listener.
+
+## Creating Typing Indicators
+> Creating typing indicators
+
+```javascript
+let keystroke = {
+    keys: "abc"
+}
+
+kitty.sendChannelKeyStrokes(channel, keystroke, function(event) {
+    if (result.isSuccess) {
+      // Handle successful keystroke. 
+    }
+
+    if (result.isCancelled) {
+      // Handle request cancellation
+    }
+
+    if (result.isError) {
+      // Handle error
+    }
+})
+```
+
+You can send keystrokes to a [channel](#channels) by calling 
+the `ChatKitty.sendChannelKeyStrokes(Channel, CreateReplyThreadKeystrokesRequest, function)` method. 
 
 ## Exiting a channel
 > Exiting a channel
