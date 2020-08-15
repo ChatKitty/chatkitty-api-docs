@@ -351,6 +351,9 @@
                 <a href="#channels-listen-to-channel-events" class="toc-h2 toc-link" data-title="Listen to channel events">Listen to channel events</a>
               </li>
               <li>
+                <a href="#channels-creating-typing-indicators" class="toc-h2 toc-link" data-title="Creating Typing Indicators">Creating Typing Indicators</a>
+              </li>
+              <li>
                 <a href="#channels-exiting-a-channel" class="toc-h2 toc-link" data-title="Exiting a channel">Exiting a channel</a>
               </li>
           </ul>
@@ -598,7 +601,7 @@ This method returns a <code>ChannelEventListenerRegistration</code> object.</p>
 <td>Fired when the device receives a sent message.</td>
 </tr>
 <tr>
-<td><code>PARTICIPANT.ENTERED.EXITED</code></td>
+<td><code>PARTICIPANT.CHANGED_STATUS</code></td>
 <td>Fired when a participant has entered or exited a channel.</td>
 </tr>
 <tr>
@@ -615,6 +618,30 @@ This method returns a <code>ChannelEventListenerRegistration</code> object.</p>
 <p>If you no longer wish to receive events with a channel event listener, deregister it by 
 calling the <code>ChannelEventListenerRegistration.deregister()</code> method on 
 <code>ChannelEventListenerRegistration</code> object returned from registering the event listener.</p>
+<h2 id='channels-creating-typing-indicators'>Creating Typing Indicators</h2>
+<blockquote>
+<p>Creating typing indicators</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">keystroke</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">keys</span><span class="p">:</span> <span class="dl">"</span><span class="s2">abc</span><span class="dl">"</span>
+<span class="p">}</span>
+
+<span class="nx">kitty</span><span class="p">.</span><span class="nx">sendChannelKeyStrokes</span><span class="p">(</span><span class="nx">channel</span><span class="p">,</span> <span class="nx">keystroke</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// Handle successful keystroke. </span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// Handle request cancellation</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// Handle error</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>You can send keystrokes to a <a href="#channels">channel</a> by calling 
+the <code>ChatKitty.sendChannelKeyStrokes(Channel, CreateReplyThreadKeystrokesRequest, function)</code> method. </p>
 <h2 id='channels-exiting-a-channel'>Exiting a channel</h2>
 <blockquote>
 <p>Exiting a channel</p>
