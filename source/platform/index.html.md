@@ -1411,8 +1411,9 @@ Users can chat with each other by joining channels. They are identified by their
 ## Properties
 Name | Type | Description 
 --------- | ----------- | -----------
-id | Long | 64 bit integer identifier associated with this user 
+id | Long | 64 bit integer identifier associated with this user.
 name | String | The unique name of the user.
+displayName | String | Human readable name of this user that will be shown to other users.
 
 ## HAL links
 Link | Methods | Description
@@ -1428,7 +1429,8 @@ curl --location --request POST '{{users_link}}' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer {{access_token}}' \
 --data-raw '{
-    "name": "37282832193"
+    "name": "37282832193",
+    "displayName": "Jane Doe"
 }'
 ```
 
@@ -1439,7 +1441,8 @@ Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
 {
-    "name": "37282832193"
+    "name": "37282832193",
+    "displayName": "Jane Doe"
 }
 ```
 
@@ -1449,6 +1452,7 @@ Authorization: Bearer {{access_token}}
 {
   "id": 1,
   "name": "37282832193",
+  "displayName": "Jane Doe",
   "_links": {
     "self": {
       "href": "https://api.chatkitty.com/v1/applications/1/users/1"
@@ -1472,6 +1476,7 @@ This endpoint creates a new ChatKitty user.
 Parameter | Type | Description 
 --------- | ----------- | -----------
 name | String | The unique name of the user.
+displayName | String | Human readable name of this user that will be shown to other users.
 
 ## Get Users
 ```shell
@@ -1496,6 +1501,7 @@ Authorization: Bearer {{access_token}}
       {
         "id": 1,
         "name": "1017562554",
+        "displayName": "Jane Doe",
         "_links": {
           "self": {
             "href": "https://api.chatkitty.com/v1/applications/1/users/1"
@@ -1511,6 +1517,7 @@ Authorization: Bearer {{access_token}}
       {
         "id": 2,
         "name": "102746681",
+        "displayName": "John Doe",
         "_links": {
           "self": {
             "href": "https://api.chatkitty.com/v1/applications/1/users/2"
@@ -1576,6 +1583,7 @@ Authorization: Bearer {{access_token}}
 {
   "id": 1,
   "name": "1017562554",
+  "displayName": "Jane Doe",
   "_links": {
     "self": {
       "href": "https://api.chatkitty.com/v1/applications/1/users/1"
