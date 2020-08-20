@@ -141,6 +141,39 @@ kitty.getCurrentUser(function(result) {
 After starting a ChatKitty [user session](#authentication-begin-a-user-session), you can request the current user 
 anytime by calling the `ChatKitty.getCurrentUser(function)` method.
 
+## Listen to Current User events
+When an event involving the current user happens, like joining or exiting a channel, 
+a `CurrentUserEvent` is sent to registered channel event listeners.
+
+### Registering a current user event listener
+> Register a current user event listener
+
+```javascript
+let registration = kitty.registerCurrentUserEventListener(TYPE, function(event) {
+      switch (event.type) {
+          case "CURRENT_USER.CHANNEL.JOINED":
+             let channelJoined = result.channel;
+              // Handle channel joined
+             break
+          case "CURRENT_USER.CHANNEL.LEFT":
+             let channelLeft = result.channel;
+             // Handle channel joined
+             break
+          default:
+            break
+      }
+});
+```
+
+To beginning listening to current user events, register a current user event listener by calling the `ChatKitty.registerCurrentUserEventListener(String, function)` method.
+Where `String` is the **type** of event the function handles.  
+This method returns a `CurrentUserEventListenerRegistration` object.
+
+#### Current User Event Types
+Type | Description 
+---- | -----------
+`CURRENT_USER.CHANNEL.CHANGED_STATUS` | Fired when the current user joins or leaves a channel.
+
 # Channels
 Channels are the backbone of the ChatKitty chat experience. Users can join channels and receive 
 or send messages. ChatKitty broadcasts messages created in channels to **channel members** with active 
