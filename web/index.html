@@ -334,6 +334,11 @@
       </li>
       <li>
         <a href="#current-user" class="toc-h1 toc-link" data-title="Current User">Current User</a>
+          <ul class="toc-list-h2">
+              <li>
+                <a href="#current-user-listen-to-current-user-events" class="toc-h2 toc-link" data-title="Listen to Current User events">Listen to Current User events</a>
+              </li>
+          </ul>
       </li>
       <li>
         <a href="#channels" class="toc-h1 toc-link" data-title="Channels">Channels</a>
@@ -498,6 +503,43 @@ using a just username if the user is a guest.</p>
 </code></pre></div>
 <p>After starting a ChatKitty <a href="#authentication-begin-a-user-session">user session</a>, you can request the current user 
 anytime by calling the <code>ChatKitty.getCurrentUser(function)</code> method.</p>
+<h2 id='current-user-listen-to-current-user-events'>Listen to Current User events</h2>
+<p>When an event involving the current user happens, like joining or exiting a channel, 
+a <code>CurrentUserEvent</code> is sent to registered channel event listeners.</p>
+<h3 id='current-user-listen-to-current-user-events-registering-a-current-user-event-listener'>Registering a current user event listener</h3>
+<blockquote>
+<p>Register a current user event listener</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">registration</span> <span class="o">=</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">registerCurrentUserEventListener</span><span class="p">(</span><span class="nx">TYPE</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">switch</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">case</span> <span class="dl">"</span><span class="s2">CURRENT_USER.CHANNEL.JOINED</span><span class="dl">"</span><span class="p">:</span>
+             <span class="kd">let</span> <span class="nx">channelJoined</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">channel</span><span class="p">;</span>
+              <span class="c1">// Handle channel joined</span>
+             <span class="k">break</span>
+          <span class="k">case</span> <span class="dl">"</span><span class="s2">CURRENT_USER.CHANNEL.LEFT</span><span class="dl">"</span><span class="p">:</span>
+             <span class="kd">let</span> <span class="nx">channelLeft</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">channel</span><span class="p">;</span>
+             <span class="c1">// Handle channel joined</span>
+             <span class="k">break</span>
+          <span class="k">default</span><span class="p">:</span>
+            <span class="k">break</span>
+      <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>To beginning listening to current user events, register a current user event listener by calling the <code>ChatKitty.registerCurrentUserEventListener(String, function)</code> method.
+Where <code>String</code> is the <strong>type</strong> of event the function handles.<br>
+This method returns a <code>CurrentUserEventListenerRegistration</code> object.</p>
+<h4 id='current-user-listen-to-current-user-events-registering-a-current-user-event-listener-current-user-event-types'>Current User Event Types</h4>
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>CURRENT_USER.CHANNEL.CHANGED_STATUS</code></td>
+<td>Fired when the current user joins or leaves a channel.</td>
+</tr>
+</tbody></table>
 <h1 id='channels'>Channels</h1>
 <p>Channels are the backbone of the ChatKitty chat experience. Users can join channels and receive 
 or send messages. ChatKitty broadcasts messages created in channels to <strong>channel members</strong> with active 
