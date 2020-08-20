@@ -225,7 +225,55 @@ kitty.getChannels(function(result) {
 });
 ```
 
-You can get channels the current user has joined or can join by calling the `ChatKitty.getChannels(function)` method.
+You can get channels the current user has joined by calling the `ChatKitty.getChannels(function)` method.
+
+## Get joinable channels
+> Get channels that can be joined by the current user
+
+```javascript
+kitty.getJoinableChannels(function(result) {
+  if (result.isSuccess) {
+    let channels = result.channels
+    for (let channel of channels) {
+       // Handle channel
+    }
+  }
+
+  if (result.isCancelled) {
+    // Handle request cancellation
+  }
+
+  if (result.isError) {
+    // Handle error
+  }
+});
+```
+
+You can get channels the current user can join by calling the `ChatKitty.getJoinableChannels(function)` method.
+
+## Get channel members
+> Get members of a particular channel
+
+```javascript
+kitty.getChannelMembers(channel, function(result) {
+  if (result.isSuccess) {
+    let members = result.members
+    for (let member of members) {
+       // Handle member
+    }
+  }
+
+  if (result.isCancelled) {
+    // Handle request cancellation
+  }
+
+  if (result.isError) {
+    // Handle error
+  }
+});
+```
+
+You can get the members of a channel by calling the `ChatKitty.getChannelMembers(Channel, function)` method.
 
 ## Entering a channel
 > Entering a channel
