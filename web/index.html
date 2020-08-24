@@ -341,6 +341,23 @@
           </ul>
       </li>
       <li>
+        <a href="#push-notifications" class="toc-h1 toc-link" data-title="Push Notifications">Push Notifications</a>
+          <ul class="toc-list-h2">
+              <li>
+                <a href="#push-notifications-push-notification-types" class="toc-h2 toc-link" data-title="Push Notification Types">Push Notification Types</a>
+              </li>
+              <li>
+                <a href="#push-notifications-get-registered-devices" class="toc-h2 toc-link" data-title="Get Registered Devices">Get Registered Devices</a>
+              </li>
+              <li>
+                <a href="#push-notifications-register-a-device" class="toc-h2 toc-link" data-title="Register a device">Register a device</a>
+              </li>
+              <li>
+                <a href="#push-notifications-delete-registered-devices" class="toc-h2 toc-link" data-title="Delete Registered Devices">Delete Registered Devices</a>
+              </li>
+          </ul>
+      </li>
+      <li>
         <a href="#channels" class="toc-h1 toc-link" data-title="Channels">Channels</a>
           <ul class="toc-list-h2">
               <li>
@@ -546,6 +563,94 @@ This method returns a <code>CurrentUserEventListenerRegistration</code> object.<
 <td>Fired when the current user joins or leaves a channel.</td>
 </tr>
 </tbody></table>
+<h1 id='push-notifications'>Push Notifications</h1>
+<p>ChatKitty Web SDK offers functionality for sending notification messages to your mobile users. 
+Currently, the ChatKitty SDK supports registering push notification devices with <a href="https://reactnative.dev/">React Native</a>.</p>
+<h2 id='push-notifications-push-notification-types'>Push Notification Types</h2>
+<p>There are two push notification services that are supported by ChatKitty. </p>
+<h3 id='push-notifications-push-notification-types-firebase-cloud-messaging'>Firebase Cloud Messaging</h3>
+<p>This refers to the Push Notification service for Android devices. 
+Documentation for setting up FCM can be founding in our <a href="../platform/#push-notification-credentials-fcm">FCM Setup Gudie</a> </p>
+<h3 id='push-notifications-push-notification-types-apple-push-notification'>Apple Push Notification</h3>
+<p>This refers to the Push Notification service for iOS devices. 
+Documentation for setting up APNs can be founding in our <a href="../platform/#push-notification-credentials-apns">APNs Setup Gudie</a> </p>
+<h2 id='push-notifications-get-registered-devices'>Get Registered Devices</h2>
+<blockquote>
+<p>Get registered devices for the current user</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">getRegisteredDevices</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">devices</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">devices</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">device</span> <span class="k">of</span> <span class="nx">devices</span><span class="p">)</span> <span class="p">{</span>
+       <span class="c1">// Handle device</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle request cancellation</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle error</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>You can get registered devices for the current user by calling the <code>ChatKitty.getRegisteredDevices(function)</code> method.</p>
+<h2 id='push-notifications-register-a-device'>Register a device</h2>
+<blockquote>
+<p>Register a device </p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">registerPushNotificationDevice</span><span class="p">(</span><span class="nx">TYPE</span><span class="p">,</span> <span class="nx">TOKEN</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
+     <span class="c1">// Successfully registered a device</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle request cancellation</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle error</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>You can register a device by calling the <code>ChatKitty.registerPushNotificationDevice(string, string, function)</code> method.</p>
+<h4 id='push-notifications-register-a-device-apple-push-notification-push-notification-device-types'>Push Notification Device Types</h4>
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>FCM</code></td>
+<td>Indicates the Firebase Cloud Messaging Service</td>
+</tr>
+<tr>
+<td><code>APNS</code></td>
+<td>Indicates the Apple Push Notification Service</td>
+</tr>
+</tbody></table>
+<h2 id='push-notifications-delete-registered-devices'>Delete Registered Devices</h2>
+<blockquote>
+<p>Deleting a registered device </p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">removeDevice</span><span class="p">(</span><span class="nx">device</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
+     <span class="c1">// Successfully removed a device</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle request cancellation</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle error</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>You can remove a push notification device by calling the <code>ChatKitty.removeDevice(Device, function)</code> method. 
+This will stop sending notifications to the device.</p>
 <h1 id='channels'>Channels</h1>
 <p>Channels are the backbone of the ChatKitty chat experience. Users can join channels and receive 
 or send messages. ChatKitty broadcasts messages created in channels to <strong>channel members</strong> with active 
