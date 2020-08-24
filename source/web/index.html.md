@@ -174,6 +174,94 @@ Type | Description
 ---- | -----------
 `CURRENT_USER.CHANNEL.CHANGED_STATUS` | Fired when the current user joins or leaves a channel.
 
+# Push Notifications
+ChatKitty Web SDK offers functionality for sending notification messages to your mobile users. 
+Currently, the ChatKitty SDK supports registering push notification devices with [React Native](https://reactnative.dev/).
+
+## Push Notification Types
+There are two push notification services that are supported by ChatKitty. 
+
+### Firebase Cloud Messaging
+This refers to the Push Notification service for Android devices. 
+Documentation for setting up FCM can be founding in our [FCM Setup Gudie](../platform/#push-notification-credentials-fcm) 
+
+### Apple Push Notification 
+This refers to the Push Notification service for iOS devices. 
+Documentation for setting up APNs can be founding in our [APNs Setup Gudie](../platform/#push-notification-credentials-apns) 
+
+## Get Registered Devices
+> Get registered devices for the current user
+
+```javascript
+kitty.getRegisteredDevices(function(result) {
+  if (result.isSuccess) {
+    let devices = result.devices
+    for (let device of devices) {
+       // Handle device
+    }
+  }
+
+  if (result.isCancelled) {
+    // Handle request cancellation
+  }
+
+  if (result.isError) {
+    // Handle error
+  }
+});
+```
+
+You can get registered devices for the current user by calling the `ChatKitty.getRegisteredDevices(function)` method.
+
+## Register a device
+> Register a device 
+
+```javascript
+kitty.registerPushNotificationDevice(TYPE, TOKEN, function(result) {
+  if (result.isSuccess) {
+     // Successfully registered a device
+  }
+
+  if (result.isCancelled) {
+    // Handle request cancellation
+  }
+
+  if (result.isError) {
+    // Handle error
+  }
+});
+```
+
+You can register a device by calling the `ChatKitty.registerPushNotificationDevice(string, string, function)` method.
+
+#### Push Notification Device Types
+Type | Description 
+---- | -----------
+`FCM` | Indicates the Firebase Cloud Messaging Service
+`APNS` | Indicates the Apple Push Notification Service
+
+## Delete Registered Devices
+> Deleting a registered device 
+
+```javascript
+kitty.removeDevice(device, function(result) {
+  if (result.isSuccess) {
+     // Successfully removed a device
+  }
+
+  if (result.isCancelled) {
+    // Handle request cancellation
+  }
+
+  if (result.isError) {
+    // Handle error
+  }
+});
+```
+
+You can remove a push notification device by calling the `ChatKitty.removeDevice(Device, function)` method. 
+This will stop sending notifications to the device.
+
 # Channels
 Channels are the backbone of the ChatKitty chat experience. Users can join channels and receive 
 or send messages. ChatKitty broadcasts messages created in channels to **channel members** with active 
