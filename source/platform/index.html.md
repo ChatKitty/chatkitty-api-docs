@@ -120,6 +120,7 @@ Authorization: {{access_token}}
       {
         "id": 1,
         "name": "1017562554",
+        "displayName": "Jane Doe",
         "_links": {
           "self": {
             "href": "https://api.chatkitty.com/v1/applications/1/users/1"
@@ -208,6 +209,7 @@ and the page would include a JSON array in its `_embedded` property named `users
       {
         "id": 1,
         "name": "1017562554",
+        "displayName": "Jane Doe",
         "_links": {
           "self": {
             "href": "https://api.chatkitty.com/v1/applications/1/users/1"
@@ -641,6 +643,7 @@ Authorization: Bearer {{access_token}}
       {
         "id": 1,
         "name": "1017562554",
+        "displayName": "Jane Doe",
         "_links": {
           "self": {
             "href": "https://api.chatkitty.com/v1/applications/1/users/1"
@@ -1429,7 +1432,7 @@ curl --location --request POST '{{users_link}}' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer {{access_token}}' \
 --data-raw '{
-    "name": "37282832193",
+    "name": "1017562554",
     "displayName": "Jane Doe"
 }'
 ```
@@ -1441,7 +1444,7 @@ Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
 {
-    "name": "37282832193",
+    "name": "1017562554",
     "displayName": "Jane Doe"
 }
 ```
@@ -1451,7 +1454,7 @@ Authorization: Bearer {{access_token}}
 ```json
 {
   "id": 1,
-  "name": "37282832193",
+  "name": "1017562554",
   "displayName": "Jane Doe",
   "_links": {
     "self": {
@@ -1680,6 +1683,82 @@ This endpoint returns a user challenge token [page](#pagination) resource.
 
 ### HTTP Request
 `GET {{users_link}}`
+
+## Update a User
+```shell
+curl --location --request PUT '{{user_link}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{access_token}}' \
+--data-raw '{
+    "id": 1,
+    "name": "1017562554",
+    "displayName": "Jane Anne Doe",
+    "_links": {
+      "self": {
+        "href": "https://api.chatkitty.com/v1/applications/1/users/1"
+      },
+      "channels": {
+        "href": "https://api.chatkitty.com/v1/applications/1/users/1/channels"
+      },
+      "application": {
+        "href": "https://api.chatkitty.com/v1/applications/1"
+      }
+    }
+}'
+```
+
+```http
+PUT / HTTP/1.1
+Host: {{users_link}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "id": 1,
+    "name": "1017562554",
+    "displayName": "Jane Anne Doe",
+    "_links": {
+      "self": {
+        "href": "https://api.chatkitty.com/v1/applications/1/users/1"
+      },
+      "channels": {
+        "href": "https://api.chatkitty.com/v1/applications/1/users/1/channels"
+      },
+      "application": {
+        "href": "https://api.chatkitty.com/v1/applications/1"
+      }
+    }
+}
+```
+
+> The command above returns a user HAL resource:
+
+```json
+{
+  "id": 1,
+  "name": "1017562554",
+  "displayName": "Jane Anne Doe",
+  "_links": {
+    "self": {
+      "href": "https://api.chatkitty.com/v1/applications/1/users/1"
+    },
+    "channels": {
+      "href": "https://api.chatkitty.com/v1/applications/1/users/1/channels"
+    },
+    "application": {
+      "href": "https://api.chatkitty.com/v1/applications/1"
+    }
+  }
+}
+```
+
+This endpoint updates a ChatKitty user.
+
+### HTTP Request
+`PUT {{user_link}}`
+
+### Updatable Properties
+- displayName
 
 ## Delete a User
 ```shell
