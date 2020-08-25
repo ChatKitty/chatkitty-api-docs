@@ -506,6 +506,9 @@
                 <a href="#user-get-user-tokens" class="toc-h2 toc-link" data-title="Get User Tokens">Get User Tokens</a>
               </li>
               <li>
+                <a href="#user-update-a-user" class="toc-h2 toc-link" data-title="Update a User">Update a User</a>
+              </li>
+              <li>
                 <a href="#user-delete-a-user" class="toc-h2 toc-link" data-title="Delete a User">Delete a User</a>
               </li>
           </ul>
@@ -629,6 +632,7 @@ You must replace <code>{{access_token}}</code> with an access token gotten using
       </span><span class="p">{</span><span class="w">
         </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1017562554"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Doe"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
@@ -749,6 +753,7 @@ and the page would include a JSON array in its <code>_embedded</code> property n
       </span><span class="p">{</span><span class="w">
         </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1017562554"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Doe"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
@@ -1253,6 +1258,7 @@ New users cannot be added to a direct channel and there can only exist one direc
       </span><span class="p">{</span><span class="w">
         </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1017562554"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Doe"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
@@ -2159,7 +2165,7 @@ property in the <strong>Create FCM Credentials</strong> <a href="#push-notificat
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span> <span class="se">\</span>
 <span class="nt">--data-raw</span> <span class="s1">'{
-    "name": "37282832193",
+    "name": "1017562554",
     "displayName": "Jane Doe"
 }'</span>
 </code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -2168,7 +2174,7 @@ property in the <strong>Create FCM Credentials</strong> <a href="#push-notificat
 <span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
 
 <span class="p">{</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"37282832193"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1017562554"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Doe"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -2177,7 +2183,7 @@ property in the <strong>Create FCM Credentials</strong> <a href="#push-notificat
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"37282832193"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1017562554"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Doe"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2381,6 +2387,74 @@ A <b>maximum of 10</b> challenge tokens can exists for a user.
 <p>This endpoint returns a user challenge token <a href="#pagination">page</a> resource.</p>
 <h3 id='user-get-user-tokens-http-request'>HTTP Request</h3>
 <p><code>GET {{users_link}}</code></p>
+<h2 id='user-update-a-user'>Update a User</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PUT <span class="s1">'{{user_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "id": 1,
+    "name": "1017562554",
+    "displayName": "Jane Anne Doe",
+    "_links": {
+      "self": {
+        "href": "https://api.chatkitty.com/v1/applications/1/users/1"
+      },
+      "channels": {
+        "href": "https://api.chatkitty.com/v1/applications/1/users/1/channels"
+      },
+      "application": {
+        "href": "https://api.chatkitty.com/v1/applications/1"
+      }
+    }
+}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">PUT</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{users_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
+
+<span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1017562554"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Anne Doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1/channels"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>The command above returns a user HAL resource:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1017562554"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Anne Doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1/channels"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint updates a ChatKitty user.</p>
+<h3 id='user-update-a-user-http-request'>HTTP Request</h3>
+<p><code>PUT {{user_link}}</code></p>
+<h3 id='user-update-a-user-updatable-properties'>Updatable Properties</h3>
+<ul>
+<li>displayName</li>
+</ul>
 <h2 id='user-delete-a-user'>Delete a User</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'{{user_link}}'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
