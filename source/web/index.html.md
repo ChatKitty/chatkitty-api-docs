@@ -240,6 +240,30 @@ Type | Description
 `FCM` | Indicates the Firebase Cloud Messaging Service
 `APNS` | Indicates the Apple Push Notification Service
 
+## Handling Push Notification Data
+> Handling push notification data
+
+```javascript
+kitty.handlePushNotificationData(notification.data, function(result) {
+  if (result.isSuccess) {
+     // Check the type of push notification
+     const type = result.type
+     // Extract the recipient from the push notification
+     const recipient = result.recipient
+     // Extract the message from the push notification (if applicable)
+     const message = result.message
+  }
+});
+```
+
+You can retrieve data from a push notification by calling the `ChatKitty.handlePushNotificationData(PushNotificationData, function)` method.
+
+#### Push Notification Types
+Type | Description 
+---- | -----------
+`SYSTEM:SENT:MESSAGE` | Received when an application administrator sends a system message through the platform API. This includes a `message` payload, which is the message resource of the **system message** sent.
+`USER:SENT:MESSAGE` | Received when a chat user sends a message client-side. This includes a `message` payload, which is the message resource of the **user message** sent.
+
 ## Delete Registered Devices
 > Deleting a registered device 
 
