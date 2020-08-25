@@ -353,6 +353,9 @@
                 <a href="#push-notifications-register-a-device" class="toc-h2 toc-link" data-title="Register a device">Register a device</a>
               </li>
               <li>
+                <a href="#push-notifications-handling-push-notification-data" class="toc-h2 toc-link" data-title="Handling Push Notification Data">Handling Push Notification Data</a>
+              </li>
+              <li>
                 <a href="#push-notifications-delete-registered-devices" class="toc-h2 toc-link" data-title="Delete Registered Devices">Delete Registered Devices</a>
               </li>
           </ul>
@@ -629,6 +632,38 @@ Documentation for setting up APNs can be founding in our <a href="../platform/#p
 <tr>
 <td><code>APNS</code></td>
 <td>Indicates the Apple Push Notification Service</td>
+</tr>
+</tbody></table>
+<h2 id='push-notifications-handling-push-notification-data'>Handling Push Notification Data</h2>
+<blockquote>
+<p>Handling push notification data</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">handlePushNotificationData</span><span class="p">(</span><span class="nx">notification</span><span class="p">.</span><span class="nx">data</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
+     <span class="c1">// Check the type of push notification</span>
+     <span class="kd">const</span> <span class="nx">type</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">type</span>
+     <span class="c1">// Extract the recipient from the push notification</span>
+     <span class="kd">const</span> <span class="nx">recipient</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">recipient</span>
+     <span class="c1">// Extract the message from the push notification (if applicable)</span>
+     <span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">message</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>You can retrieve data from a push notification by calling the <code>ChatKitty.handlePushNotificationData(PushNotificationData, function)</code> method.</p>
+<h4 id='push-notifications-handling-push-notification-data-apple-push-notification-push-notification-types'>Push Notification Types</h4>
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>SYSTEM:SENT:MESSAGE</code></td>
+<td>Received when an application administrator sends a system message through the platform API. This includes a <code>message</code> payload, which is the message resource of the <strong>system message</strong> sent.</td>
+</tr>
+<tr>
+<td><code>USER:SENT:MESSAGE</code></td>
+<td>Received when a chat user sends a message client-side. This includes a <code>message</code> payload, which is the message resource of the <strong>user message</strong> sent.</td>
 </tr>
 </tbody></table>
 <h2 id='push-notifications-delete-registered-devices'>Delete Registered Devices</h2>
