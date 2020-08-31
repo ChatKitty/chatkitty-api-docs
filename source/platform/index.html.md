@@ -450,7 +450,7 @@ Parameter | Type | Description
 type | Enum | The type of the channel. __Possible values__ are [OPEN](#channel-open-channel), [PUBLIC](#channel-public-channel), [PRIVATE](#channel-private-channel), and [DIRECT](#channel-direct-channel)
 name | String | The name of the channel
 
-#### Direct Channel
+#### Direct Channel Parameters
 Parameter | Type | Description 
 --------- | ----------- | -----------
 members | Link Array | Self links of the members of this channel. The same direct channel is always returned for the same set of members
@@ -865,12 +865,12 @@ Parameter | Type | Description
 --------- | ----------- | -----------
 type | Enum | The type of message. __Possible values__ are [TEXT](#message-text-message) and [FILE](#message-file-message)
 
-#### System Text Message
+#### System Text Message Parameters
 Parameter | Type | Description 
 --------- | ----------- | -----------
 body | String | The text body of the message
 
-#### System File Upload Message
+#### System File Upload Message Parameters
 
 > To upload a system file message:
 
@@ -904,7 +904,7 @@ Parameter | Type | Description
 file | File | Multipart file to be [uploaded](#files-file-uploads).
 groupTag | String | __Optional:__ Tag to group file message by (like an album name). __Present if__ this file message is part of a file message group.
 
-#### System External File Message
+#### System External File Message Parameters
 
 > This creates a new system external file message:
 
