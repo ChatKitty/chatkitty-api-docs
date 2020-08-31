@@ -87,7 +87,7 @@ Create a challenge token for a user server-side using the **Platform API**. You 
  and use them to start a user session. 
 </aside>
 
-### Begin a user session with a user name (Guest user session)  
+### Begin a user session with a user name (guest user session)
 > Starting a guest user session
 
 ```javascript
@@ -141,7 +141,7 @@ kitty.getCurrentUser(function(result) {
 After starting a ChatKitty [user session](#authentication-begin-a-user-session), you can request the current user 
 anytime by calling the `ChatKitty.getCurrentUser(function)` method.
 
-## Listen to Current User events
+## Listen to current user events
 When an event involving the current user happens, like joining or exiting a channel, 
 a `CurrentUserEvent` is sent to registered channel event listeners.
 
@@ -169,7 +169,7 @@ To beginning listening to current user events, register a current user event lis
 Where `String` is the **type** of event the function handles.  
 This method returns a `CurrentUserEventListenerRegistration` object.
 
-#### Current User Event Types
+#### Current user event types
 Type | Description 
 ---- | -----------
 `CURRENT_USER.CHANNEL.CHANGED_STATUS` | Fired when the current user joins or leaves a channel.
@@ -178,18 +178,18 @@ Type | Description
 ChatKitty Web SDK offers functionality for sending notification messages to your mobile users. 
 Currently, the ChatKitty SDK supports registering push notification devices with [React Native](https://reactnative.dev/).
 
-## Push Notification Types
+## Push notification types
 There are two push notification services that are supported by ChatKitty. 
 
 ### Firebase Cloud Messaging
 This refers to the Push Notification service for Android devices. 
 Documentation for setting up FCM can be founding in our [FCM Setup Gudie](../platform/#push-notification-credentials-fcm) 
 
-### Apple Push Notification 
+### Apple Push Notification Service
 This refers to the Push Notification service for iOS devices. 
 Documentation for setting up APNs can be founding in our [APNs Setup Gudie](../platform/#push-notification-credentials-apns) 
 
-## Get Registered Devices
+## Get registered devices
 > Get registered devices for the current user
 
 ```javascript
@@ -234,13 +234,13 @@ kitty.registerPushNotificationDevice(TYPE, TOKEN, function(result) {
 
 You can register a device by calling the `ChatKitty.registerPushNotificationDevice(string, string, function)` method.
 
-#### Push Notification Device Types
+#### Push notification device types
 Type | Description 
 ---- | -----------
 `FCM` | Indicates the Firebase Cloud Messaging Service
 `APNS` | Indicates the Apple Push Notification Service
 
-## Handling Push Notification Data
+## Handling push notification data
 > Handling push notification data
 
 ```javascript
@@ -258,13 +258,13 @@ kitty.handlePushNotificationData(notification.data, function(result) {
 
 You can retrieve data from a push notification by calling the `ChatKitty.handlePushNotificationData(PushNotificationData, function)` method.
 
-#### Push Notification Types
+#### Push notification types
 Type | Description 
 ---- | -----------
 `SYSTEM:SENT:MESSAGE` | Received when an application administrator sends a system message through the platform API. This includes a `message` payload, which is the message resource of the **system message** sent.
 `USER:SENT:MESSAGE` | Received when a chat user sends a message client-side. This includes a `message` payload, which is the message resource of the **user message** sent.
 
-## Delete Registered Devices
+## Delete registered devices
 > Deleting a registered device 
 
 ```javascript
@@ -291,7 +291,7 @@ Channels are the backbone of the ChatKitty chat experience. Users can join chann
 or send messages. ChatKitty broadcasts messages created in channels to **channel members** with active 
 **chat sessions** and sends **push notifications** to offline members.
 
-## Channel Types
+## Channel types
 
 There are four types of channels;
 
@@ -439,7 +439,7 @@ To beginning listening to channel events, register a channel event listener by c
 Where `String` is the **type** of event the function handles.  
 This method returns a `ChannelEventListenerRegistration` object.
 
-#### Channel Event Types
+#### Channel event types
 Type | Description 
 ---- | -----------
 `MESSAGE.RECEIVED` | Fired when the device receives a sent message.
@@ -457,7 +457,7 @@ If you no longer wish to receive events with a channel event listener, deregiste
 calling the `ChannelEventListenerRegistration.deregister()` method on 
 `ChannelEventListenerRegistration` object returned from registering the event listener.
 
-## Creating Typing Indicators
+## Creating typing indicators
 > Creating typing indicators
 
 ```javascript
@@ -497,7 +497,7 @@ Exit a channel by calling the `ChannelEnterRegistration.exitChannel()` method.
 # Messages
 Users send messages through your application and administrators can send messages through the Platform API. 
 
-## Messages Types
+## Messages types
 There are four types of messages;
 
 ### Text Message
