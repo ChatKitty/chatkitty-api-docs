@@ -588,7 +588,9 @@ You can send a message to a [channel](#channels) by calling the `ChatKitty.sendC
 ## Message delivery receipts
 With message delivery receipts, you can see when messages get delivered on another user's devices.
 
-When a user receives or fetches a message sent by another user for the first time, a delivery receipts is created.
+When a user receives or fetches a message sent by another user for the first time, a delivery receipt is created.
+
+Delivery receipts are automatically created by the ChatKitty platform and this SDK.
 
 <aside class="notice">
  Delivery receipts are only created for messages sent inside <b>group channels</b>.
@@ -601,4 +603,32 @@ When a user receives or fetches a message sent by another user for the first tim
 // TODO
 ```
 
-You can get delivery receipts for a message by calling the `ChatKitty.getMessageDeliveryReceipts(Message, function)` method.
+You can get delivery receipts for a [message](#messages) by calling the `ChatKitty.getMessageDeliveryReceipts(Message, function)` method.
+
+## Message read receipts
+With message read receipts, you can see when messages are read by other users
+
+When a user reads a message for the first time, a read receipt is created.
+
+<aside class="notice">
+ Read receipts are only created for messages sent inside <b>group channels</b>.
+</aside>
+
+## Read a message
+> Marking a message as read
+
+```javascript
+// TODO
+```
+
+You can mark a [message](#messages) as read by calling the `ChatKitty.readMessage(Message, function)` method. Mark a message
+as read when a message is displayed to the current user.
+
+## Get message read receipts
+> Get read receipts for a message
+
+```javascript
+// TODO
+```
+
+You can get read receipts for a message by calling the `ChatKitty.getMessageReadReceipts(Message, function)` method.
