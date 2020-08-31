@@ -444,6 +444,11 @@ Type | Description
 ---- | -----------
 `MESSAGE.RECEIVED` | Fired when the device receives a sent message.
 `PARTICIPANT.CHANGED_STATUS` | Fired when a participant has entered or exited a channel.
+
+#### Group Channel event types
+Type | Description
+---- | -----------
+`MESSAGE.DELIVERY_RECEIPT.CREATED` | Fired when a message has been delivered in a group channel.
 `KEYSTROKES.CREATED` | Fired when a participant has started typing characters.
 
 ### Deregistering a channel event listener
@@ -579,3 +584,21 @@ kitty.sendChannelMessage(
 ```
 
 You can send a message to a [channel](#channels) by calling the `ChatKitty.sendChannelMessage(Channel, CreateMessageRequest, function)` method.
+
+## Message delivery receipts
+With message delivery receipts, you can see when messages get delivered on another user's devices.
+
+When a user receives or fetches a message sent by another user for the first time, a delivery receipts is created.
+
+<aside class="notice">
+ Delivery receipts are only created for messages sent inside <b>group channels</b>.
+</aside>
+
+## Get message delivery receipts
+> Get delivery receipts for a message
+
+```javascript
+// TODO
+```
+
+You can get delivery receipts for a message by calling the `ChatKitty.getMessageDeliveryReceipts(Message, function)` method.
