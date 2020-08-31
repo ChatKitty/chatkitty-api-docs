@@ -290,7 +290,7 @@
   color: #859900;
 }
   </style>
-  <link href="../stylesheets/screen-c9d8fa83.css" rel="stylesheet" media="screen" />
+  <link href="../stylesheets/screen-fa3e5910.css" rel="stylesheet" media="screen" />
   <link href="../stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
     <script src="../javascripts/all-e9bde216.js"></script>
 
@@ -336,7 +336,7 @@
         <a href="#current-user" class="toc-h1 toc-link" data-title="Current User">Current User</a>
           <ul class="toc-list-h2">
               <li>
-                <a href="#current-user-listen-to-current-user-events" class="toc-h2 toc-link" data-title="Listen to Current User events">Listen to Current User events</a>
+                <a href="#current-user-listen-to-current-user-events" class="toc-h2 toc-link" data-title="Listen to current user events">Listen to current user events</a>
               </li>
           </ul>
       </li>
@@ -344,19 +344,19 @@
         <a href="#push-notifications" class="toc-h1 toc-link" data-title="Push Notifications">Push Notifications</a>
           <ul class="toc-list-h2">
               <li>
-                <a href="#push-notifications-push-notification-types" class="toc-h2 toc-link" data-title="Push Notification Types">Push Notification Types</a>
+                <a href="#push-notifications-push-notification-types" class="toc-h2 toc-link" data-title="Push notification types">Push notification types</a>
               </li>
               <li>
-                <a href="#push-notifications-get-registered-devices" class="toc-h2 toc-link" data-title="Get Registered Devices">Get Registered Devices</a>
+                <a href="#push-notifications-get-registered-devices" class="toc-h2 toc-link" data-title="Get registered devices">Get registered devices</a>
               </li>
               <li>
                 <a href="#push-notifications-register-a-device" class="toc-h2 toc-link" data-title="Register a device">Register a device</a>
               </li>
               <li>
-                <a href="#push-notifications-handling-push-notification-data" class="toc-h2 toc-link" data-title="Handling Push Notification Data">Handling Push Notification Data</a>
+                <a href="#push-notifications-handling-push-notification-data" class="toc-h2 toc-link" data-title="Handling push notification data">Handling push notification data</a>
               </li>
               <li>
-                <a href="#push-notifications-delete-registered-devices" class="toc-h2 toc-link" data-title="Delete Registered Devices">Delete Registered Devices</a>
+                <a href="#push-notifications-delete-registered-devices" class="toc-h2 toc-link" data-title="Delete registered devices">Delete registered devices</a>
               </li>
           </ul>
       </li>
@@ -364,7 +364,7 @@
         <a href="#channels" class="toc-h1 toc-link" data-title="Channels">Channels</a>
           <ul class="toc-list-h2">
               <li>
-                <a href="#channels-channel-types" class="toc-h2 toc-link" data-title="Channel Types">Channel Types</a>
+                <a href="#channels-channel-types" class="toc-h2 toc-link" data-title="Channel types">Channel types</a>
               </li>
               <li>
                 <a href="#channels-get-channels" class="toc-h2 toc-link" data-title="Get channels">Get channels</a>
@@ -382,7 +382,7 @@
                 <a href="#channels-listen-to-channel-events" class="toc-h2 toc-link" data-title="Listen to channel events">Listen to channel events</a>
               </li>
               <li>
-                <a href="#channels-creating-typing-indicators" class="toc-h2 toc-link" data-title="Creating Typing Indicators">Creating Typing Indicators</a>
+                <a href="#channels-creating-typing-indicators" class="toc-h2 toc-link" data-title="Creating typing indicators">Creating typing indicators</a>
               </li>
               <li>
                 <a href="#channels-exiting-a-channel" class="toc-h2 toc-link" data-title="Exiting a channel">Exiting a channel</a>
@@ -393,7 +393,7 @@
         <a href="#messages" class="toc-h1 toc-link" data-title="Messages">Messages</a>
           <ul class="toc-list-h2">
               <li>
-                <a href="#messages-messages-types" class="toc-h2 toc-link" data-title="Messages Types">Messages Types</a>
+                <a href="#messages-messages-types" class="toc-h2 toc-link" data-title="Messages types">Messages types</a>
               </li>
               <li>
                 <a href="#messages-get-messages" class="toc-h2 toc-link" data-title="Get messages">Get messages</a>
@@ -478,7 +478,7 @@ using a just username if the user is a guest.</p>
  When a user logs into your client application, load the user's username and challenge token from storage 
  and use them to start a user session. 
 </aside>
-<h3 id='authentication-begin-a-user-session-begin-a-user-session-with-a-user-name-guest-user-session'>Begin a user session with a user name (Guest user session)</h3>
+<h3 id='authentication-begin-a-user-session-begin-a-user-session-with-a-user-name-guest-user-session'>Begin a user session with a user name (guest user session)</h3>
 <blockquote>
 <p>Starting a guest user session</p>
 </blockquote>
@@ -529,7 +529,7 @@ using a just username if the user is a guest.</p>
 </code></pre></div>
 <p>After starting a ChatKitty <a href="#authentication-begin-a-user-session">user session</a>, you can request the current user 
 anytime by calling the <code>ChatKitty.getCurrentUser(function)</code> method.</p>
-<h2 id='current-user-listen-to-current-user-events'>Listen to Current User events</h2>
+<h2 id='current-user-listen-to-current-user-events'>Listen to current user events</h2>
 <p>When an event involving the current user happens, like joining or exiting a channel, 
 a <code>CurrentUserEvent</code> is sent to registered channel event listeners.</p>
 <h3 id='current-user-listen-to-current-user-events-registering-a-current-user-event-listener'>Registering a current user event listener</h3>
@@ -554,7 +554,7 @@ a <code>CurrentUserEvent</code> is sent to registered channel event listeners.</
 <p>To beginning listening to current user events, register a current user event listener by calling the <code>ChatKitty.registerCurrentUserEventListener(String, function)</code> method.
 Where <code>String</code> is the <strong>type</strong> of event the function handles.<br>
 This method returns a <code>CurrentUserEventListenerRegistration</code> object.</p>
-<h4 id='current-user-listen-to-current-user-events-registering-a-current-user-event-listener-current-user-event-types'>Current User Event Types</h4>
+<h4 id='current-user-listen-to-current-user-events-registering-a-current-user-event-listener-current-user-event-types'>Current user event types</h4>
 <table><thead>
 <tr>
 <th>Type</th>
@@ -569,15 +569,15 @@ This method returns a <code>CurrentUserEventListenerRegistration</code> object.<
 <h1 id='push-notifications'>Push Notifications</h1>
 <p>ChatKitty Web SDK offers functionality for sending notification messages to your mobile users. 
 Currently, the ChatKitty SDK supports registering push notification devices with <a href="https://reactnative.dev/">React Native</a>.</p>
-<h2 id='push-notifications-push-notification-types'>Push Notification Types</h2>
+<h2 id='push-notifications-push-notification-types'>Push notification types</h2>
 <p>There are two push notification services that are supported by ChatKitty. </p>
 <h3 id='push-notifications-push-notification-types-firebase-cloud-messaging'>Firebase Cloud Messaging</h3>
 <p>This refers to the Push Notification service for Android devices. 
 Documentation for setting up FCM can be founding in our <a href="../platform/#push-notification-credentials-fcm">FCM Setup Gudie</a> </p>
-<h3 id='push-notifications-push-notification-types-apple-push-notification'>Apple Push Notification</h3>
+<h3 id='push-notifications-push-notification-types-apple-push-notification-service'>Apple Push Notification Service</h3>
 <p>This refers to the Push Notification service for iOS devices. 
 Documentation for setting up APNs can be founding in our <a href="../platform/#push-notification-credentials-apns">APNs Setup Gudie</a> </p>
-<h2 id='push-notifications-get-registered-devices'>Get Registered Devices</h2>
+<h2 id='push-notifications-get-registered-devices'>Get registered devices</h2>
 <blockquote>
 <p>Get registered devices for the current user</p>
 </blockquote>
@@ -618,7 +618,7 @@ Documentation for setting up APNs can be founding in our <a href="../platform/#p
 <span class="p">});</span>
 </code></pre></div>
 <p>You can register a device by calling the <code>ChatKitty.registerPushNotificationDevice(string, string, function)</code> method.</p>
-<h4 id='push-notifications-register-a-device-apple-push-notification-push-notification-device-types'>Push Notification Device Types</h4>
+<h4 id='push-notifications-register-a-device-apple-push-notification-service-push-notification-device-types'>Push notification device types</h4>
 <table><thead>
 <tr>
 <th>Type</th>
@@ -634,7 +634,7 @@ Documentation for setting up APNs can be founding in our <a href="../platform/#p
 <td>Indicates the Apple Push Notification Service</td>
 </tr>
 </tbody></table>
-<h2 id='push-notifications-handling-push-notification-data'>Handling Push Notification Data</h2>
+<h2 id='push-notifications-handling-push-notification-data'>Handling push notification data</h2>
 <blockquote>
 <p>Handling push notification data</p>
 </blockquote>
@@ -650,7 +650,7 @@ Documentation for setting up APNs can be founding in our <a href="../platform/#p
 <span class="p">});</span>
 </code></pre></div>
 <p>You can retrieve data from a push notification by calling the <code>ChatKitty.handlePushNotificationData(PushNotificationData, function)</code> method.</p>
-<h4 id='push-notifications-handling-push-notification-data-apple-push-notification-push-notification-types'>Push Notification Types</h4>
+<h4 id='push-notifications-handling-push-notification-data-apple-push-notification-service-push-notification-types'>Push notification types</h4>
 <table><thead>
 <tr>
 <th>Type</th>
@@ -666,7 +666,7 @@ Documentation for setting up APNs can be founding in our <a href="../platform/#p
 <td>Received when a chat user sends a message client-side. This includes a <code>message</code> payload, which is the message resource of the <strong>user message</strong> sent.</td>
 </tr>
 </tbody></table>
-<h2 id='push-notifications-delete-registered-devices'>Delete Registered Devices</h2>
+<h2 id='push-notifications-delete-registered-devices'>Delete registered devices</h2>
 <blockquote>
 <p>Deleting a registered device </p>
 </blockquote>
@@ -690,7 +690,7 @@ This will stop sending notifications to the device.</p>
 <p>Channels are the backbone of the ChatKitty chat experience. Users can join channels and receive 
 or send messages. ChatKitty broadcasts messages created in channels to <strong>channel members</strong> with active 
 <strong>chat sessions</strong> and sends <strong>push notifications</strong> to offline members.</p>
-<h2 id='channels-channel-types'>Channel Types</h2>
+<h2 id='channels-channel-types'>Channel types</h2>
 <p>There are four types of channels;</p>
 <h3 id='channels-channel-types-open-channel'>Open Channel</h3>
 <p>Open channels provide Twitch-style chats where many users can join the chat without invites and send 
@@ -821,7 +821,7 @@ a <code>ChannelEvent</code> is sent to registered channel event listeners.</p>
 <p>To beginning listening to channel events, register a channel event listener by calling the <code>ChatKitty.registerChannelEventListener(Channel, String, function)</code> method.
 Where <code>String</code> is the <strong>type</strong> of event the function handles.<br>
 This method returns a <code>ChannelEventListenerRegistration</code> object.</p>
-<h4 id='channels-listen-to-channel-events-registering-a-channel-event-listener-channel-event-types'>Channel Event Types</h4>
+<h4 id='channels-listen-to-channel-events-registering-a-channel-event-listener-channel-event-types'>Channel event types</h4>
 <table><thead>
 <tr>
 <th>Type</th>
@@ -850,7 +850,7 @@ This method returns a <code>ChannelEventListenerRegistration</code> object.</p>
 <p>If you no longer wish to receive events with a channel event listener, deregister it by 
 calling the <code>ChannelEventListenerRegistration.deregister()</code> method on 
 <code>ChannelEventListenerRegistration</code> object returned from registering the event listener.</p>
-<h2 id='channels-creating-typing-indicators'>Creating Typing Indicators</h2>
+<h2 id='channels-creating-typing-indicators'>Creating typing indicators</h2>
 <blockquote>
 <p>Creating typing indicators</p>
 </blockquote>
@@ -885,7 +885,7 @@ the <code>ChatKitty.sendChannelKeyStrokes(Channel, CreateReplyThreadKeystrokesRe
 <p>Exit a channel by calling the <code>ChannelEnterRegistration.exitChannel()</code> method.</p>
 <h1 id='messages'>Messages</h1>
 <p>Users send messages through your application and administrators can send messages through the Platform API. </p>
-<h2 id='messages-messages-types'>Messages Types</h2>
+<h2 id='messages-messages-types'>Messages types</h2>
 <p>There are four types of messages;</p>
 <h3 id='messages-messages-types-text-message'>Text Message</h3>
 <p>Users can send text messages containing a unicode text body. These messages can contain emojis and other unicode characters
