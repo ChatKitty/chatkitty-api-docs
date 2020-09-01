@@ -453,10 +453,10 @@
         <a href="#push-notification-credentials" class="toc-h1 toc-link" data-title="Push Notification Credentials">Push Notification Credentials</a>
           <ul class="toc-list-h2">
               <li>
-                <a href="#push-notification-credentials-fcm" class="toc-h2 toc-link" data-title="FCM">FCM</a>
+                <a href="#push-notification-credentials-apns" class="toc-h2 toc-link" data-title="APNs">APNs</a>
               </li>
               <li>
-                <a href="#push-notification-credentials-apns" class="toc-h2 toc-link" data-title="APNs">APNs</a>
+                <a href="#push-notification-credentials-fcm" class="toc-h2 toc-link" data-title="FCM">FCM</a>
               </li>
               <li>
                 <a href="#push-notification-credentials-properties" class="toc-h2 toc-link" data-title="Properties">Properties</a>
@@ -465,10 +465,10 @@
                 <a href="#push-notification-credentials-hal-links" class="toc-h2 toc-link" data-title="HAL links">HAL links</a>
               </li>
               <li>
-                <a href="#push-notification-credentials-create-fcm-credential" class="toc-h2 toc-link" data-title="Create FCM Credential">Create FCM Credential</a>
+                <a href="#push-notification-credentials-create-apns-credential" class="toc-h2 toc-link" data-title="Create APNs Credential">Create APNs Credential</a>
               </li>
               <li>
-                <a href="#push-notification-credentials-create-apns-credential" class="toc-h2 toc-link" data-title="Create APNs Credential">Create APNs Credential</a>
+                <a href="#push-notification-credentials-create-fcm-credential" class="toc-h2 toc-link" data-title="Create FCM Credential">Create FCM Credential</a>
               </li>
               <li>
                 <a href="#push-notification-credentials-get-credentials" class="toc-h2 toc-link" data-title="Get Credentials">Get Credentials</a>
@@ -543,7 +543,7 @@
 their ChatKitty applications. </p>
 
 <aside class="success">
-ChatKitty provides a <a href="https://api.chatkitty.com/v1/explorer/index.html#hkey0=Content-Type&hval0=application/json&uri=/v1/applications/me">API Explorer</a> to 
+ChatKitty provides an <a href="https://api.chatkitty.com/v1/explorer/index.html#hkey0=Content-Type&hval0=application/json&uri=/v1/applications/me">API Explorer</a> to
 access the Platform API.
 </aside>
 <h1 id='headers'>Headers</h1>
@@ -1750,7 +1750,7 @@ my_file_message_group_tag
       </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/2"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/2/channels/2/messages"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/2/messages"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
@@ -1762,33 +1762,21 @@ my_file_message_group_tag
 <h3 id='message-delete-a-message-http-request'>HTTP Request</h3>
 <p><code>DELETE {{message_link}}</code></p>
 <h1 id='push-notification-credentials'>Push Notification Credentials</h1>
-<p>Register your <a href="https://firebase.google.com/products/cloud-messaging">Firebase Cloud Messaging</a> (<a href="#push-notification-credentials-fcm">FCM</a>) 
-and/or <a href="https://developer.apple.com/go/?id=push-notifications">Apple Push Notification service</a> (<a href="#push-notification-credentials-apns">APNs</a>) 
+<p>Register your <a href="https://developer.apple.com/go/?id=push-notifications">Apple Push Notification service</a> (<a href="#push-notification-credentials-apns">APNs</a>)
+and/or <a href="https://firebase.google.com/products/cloud-messaging">Firebase Cloud Messaging</a> (<a href="#push-notification-credentials-fcm">FCM</a>)
 credentials to begin receiving push notifications from the ChatKitty platform. </p>
+<h2 id='push-notification-credentials-apns'>APNs</h2>
+<p>Follow the introductions <a href="https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_certificate-based_connection_to_apns">here</a>
+to create an APNs certificate for your application.</p>
+
+<p>Once you create your APNs certificate, export it as a P12 file and use it as the <strong>file</strong> property in the <strong>Create APNs Credentials</strong> file upload <a href="#push-notification-credentials-create-apns-credential">POST</a>
+request body.</p>
 <h2 id='push-notification-credentials-fcm'>FCM</h2>
 <p>Create a new Firebase Cloud Messaging <strong>Server Key</strong>, from the <a href="https://console.firebase.google.com/">Firebase Console</a> 
 go to <strong>Project settings</strong> &gt; <strong>Cloud Messaging</strong> &gt; <strong>Project credentials</strong> &gt; <strong>Add server key</strong>.</p>
 
 <p>Once you create your Server Key, use it as the <strong>API Key</strong> property in the <strong>Create FCM Credentials</strong> <a href="#push-notification-credentials-create-fcm-credential">POST</a> 
 request body.</p>
-<h2 id='push-notification-credentials-apns'>APNs</h2>
-<p>Follow the introductions <a href="https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_certificate-based_connection_to_apns">here</a> 
-to create an APNs certification for your application.</p>
-
-<p>Using <code>openssl</code>, extract the public certificate and private key from your .P12 file.</p>
-
-<blockquote>
-<p>Public certificate:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>openssl pkcs12 -in your_P12_file.pfx -clcerts -nokeys -out public.pem
-</code></pre></div>
-<blockquote>
-<p>Private key:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>openssl pkcs12 -in your_P12_file.pfx -nocerts -out private.pem
-</code></pre></div>
-<p>Use the contents of the public certificate as the <strong>certificate</strong> property, and the private key as the <strong>private key</strong> 
-property in the <strong>Create FCM Credentials</strong> <a href="#push-notification-credentials-create-apns-credential">POST</a> </p>
 <h2 id='push-notification-credentials-properties'>Properties</h2>
 <table><thead>
 <tr>
@@ -1801,20 +1789,6 @@ property in the <strong>Create FCM Credentials</strong> <a href="#push-notificat
 <td>type</td>
 <td>Enum</td>
 <td>The type of this credentials set. <strong>Possible values</strong> are <a href="#push-notification-credentials-fcm">FCM</a>, and <a href="#push-notification-credentials-apns">APNs</a></td>
-</tr>
-</tbody></table>
-<h3 id='push-notification-credentials-properties-fcm-credential-properties'>FCM Credential Properties</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>apiKey</td>
-<td>String</td>
-<td>The FCM <strong>Server Key</strong> of this application.</td>
 </tr>
 </tbody></table>
 <h3 id='push-notification-credentials-properties-apns-credential-properties'>APNs Credential Properties</h3>
@@ -1841,6 +1815,20 @@ property in the <strong>Create FCM Credentials</strong> <a href="#push-notificat
 <td>Flag indicating if this APNs was issued as a sandbox certificate.</td>
 </tr>
 </tbody></table>
+<h3 id='push-notification-credentials-properties-fcm-credential-properties'>FCM Credential Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>apiKey</td>
+<td>String</td>
+<td>The FCM <strong>Server Key</strong> of this application.</td>
+</tr>
+</tbody></table>
 <h2 id='push-notification-credentials-hal-links'>HAL links</h2>
 <table><thead>
 <tr>
@@ -1858,6 +1846,85 @@ property in the <strong>Create FCM Credentials</strong> <a href="#push-notificat
 <td><a href="#application">application</a></td>
 <td><a href="#application-get-application">GET</a></td>
 <td>Link to your application resource.</td>
+</tr>
+</tbody></table>
+<h2 id='push-notification-credentials-create-apns-credential'>Create APNs Credential</h2>
+<blockquote>
+<p>This creates a new APNS credential:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'{{push_notification_credentials_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: multipart/form-data'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'type=APNS'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'file=@./files/apns_certificate_file.p12'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'password=my_apns_certificate_password'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{push_notification_credentials_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
+
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="type"
+
+APNS
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="./files/apns_certificate_file.p12"
+Content-Type: application/x-pkcs12
+
+(data)
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="password"
+
+my_apns_certificate_password
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+</code></pre></div>
+<blockquote>
+<p>The command above returns an APNs push notification credential HAL resource:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"APNS"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"certificate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{your_public_cert}}"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"privateKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{your_private_key}}"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/push_notification_credentials/2"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint <a href="#files-file-uploads">uploads</a> a new set of APNs credentials.</p>
+<h3 id='push-notification-credentials-create-apns-credential-http-request'>HTTP Request</h3>
+<p><code>POST {{push_notification_credentials_link}}</code></p>
+<h3 id='push-notification-credentials-create-apns-credential-file-upload-request-parameters'>File Upload Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>Enum</td>
+<td>The type of this credentials set. Always <a href="#push-notification-credentials-fcm">APNS</a>.</td>
+</tr>
+<tr>
+<td>file</td>
+<td>File</td>
+<td>Multipart P12 certificate file to be <a href="#files-file-uploads">uploaded</a>.</td>
+</tr>
+<tr>
+<td>password</td>
+<td>String</td>
+<td>Password set when the APNs P12 certificate file was exported.</td>
+</tr>
+<tr>
+<td>isSandbox</td>
+<td>Boolean</td>
+<td><strong>Optional</strong> Flag indicating if this APNs was issued as a sandbox certificate. <strong>Default: false</strong></td>
 </tr>
 </tbody></table>
 <h2 id='push-notification-credentials-create-fcm-credential'>Create FCM Credential</h2>
@@ -1917,78 +1984,6 @@ property in the <strong>Create FCM Credentials</strong> <a href="#push-notificat
 <td>apiKey</td>
 <td>String</td>
 <td>The FCM <strong>Server Key</strong> of this application.</td>
-</tr>
-</tbody></table>
-<h2 id='push-notification-credentials-create-apns-credential'>Create APNs Credential</h2>
-<blockquote>
-<p>This creates a new APNS credential:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'{{push_notification_credentials_link}}'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span> <span class="se">\</span>
-<span class="nt">--data-raw</span> <span class="s1">'{
-    "type": "APNS",
-    "certificate": "{{your_public_cert}}",
-    "privateKey": "{{your_private_key}}"
-}'</span>
-</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">{{push_notification_credentials_link}}</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer {{access_token}}</span>
-
-<span class="p">{</span><span class="w">
-    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"APNS"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"certificate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{your_public_cert}}"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"privateKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{your_private_key}}"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<blockquote>
-<p>The command above returns a FCM push notification credential HAL resource:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"APNS"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"certificate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{your_public_cert}}"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"privateKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{your_private_key}}"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/push_notification_credentials/2"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint creates a new set of APNs credentials.</p>
-<h3 id='push-notification-credentials-create-apns-credential-http-request'>HTTP Request</h3>
-<p><code>POST {{push_notification_credentials_link}}</code></p>
-<h3 id='push-notification-credentials-create-apns-credential-request-parameters'>Request Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>type</td>
-<td>Enum</td>
-<td>The type of this credentials set. Always <a href="#push-notification-credentials-fcm">APNS</a>.</td>
-</tr>
-<tr>
-<td>certificate</td>
-<td>String</td>
-<td>The APNs <strong>Public certificate</strong> of this application.</td>
-</tr>
-<tr>
-<td>privateKey</td>
-<td>String</td>
-<td>The APNs <strong>Private key</strong> of this application.</td>
-</tr>
-<tr>
-<td>isSandbox</td>
-<td>Boolean</td>
-<td>Flag indicating if this APNs was issued as a sandbox certificate. <strong>Default: false</strong></td>
 </tr>
 </tbody></table>
 <h2 id='push-notification-credentials-get-credentials'>Get Credentials</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{push_notification_credentials_link}}'</span> <span class="se">\</span>
