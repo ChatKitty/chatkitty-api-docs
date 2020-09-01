@@ -1205,7 +1205,7 @@ Parameter | Type | Description
 type | Enum | The type of this credentials set. Always [APNS](#push-notification-credentials-fcm).
 file | File | Multipart P12 certificate file to be [uploaded](#files-file-uploads).
 password | String | Password set when the APNs P12 certificate file was exported.
-isSandbox | Boolean | **Optional** Flag indicating if this APNs was issued as a sandbox certificate. **Default: false**
+isSandbox | Boolean | **Optional** Flag indicating if this APNs certificate was issued as a sandbox certificate. **Default: false**
 
 ## Create FCM Credential
 
