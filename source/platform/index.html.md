@@ -469,13 +469,27 @@ This endpoint creates a new channel.
 ### Request Parameters
 Parameter | Type | Description 
 --------- | ----------- | -----------
-type | Enum | The type of the channel. __Possible values__ are [OPEN](#channel-open-channel), [PUBLIC](#channel-public-channel), [PRIVATE](#channel-private-channel), and [DIRECT](#channel-direct-channel)
-name | String | The name of the channel
+type | Enum | The type of the channel. __Possible values__ are [OPEN](#channel-open-channel), [PUBLIC](#channel-public-channel), [PRIVATE](#channel-private-channel), and [DIRECT](#channel-direct-channel).
 
-#### Direct Channel Parameters
+#### Open Channel Parameters
+Parameter | Type | Description
+--------- | ----------- | -----------
+name | String | __Optional:__ The name of the channel.
+
+#### Public Channel Parameters
 Parameter | Type | Description 
 --------- | ----------- | -----------
-members | Link Array | Self links of the members of this channel. The same direct channel is always returned for the same set of members
+name | String | __Optional:__ The name of the channel.
+
+#### Private Channel Parameters
+Parameter | Type | Description
+--------- | ----------- | -----------
+name | String | __Optional:__ The name of the channel.
+
+#### Direct Channel Parameters
+Parameter | Type | Description
+--------- | ----------- | -----------
+members | Link Array | Self links of the members of this channel. The same direct channel is always returned for the same set of members.
 
 ## Get Channels
 ```shell
