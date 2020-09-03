@@ -904,6 +904,16 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 <td><a href="#channel-create-a-channel">POST</a>, <a href="#channel-get-channels">GET</a></td>
 <td>Channels belonging to this application.</td>
 </tr>
+<tr>
+<td><a href="#message">messages</a></td>
+<td><a href="#message-create-a-message">POST</a>, <a href="#message-get-messages">GET</a></td>
+<td>Messages belonging to this application.</td>
+</tr>
+<tr>
+<td><a href="#push-notification-credentials">pushNotificationCredentials</a></td>
+<td>POST, <a href="#push-notification-credentials-get-credentials">GET</a></td>
+<td>Push Notification Credentials belonging to this application.</td>
+</tr>
 </tbody></table>
 <h2 id='application-templated-hal-links'>Templated HAL links</h2>
 <table><thead>
@@ -921,12 +931,7 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 <tr>
 <td><a href="#channel">find:channels</a></td>
 <td><a href="#channel-get-channels">GET</a></td>
-<td>Finds channels belonging to this application. Supports searching channels by <strong>member usernames</strong>.</td>
-</tr>
-<tr>
-<td><a href="#channel-direct-channel">find:directChannels</a></td>
-<td><a href="#channel-get-channels">GET</a></td>
-<td>Finds <strong>direct channels</strong> belonging to this application. Supports searching <strong>direct channels</strong> by <strong>member usernames</strong>.</td>
+<td>Finds channels belonging to this application. Supports searching channels by <strong>member usernames</strong> and filtering by <strong>direct channels</strong>.</td>
 </tr>
 </tbody></table>
 <h2 id='application-get-application'>Get Application</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{application_link}}'</span> <span class="se">\</span>
@@ -954,9 +959,6 @@ This is the only URL needed to discover the rest of the Platform API as every ot
     </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"directChannels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/direct"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
     </span><span class="nl">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/messages"</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -969,10 +971,6 @@ This is the only URL needed to discover the rest of the Platform API as every ot
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"find:channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/members{?page,size}"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"templated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"find:directChannels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/direct{?page,size,members}"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"templated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -1389,9 +1387,6 @@ New users cannot be added to a direct channel and there can only exist one direc
     </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"directChannels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/direct"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
     </span><span class="nl">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/messages"</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -1404,10 +1399,6 @@ New users cannot be added to a direct channel and there can only exist one direc
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"find:channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/members{?page,size}"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"templated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"find:directChannels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/direct{?page,size,members}"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"templated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -2164,9 +2155,6 @@ my_apns_certificate_password
     </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"directChannels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/direct"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
     </span><span class="nl">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/messages"</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -2179,10 +2167,6 @@ my_apns_certificate_password
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"find:channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/members{?page,size}"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"templated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"find:directChannels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/direct{?page,size,members}"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"templated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -2565,9 +2549,6 @@ A <b>maximum of 10</b> challenge tokens can exists for a user.
     </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"directChannels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/direct"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
     </span><span class="nl">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/messages"</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -2580,10 +2561,6 @@ A <b>maximum of 10</b> challenge tokens can exists for a user.
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"find:channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/members{?page,size}"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"templated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"find:directChannels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels/direct{?page,size,members}"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"templated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
