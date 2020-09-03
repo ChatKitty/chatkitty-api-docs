@@ -21,7 +21,7 @@ The Platform API provides a RESTful interface for administrators and server-side
 their ChatKitty applications. 
 
 <aside class="success">
-ChatKitty provides a <a href="https://api.chatkitty.com/v1/explorer/index.html#hkey0=Content-Type&hval0=application/json&uri=/v1/applications/me">API Explorer</a> to 
+ChatKitty provides an <a href="https://api.chatkitty.com/v1/explorer/index.html#hkey0=Content-Type&hval0=application/json&uri=/v1/applications/me">API Explorer</a> to
 access the Platform API.
 </aside>
 
@@ -450,7 +450,7 @@ Parameter | Type | Description
 type | Enum | The type of the channel. __Possible values__ are [OPEN](#channel-open-channel), [PUBLIC](#channel-public-channel), [PRIVATE](#channel-private-channel), and [DIRECT](#channel-direct-channel)
 name | String | The name of the channel
 
-#### Direct Channel
+#### Direct Channel Parameters
 Parameter | Type | Description 
 --------- | ----------- | -----------
 members | Link Array | Self links of the members of this channel. The same direct channel is always returned for the same set of members
@@ -865,12 +865,12 @@ Parameter | Type | Description
 --------- | ----------- | -----------
 type | Enum | The type of message. __Possible values__ are [TEXT](#message-text-message) and [FILE](#message-file-message)
 
-#### System Text Message
+#### System Text Message Parameters
 Parameter | Type | Description 
 --------- | ----------- | -----------
 body | String | The text body of the message
 
-#### System File Upload Message
+#### System File Upload Message Parameters
 
 > To upload a system file message:
 
@@ -904,7 +904,7 @@ Parameter | Type | Description
 file | File | Multipart file to be [uploaded](#files-file-uploads).
 groupTag | String | __Optional:__ Tag to group file message by (like an album name). __Present if__ this file message is part of a file message group.
 
-#### System External File Message
+#### System External File Message Parameters
 
 > This creates a new system external file message:
 
@@ -1086,7 +1086,7 @@ Authorization: Bearer {{access_token}}
       "href": "https://api.chatkitty.com/v1/applications/1/channels/2"
     },
     "messages": {
-      "href": "https://api.chatkitty.com/v1/applications/2/channels/2/messages"
+      "href": "https://api.chatkitty.com/v1/applications/1/channels/2/messages"
     },
     "application": {
       "href": "https://api.chatkitty.com/v1/applications/1"
@@ -1101,9 +1101,16 @@ This endpoint deletes a message.
 `DELETE {{message_link}}`
 
 # Push Notification Credentials
-Register your [Firebase Cloud Messaging](https://firebase.google.com/products/cloud-messaging) ([FCM](#push-notification-credentials-fcm)) 
-and/or [Apple Push Notification service](https://developer.apple.com/go/?id=push-notifications) ([APNs](#push-notification-credentials-apns)) 
+Register your [Apple Push Notification service](https://developer.apple.com/go/?id=push-notifications) ([APNs](#push-notification-credentials-apns))
+and/or [Firebase Cloud Messaging](https://firebase.google.com/products/cloud-messaging) ([FCM](#push-notification-credentials-fcm))
 credentials to begin receiving push notifications from the ChatKitty platform. 
+
+## APNs
+Follow the introductions [here](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_certificate-based_connection_to_apns)
+to create an APNs certificate for your application.
+
+Once you create your APNs certificate, export it as a P12 file and use it as the **file** property in the **Create APNs Credentials** file upload [POST](#push-notification-credentials-create-apns-credential)
+request body.
 
 ## FCM
 Create a new Firebase Cloud Messaging **Server Key**, from the [Firebase Console](https://console.firebase.google.com/) 
@@ -1112,48 +1119,93 @@ go to **Project settings** > **Cloud Messaging** > **Project credentials** > **A
 Once you create your Server Key, use it as the **API Key** property in the **Create FCM Credentials** [POST](#push-notification-credentials-create-fcm-credential) 
 request body.
 
-## APNs
-Follow the introductions [here](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_certificate-based_connection_to_apns) 
-to create an APNs certification for your application.
-
-Using `openssl`, extract the public certificate and private key from your .P12 file.
-> Public certificate:
-
-```
-openssl pkcs12 -in your_P12_file.pfx -clcerts -nokeys -out public.pem
-```
-
-> Private key:
-
-```
-openssl pkcs12 -in your_P12_file.pfx -nocerts -out private.pem
-```
-
-Use the contents of the public certificate as the **certificate** property, and the private key as the **private key** 
-property in the **Create FCM Credentials** [POST](#push-notification-credentials-create-apns-credential) 
-
 ## Properties
 Name | Type | Description 
 --------- | ----------- | -----------
 type | Enum | The type of this credentials set. __Possible values__ are [FCM](#push-notification-credentials-fcm), and [APNs](#push-notification-credentials-apns)
+
+### APNs Credential Properties
+Name | Type | Description
+--------- | ----------- | -----------
+certificate | String | The APNs **Public certificate** of this application.
+privateKey | String | The APNs **Private key** of this application.
+isSandbox | Boolean | Flag indicating if this APNs was issued as a sandbox certificate.
 
 ### FCM Credential Properties
 Name | Type | Description 
 --------- | ----------- | -----------
 apiKey | String | The FCM **Server Key** of this application.
 
-### APNs Credential Properties
-Name | Type | Description 
---------- | ----------- | -----------
-certificate | String | The APNs **Public certificate** of this application.
-privateKey | String | The APNs **Private key** of this application.
-isSandbox | Boolean | Flag indicating if this APNs was issued as a sandbox certificate.
-
 ## HAL links
 Link | Methods | Description
 --------- | ----------- | -----------
 [self](#push-notification-credentials) | [GET](#push-notification-credentials-get-credential), [DELETE](#push-notification-credentials-delete-credential) | Self link to this set of credentials.
-[application](#application) | [GET](#application-get-application) | Link to your application resource. 
+[application](#application) | [GET](#application-get-application) | Link to your application resource.
+
+## Create APNs Credential
+
+> This creates a new APNS credential:
+
+```shell
+curl --location --request POST '{{push_notification_credentials_link}}' \
+--header 'Content-Type: multipart/form-data' \
+--header 'Authorization: Bearer {{access_token}}' \
+--form 'type=APNS' \
+--form 'file=@./files/apns_certificate_file.p12' \
+--form 'password=my_apns_certificate_password'
+```
+
+```http
+POST / HTTP/1.1
+Host: {{push_notification_credentials_link}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: Bearer {{access_token}}
+
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="type"
+
+APNS
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="./files/apns_certificate_file.p12"
+Content-Type: application/x-pkcs12
+
+(data)
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="password"
+
+my_apns_certificate_password
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+```
+
+> The command above returns an APNs push notification credential HAL resource:
+
+```json
+{
+    "type": "APNS",
+    "certificate": "{{your_public_cert}}",
+    "privateKey": "{{your_private_key}}",
+    "_links": {
+        "self": {
+            "href": "https://api.chatkitty.com/v1/applications/1/push_notification_credentials/2"
+        },
+        "application": {
+            "href": "https://api.chatkitty.com/v1/applications/1"
+        }
+    }
+}
+```
+This endpoint [uploads](#files-file-uploads) a new set of APNs credentials.
+
+### HTTP Request
+`POST {{push_notification_credentials_link}}`
+
+### File Upload Request Parameters
+Parameter | Type | Description 
+--------- | ----------- | -----------
+type | Enum | The type of this credentials set. Always [APNS](#push-notification-credentials-apns).
+file | File | Multipart P12 certificate file to be [uploaded](#files-file-uploads).
+password | String | Password set when the APNs P12 certificate file was exported.
+isSandbox | Boolean | **Optional:** Flag indicating if this APNs certificate was issued as a sandbox certificate. **Default: false**
 
 ## Create FCM Credential
 
@@ -1203,68 +1255,10 @@ This endpoint creates a new set of FCM credentials.
 `POST {{push_notification_credentials_link}}`
 
 ### Request Parameters
-Parameter | Type | Description 
+Parameter | Type | Description
 --------- | ----------- | -----------
 type | Enum | The type of this credentials set. Always [FCM](#push-notification-credentials-fcm).
 apiKey | String | The FCM **Server Key** of this application.
-
-## Create APNs Credential
-
-> This creates a new APNS credential:
-
-```shell
-curl --location --request POST '{{push_notification_credentials_link}}' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer {{access_token}}' \
---data-raw '{
-    "type": "APNS",
-    "certificate": "{{your_public_cert}}",
-    "privateKey": "{{your_private_key}}"
-}'
-```
-
-```http
-POST / HTTP/1.1
-Host: {{push_notification_credentials_link}}
-Content-Type: application/json
-Authorization: Bearer {{access_token}}
-
-{
-    "type": "APNS",
-    "certificate": "{{your_public_cert}}",
-    "privateKey": "{{your_private_key}}"
-}
-```
-
-> The command above returns a FCM push notification credential HAL resource:
-
-```json
-{
-    "type": "APNS",
-    "certificate": "{{your_public_cert}}",
-    "privateKey": "{{your_private_key}}",
-    "_links": {
-        "self": {
-            "href": "https://api.chatkitty.com/v1/applications/1/push_notification_credentials/2"
-        },
-        "application": {
-            "href": "https://api.chatkitty.com/v1/applications/1"
-        }
-    }
-}
-```
-This endpoint creates a new set of APNs credentials.
-
-### HTTP Request
-`POST {{push_notification_credentials_link}}`
-
-### Request Parameters
-Parameter | Type | Description 
---------- | ----------- | -----------
-type | Enum | The type of this credentials set. Always [APNS](#push-notification-credentials-fcm).
-certificate | String | The APNs **Public certificate** of this application.
-privateKey | String | The APNs **Private key** of this application.
-isSandbox | Boolean | Flag indicating if this APNs was issued as a sandbox certificate. **Default: false**
 
 ## Get Credentials
 ```shell
