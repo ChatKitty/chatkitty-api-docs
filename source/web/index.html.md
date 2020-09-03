@@ -600,7 +600,16 @@ Delivery receipts are automatically created by the ChatKitty platform and this S
 > Get delivery receipts for a message
 
 ```javascript
-// TODO
+kitty.getMessageDeliveryReceipts(
+  message,
+  function(result) {
+    if (result.isSuccess) {
+     for (let receipt of result.receipts) {
+        let user = receipt.user
+     }
+    }
+  }
+);
 ```
 
 You can get delivery receipts for a [message](#messages) by calling the `ChatKitty.getMessageDeliveryReceipts(Message, function)` method.
@@ -618,17 +627,33 @@ When a user reads a message for the first time, a read receipt is created.
 > Marking a message as read
 
 ```javascript
-// TODO
+kitty.markMessageRead(
+  message,
+  function(result) {
+    if (result.isSuccess) {
+     // Handle success
+    }
+  }
+);
 ```
 
-You can mark a [message](#messages) as read by calling the `ChatKitty.readMessage(Message, function)` method. Mark a message
+You can mark a [message](#messages) as read by calling the `ChatKitty.markMessageRead(Message, function)` method. Mark a message
 as read when a message is displayed to the current user.
 
 ## Get message read receipts
 > Get read receipts for a message
 
 ```javascript
-// TODO
+kitty.getReadReceipts(
+  message,
+  function(result) {
+    if (result.isSuccess) {
+     for (let receipt of result.receipts) {
+        let user = receipt.user
+     }
+    }
+  }
+);
 ```
 
 You can get read receipts for a message by calling the `ChatKitty.getMessageReadReceipts(Message, function)` method.
