@@ -369,6 +369,9 @@
                 <a href="#application-hal-links" class="toc-h2 toc-link" data-title="HAL links">HAL links</a>
               </li>
               <li>
+                <a href="#application-templated-hal-links" class="toc-h2 toc-link" data-title="Templated HAL links">Templated HAL links</a>
+              </li>
+              <li>
                 <a href="#application-get-application" class="toc-h2 toc-link" data-title="Get Application">Get Application</a>
               </li>
           </ul>
@@ -766,10 +769,10 @@ and the page would include a JSON array in its <code>_embedded</code> property n
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="err">...</span><span class="w">
+      </span><span class="err">//</span><span class="w"> </span><span class="err">...</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="err">...</span><span class="w">
+  </span><span class="err">//</span><span class="w"> </span><span class="err">...</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h2 id='pagination-page-metadata'>Page Metadata</h2>
 <p>Metadata about a page containing its size, total number of elements in the collection, total number of pages in the collection, and the page number.</p>
@@ -898,8 +901,32 @@ This is the only URL needed to discover the rest of the Platform API as every ot
 </tr>
 <tr>
 <td><a href="#channel">channels</a></td>
-<td><a href="#channel-create-a-channel">POST</a>, <a href="#channel-get-a-channel">GET</a></td>
+<td><a href="#channel-create-a-channel">POST</a>, <a href="#channel-get-channels">GET</a></td>
 <td>Channels belonging to this application.</td>
+</tr>
+</tbody></table>
+<h2 id='application-templated-hal-links'>Templated HAL links</h2>
+<table><thead>
+<tr>
+<th>Link</th>
+<th>Methods</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="#user">find:users</a></td>
+<td><a href="#user-get-users">GET</a></td>
+<td>Finds users belonging to this application. Supports searching users by <strong>username</strong>.</td>
+</tr>
+<tr>
+<td><a href="#channel">find:channels</a></td>
+<td><a href="#channel-get-channels">GET</a></td>
+<td>Finds channels belonging to this application. Supports searching channels by <strong>member usernames</strong>.</td>
+</tr>
+<tr>
+<td><a href="#channel-direct-channel">find:directChannels</a></td>
+<td><a href="#channel-get-channels">GET</a></td>
+<td>Finds <strong>direct channels</strong> belonging to this application. Supports searching <strong>direct channels</strong> by <strong>member usernames</strong>.</td>
 </tr>
 </tbody></table>
 <h2 id='application-get-application'>Get Application</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{application_link}}'</span> <span class="se">\</span>
@@ -926,6 +953,27 @@ This is the only URL needed to discover the rest of the Platform API as every ot
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"directChannels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/channels/direct"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/messages"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"pushNotificationCredentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/push_notification_credentials"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"find:users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/users/name{?page,size}"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"templated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"find:channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/channels/members{?page,size}"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"templated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"find:directChannels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/channels/direct{?page,size,members}"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"templated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1340,6 +1388,27 @@ New users cannot be added to a direct channel and there can only exist one direc
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"directChannels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/channels/direct"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/messages"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"pushNotificationCredentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/push_notification_credentials"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"find:users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/users/name{?page,size}"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"templated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"find:channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/channels/members{?page,size}"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"templated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"find:directChannels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/channels/direct{?page,size,members}"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"templated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -2094,6 +2163,27 @@ my_apns_certificate_password
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"directChannels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/channels/direct"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/messages"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"pushNotificationCredentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/push_notification_credentials"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"find:users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/users/name{?page,size}"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"templated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"find:channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/channels/members{?page,size}"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"templated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"find:directChannels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/channels/direct{?page,size,members}"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"templated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -2474,6 +2564,27 @@ A <b>maximum of 10</b> challenge tokens can exists for a user.
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/channels"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"directChannels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/channels/direct"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/messages"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"pushNotificationCredentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/push_notification_credentials"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"find:users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/users/name{?page,size}"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"templated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"find:channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/channels/members{?page,size}"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"templated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"find:directChannels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:9001/chat/v1/applications/502/channels/direct{?page,size,members}"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"templated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
