@@ -351,7 +351,7 @@ Authorization: Bearer {{access_token}}
       "href": "https://api.chatkitty.com/v1/applications/1/push_notification_credentials"
     },
     "find:users": {
-      "href": "https://api.chatkitty.com/v1/applications/1/users{?page,size}",
+      "href": "https://api.chatkitty.com/v1/applications/1/users{?page,size,name}",
       "templated": true
     },
     "find:channels": {
@@ -764,7 +764,7 @@ Authorization: Bearer {{access_token}}
       "href": "https://api.chatkitty.com/v1/applications/1/push_notification_credentials"
     },
     "find:users": {
-      "href": "https://api.chatkitty.com/v1/applications/1/users{?page,size}",
+      "href": "https://api.chatkitty.com/v1/applications/1/users{?page,size,name}",
       "templated": true
     },
     "find:channels": {
@@ -1436,7 +1436,7 @@ Authorization: Bearer {{access_token}}
       "href": "https://api.chatkitty.com/v1/applications/1/push_notification_credentials"
     },
     "find:users": {
-      "href": "https://api.chatkitty.com/v1/applications/1/users{?page,size}",
+      "href": "https://api.chatkitty.com/v1/applications/1/users{?page,size,name}",
       "templated": true
     },
     "find:channels": {
@@ -1842,7 +1842,7 @@ Authorization: Bearer {{access_token}}
       "href": "https://api.chatkitty.com/v1/applications/1/push_notification_credentials"
     },
     "find:users": {
-      "href": "https://api.chatkitty.com/v1/applications/1/users{?page,size}",
+      "href": "https://api.chatkitty.com/v1/applications/1/users{?page,size,name}",
       "templated": true
     },
     "find:channels": {
