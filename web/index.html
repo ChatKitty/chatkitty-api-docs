@@ -401,6 +401,21 @@
               <li>
                 <a href="#messages-send-a-message" class="toc-h2 toc-link" data-title="Send a message">Send a message</a>
               </li>
+              <li>
+                <a href="#messages-message-delivery-receipts" class="toc-h2 toc-link" data-title="Message delivery receipts">Message delivery receipts</a>
+              </li>
+              <li>
+                <a href="#messages-get-message-delivery-receipts" class="toc-h2 toc-link" data-title="Get message delivery receipts">Get message delivery receipts</a>
+              </li>
+              <li>
+                <a href="#messages-message-read-receipts" class="toc-h2 toc-link" data-title="Message read receipts">Message read receipts</a>
+              </li>
+              <li>
+                <a href="#messages-read-a-message" class="toc-h2 toc-link" data-title="Read a message">Read a message</a>
+              </li>
+              <li>
+                <a href="#messages-get-message-read-receipts" class="toc-h2 toc-link" data-title="Get message read receipts">Get message read receipts</a>
+              </li>
           </ul>
       </li>
   </ul>
@@ -836,6 +851,18 @@ This method returns a <code>ChannelEventListenerRegistration</code> object.</p>
 <td><code>PARTICIPANT.CHANGED_STATUS</code></td>
 <td>Fired when a participant has entered or exited a channel.</td>
 </tr>
+</tbody></table>
+<h4 id='channels-listen-to-channel-events-registering-a-channel-event-listener-group-channel-event-types'>Group Channel event types</h4>
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>MESSAGE.DELIVERY_RECEIPT.CREATED</code></td>
+<td>Fired when a message has been delivered in a group channel.</td>
+</tr>
 <tr>
 <td><code>KEYSTROKES.CREATED</code></td>
 <td>Fired when a participant has started typing characters.</td>
@@ -959,6 +986,71 @@ the <code>ChatKitty.sendChannelKeyStrokes(Channel, CreateReplyThreadKeystrokesRe
 <span class="p">);</span>
 </code></pre></div>
 <p>You can send a message to a <a href="#channels">channel</a> by calling the <code>ChatKitty.sendChannelMessage(Channel, CreateMessageRequest, function)</code> method.</p>
+<h2 id='messages-message-delivery-receipts'>Message delivery receipts</h2>
+<p>With message delivery receipts, you can see when messages get delivered on another user&#39;s devices.</p>
+
+<p>When a user receives or fetches a message sent by another user for the first time, a delivery receipt is created.</p>
+
+<p>Delivery receipts are automatically created by the ChatKitty platform and this SDK.</p>
+
+<aside class="notice">
+ Delivery receipts are only created for messages sent inside <b>group channels</b>.
+</aside>
+<h2 id='messages-get-message-delivery-receipts'>Get message delivery receipts</h2>
+<blockquote>
+<p>Get delivery receipts for a message</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">getMessageDeliveryReceipts</span><span class="p">(</span>
+  <span class="nx">message</span><span class="p">,</span>
+  <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
+     <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">receipt</span> <span class="k">of</span> <span class="nx">result</span><span class="p">.</span><span class="nx">receipts</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">receipt</span><span class="p">.</span><span class="nx">user</span>
+     <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">);</span>
+</code></pre></div>
+<p>You can get delivery receipts for a <a href="#messages">message</a> by calling the <code>ChatKitty.getMessageDeliveryReceipts(Message, function)</code> method.</p>
+<h2 id='messages-message-read-receipts'>Message read receipts</h2>
+<p>With message read receipts, you can see when messages are read by other users</p>
+
+<p>When a user reads a message for the first time, a read receipt is created.</p>
+
+<aside class="notice">
+ Read receipts are only created for messages sent inside <b>group channels</b>.
+</aside>
+<h2 id='messages-read-a-message'>Read a message</h2>
+<blockquote>
+<p>Marking a message as read</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">markMessageRead</span><span class="p">(</span>
+  <span class="nx">message</span><span class="p">,</span>
+  <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
+     <span class="c1">// Handle success</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">);</span>
+</code></pre></div>
+<p>You can mark a <a href="#messages">message</a> as read by calling the <code>ChatKitty.markMessageRead(Message, function)</code> method. Mark a message
+as read when a message is displayed to the current user.</p>
+<h2 id='messages-get-message-read-receipts'>Get message read receipts</h2>
+<blockquote>
+<p>Get read receipts for a message</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">getReadReceipts</span><span class="p">(</span>
+  <span class="nx">message</span><span class="p">,</span>
+  <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
+     <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">receipt</span> <span class="k">of</span> <span class="nx">result</span><span class="p">.</span><span class="nx">receipts</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">receipt</span><span class="p">.</span><span class="nx">user</span>
+     <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">);</span>
+</code></pre></div>
+<p>You can get read receipts for a message by calling the <code>ChatKitty.getMessageReadReceipts(Message, function)</code> method.</p>
 
   </div>
   <div class="dark-box">
