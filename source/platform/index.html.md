@@ -355,7 +355,7 @@ Authorization: Bearer {{access_token}}
       "templated": true
     },
     "find:channels": {
-      "href": "https://api.chatkitty.com/v1/applications/1/channels/members{?page,size}",
+      "href": "https://api.chatkitty.com/v1/applications/1/channels/members{?page,size,direct,members}",
       "templated": true
     }
   }
@@ -768,7 +768,7 @@ Authorization: Bearer {{access_token}}
       "templated": true
     },
     "find:channels": {
-      "href": "https://api.chatkitty.com/v1/applications/1/channels/members{?page,size}",
+      "href": "https://api.chatkitty.com/v1/applications/1/channels/members{?page,size,direct,members}",
       "templated": true
     }
   }
@@ -1440,7 +1440,7 @@ Authorization: Bearer {{access_token}}
       "templated": true
     },
     "find:channels": {
-      "href": "https://api.chatkitty.com/v1/applications/1/channels/members{?page,size}",
+      "href": "https://api.chatkitty.com/v1/applications/1/channels/members{?page,size,direct,members}",
       "templated": true
     }
   }
@@ -1846,7 +1846,7 @@ Authorization: Bearer {{access_token}}
       "templated": true
     },
     "find:channels": {
-      "href": "https://api.chatkitty.com/v1/applications/1/channels/members{?page,size}",
+      "href": "https://api.chatkitty.com/v1/applications/1/channels/members{?page,size,direct,members}",
       "templated": true
     }
   }
