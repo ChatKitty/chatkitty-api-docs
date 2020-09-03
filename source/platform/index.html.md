@@ -222,10 +222,10 @@ and the page would include a JSON array in its `_embedded` property named `users
           }
         }
       },
-      ...
+      // ...
     ]
   },
-  ...
+  // ...
 }
 ```
 
@@ -303,7 +303,14 @@ Link | Methods | Description
 --------- | ----------- | -----------
 [self](#application) | [GET](#application-get-application) | Self link to this application. 
 [users](#user) | [POST](#user-create-a-user), [GET](#user-get-users) | Users belonging to this application.
-[channels](#channel) | [POST](#channel-create-a-channel), [GET](#channel-get-a-channel) | Channels belonging to this application.
+[channels](#channel) | [POST](#channel-create-a-channel), [GET](#channel-get-channels) | Channels belonging to this application.
+
+## Templated HAL links
+Link | Methods | Description
+--------- | ----------- | -----------
+[find:users](#user) | [GET](#user-get-users) | Finds users belonging to this application. Supports searching users by __username__.
+[find:channels](#channel) | [GET](#channel-get-channels) | Finds channels belonging to this application. Supports searching channels by __member usernames__.
+[find:directChannels](#channel-direct-channel) | [GET](#channel-get-channels) | Finds __direct channels__ belonging to this application. Supports searching __direct channels__ by __member usernames__.
 
 ## Get Application
 ```shell
@@ -335,6 +342,27 @@ Authorization: Bearer {{access_token}}
     },
     "channels": {
       "href": "https://api.chatkitty.com/v1/applications/1/channels"
+    },
+    "directChannels": {
+      "href": "http://localhost:9001/chat/v1/applications/502/channels/direct"
+    },
+    "messages": {
+      "href": "http://localhost:9001/chat/v1/applications/502/messages"
+    },
+    "pushNotificationCredentials": {
+      "href": "http://localhost:9001/chat/v1/applications/502/push_notification_credentials"
+    },
+    "find:users": {
+      "href": "http://localhost:9001/chat/v1/applications/502/users/name{?page,size}",
+      "templated": true
+    },
+    "find:channels": {
+      "href": "http://localhost:9001/chat/v1/applications/502/channels/members{?page,size}",
+      "templated": true
+    },
+    "find:directChannels": {
+      "href": "http://localhost:9001/chat/v1/applications/502/channels/direct{?page,size,members}",
+      "templated": true
     }
   }
 }
@@ -734,6 +762,27 @@ Authorization: Bearer {{access_token}}
     },
     "channels": {
       "href": "https://api.chatkitty.com/v1/applications/1/channels"
+    },
+    "directChannels": {
+      "href": "http://localhost:9001/chat/v1/applications/502/channels/direct"
+    },
+    "messages": {
+      "href": "http://localhost:9001/chat/v1/applications/502/messages"
+    },
+    "pushNotificationCredentials": {
+      "href": "http://localhost:9001/chat/v1/applications/502/push_notification_credentials"
+    },
+    "find:users": {
+      "href": "http://localhost:9001/chat/v1/applications/502/users/name{?page,size}",
+      "templated": true
+    },
+    "find:channels": {
+      "href": "http://localhost:9001/chat/v1/applications/502/channels/members{?page,size}",
+      "templated": true
+    },
+    "find:directChannels": {
+      "href": "http://localhost:9001/chat/v1/applications/502/channels/direct{?page,size,members}",
+      "templated": true
     }
   }
 }
@@ -1392,6 +1441,27 @@ Authorization: Bearer {{access_token}}
     },
     "channels": {
       "href": "https://api.chatkitty.com/v1/applications/1/channels"
+    },
+    "directChannels": {
+      "href": "http://localhost:9001/chat/v1/applications/502/channels/direct"
+    },
+    "messages": {
+      "href": "http://localhost:9001/chat/v1/applications/502/messages"
+    },
+    "pushNotificationCredentials": {
+      "href": "http://localhost:9001/chat/v1/applications/502/push_notification_credentials"
+    },
+    "find:users": {
+      "href": "http://localhost:9001/chat/v1/applications/502/users/name{?page,size}",
+      "templated": true
+    },
+    "find:channels": {
+      "href": "http://localhost:9001/chat/v1/applications/502/channels/members{?page,size}",
+      "templated": true
+    },
+    "find:directChannels": {
+      "href": "http://localhost:9001/chat/v1/applications/502/channels/direct{?page,size,members}",
+      "templated": true
     }
   }
 }
@@ -1784,6 +1854,27 @@ Authorization: Bearer {{access_token}}
     },
     "channels": {
       "href": "https://api.chatkitty.com/v1/applications/1/channels"
+    },
+    "directChannels": {
+      "href": "http://localhost:9001/chat/v1/applications/502/channels/direct"
+    },
+    "messages": {
+      "href": "http://localhost:9001/chat/v1/applications/502/messages"
+    },
+    "pushNotificationCredentials": {
+      "href": "http://localhost:9001/chat/v1/applications/502/push_notification_credentials"
+    },
+    "find:users": {
+      "href": "http://localhost:9001/chat/v1/applications/502/users/name{?page,size}",
+      "templated": true
+    },
+    "find:channels": {
+      "href": "http://localhost:9001/chat/v1/applications/502/channels/members{?page,size}",
+      "templated": true
+    },
+    "find:directChannels": {
+      "href": "http://localhost:9001/chat/v1/applications/502/channels/direct{?page,size,members}",
+      "templated": true
     }
   }
 }
