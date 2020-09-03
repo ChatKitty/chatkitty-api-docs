@@ -351,11 +351,11 @@ Authorization: Bearer {{access_token}}
       "href": "https://api.chatkitty.com/v1/applications/1/push_notification_credentials"
     },
     "find:users": {
-      "href": "https://api.chatkitty.com/v1/applications/1/users/name{?page,size}",
+      "href": "https://api.chatkitty.com/v1/applications/1/users{?page,size}",
       "templated": true
     },
     "find:channels": {
-      "href": "https://api.chatkitty.com/v1/applications/1/channels/members{?page,size,direct,members}",
+      "href": "https://api.chatkitty.com/v1/applications/1/channels{?page,size,direct,members}",
       "templated": true
     }
   }
@@ -764,11 +764,11 @@ Authorization: Bearer {{access_token}}
       "href": "https://api.chatkitty.com/v1/applications/1/push_notification_credentials"
     },
     "find:users": {
-      "href": "https://api.chatkitty.com/v1/applications/1/users/name{?page,size}",
+      "href": "https://api.chatkitty.com/v1/applications/1/users{?page,size}",
       "templated": true
     },
     "find:channels": {
-      "href": "https://api.chatkitty.com/v1/applications/1/channels/members{?page,size,direct,members}",
+      "href": "https://api.chatkitty.com/v1/applications/1/channels{?page,size,direct,members}",
       "templated": true
     }
   }
@@ -1436,11 +1436,11 @@ Authorization: Bearer {{access_token}}
       "href": "https://api.chatkitty.com/v1/applications/1/push_notification_credentials"
     },
     "find:users": {
-      "href": "https://api.chatkitty.com/v1/applications/1/users/name{?page,size}",
+      "href": "https://api.chatkitty.com/v1/applications/1/users{?page,size}",
       "templated": true
     },
     "find:channels": {
-      "href": "https://api.chatkitty.com/v1/applications/1/channels/members{?page,size,direct,members}",
+      "href": "https://api.chatkitty.com/v1/applications/1/channels{?page,size,direct,members}",
       "templated": true
     }
   }
@@ -1842,11 +1842,11 @@ Authorization: Bearer {{access_token}}
       "href": "https://api.chatkitty.com/v1/applications/1/push_notification_credentials"
     },
     "find:users": {
-      "href": "https://api.chatkitty.com/v1/applications/1/users/name{?page,size}",
+      "href": "https://api.chatkitty.com/v1/applications/1/users{?page,size}",
       "templated": true
     },
     "find:channels": {
-      "href": "https://api.chatkitty.com/v1/applications/1/channels/members{?page,size,direct,members}",
+      "href": "https://api.chatkitty.com/v1/applications/1/channels{?page,size,direct,members}",
       "templated": true
     }
   }
