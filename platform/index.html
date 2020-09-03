@@ -1118,12 +1118,49 @@ New users cannot be added to a direct channel and there can only exist one direc
 <tr>
 <td>type</td>
 <td>Enum</td>
-<td>The type of the channel. <strong>Possible values</strong> are <a href="#channel-open-channel">OPEN</a>, <a href="#channel-public-channel">PUBLIC</a>, <a href="#channel-private-channel">PRIVATE</a>, and <a href="#channel-direct-channel">DIRECT</a></td>
+<td>The type of the channel. <strong>Possible values</strong> are <a href="#channel-open-channel">OPEN</a>, <a href="#channel-public-channel">PUBLIC</a>, <a href="#channel-private-channel">PRIVATE</a>, and <a href="#channel-direct-channel">DIRECT</a>.</td>
 </tr>
+</tbody></table>
+<h4 id='channel-create-a-channel-request-parameters-open-channel-parameters'>Open Channel Parameters</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
 <tr>
 <td>name</td>
 <td>String</td>
-<td>The name of the channel</td>
+<td><strong>Optional:</strong> The name of the channel.</td>
+</tr>
+</tbody></table>
+<h4 id='channel-create-a-channel-request-parameters-public-channel-parameters'>Public Channel Parameters</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td><strong>Optional:</strong> The name of the channel.</td>
+</tr>
+</tbody></table>
+<h4 id='channel-create-a-channel-request-parameters-private-channel-parameters'>Private Channel Parameters</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td><strong>Optional:</strong> The name of the channel.</td>
 </tr>
 </tbody></table>
 <h4 id='channel-create-a-channel-request-parameters-direct-channel-parameters'>Direct Channel Parameters</h4>
@@ -1137,7 +1174,7 @@ New users cannot be added to a direct channel and there can only exist one direc
 <tr>
 <td>members</td>
 <td>Link Array</td>
-<td>Self links of the members of this channel. The same direct channel is always returned for the same set of members</td>
+<td>Self links of the members of this channel. The same direct channel is always returned for the same set of members.</td>
 </tr>
 </tbody></table>
 <h2 id='channel-get-channels'>Get Channels</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{channels_link}}'</span> <span class="se">\</span>
