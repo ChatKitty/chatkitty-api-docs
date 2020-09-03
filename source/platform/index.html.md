@@ -304,13 +304,14 @@ Link | Methods | Description
 [self](#application) | [GET](#application-get-application) | Self link to this application. 
 [users](#user) | [POST](#user-create-a-user), [GET](#user-get-users) | Users belonging to this application.
 [channels](#channel) | [POST](#channel-create-a-channel), [GET](#channel-get-channels) | Channels belonging to this application.
+[messages](#message) | [POST](#message-create-a-message), [GET](#message-get-messages) | Messages belonging to this application.
+[pushNotificationCredentials](#push-notification-credentials) | POST, [GET](#push-notification-credentials-get-credentials) | Push Notification Credentials belonging to this application.
 
 ## Templated HAL links
 Link | Methods | Description
 --------- | ----------- | -----------
 [find:users](#user) | [GET](#user-get-users) | Finds users belonging to this application. Supports searching users by __username__.
-[find:channels](#channel) | [GET](#channel-get-channels) | Finds channels belonging to this application. Supports searching channels by __member usernames__.
-[find:directChannels](#channel-direct-channel) | [GET](#channel-get-channels) | Finds __direct channels__ belonging to this application. Supports searching __direct channels__ by __member usernames__.
+[find:channels](#channel) | [GET](#channel-get-channels) | Finds channels belonging to this application. Supports searching channels by __member usernames__ and filtering by __direct channels__.
 
 ## Get Application
 ```shell
@@ -343,9 +344,6 @@ Authorization: Bearer {{access_token}}
     "channels": {
       "href": "https://api.chatkitty.com/v1/applications/1/channels"
     },
-    "directChannels": {
-      "href": "https://api.chatkitty.com/v1/applications/1/channels/direct"
-    },
     "messages": {
       "href": "https://api.chatkitty.com/v1/applications/1/messages"
     },
@@ -358,10 +356,6 @@ Authorization: Bearer {{access_token}}
     },
     "find:channels": {
       "href": "https://api.chatkitty.com/v1/applications/1/channels/members{?page,size}",
-      "templated": true
-    },
-    "find:directChannels": {
-      "href": "https://api.chatkitty.com/v1/applications/1/channels/direct{?page,size,members}",
       "templated": true
     }
   }
@@ -763,9 +757,6 @@ Authorization: Bearer {{access_token}}
     "channels": {
       "href": "https://api.chatkitty.com/v1/applications/1/channels"
     },
-    "directChannels": {
-      "href": "https://api.chatkitty.com/v1/applications/1/channels/direct"
-    },
     "messages": {
       "href": "https://api.chatkitty.com/v1/applications/1/messages"
     },
@@ -778,10 +769,6 @@ Authorization: Bearer {{access_token}}
     },
     "find:channels": {
       "href": "https://api.chatkitty.com/v1/applications/1/channels/members{?page,size}",
-      "templated": true
-    },
-    "find:directChannels": {
-      "href": "https://api.chatkitty.com/v1/applications/1/channels/direct{?page,size,members}",
       "templated": true
     }
   }
@@ -1442,9 +1429,6 @@ Authorization: Bearer {{access_token}}
     "channels": {
       "href": "https://api.chatkitty.com/v1/applications/1/channels"
     },
-    "directChannels": {
-      "href": "https://api.chatkitty.com/v1/applications/1/channels/direct"
-    },
     "messages": {
       "href": "https://api.chatkitty.com/v1/applications/1/messages"
     },
@@ -1457,10 +1441,6 @@ Authorization: Bearer {{access_token}}
     },
     "find:channels": {
       "href": "https://api.chatkitty.com/v1/applications/1/channels/members{?page,size}",
-      "templated": true
-    },
-    "find:directChannels": {
-      "href": "https://api.chatkitty.com/v1/applications/1/channels/direct{?page,size,members}",
       "templated": true
     }
   }
@@ -1855,9 +1835,6 @@ Authorization: Bearer {{access_token}}
     "channels": {
       "href": "https://api.chatkitty.com/v1/applications/1/channels"
     },
-    "directChannels": {
-      "href": "https://api.chatkitty.com/v1/applications/1/channels/direct"
-    },
     "messages": {
       "href": "https://api.chatkitty.com/v1/applications/1/messages"
     },
@@ -1870,10 +1847,6 @@ Authorization: Bearer {{access_token}}
     },
     "find:channels": {
       "href": "https://api.chatkitty.com/v1/applications/1/channels/members{?page,size}",
-      "templated": true
-    },
-    "find:directChannels": {
-      "href": "https://api.chatkitty.com/v1/applications/1/channels/direct{?page,size,members}",
       "templated": true
     }
   }
