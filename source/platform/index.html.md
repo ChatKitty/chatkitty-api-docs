@@ -136,6 +136,7 @@ Authorization: {{access_token}}
       {
         "id": 2,
         "name": "102746681",
+        "displayName": "John Doe",
         "_links": {
           "self": {
             "href": "https://api.chatkitty.com/v1/applications/1/users/2"
@@ -695,6 +696,7 @@ Authorization: Bearer {{access_token}}
       {
         "id": 2,
         "name": "102746681",
+        "displayName": "John Doe",
         "_links": {
           "self": {
             "href": "https://api.chatkitty.com/v1/applications/1/users/2"
@@ -1475,6 +1477,7 @@ Name | Type | Description
 id | Long | 64 bit integer identifier associated with this user.
 name | String | The unique name of the user.
 displayName | String | Human readable name of this user that will be shown to other users.
+isGuest | Boolean | __Optional__ Included if this user was created as a guest.
 
 ## HAL links
 Link | Methods | Description
@@ -1538,6 +1541,7 @@ Parameter | Type | Description
 --------- | ----------- | -----------
 name | String | The unique name of the user.
 displayName | String | Human readable name of this user that will be shown to other users.
+isGuest | Boolean | __Optional__ Ture if this user should be created as a guest.
 
 ## Get Users
 ```shell
@@ -1817,6 +1821,7 @@ This endpoint updates a ChatKitty user.
 
 ### Updatable Properties
 - displayName
+- isGuest
 
 ## Delete a User
 ```shell
