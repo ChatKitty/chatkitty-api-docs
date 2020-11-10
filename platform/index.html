@@ -1,202 +1,823 @@
-<!-- HTML for static distribution bundle build -->
-<!DOCTYPE html>
-<html lang="en">
+
+<!doctype html>
+<html>
 <head>
-  <meta charset="UTF-8">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174267360-2"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-174267360-2');
+  </script>
+  <meta charset="utf-8">
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="../images/favicon-7d95b84d.ico" rel="icon" type="image/ico" />
   <title>Platform API Documentation</title>
-  <link rel="stylesheet" type="text/css" href="swagger-ui-bb87884e.css">
-  <link rel="icon" type="image/png" href="favicon-32x32-585fd601.png" sizes="32x32"/>
-  <link rel="icon" type="image/png" href="favicon-16x16-bfc9a105.png" sizes="16x16"/>
-  <style>
-      html {
-          -webkit-box-sizing: border-box;
-                  box-sizing: border-box;
-          overflow: -moz-scrollbars-vertical;
-          overflow-y: scroll;
-      }
 
-      *,
-      *:before,
-      *:after {
-          -webkit-box-sizing: inherit;
-                  box-sizing: inherit;
-      }
-
-      body {
-          margin: 0;
-          background: #fafafa;
-      }
+  <style media="screen">
+    .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s, .highlight .sa, .highlight .dl {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf, .highlight .fm {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv, .highlight .vm {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #f92672;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
   </style>
+  <style media="print">
+    * {
+      -webkit-transition: none !important;
+      transition: none !important;
+    }
+
+    .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #586e75;
+}
+.highlight .err {
+  color: #002b36;
+  background-color: #dc322f;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
+  color: #657b83;
+}
+.highlight .cp {
+  color: #b58900;
+}
+.highlight .nt {
+  color: #b58900;
+}
+.highlight .o, .highlight .ow {
+  color: #93a1a1;
+}
+.highlight .p, .highlight .pi {
+  color: #93a1a1;
+}
+.highlight .gi {
+  color: #859900;
+}
+.highlight .gd {
+  color: #dc322f;
+}
+.highlight .gh {
+  color: #268bd2;
+  background-color: #002b36;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #6c71c4;
+}
+.highlight .kc {
+  color: #cb4b16;
+}
+.highlight .kt {
+  color: #cb4b16;
+}
+.highlight .kd {
+  color: #cb4b16;
+}
+.highlight .s, .highlight .sa, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #859900;
+}
+.highlight .sr {
+  color: #2aa198;
+}
+.highlight .si {
+  color: #d33682;
+}
+.highlight .se {
+  color: #d33682;
+}
+.highlight .nn {
+  color: #b58900;
+}
+.highlight .nc {
+  color: #b58900;
+}
+.highlight .no {
+  color: #b58900;
+}
+.highlight .na {
+  color: #268bd2;
+}
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
+  color: #859900;
+}
+.highlight .ss {
+  color: #859900;
+}
+  </style>
+  <link href="../stylesheets/screen-171acb3b.css" rel="stylesheet" media="screen" />
+  <link href="../stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
+    <script src="../javascripts/all-e9bde216.js"></script>
+
+    <script>
+        $(function () {
+            setupCodeCopy();
+        });
+    </script>
 </head>
 
-<body>
-<div id="swagger-ui"></div>
+<body class="platform platform_index" data-languages="[&quot;shell&quot;,&quot;http&quot;]">
+<a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar-cad8cdcb.png" alt="" />
+      </span>
+</a>
+<div class="toc-wrapper">
+  <a href="/"><img src="../images/logo-2664c69a.png" class="logo" alt="" /></a>
+    <div class="lang-selector">
+          <a href="#" data-language-name="shell">shell</a>
+          <a href="#" data-language-name="http">http</a>
+    </div>
+    <div class="search">
+      <input type="text" class="search" id="input-search" placeholder="Search">
+    </div>
+    <ul class="search-results"></ul>
+  <ul id="toc" class="toc-list-h1">
+      <li>
+        <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+      </li>
+      <li>
+        <a href="#headers" class="toc-h1 toc-link" data-title="Headers">Headers</a>
+      </li>
+      <li>
+        <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+      </li>
+      <li>
+        <a href="#pagination" class="toc-h1 toc-link" data-title="Pagination">Pagination</a>
+          <ul class="toc-list-h2">
+              <li>
+                <a href="#pagination-properties" class="toc-h2 toc-link" data-title="Properties">Properties</a>
+              </li>
+              <li>
+                <a href="#pagination-hal-links" class="toc-h2 toc-link" data-title="HAL links">HAL links</a>
+              </li>
+              <li>
+                <a href="#pagination-embedded-properties" class="toc-h2 toc-link" data-title="Embedded properties">Embedded properties</a>
+              </li>
+              <li>
+                <a href="#pagination-page-metadata" class="toc-h2 toc-link" data-title="Page Metadata">Page Metadata</a>
+              </li>
+              <li>
+                <a href="#pagination-properties" class="toc-h2 toc-link" data-title="Properties">Properties</a>
+              </li>
+          </ul>
+      </li>
+      <li>
+        <a href="#files" class="toc-h1 toc-link" data-title="Files">Files</a>
+          <ul class="toc-list-h2">
+              <li>
+                <a href="#files-properties" class="toc-h2 toc-link" data-title="Properties">Properties</a>
+              </li>
+              <li>
+                <a href="#files-file-uploads" class="toc-h2 toc-link" data-title="File Uploads">File Uploads</a>
+              </li>
+              <li>
+                <a href="#files-external-files" class="toc-h2 toc-link" data-title="External Files">External Files</a>
+              </li>
+          </ul>
+      </li>
+      <li>
+        <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+      </li>
+      <li>
+        <a href="/platform/v1/" class="toc-h1 toc-link" data-title="Platform V1 API">V1</a>
+      </li>
+  </ul>
+    <ul class="toc-footer">
+        <li><a href='https://www.chatkitty.com'>&copy; ChatKitty 2020. All rights reserved</a></li>
+    </ul>
+</div>
+<div class="page-wrapper">
+  <div class="dark-box"></div>
+  <div class="content">
+    <h1 id='introduction'>Introduction</h1>
+<p>The Platform API provides a RESTful interface for administrators and server-side back-ends to manage
+their ChatKitty applications. </p>
 
-<script src="swagger-ui-bundle-e3d25fc9.js"></script>
-<script src="swagger-ui-standalone-preset-d605b59a.js"></script>
-<script>
-  window.onload = function () {
+<aside class="success">
+ChatKitty provides an <a href="https://api.chatkitty.com/v1/explorer/index.html#hkey0=Content-Type&hval0=application/json&uri=/v1/applications/me">API Explorer</a> to
+access the Platform API.
+</aside>
+<h1 id='headers'>Headers</h1>
+<p>Making a request to the Platform API requires HTTP <code>Content-Type</code> and <code>Authorization</code> headers.</p>
 
-    // Build a system
-    const ui = SwaggerUIBundle({
-      spec: /*intellij-swagger-spec-start*/{
-        "openapi": "3.0.3",
-        "info": {
-          "title": "ChatKitty Platform API",
-          "description": "Server-Side Platform API for ChatKitty",
-          "version": "0.0.4"
-        },
-        "externalDocs": {
-          "description": "Need Help? Check out our tutorials and guides.",
-          "url": "https://www.chatkitty.com/blog/posts/building-a-chat-app-with-react-native-and-firebase-part-1/"
-        },
-        "servers": [{
-          "url": "https://api.chatkitty.com/v1/applications/{applicationId}",
-          "variables": {
-            "applicationId": {
-              "description": "ChatKitty Application ID",
-              "default": "1"
-            }
-          }
-        }],
-        "tags": [{"name": "user", "description": "User operations"},
-          {"name": "user_session", "description": "User session operations"}],
-        "paths": {
-          "/users": {
-            "post": {
-              "tags": ["user"],
-              "summary": "Create user",
-              "description": "creates a new ChatKitty user.",
-              "operationId": "createUser",
-              "requestBody": {
-                "description": "New user parameters",
-                "content": {"application/json": {"schema": {"$ref": "#/components/schemas/CreateUserRequest"}}},
-                "required": true
-              },
-              "responses": {
-                "200": {
-                  "description": "successful operation",
-                  "content": {"application/hal+json": {"schema": {"$ref": "#/components/schemas/User"}}},
-                  "links": {
-                    "Self": {
-                      "operationId": "getUser",
-                      "parameters": {"self": "$response.body#/_links/self/href"}
-                    }
-                  }
-                }
-              },
-              "security": [{"chatkittyPlatformAuthorization": ["create:user"]}]
-            },
-            "head": {
-              "tags": ["user"],
-              "summary": "Get user exists",
-              "description": "Check if a user exists.",
-              "operationId": "getUserExists",
-              "parameters": [{
-                "in": "query",
-                "name": "name",
-                "schema": {"type": "string"},
-                "description": "The username of the user",
-                "required": true
-              }],
-              "responses": {
-                "200": {"description": "user was found and exists"},
-                "404": {"description": "user was not found and does not exists"}
-              },
-              "security": [{"chatkittyPlatformAuthorization": ["get:user"]}]
-            }
-          },
-          "/user_sessions/active": {
-            "head": {
-              "tags": ["user_session"],
-              "summary": "Get active user session exists",
-              "description": "Check if an active user session exists.",
-              "operationId": "getActiveSessionExists",
-              "parameters": [{
-                "in": "query",
-                "name": "id",
-                "schema": {"type": "number"},
-                "description": "The id of the user",
-                "required": true
-              }],
-              "responses": {
-                "200": {"description": "active user session was found and exists"},
-                "404": {"description": "active user session was not found and does not exists"}
-              },
-              "security": [{"chatkittyPlatformAuthorization": ["get:user"]}]
-            }
-          }
-        },
-        "components": {
-          "schemas": {
-            "CreateUserRequest": {
-              "title": "Create User Request Resource",
-              "type": "object",
-              "properties": {
-                "name": {"type": "string", "description": "Username of this user"},
-                "displayName": {
-                  "type": "string",
-                  "description": "Name shown to other users for this user"
-                }
-              }
-            },
-            "User": {
-              "title": "User Resource",
-              "type": "object",
-              "properties": {
-                "id": {"type": "integer", "format": "int64"},
-                "name": {"type": "string"},
-                "displayName": {"type": "string"},
-                "displayPictureUrl": {"type": "string"},
-                "isGuest": {"type": "boolean"},
-                "properties": {"type": "object", "additionalProperties": true},
-                "_links": {
-                  "type": "object",
-                  "properties": {"self": {"$ref": "#/components/schemas/Link"}}
-                }
-              },
-              "description": "A user within a ChatKitty application"
-            },
-            "Link": {
-              "title": "HAL Link",
-              "type": "object",
-              "properties": {"href": {"type": "string", "format": "uri"}}
-            }
-          },
-          "securitySchemes": {
-            "chatkittyPlatformAuthorization": {
-              "type": "oauth2",
-              "flows": {
-                "clientCredentials": {
-                  "tokenUrl": "https://authorization.chatkitty.com/oauth/token",
-                  "refreshUrl": "https://authorization.chatkitty.com/oauth/token",
-                  "scopes": {
-                    "create:users": "modify users in your application",
-                    "read:users": "read your users",
-                    "update:users": "update your users",
-                    "delete:users": "delete your users"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }/*intellij-swagger-spec-end*/,
-      validatorUrl: null,
-      dom_id: '#swagger-ui',
-      deepLinking: true,
-      presets: [
-        SwaggerUIBundle.presets.apis,
-        SwaggerUIStandalonePreset
-      ],
-      plugins: [
-        SwaggerUIBundle.plugins.DownloadUrl
-      ],
-      layout: "StandaloneLayout"
-    })
+<p>Most resources exposed by the API are represented as JSON <a href="http://stateless.co/hal_specification.html">HAL</a> responses.</p>
 
-    window.ui = ui
-  }
-</script>
+<p>For these resources, set request <code>Content-Type</code> headers to <code>application/json</code>.</p>
+
+<p>ChatKitty&#39;s API requires a <a href="https://oauth.net/2/">OAuth 2.0</a> Bearer access token <code>Authorization</code> header values
+to access protected resources. A valid access token can be retrieved from the ChatKitty Authorization Service 
+using your application&#39;s client ID and client secret. </p>
+<h1 id='authentication'>Authentication</h1>
+<blockquote>
+<p>To authorize use this replacing <code>acme</code> with your client ID and <code>acmesecret</code> with your client secret:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://authorization.chatkitty.com/oauth/token'</span> <span class="se">\</span>
+<span class="nt">--user</span> <span class="s1">'acme:acmesecret'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'grant_type=client_credentials'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'username=acme'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'password=acmesecret'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/oauth/token</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">https://authorization.chatkitty.com/oauth/token</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic YWNtZTphY21lc2VjcmV0Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW</span>
+
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="grant_type"
+
+client_credentials
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="username"
+
+acme
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="password"
+
+acmesecret
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+</code></pre></div>
+<blockquote>
+<p>Returns a JSON response with the Bearer access token.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d4327889-26a8-49ac-997c-56d8b1bcb09c"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bearer"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">42892</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org:1:app"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p><code>access_token</code> is the bearer access token.
+<code>expires_in</code> represents the access token&#39;s validity in seconds.</p>
+</blockquote>
+
+<p>Retrieve an <strong>OAuth 2.0 Bearer access token</strong> with the client credentials OAuth flow.</p>
+
+<p>Retrieving a Bearer access token requires a ChatKitty application client ID and client secret. </p>
+
+<p>You can create a ChatKitty application and receive client credentials by <a href="https://www.chatkitty.com/contact/">contacting us</a>.</p>
+
+<p>ChatKitty expects a valid Bearer access token to be included in all API requests like this:</p>
+
+<p><code>Authorization: Bearer {{access_token}}</code></p>
+
+<aside class="notice">
+You must replace <code>{{access_token}}</code> with an access token gotten using your client credentials.
+</aside>
+<h1 id='pagination'>Pagination</h1>
+<blockquote>
+<p>This requests a user resource page</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'{{users_link}}'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">{{users_link}}</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">{{access_token}}</span>
+</code></pre></div>
+<blockquote>
+<p>The command above returns a user page HAL resource.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1017562554"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Doe"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1/channels"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"102746681"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/2"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/2/channels"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"first"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users?page=0&amp;size=2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"prev"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users?page=0&amp;size=2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users?page=1&amp;size=2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"next"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users?page=2&amp;size=2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"last"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users?page=2&amp;size=2"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalElements"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalPages"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"number"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>ChatKitty <strong>paginates</strong> all collection resources. Requesting a resource collection returns 
+the first page of the collection optionally with HAL hypermedia links to subsequent pages if more pages are available.</p>
+
+<p>Traverse the page links to iterate through a collection.</p>
+<h2 id='pagination-properties'>Properties</h2>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="#pagination-page-metadata">page</a></td>
+<td>PageMetadata</td>
+<td>Metadata about the page</td>
+</tr>
+</tbody></table>
+<h2 id='pagination-hal-links'>HAL links</h2>
+<table><thead>
+<tr>
+<th>Link</th>
+<th>Methods</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>self</td>
+<td>GET</td>
+<td>Self link to this page.</td>
+</tr>
+<tr>
+<td>first</td>
+<td>GET</td>
+<td><strong>Optional:</strong> Link to the first page of this collection. <strong>Present if</strong> known.</td>
+</tr>
+<tr>
+<td>prev</td>
+<td>GET</td>
+<td><strong>Optional:</strong> Link to the previous page of this collection. <strong>Present if</strong> there are more items before the first item in this page.</td>
+</tr>
+<tr>
+<td>next</td>
+<td>GET</td>
+<td><strong>Optional:</strong> Link to the next page of this collection. <strong>Present if</strong> there are more items after the last item in this page.</td>
+</tr>
+<tr>
+<td>last</td>
+<td>GET</td>
+<td><strong>Optional:</strong> Link to the last page of this collection. <strong>Present if</strong> known.</td>
+</tr>
+</tbody></table>
+<h2 id='pagination-embedded-properties'>Embedded properties</h2>
+<p>A page resources embeds a slice of a resource collection in a JSON array property with the same name 
+as the resource collection. For example, with a collection of users resources, the resource collection name would be <code>users</code>, 
+and the page would include a JSON array in its <code>_embedded</code> property named <code>users</code>, as per the <a href="http://stateless.co/hal_specification.html">HAL</a> specification.</p>
+
+<blockquote>
+<p><code>users</code> is the name of a user resource collection</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1017562554"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Doe"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1/users/1/channels"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"application"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.chatkitty.com/v1/applications/1"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">//</span><span class="w"> </span><span class="err">...</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="err">//</span><span class="w"> </span><span class="err">...</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='pagination-page-metadata'>Page Metadata</h2>
+<p>Metadata about a page containing its size, total number of elements in the collection, total number of pages in the collection, and the page number.</p>
+<h2 id='pagination-properties'>Properties</h2>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>size</td>
+<td>Int</td>
+<td>The number of elements in this page.</td>
+</tr>
+<tr>
+<td>number</td>
+<td>Int</td>
+<td><strong>Optional:</strong> The zero-based index of this page. <strong>Present if</strong> known.</td>
+</tr>
+<tr>
+<td>totalElements</td>
+<td>Long</td>
+<td><strong>Optional:</strong> The total number of elements in the collection. <strong>Present if</strong> known.</td>
+</tr>
+<tr>
+<td>totalPages</td>
+<td>Int</td>
+<td><strong>Optional:</strong> The total number of pages in the collection. <strong>Present if</strong> known.</td>
+</tr>
+</tbody></table>
+<h1 id='files'>Files</h1>
+<p>Files like pictures, videos, documents, etc. can be uploaded to ChatKitty. 
+If you prefer hosting your own files, you can also create external file references pointing to 
+your file servers.</p>
+<h2 id='files-properties'>Properties</h2>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>Enum</td>
+<td>The type of this file. <strong>Possible values</strong> are <a href="#files-file-uploads">HOSTED</a> and <a href="#files-external-files">EXTERNAL</a></td>
+</tr>
+<tr>
+<td>url</td>
+<td>String</td>
+<td>URL pointing to this file&#39;s content</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The name of this file</td>
+</tr>
+<tr>
+<td>contentType</td>
+<td>String</td>
+<td>MIME type of this file</td>
+</tr>
+<tr>
+<td>size</td>
+<td>Long</td>
+<td>64 bit integer size of this file in bytes</td>
+</tr>
+</tbody></table>
+<h2 id='files-file-uploads'>File Uploads</h2>
+<blockquote>
+<p>The HTTP request for a file upload looks like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://api.chatkitty.com/v1/file-upload-path'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: multipart/form-data'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer {{access_token}}'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'file=@./file-path/file_name.png'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'extraPropertyName=extraPropertyValue'</span>
+</code></pre></div><div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">https://api.chatkitty.com/v1/file-upload-path</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">multipart/form-data; boundary=Your_Boundary_String</span>
+
+Your_Unique_Boundary_String
+Content-Disposition: form-data; name="file"; filename="./file-path/file_name.png"
+Content-Type: image/png
+
+(file data)
+New_Boundary_String
+Content-Disposition: form-data; name="extraPropertyName"
+
+extraPropertyValue
+Your_Unique_Boundary_String
+</code></pre></div>
+<p>To upload a file to ChatKitty, make a <a href="https://tools.ietf.org/html/rfc2388">multipart form data</a> <code>POST</code> request to a file upload endpoint:</p>
+
+<ul>
+<li>Your HTTP request content type header must be set to <code>multipart/form-data</code>.</li>
+<li>The content-disposition header for the part containing the file content must have 
+a &quot;name&quot; parameter with the value <code>file</code>.</li>
+<li>The form data must be the content of the file.</li>
+</ul>
+<h3 id='files-file-uploads-additional-file-upload-properties'>Additional file upload properties</h3>
+<ul>
+<li>Additional properties specific to the file upload endpoint can be sent using 
+additional content parts</li>
+<li>The content-disposition header for the part containing the property must have 
+a &quot;name&quot; parameter with the property name.</li>
+<li>The form data must be the value of the property.</li>
+</ul>
+<h2 id='files-external-files'>External Files</h2>
+<p>If you&#39;d rather host your own files, you can create an external file reference.  </p>
+
+<p>To create an external file reference, set the external file&#39;s parameters on the file property 
+of an endpoint expecting an external file reference:</p>
+<h3 id='files-external-files-external-file-parameters'>External File Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>url</td>
+<td>String</td>
+<td>External URL pointing to this file&#39;s content</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The name of this file</td>
+</tr>
+<tr>
+<td>contentType</td>
+<td>String</td>
+<td>MIME type of this file</td>
+</tr>
+<tr>
+<td>size</td>
+<td>Long</td>
+<td>64 bit integer size of this file in bytes</td>
+</tr>
+</tbody></table>
+<h1 id='errors'>Errors</h1>
+<aside class="notice">
+The Platform API may return any of these HTTP error codes
+</aside>
+
+<p>The ChatKitty Platform API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request -- Your request is invalid.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized -- Your API key is wrong.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden -- The resource requested is hidden for administrators only.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found -- The specified resource could not be found.</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed -- You tried to access a resource with an invalid method.</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone -- The resource requested has been removed from our servers.</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests -- You&#39;re making too many requests.</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+  </div>
+  <div class="dark-box">
+      <div class="lang-selector">
+            <a href="#" data-language-name="shell">shell</a>
+            <a href="#" data-language-name="http">http</a>
+      </div>
+  </div>
+</div>
+<script src="https://www.chatkitty.com/js/plugins.js"></script>
+<script src="https://www.chatkitty.com/js/init.js"></script>
+<script src="https://www.chatkitty.com/js/main.js"></script>
 </body>
 </html>

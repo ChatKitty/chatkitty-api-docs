@@ -1,0 +1,204 @@
+<!-- HTML for static distribution bundle build -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Platform API Documentation</title>
+  <link rel="stylesheet" type="text/css" href="../swagger-ui-bb87884e.css">
+  <link rel="icon" type="image/png" href="../favicon-32x32-585fd601.png" sizes="32x32"/>
+  <link rel="icon" type="image/png" href="../favicon-16x16-bfc9a105.png" sizes="16x16"/>
+  <style>
+      html {
+          -webkit-box-sizing: border-box;
+                  box-sizing: border-box;
+          overflow: -moz-scrollbars-vertical;
+          overflow-y: scroll;
+      }
+
+      *,
+      *:before,
+      *:after {
+          -webkit-box-sizing: inherit;
+                  box-sizing: inherit;
+      }
+
+      body {
+          margin: 0;
+          background: #fafafa;
+      }
+  </style>
+</head>
+
+<body>
+<div id="swagger-ui"></div>
+
+<script src="../swagger-ui-bundle-016c5f6e.js"></script>
+<script src="../swagger-ui-standalone-preset-d605b59a.js"></script>
+<script>
+  window.onload = function () {
+
+    // Build a system
+    const ui = SwaggerUIBundle({
+      spec: /*intellij-swagger-spec-start*/{
+        "openapi": "3.0.3",
+        "info": {
+          "title": "ChatKitty Platform API",
+          "description": "Server-Side Platform API for ChatKitty",
+          "version": "0.0.4"
+        },
+        "externalDocs": {
+          "description": "Need Help? Check out our tutorials and guides.",
+          "url": "https://www.chatkitty.com/blog/posts/building-a-chat-app-with-react-native-and-firebase-part-1/"
+        },
+        "servers": [{
+          "url": "https://api.chatkitty.com/v1/applications/{applicationId}",
+          "variables": {
+            "applicationId": {
+              "description": "ChatKitty Application ID",
+              "default": "1"
+            }
+          }
+        }],
+        "tags": [{"name": "user", "description": "User operations"},
+          {"name": "user_session", "description": "User session operations"}],
+        "paths": {
+          "/users": {
+            "post": {
+              "tags": ["user"],
+              "summary": "Create user",
+              "description": "creates a new ChatKitty user.",
+              "operationId": "createUser",
+              "requestBody": {
+                "description": "New user parameters",
+                "content": {"application/json": {"schema": {"$ref": "#/components/schemas/CreateUserRequest"}}},
+                "required": true
+              },
+              "responses": {
+                "200": {
+                  "description": "successful operation",
+                  "content": {"application/hal+json": {"schema": {"$ref": "#/components/schemas/User"}}},
+                  "links": {
+                    "Self": {
+                      "operationId": "getUser",
+                      "parameters": {"self": "$response.body#/_links/self/href"}
+                    }
+                  }
+                }
+              },
+              "security": [{"chatkittyPlatformAuthorization": ["create:user"]}]
+            },
+            "head": {
+              "tags": ["user"],
+              "summary": "Get user exists",
+              "description": "Check if a user exists.",
+              "operationId": "getUserExists",
+              "parameters": [{
+                "in": "query",
+                "name": "name",
+                "schema": {"type": "string"},
+                "description": "The username of the user",
+                "required": true
+              }],
+              "responses": {
+                "200": {"description": "user was found and exists"},
+                "404": {"description": "user was not found and does not exists"}
+              },
+              "security": [{"chatkittyPlatformAuthorization": ["get:user"]}]
+            }
+          },
+          "/user_sessions/active": {
+            "head": {
+              "tags": ["user_session"],
+              "summary": "Get active user session exists",
+              "description": "Check if an active user session exists.",
+              "operationId": "getActiveSessionExists",
+              "parameters": [{
+                "in": "query",
+                "name": "id",
+                "schema": {"type": "number"},
+                "description": "The id of the user",
+                "required": true
+              }],
+              "responses": {
+                "200": {"description": "active user session was found and exists"},
+                "404": {"description": "active user session was not found and does not exists"}
+              },
+              "security": [{"chatkittyPlatformAuthorization": ["get:user"]}]
+            }
+          }
+        },
+        "components": {
+          "schemas": {
+            "CreateUserRequest": {
+              "title": "Create User Request Resource",
+              "type": "object",
+              "properties": {
+                "name": {"type": "string", "description": "Username of this user"},
+                "displayName": {
+                  "type": "string",
+                  "description": "Name shown to other users for this user"
+                }
+              }
+            },
+            "User": {
+              "title": "User Resource",
+              "type": "object",
+              "properties": {
+                "id": {"type": "integer", "format": "int64"},
+                "name": {"type": "string"},
+                "displayName": {"type": "string"},
+                "displayPictureUrl": {"type": "string"},
+                "isGuest": {"type": "boolean"},
+                "properties": {"type": "object", "additionalProperties": true},
+                "_links": {
+                  "type": "object",
+                  "properties": {"self": {"$ref": "#/components/schemas/Link"}}
+                }
+              },
+              "description": "A user within a ChatKitty application"
+            },
+            "Link": {
+              "title": "HAL Link",
+              "type": "object",
+              "properties": {"href": {"type": "string", "format": "uri"}}
+            }
+          },
+          "securitySchemes": {
+            "chatkittyPlatformAuthorization": {
+              "type": "oauth2",
+              "flows": {
+                "clientCredentials": {
+                  "tokenUrl": "https://authorization.chatkitty.com/oauth/token",
+                  "refreshUrl": "https://authorization.chatkitty.com/oauth/token",
+                  "scopes": {
+                    "create:users": "modify users in your application",
+                    "read:users": "read your users",
+                    "update:users": "update your users",
+                    "delete:users": "delete your users"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }/*intellij-swagger-spec-end*/,
+      validatorUrl: null,
+      dom_id: '#swagger-ui',
+      deepLinking: true,
+      presets: [
+        SwaggerUIBundle.presets.apis,
+        SwaggerUIStandalonePreset
+      ],
+      plugins: [
+        SwaggerUIBundle.plugins.DownloadUrl
+      ],
+      layout: "StandaloneLayout"
+    })
+
+    window.ui = ui
+
+
+  }
+</script>
+</body>
+</html>
