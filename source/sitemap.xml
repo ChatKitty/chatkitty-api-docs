@@ -3,19 +3,21 @@
   <url>
     <loc>https://docs.chatkitty.com/</loc>
     <lastmod>2020-11-10</lastmod>
-    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://docs.chatkitty.com/platform/</loc>
     <lastmod>2020-11-10</lastmod>
-    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://docs.chatkitty.com/platform/v1</loc>
+    <lastmod>2020-11-10</lastmod>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://docs.chatkitty.com/js/</loc>
     <lastmod>2020-11-10</lastmod>
-    <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
 </urlset>

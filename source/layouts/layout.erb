@@ -111,16 +111,21 @@ under the License.
     <% end %>
     <% if current_page.url == '/' %>
       <li>
-        <a href="/javascript/" class="toc-h1 toc-link" data-title="JavaScript">
+        <a href="/javascript/" class="toc-h1 toc-link" data-title="JavaScript SDK">
           <i class="fab fa-js-square" aria-hidden="true"></i>
           <span>JavaScript SDK</span>
         </a>
       </li>
       <li>
-        <a href="/platform/" class="toc-h1 toc-link" data-title="Platform">
+        <a href="/platform/" class="toc-h1 toc-link" data-title="Platform API">
           <i class="fa fa-server" aria-hidden="true"></i>
           <span>Platform API</span>
         </a>
+      </li>
+    <% end %>
+    <% if current_page.url == '/platform/' %>
+      <li>
+        <a href="/platform/v1/" class="toc-h1 toc-link" data-title="Platform V1 API">V1</a>
       </li>
     <% end %>
     <% if current_page.url == '/android/' %>
