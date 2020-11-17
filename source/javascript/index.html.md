@@ -36,7 +36,7 @@ yarn add chatkitty
 ```javascript
 import ChatKitty from 'chatkitty';
 
-export const kitty = ChatKitty.getInstance(CHATKITTY_APP_ID);
+export const kitty = ChatKitty.getInstance(CHATKITTY_API_KEY);
 ```
 
 Create a `ChatKitty` instance by passing your application's API key to the 
@@ -123,13 +123,29 @@ method.
  The observer function passed to onCurrentUserChanged is called when first registered, with the current user value.
 </aside>
 
+## Updating the current user
+> Updating the current user
+
+```javascript
+  kitty.updateCurrentUser((user) => {
+        user.properties = {
+          ...user.properties,
+          'new-property': newPropertyValue,
+        };
+
+        return user;
+      });
+```
+
+Update the current user by using the `ChatKitty.updateCurrentUser((user: CurrentUser) => CurrentUser)` 
+method, taking the current user and returning a user with the changes to be applied.
+
 # Channels
 Channels are the backbone of the ChatKitty chat experience. Users can join channels and receive 
 or send messages. ChatKitty broadcasts messages created in channels to **channel members** with active 
 **chat sessions** and sends **push notifications** to offline members.
 
 ## Channel types
-
 There are four types of channels;
 
 ### Open Channel
@@ -152,8 +168,31 @@ ChatKitty persists messages sent in private channels by default but this behavio
 Direct channels let users have private conversations between **up to 9** other users.
 New users cannot be added to a direct channel and there can only exist one direct channel between a set of users.
 
+## Creating a channel
+> Creating a new channel
+
+```javascript
+kitty
+  .createChannel({
+    type: "PUBLIC",
+    name: channelName,
+  })
+  .then((result) => {
+    if (result.succeeded) {
+      let channel = result.channel; // Handle channel
+    }
+
+    if (result.failed) {
+      let error = result.error; // Handle error
+    }
+  });
+```
+
+Create a new channel by using the `ChatKitty.createChannel(CreateChannelRequest)` method. A user is 
+automatically a member of a group channel they created.
+
 ## Get channels
-> Get channels the current user can begin chat sessions in channel
+> Get channels the current user can begin chat sessions in
 
 ```javascript
 kitty.getChannels().then((result) => {
@@ -184,144 +223,115 @@ kitty.getJoinableChannels().then((result) => {
 });
 ```
 
-You can get channels the current user can join, becoming a member, by calling the `ChatKitty.getJoinableChannels()` 
+Get channels the current user can join, becoming a member, by calling the `ChatKitty.getJoinableChannels()` 
 method.
 
-## Get channel members
-> Get members of a particular channel
+## Getting a channel
+> Getting a channel by id
 
 ```javascript
-kitty.getChannelMembers(channel, function(result) {
-  if (result.isSuccess) {
-    let members = result.members
-    for (let member of members) {
-       // Handle member
-    }
+kitty.getChannel(channelId).then((result) => {
+  if (result.succeeded) {
+    let channel = result.channel; // Handle channel
   }
 
-  if (result.isCancelled) {
-    // Handle request cancellation
-  }
-
-  if (result.isError) {
-    // Handle error
+  if (result.failed) {
+    let error = result.error; // Handle error
   }
 });
 ```
 
-You can get the members of a channel by calling the `ChatKitty.getChannelMembers(Channel, function)` method.
+Get a channel by searchable properties like channel ID by using the `ChatKitty.getChannel(property)` 
+method.
 
-## Entering a channel
-> Entering a channel
+## Joining a channel
+> Joining a group channel
 
 ```javascript
- let registration = kitty.enterChannel(channel, function(result) {
-      if (result.isSuccess) {
-        // Listen to channel events. 
-      }
+const result = await kitty.joinChannel({ channel: channel });
+
+if (result.succeeded) {
+  let channel = result.channel; // Handle channel
+}
+
+if (result.failed) {
+  let error = result.error; // Handle error
+}
+```
+
+The current user can join a group channel, becoming a member, by using the `ChatKitty.joinChannel(JoinChannelRequest)` 
+method.
+
+# Chat Sessions
+Before a user can begin sending and receiving real-time messages and use in-app chat features like 
+typing indicators, delivery and read receipts, emoji and like reactions, etc, their device needs to 
+start a chat session. 
+
+<aside class="notice">
+ A user device can start up to 10 chat sessions at a time.
+</aside>
+
+## Starting a chat session
+> Starting a chat session
+
+```javascript
+let result = kitty.startChatSession({
+      channel: channel,
+      onReceivedMessage: (message) => {},
+    });
+
+if (result.succeeded) {
+  let session = result.session; // Handle session
+}
+
+if (result.failed) {
+  let error = result.error; // Handle error
+}
+```
+
+Start a chat session by calling the `ChatKitty.startChatSession(StartChatSessionRequest)` method. 
+This method returns a `StartChatSessionResult` object with a `ChatSession`, which can be used to later 
+[end the chat session](#chat-sessions-ending-a-chat-session), if the session was successfully started.
+
+## Listening to chat session events
+> Registering chat session event handler methods when starting a chat session
+
+```javascript
+lkitty.startChatSession({
+      channel: channel,
+      onReceivedMessage: (message) => {
+        // handle received messages
+      },
     });
 ```
 
-You must first enter a channel to receive messages and other events related to the channel.
+When an event involving a chat session channel happens, like a message sent in the channel or another 
+user joined the channel, a corresponding chat session event handler method registered when starting 
+the session is called.
 
-Enter a channel by calling the `ChatKitty.enterChannel(Channel, function)` method. This method returns a `ChannelEnterRegistration` object.
-
-## Listen to channel events
-When an event involving a channel happens, like a message sent in the channel or a user joining the channel, 
-a `ChannelEvent` is sent to registered channel event listeners.
-
-### Registering a channel event listener
-> Register a channel event listener
-
-```javascript
-let registration = kitty.registerChannelEventListener(channel, TYPE, function(event) {
-      switch (message.type) {
-          case "MESSAGE.RECEIVED":
-             let message = result.message;
-              // Handle message
-             break
-          case "PARTICIPANT.ENTERED":
-             let enteredUser = result.user;
-              // Handle user who entered.
-             break
-          case "PARTICIPANT.EXITED":
-              let exitedUser = result.user;
-              // Handle user who exited.
-             break
-          case "KEYSTROKES.CREATED":
-             let keystrokeUser = result.user;
-             let keys = result.keys;
-              // Handle typing indicator for user and keys.
-            break
-          default:
-            break
-      }
-});
-```
-
-To beginning listening to channel events, register a channel event listener by calling the `ChatKitty.registerChannelEventListener(Channel, String, function)` method.
-Where `String` is the **type** of event the function handles.  
-This method returns a `ChannelEventListenerRegistration` object.
-
-#### Channel event types
-Type | Description 
+#### Chat session event handler methods
+Name | Description 
 ---- | -----------
-`MESSAGE.RECEIVED` | Fired when the device receives a sent message.
-`PARTICIPANT.CHANGED_STATUS` | Fired when a participant has entered or exited a channel.
+`onReceivedMessage` | Called when the device receives a sent message.
 
-#### Group Channel event types
-Type | Description
----- | -----------
-`MESSAGE.DELIVERY_RECEIPT.CREATED` | Fired when a message has been delivered in a group channel.
-`KEYSTROKES.CREATED` | Fired when a participant has started typing characters.
-
-### Deregistering a channel event listener
-> Deregister a channel event listener
+## Ending a chat session
+> Ending a chat session using its chat session object
 
 ```javascript
-registration.deregister(); // ChannelEventListenerRegistration
+session.end(); // Ends the session
 ```
+> 
 
-If you no longer wish to receive events with a channel event listener, deregister it by 
-calling the `ChannelEventListenerRegistration.deregister()` method on 
-`ChannelEventListenerRegistration` object returned from registering the event listener.
-
-## Creating typing indicators
-> Creating typing indicators
+>Ending a chat session using the ChatKitty client
 
 ```javascript
-let keystroke = {
-    keys: "abc"
-}
-
-kitty.sendChannelKeyStrokes(channel, keystroke, function(event) {
-    if (result.isSuccess) {
-      // Handle successful keystroke. 
-    }
-
-    if (result.isCancelled) {
-      // Handle request cancellation
-    }
-
-    if (result.isError) {
-      // Handle error
-    }
-})
+ChatKitty.endChatSession(session);
 ```
 
-You can send keystrokes to a [channel](#channels) by calling 
-the `ChatKitty.sendChannelKeyStrokes(Channel, CreateReplyThreadKeystrokesRequest, function)` method. 
+If you no longer wish to participate in a channel's live chat and receive its events, you must end 
+your chat session with the channel. 
 
-## Exiting a channel
-> Exiting a channel
-
-```javascript
-registration.exitChannel(); // ChannelEnterRegistration
-```
-
-If you no longer wish to receive events related to a channel you must exit the channel. 
-
-Exit a channel by calling the `ChannelEnterRegistration.exitChannel()` method.
+End a chat session by calling either the `ChatSession`'s `end()` or `ChatKitty.endChatSession(ChatSession)` method.
 
 # Messages
 Users send messages through your application and administrators can send messages through the Platform API. 
