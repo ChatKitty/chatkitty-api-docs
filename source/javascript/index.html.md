@@ -12,279 +12,116 @@ search: true
 code_clipboard: true
 ---
 # Introduction
-Integrate **real-time chat** into your Web application with the ChatKitty SDK for Web.  
+Integrate **real-time chat** into your React Native or Web application with the ChatKitty JavaScript SDK.  
 
 # Installation
-ChatKitty is available as an [npm package](https://www.npmjs.com/package/chatkitty-sdk-web).
+ChatKitty is available as an [npm package](https://www.npmjs.com/package/chatkitty).
 
 > Install the ChatKitty npm package with npm...
 
 ```shell
-npm install chatkitty-sdk-web
+npm install chatkitty
 ```
 
 > ...or with yarn
 
 ```shell
-yarn add chatkitty-sdk-web
+yarn add chatkitty
 ```
 
 # Authentication
-
-**Initialize the Chat SDK with your App ID**  
-> Get a ChatKitty instance with your application App ID
+**Initialize the Chat SDK with your API key**  
+> Get a ChatKitty instance with your API key
 
 ```javascript
-let kitty = new ChatKitty({
-                  appID: CHATKITTY_APP_ID,
-                });
+import ChatKitty from 'chatkitty';
+
+export const kitty = ChatKitty.getInstance(CHATKITTY_APP_ID);
 ```
 
-Create a `ChatKitty` instance by passing your application's App ID to the `new ChatKitty(ChatKittyConfiguration)` method as a parameter.
+Create a `ChatKitty` instance by passing your application's API key to the 
+`ChatKitty.getInstance(string)` method as a parameter.
 
-## Begin a user session
-To make calls to ChatKitty through the Chat SDK, a user session must be initiated.
+## Starting a user session
+To make calls to ChatKitty through the Chat SDK, a user session must be started.
 
-You can initiate a user session using the unique **username** of a user and a **challenge token**, or 
-using a just username if the user is a guest.
+You can start a user session using the unique **username** of a user and optional authentication 
+parameters to secure the user session.
 
 <aside class="notice">
  A username must be unique within a ChatKitty application.<br/>
  We recommend you use as a hashed email address or phone number as your ChatKitty usernames.
 </aside>
 
-### Begin a user session with a user name and challenge token  
+### Starting a user session with a user name and authentication parameters
 > Starting a user session
 
 ```javascript
-kitty.startSession({
-          username: CHATKITTY_USERNAME,
-          challengeToken: CHATKITTY_CHALLENGE_TOKEN,
-          callback: function(result) {
-              if (result.isSuccess) {
-                let user = result.currentUser;
-            
-                // Handle user
-              }
-            
-              if (result.isCancelled) {
-                // Handle request cancellation
-              }
-            
-              if (result.isError) {
-                // Handle error
-              }
-            }
-        });
+let result = await kitty.startSession({
+  username: email,
+  authParams: { // parameters to pass to authentication chat function
+    password: password, 
+  },
+});
+
+if (result.succeeded) {
+  let session = result.session; // Handle session
+}
+
+if (result.failed) {
+  let error = result.error; // Handle error
+}
 ```
 
-Create a challenge token for a user server-side using the **Platform API**. You can then begin a user session by calling the 
-`ChatKitty.startSession(StartSessionParams)` method with your user's unique name and challenge token.
-
-<aside class="notice">
- You should store user challenge tokens securely to your persistent storage. <br>
- When a user logs into your client application, load the user's username and challenge token from storage 
- and use them to start a user session. 
-</aside>
-
-### Begin a user session with a user name (guest user session)
+### Begin a user session with just a user name (guest user session)
 > Starting a guest user session
 
 ```javascript
-kitty.startSession({
-          username: CHATKITTY_USERNAME,
-          callback: function(result) {
-              if (result.isSuccess) {
-                let user = result.currentUser;
-            
-                // Handle user
-              }
-            
-              if (result.isCancelled) {
-                // Handle request cancellation
-              }
-            
-              if (result.isError) {
-                // Handle error
-              }
-            }
-        });
+let result = await kitty.startSession({
+  username: email,
+});
+
+if (result.succeeded) {
+  let session = result.session; // Handle session
+}
+
+if (result.failed) {
+  let error = result.error; // Handle error
+}
 ```
 
-If your application has the **guest user** feature enabled, you can begin a user session by calling the 
-`ChatKitty.startSession(StartSessionParams)` method with your user's unique name.
+If your application has the **guest user** feature enabled, you can start a user session by calling the 
+`ChatKitty.startSession(StartSessionRequest)` method with only your user's unique name.
 
 <aside class="notice">
- Guest users are appropriate when your application in development, if your application supports anonymous chat, or if you don't have back-end authentication.
+ Guest users are appropriate when your application in development, if your application supports anonymous chat, or if you don't need back-end authentication.
 </aside>
 
 # Current User
 > Get the current user
 
 ```javascript
-kitty.getCurrentUser(function(result) {
-  if (result.isSuccess) {
-    let user = result.currentUser;
+let result = await kitty.getCurrentUser();
 
-    // Handle user
-  }
-
-  if (result.isCancelled) {
-    // Handle request cancellation
-  }
-
-  if (result.isError) {
-    // Handle error
-  }
-});
+let user = result.user; // Handle user
 ```
-After starting a ChatKitty [user session](#authentication-begin-a-user-session), you can request the current user 
-anytime by calling the `ChatKitty.getCurrentUser(function)` method.
+After starting a ChatKitty [user session](#authentication-starting-a-user-session), you can request the current user 
+anytime by calling the `ChatKitty.getCurrentUser()` method.
 
-## Listen to current user events
-When an event involving the current user happens, like joining or exiting a channel, 
-a `CurrentUserEvent` is sent to registered channel event listeners.
-
-### Registering a current user event listener
-> Register a current user event listener
+## Observing the current user
+> Observing the current user changes
 
 ```javascript
-let registration = kitty.registerCurrentUserEventListener(TYPE, function(event) {
-      switch (event.type) {
-          case "CURRENT_USER.CHANNEL.JOINED":
-             let channelJoined = result.channel;
-              // Handle channel joined
-             break
-          case "CURRENT_USER.CHANNEL.LEFT":
-             let channelLeft = result.channel;
-             // Handle channel joined
-             break
-          default:
-            break
-      }
+kitty.onCurrentUserChanged((user) => {
+  // handle new current user or current user changes
 });
 ```
+Get updates when the current user changes by using the `ChatKitty.onCurrentUserChanged((user: CurrentUser | null) => void)` 
+method. 
 
-To beginning listening to current user events, register a current user event listener by calling the `ChatKitty.registerCurrentUserEventListener(String, function)` method.
-Where `String` is the **type** of event the function handles.  
-This method returns a `CurrentUserEventListenerRegistration` object.
-
-#### Current user event types
-Type | Description 
----- | -----------
-`CURRENT_USER.CHANNEL.CHANGED_STATUS` | Fired when the current user joins or leaves a channel.
-
-# Push Notifications
-ChatKitty Web SDK offers functionality for sending notification messages to your mobile users. 
-Currently, the ChatKitty SDK supports registering push notification devices with [React Native](https://reactnative.dev/).
-
-## Push notification types
-There are two push notification services that are supported by ChatKitty. 
-
-### Firebase Cloud Messaging
-This refers to the Push Notification service for Android devices. 
-Documentation for setting up FCM can be founding in our [FCM Setup Gudie](../platform/#push-notification-credentials-fcm) 
-
-### Apple Push Notification Service
-This refers to the Push Notification service for iOS devices. 
-Documentation for setting up APNs can be founding in our [APNs Setup Gudie](../platform/#push-notification-credentials-apns) 
-
-## Get registered devices
-> Get registered devices for the current user
-
-```javascript
-kitty.getRegisteredDevices(function(result) {
-  if (result.isSuccess) {
-    let devices = result.devices
-    for (let device of devices) {
-       // Handle device
-    }
-  }
-
-  if (result.isCancelled) {
-    // Handle request cancellation
-  }
-
-  if (result.isError) {
-    // Handle error
-  }
-});
-```
-
-You can get registered devices for the current user by calling the `ChatKitty.getRegisteredDevices(function)` method.
-
-## Register a device
-> Register a device 
-
-```javascript
-kitty.registerPushNotificationDevice(TYPE, TOKEN, function(result) {
-  if (result.isSuccess) {
-     // Successfully registered a device
-  }
-
-  if (result.isCancelled) {
-    // Handle request cancellation
-  }
-
-  if (result.isError) {
-    // Handle error
-  }
-});
-```
-
-You can register a device by calling the `ChatKitty.registerPushNotificationDevice(string, string, function)` method.
-
-#### Push notification device types
-Type | Description 
----- | -----------
-`FCM` | Indicates the Firebase Cloud Messaging Service
-`APNS` | Indicates the Apple Push Notification Service
-
-## Handling push notification data
-> Handling push notification data
-
-```javascript
-kitty.handlePushNotificationData(notification.data, function(result) {
-  if (result.isSuccess) {
-     // Check the type of push notification
-     const type = result.type
-     // Extract the recipient from the push notification
-     const recipient = result.recipient
-     // Extract the message from the push notification (if applicable)
-     const message = result.message
-  }
-});
-```
-
-You can retrieve data from a push notification by calling the `ChatKitty.handlePushNotificationData(PushNotificationData, function)` method.
-
-#### Push notification types
-Type | Description 
----- | -----------
-`SYSTEM:SENT:MESSAGE` | Received when an application administrator sends a system message through the platform API. This includes a `message` payload, which is the message resource of the **system message** sent.
-`USER:SENT:MESSAGE` | Received when a chat user sends a message client-side. This includes a `message` payload, which is the message resource of the **user message** sent.
-
-## Delete registered devices
-> Deleting a registered device 
-
-```javascript
-kitty.removeDevice(device, function(result) {
-  if (result.isSuccess) {
-     // Successfully removed a device
-  }
-
-  if (result.isCancelled) {
-    // Handle request cancellation
-  }
-
-  if (result.isError) {
-    // Handle error
-  }
-});
-```
-
-You can remove a push notification device by calling the `ChatKitty.removeDevice(Device, function)` method. 
-This will stop sending notifications to the device.
+<aside class="notice">
+ The observer function passed to onCurrentUserChanged is called when first registered, with the current user value.
+</aside>
 
 # Channels
 Channels are the backbone of the ChatKitty chat experience. Users can join channels and receive 
@@ -316,52 +153,39 @@ Direct channels let users have private conversations between **up to 9** other u
 New users cannot be added to a direct channel and there can only exist one direct channel between a set of users.
 
 ## Get channels
-> Get channels accessible by the current user
+> Get channels the current user can begin chat sessions in channel
 
 ```javascript
-kitty.getChannels(function(result) {
-  if (result.isSuccess) {
-    let channels = result.channel
-    for (let channel of channels) {
-       // Handle channel
-    }
+kitty.getChannels().then((result) => {
+  if (result.succeeded) {
+    let channels = result.paginator.items; // Handle channels
   }
 
-  if (result.isCancelled) {
-    // Handle request cancellation
-  }
-
-  if (result.isError) {
-    // Handle error
+  if (result.failed) {
+    let error = result.error; // Handle error
   }
 });
 ```
 
-You can get channels the current user has joined by calling the `ChatKitty.getChannels(function)` method.
+You can get channels the current user can chat in by calling the `ChatKitty.getChannels()` method.
 
 ## Get joinable channels
-> Get channels that can be joined by the current user
+> Get group channels the current user can become a member of
 
 ```javascript
-kitty.getJoinableChannels(function(result) {
-  if (result.isSuccess) {
-    let channels = result.channels
-    for (let channel of channels) {
-       // Handle channel
-    }
+kitty.getJoinableChannels().then((result) => {
+  if (result.succeeded) {
+    let channels = result.paginator.items; // Handle channels
   }
 
-  if (result.isCancelled) {
-    // Handle request cancellation
-  }
-
-  if (result.isError) {
-    // Handle error
+  if (result.failed) {
+    let error = result.error; // Handle error
   }
 });
 ```
 
-You can get channels the current user can join by calling the `ChatKitty.getJoinableChannels(function)` method.
+You can get channels the current user can join, becoming a member, by calling the `ChatKitty.getJoinableChannels()` 
+method.
 
 ## Get channel members
 > Get members of a particular channel
