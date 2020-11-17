@@ -328,7 +328,7 @@
         <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           <ul class="toc-list-h2">
               <li>
-                <a href="#authentication-begin-a-user-session" class="toc-h2 toc-link" data-title="Begin a user session">Begin a user session</a>
+                <a href="#authentication-starting-a-user-session" class="toc-h2 toc-link" data-title="Starting a user session">Starting a user session</a>
               </li>
           </ul>
       </li>
@@ -336,27 +336,7 @@
         <a href="#current-user" class="toc-h1 toc-link" data-title="Current User">Current User</a>
           <ul class="toc-list-h2">
               <li>
-                <a href="#current-user-listen-to-current-user-events" class="toc-h2 toc-link" data-title="Listen to current user events">Listen to current user events</a>
-              </li>
-          </ul>
-      </li>
-      <li>
-        <a href="#push-notifications" class="toc-h1 toc-link" data-title="Push Notifications">Push Notifications</a>
-          <ul class="toc-list-h2">
-              <li>
-                <a href="#push-notifications-push-notification-types" class="toc-h2 toc-link" data-title="Push notification types">Push notification types</a>
-              </li>
-              <li>
-                <a href="#push-notifications-get-registered-devices" class="toc-h2 toc-link" data-title="Get registered devices">Get registered devices</a>
-              </li>
-              <li>
-                <a href="#push-notifications-register-a-device" class="toc-h2 toc-link" data-title="Register a device">Register a device</a>
-              </li>
-              <li>
-                <a href="#push-notifications-handling-push-notification-data" class="toc-h2 toc-link" data-title="Handling push notification data">Handling push notification data</a>
-              </li>
-              <li>
-                <a href="#push-notifications-delete-registered-devices" class="toc-h2 toc-link" data-title="Delete registered devices">Delete registered devices</a>
+                <a href="#current-user-observing-the-current-user" class="toc-h2 toc-link" data-title="Observing the current user">Observing the current user</a>
               </li>
           </ul>
       </li>
@@ -427,280 +407,105 @@
   <div class="dark-box"></div>
   <div class="content">
     <h1 id='introduction'>Introduction</h1>
-<p>Integrate <strong>real-time chat</strong> into your Web application with the ChatKitty SDK for Web.  </p>
+<p>Integrate <strong>real-time chat</strong> into your React Native or Web application with the ChatKitty JavaScript SDK.  </p>
 <h1 id='installation'>Installation</h1>
-<p>ChatKitty is available as an <a href="https://www.npmjs.com/package/chatkitty-sdk-web">npm package</a>.</p>
+<p>ChatKitty is available as an <a href="https://www.npmjs.com/package/chatkitty">npm package</a>.</p>
 
 <blockquote>
 <p>Install the ChatKitty npm package with npm...</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>npm <span class="nb">install </span>chatkitty-sdk-web
+<div class="highlight"><pre class="highlight shell tab-shell"><code>npm <span class="nb">install </span>chatkitty
 </code></pre></div>
 <blockquote>
 <p>...or with yarn</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>yarn add chatkitty-sdk-web
+<div class="highlight"><pre class="highlight shell tab-shell"><code>yarn add chatkitty
 </code></pre></div><h1 id='authentication'>Authentication</h1>
-<p><strong>Initialize the Chat SDK with your App ID</strong>  </p>
+<p><strong>Initialize the Chat SDK with your API key</strong>  </p>
 
 <blockquote>
-<p>Get a ChatKitty instance with your application App ID</p>
+<p>Get a ChatKitty instance with your API key</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">kitty</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ChatKitty</span><span class="p">({</span>
-                  <span class="na">appID</span><span class="p">:</span> <span class="nx">CHATKITTY_APP_ID</span><span class="p">,</span>
-                <span class="p">});</span>
-</code></pre></div>
-<p>Create a <code>ChatKitty</code> instance by passing your application&#39;s App ID to the <code>new ChatKitty(ChatKittyConfiguration)</code> method as a parameter.</p>
-<h2 id='authentication-begin-a-user-session'>Begin a user session</h2>
-<p>To make calls to ChatKitty through the Chat SDK, a user session must be initiated.</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="k">import</span> <span class="nx">ChatKitty</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">chatkitty</span><span class="dl">'</span><span class="p">;</span>
 
-<p>You can initiate a user session using the unique <strong>username</strong> of a user and a <strong>challenge token</strong>, or 
-using a just username if the user is a guest.</p>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">kitty</span> <span class="o">=</span> <span class="nx">ChatKitty</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">(</span><span class="nx">CHATKITTY_APP_ID</span><span class="p">);</span>
+</code></pre></div>
+<p>Create a <code>ChatKitty</code> instance by passing your application&#39;s API key to the 
+<code>ChatKitty.getInstance(string)</code> method as a parameter.</p>
+<h2 id='authentication-starting-a-user-session'>Starting a user session</h2>
+<p>To make calls to ChatKitty through the Chat SDK, a user session must be started.</p>
+
+<p>You can start a user session using the unique <strong>username</strong> of a user and optional authentication 
+parameters to secure the user session.</p>
 
 <aside class="notice">
  A username must be unique within a ChatKitty application.<br/>
  We recommend you use as a hashed email address or phone number as your ChatKitty usernames.
 </aside>
-<h3 id='authentication-begin-a-user-session-begin-a-user-session-with-a-user-name-and-challenge-token'>Begin a user session with a user name and challenge token</h3>
+<h3 id='authentication-starting-a-user-session-starting-a-user-session-with-a-user-name-and-authentication-parameters'>Starting a user session with a user name and authentication parameters</h3>
 <blockquote>
 <p>Starting a user session</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">startSession</span><span class="p">({</span>
-          <span class="na">username</span><span class="p">:</span> <span class="nx">CHATKITTY_USERNAME</span><span class="p">,</span>
-          <span class="na">challengeToken</span><span class="p">:</span> <span class="nx">CHATKITTY_CHALLENGE_TOKEN</span><span class="p">,</span>
-          <span class="na">callback</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-              <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
-                <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">currentUser</span><span class="p">;</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">startSession</span><span class="p">({</span>
+  <span class="na">username</span><span class="p">:</span> <span class="nx">email</span><span class="p">,</span>
+  <span class="na">authParams</span><span class="p">:</span> <span class="p">{</span> <span class="c1">// parameters to pass to authentication chat function</span>
+    <span class="na">password</span><span class="p">:</span> <span class="nx">password</span><span class="p">,</span> 
+  <span class="p">},</span>
+<span class="p">});</span>
 
-                <span class="c1">// Handle user</span>
-              <span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">succeeded</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">session</span><span class="p">;</span> <span class="c1">// Handle session</span>
+<span class="p">}</span>
 
-              <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// Handle request cancellation</span>
-              <span class="p">}</span>
-
-              <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// Handle error</span>
-              <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">});</span>
-</code></pre></div>
-<p>Create a challenge token for a user server-side using the <strong>Platform API</strong>. You can then begin a user session by calling the 
-<code>ChatKitty.startSession(StartSessionParams)</code> method with your user&#39;s unique name and challenge token.</p>
-
-<aside class="notice">
- You should store user challenge tokens securely to your persistent storage. <br>
- When a user logs into your client application, load the user's username and challenge token from storage 
- and use them to start a user session. 
-</aside>
-<h3 id='authentication-begin-a-user-session-begin-a-user-session-with-a-user-name-guest-user-session'>Begin a user session with a user name (guest user session)</h3>
+<span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">failed</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
+<span class="p">}</span>
+</code></pre></div><h3 id='authentication-starting-a-user-session-begin-a-user-session-with-just-a-user-name-guest-user-session'>Begin a user session with just a user name (guest user session)</h3>
 <blockquote>
 <p>Starting a guest user session</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">startSession</span><span class="p">({</span>
-          <span class="na">username</span><span class="p">:</span> <span class="nx">CHATKITTY_USERNAME</span><span class="p">,</span>
-          <span class="na">callback</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-              <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
-                <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">currentUser</span><span class="p">;</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">startSession</span><span class="p">({</span>
+  <span class="na">username</span><span class="p">:</span> <span class="nx">email</span><span class="p">,</span>
+<span class="p">});</span>
 
-                <span class="c1">// Handle user</span>
-              <span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">succeeded</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">session</span><span class="p">;</span> <span class="c1">// Handle session</span>
+<span class="p">}</span>
 
-              <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// Handle request cancellation</span>
-              <span class="p">}</span>
-
-              <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// Handle error</span>
-              <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">});</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">failed</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
+<span class="p">}</span>
 </code></pre></div>
-<p>If your application has the <strong>guest user</strong> feature enabled, you can begin a user session by calling the 
-<code>ChatKitty.startSession(StartSessionParams)</code> method with your user&#39;s unique name.</p>
+<p>If your application has the <strong>guest user</strong> feature enabled, you can start a user session by calling the 
+<code>ChatKitty.startSession(StartSessionRequest)</code> method with only your user&#39;s unique name.</p>
 
 <aside class="notice">
- Guest users are appropriate when your application in development, if your application supports anonymous chat, or if you don't have back-end authentication.
+ Guest users are appropriate when your application in development, if your application supports anonymous chat, or if you don't need back-end authentication.
 </aside>
 <h1 id='current-user'>Current User</h1>
 <blockquote>
 <p>Get the current user</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">getCurrentUser</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">currentUser</span><span class="p">;</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">getCurrentUser</span><span class="p">();</span>
 
-    <span class="c1">// Handle user</span>
-  <span class="p">}</span>
-
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Handle request cancellation</span>
-  <span class="p">}</span>
-
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Handle error</span>
-  <span class="p">}</span>
-<span class="p">});</span>
+<span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span> <span class="c1">// Handle user</span>
 </code></pre></div>
-<p>After starting a ChatKitty <a href="#authentication-begin-a-user-session">user session</a>, you can request the current user 
-anytime by calling the <code>ChatKitty.getCurrentUser(function)</code> method.</p>
-<h2 id='current-user-listen-to-current-user-events'>Listen to current user events</h2>
-<p>When an event involving the current user happens, like joining or exiting a channel, 
-a <code>CurrentUserEvent</code> is sent to registered channel event listeners.</p>
-<h3 id='current-user-listen-to-current-user-events-registering-a-current-user-event-listener'>Registering a current user event listener</h3>
+<p>After starting a ChatKitty <a href="#authentication-starting-a-user-session">user session</a>, you can request the current user 
+anytime by calling the <code>ChatKitty.getCurrentUser()</code> method.</p>
+<h2 id='current-user-observing-the-current-user'>Observing the current user</h2>
 <blockquote>
-<p>Register a current user event listener</p>
+<p>Observing the current user changes</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">registration</span> <span class="o">=</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">registerCurrentUserEventListener</span><span class="p">(</span><span class="nx">TYPE</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">switch</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
-          <span class="k">case</span> <span class="dl">"</span><span class="s2">CURRENT_USER.CHANNEL.JOINED</span><span class="dl">"</span><span class="p">:</span>
-             <span class="kd">let</span> <span class="nx">channelJoined</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">channel</span><span class="p">;</span>
-              <span class="c1">// Handle channel joined</span>
-             <span class="k">break</span>
-          <span class="k">case</span> <span class="dl">"</span><span class="s2">CURRENT_USER.CHANNEL.LEFT</span><span class="dl">"</span><span class="p">:</span>
-             <span class="kd">let</span> <span class="nx">channelLeft</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">channel</span><span class="p">;</span>
-             <span class="c1">// Handle channel joined</span>
-             <span class="k">break</span>
-          <span class="k">default</span><span class="p">:</span>
-            <span class="k">break</span>
-      <span class="p">}</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">onCurrentUserChanged</span><span class="p">((</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// handle new current user or current user changes</span>
 <span class="p">});</span>
 </code></pre></div>
-<p>To beginning listening to current user events, register a current user event listener by calling the <code>ChatKitty.registerCurrentUserEventListener(String, function)</code> method.
-Where <code>String</code> is the <strong>type</strong> of event the function handles.<br>
-This method returns a <code>CurrentUserEventListenerRegistration</code> object.</p>
-<h4 id='current-user-listen-to-current-user-events-registering-a-current-user-event-listener-current-user-event-types'>Current user event types</h4>
-<table><thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>CURRENT_USER.CHANNEL.CHANGED_STATUS</code></td>
-<td>Fired when the current user joins or leaves a channel.</td>
-</tr>
-</tbody></table>
-<h1 id='push-notifications'>Push Notifications</h1>
-<p>ChatKitty Web SDK offers functionality for sending notification messages to your mobile users. 
-Currently, the ChatKitty SDK supports registering push notification devices with <a href="https://reactnative.dev/">React Native</a>.</p>
-<h2 id='push-notifications-push-notification-types'>Push notification types</h2>
-<p>There are two push notification services that are supported by ChatKitty. </p>
-<h3 id='push-notifications-push-notification-types-firebase-cloud-messaging'>Firebase Cloud Messaging</h3>
-<p>This refers to the Push Notification service for Android devices. 
-Documentation for setting up FCM can be founding in our <a href="../platform/#push-notification-credentials-fcm">FCM Setup Gudie</a> </p>
-<h3 id='push-notifications-push-notification-types-apple-push-notification-service'>Apple Push Notification Service</h3>
-<p>This refers to the Push Notification service for iOS devices. 
-Documentation for setting up APNs can be founding in our <a href="../platform/#push-notification-credentials-apns">APNs Setup Gudie</a> </p>
-<h2 id='push-notifications-get-registered-devices'>Get registered devices</h2>
-<blockquote>
-<p>Get registered devices for the current user</p>
-</blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">getRegisteredDevices</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">let</span> <span class="nx">devices</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">devices</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">device</span> <span class="k">of</span> <span class="nx">devices</span><span class="p">)</span> <span class="p">{</span>
-       <span class="c1">// Handle device</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
+<p>Get updates when the current user changes by using the <code>ChatKitty.onCurrentUserChanged((user: CurrentUser | null) =&gt; void)</code> 
+method. </p>
 
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Handle request cancellation</span>
-  <span class="p">}</span>
-
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Handle error</span>
-  <span class="p">}</span>
-<span class="p">});</span>
-</code></pre></div>
-<p>You can get registered devices for the current user by calling the <code>ChatKitty.getRegisteredDevices(function)</code> method.</p>
-<h2 id='push-notifications-register-a-device'>Register a device</h2>
-<blockquote>
-<p>Register a device </p>
-</blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">registerPushNotificationDevice</span><span class="p">(</span><span class="nx">TYPE</span><span class="p">,</span> <span class="nx">TOKEN</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
-     <span class="c1">// Successfully registered a device</span>
-  <span class="p">}</span>
-
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Handle request cancellation</span>
-  <span class="p">}</span>
-
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Handle error</span>
-  <span class="p">}</span>
-<span class="p">});</span>
-</code></pre></div>
-<p>You can register a device by calling the <code>ChatKitty.registerPushNotificationDevice(string, string, function)</code> method.</p>
-<h4 id='push-notifications-register-a-device-apple-push-notification-service-push-notification-device-types'>Push notification device types</h4>
-<table><thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>FCM</code></td>
-<td>Indicates the Firebase Cloud Messaging Service</td>
-</tr>
-<tr>
-<td><code>APNS</code></td>
-<td>Indicates the Apple Push Notification Service</td>
-</tr>
-</tbody></table>
-<h2 id='push-notifications-handling-push-notification-data'>Handling push notification data</h2>
-<blockquote>
-<p>Handling push notification data</p>
-</blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">handlePushNotificationData</span><span class="p">(</span><span class="nx">notification</span><span class="p">.</span><span class="nx">data</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
-     <span class="c1">// Check the type of push notification</span>
-     <span class="kd">const</span> <span class="nx">type</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">type</span>
-     <span class="c1">// Extract the recipient from the push notification</span>
-     <span class="kd">const</span> <span class="nx">recipient</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">recipient</span>
-     <span class="c1">// Extract the message from the push notification (if applicable)</span>
-     <span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">message</span>
-  <span class="p">}</span>
-<span class="p">});</span>
-</code></pre></div>
-<p>You can retrieve data from a push notification by calling the <code>ChatKitty.handlePushNotificationData(PushNotificationData, function)</code> method.</p>
-<h4 id='push-notifications-handling-push-notification-data-apple-push-notification-service-push-notification-types'>Push notification types</h4>
-<table><thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>SYSTEM:SENT:MESSAGE</code></td>
-<td>Received when an application administrator sends a system message through the platform API. This includes a <code>message</code> payload, which is the message resource of the <strong>system message</strong> sent.</td>
-</tr>
-<tr>
-<td><code>USER:SENT:MESSAGE</code></td>
-<td>Received when a chat user sends a message client-side. This includes a <code>message</code> payload, which is the message resource of the <strong>user message</strong> sent.</td>
-</tr>
-</tbody></table>
-<h2 id='push-notifications-delete-registered-devices'>Delete registered devices</h2>
-<blockquote>
-<p>Deleting a registered device </p>
-</blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">removeDevice</span><span class="p">(</span><span class="nx">device</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
-     <span class="c1">// Successfully removed a device</span>
-  <span class="p">}</span>
-
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Handle request cancellation</span>
-  <span class="p">}</span>
-
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Handle error</span>
-  <span class="p">}</span>
-<span class="p">});</span>
-</code></pre></div>
-<p>You can remove a push notification device by calling the <code>ChatKitty.removeDevice(Device, function)</code> method. 
-This will stop sending notifications to the device.</p>
+<aside class="notice">
+ The observer function passed to onCurrentUserChanged is called when first registered, with the current user value.
+</aside>
 <h1 id='channels'>Channels</h1>
 <p>Channels are the backbone of the ChatKitty chat experience. Users can join channels and receive 
 or send messages. ChatKitty broadcasts messages created in channels to <strong>channel members</strong> with active 
@@ -725,48 +530,35 @@ ChatKitty persists messages sent in private channels by default but this behavio
 New users cannot be added to a direct channel and there can only exist one direct channel between a set of users.</p>
 <h2 id='channels-get-channels'>Get channels</h2>
 <blockquote>
-<p>Get channels accessible by the current user</p>
+<p>Get channels the current user can begin chat sessions in channel</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">getChannels</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">let</span> <span class="nx">channels</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">channel</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">channel</span> <span class="k">of</span> <span class="nx">channels</span><span class="p">)</span> <span class="p">{</span>
-       <span class="c1">// Handle channel</span>
-    <span class="p">}</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">getChannels</span><span class="p">().</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">succeeded</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">channels</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">paginator</span><span class="p">.</span><span class="nx">items</span><span class="p">;</span> <span class="c1">// Handle channels</span>
   <span class="p">}</span>
 
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Handle request cancellation</span>
-  <span class="p">}</span>
-
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Handle error</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">failed</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
   <span class="p">}</span>
 <span class="p">});</span>
 </code></pre></div>
-<p>You can get channels the current user has joined by calling the <code>ChatKitty.getChannels(function)</code> method.</p>
+<p>You can get channels the current user can chat in by calling the <code>ChatKitty.getChannels()</code> method.</p>
 <h2 id='channels-get-joinable-channels'>Get joinable channels</h2>
 <blockquote>
-<p>Get channels that can be joined by the current user</p>
+<p>Get group channels the current user can become a member of</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">getJoinableChannels</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isSuccess</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">let</span> <span class="nx">channels</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">channels</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">channel</span> <span class="k">of</span> <span class="nx">channels</span><span class="p">)</span> <span class="p">{</span>
-       <span class="c1">// Handle channel</span>
-    <span class="p">}</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">getJoinableChannels</span><span class="p">().</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">succeeded</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">channels</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">paginator</span><span class="p">.</span><span class="nx">items</span><span class="p">;</span> <span class="c1">// Handle channels</span>
   <span class="p">}</span>
 
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCancelled</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Handle request cancellation</span>
-  <span class="p">}</span>
-
-  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isError</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Handle error</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">failed</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
   <span class="p">}</span>
 <span class="p">});</span>
 </code></pre></div>
-<p>You can get channels the current user can join by calling the <code>ChatKitty.getJoinableChannels(function)</code> method.</p>
+<p>You can get channels the current user can join, becoming a member, by calling the <code>ChatKitty.getJoinableChannels()</code> 
+method.</p>
 <h2 id='channels-get-channel-members'>Get channel members</h2>
 <blockquote>
 <p>Get members of a particular channel</p>
