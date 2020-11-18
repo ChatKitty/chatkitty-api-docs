@@ -17,16 +17,16 @@ Integrate **real-time chat** into your React Native or Web application with the 
 # Installation
 ChatKitty is available as an [npm package](https://www.npmjs.com/package/chatkitty).
 
-> Install the ChatKitty npm package with npm...
+> Install the ChatKitty npm package with yarn...
 
 ```shell
-npm install chatkitty
+yarn install chatkitty
 ```
 
-> ...or with yarn
+> ...or with npm
 
 ```shell
-yarn add chatkitty
+npm add chatkitty
 ```
 
 # Authentication
