@@ -183,20 +183,18 @@ New users cannot be added to a direct channel and there can only exist one direc
 > Creating a new channel
 
 ```javascript
-kitty
-  .createChannel({
-    type: "PUBLIC",
-    name: channelName,
-  })
-  .then((result) => {
-    if (result.succeeded) {
-      let channel = result.channel; // Handle channel
-    }
+let result = await kitty.createChannel({
+  type: "PUBLIC",
+  name: channelName,
+});
 
-    if (result.failed) {
-      let error = result.error; // Handle error
-    }
-  });
+if (result.succeeded) {
+  let channel = result.channel; // Handle channel
+}
+
+if (result.failed) {
+  let error = result.error; // Handle error
+}
 ```
 
 Create a new channel by using the `ChatKitty.createChannel(CreateChannelRequest)` method. A user is 
@@ -206,15 +204,15 @@ automatically a member of a group channel they created.
 > Get channels the current user can begin chat sessions in
 
 ```javascript
-kitty.getChannels().then((result) => {
-  if (result.succeeded) {
-    let channels = result.paginator.items; // Handle channels
-  }
+let result = await kitty.getChannels();
 
-  if (result.failed) {
-    let error = result.error; // Handle error
-  }
-});
+if (result.succeeded) {
+  let channels = result.paginator.items; // Handle channels
+}
+
+if (result.failed) {
+  let error = result.error; // Handle error
+}
 ```
 
 You can get channels the current user can chat in by calling the `ChatKitty.getChannels()` method.
@@ -223,15 +221,15 @@ You can get channels the current user can chat in by calling the `ChatKitty.getC
 > Get group channels the current user can become a member of
 
 ```javascript
-kitty.getJoinableChannels().then((result) => {
-  if (result.succeeded) {
-    let channels = result.paginator.items; // Handle channels
-  }
+let result = await kitty.getJoinableChannels();
 
-  if (result.failed) {
-    let error = result.error; // Handle error
-  }
-});
+if (result.succeeded) {
+  let channels = result.paginator.items; // Handle channels
+}
+
+if (result.failed) {
+  let error = result.error; // Handle error
+}
 ```
 
 Get channels the current user can join, becoming a member, by calling the `ChatKitty.getJoinableChannels()` 
@@ -241,15 +239,15 @@ method.
 > Getting a channel by id
 
 ```javascript
-kitty.getChannel(channelId).then((result) => {
-  if (result.succeeded) {
-    let channel = result.channel; // Handle channel
-  }
+let result = await kitty.getChannel(channelId);
 
-  if (result.failed) {
-    let error = result.error; // Handle error
-  }
-});
+if (result.succeeded) {
+  let channel = result.channel; // Handle channel
+}
+
+if (result.failed) {
+  let error = result.error; // Handle error
+}
 ```
 
 Get a channel by searchable properties like channel ID by using the `ChatKitty.getChannel(property)` 
@@ -286,7 +284,7 @@ start a chat session.
 > Starting a chat session
 
 ```javascript
-let result = kitty.startChatSession({
+let result = await kitty.startChatSession({
       channel: channel,
       onReceivedMessage: (message) => {},
     });
@@ -308,7 +306,7 @@ This method returns a `StartChatSessionResult` object with a `ChatSession`, whic
 > Registering chat session event handler methods when starting a chat session
 
 ```javascript
-lkitty.startChatSession({
+kitty.startChatSession({
       channel: channel,
       onReceivedMessage: (message) => {
         // handle received messages
@@ -396,19 +394,17 @@ You can send a message by calling the `ChatKitty.sendMessage(SendMessageRequest)
 > Get messages inside a channel
 
 ```javascript
-kitty
-  .getMessages({
-    channel: channel,
-  })
-  .then((result) => {
-    if (result.succeeded) {
-      let messages = result.paginator.items; // Handle messages
-    }
+let result = await kitty.getMessages({
+  channel: channel,
+});
 
-    if (result.failed) {
-      let error = result.error; // Handle error
-    }
-  });
+if (result.succeeded) {
+  let messages = result.paginator.items; // Handle messages
+}
+
+if (result.failed) {
+  let error = result.error; // Handle error
+}
 ```
 
 You can get messages in a [channel](#channels) by calling the `ChatKitty.getChannelMessages(GetMessagesRequest)` method.
