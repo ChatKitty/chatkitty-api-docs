@@ -9,7 +9,7 @@ toc_footers:
 # Overview
 
 ChatKitty provides a **Platform API**, and client SDKs to directly interact with the different types
-of resources representing data in your ChatKitty application. The ChatKitty Platform API is RESTful,
+of objects representing data in your ChatKitty application. The ChatKitty Platform API is RESTful,
 using the HTTP protocol to expose discoverable [HAL](http://stateless.co/hal_specification.html) resources.
 
 The client libraries provide an asynchronous real-time messaging interface to ChatKitty's user-side functionality.
