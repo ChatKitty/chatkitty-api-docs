@@ -447,7 +447,7 @@ parameters to secure the user session.</p>
 
 <aside class="notice">
  A username must be unique within a ChatKitty application.<br/>
- We recommend you use as a hashed email address or phone number as your ChatKitty usernames.
+ We recommend you use hashed email address or phone number as your ChatKitty usernames.
 </aside>
 <h3 id='authentication-starting-a-user-session-starting-a-user-session-with-a-user-name-and-authentication-parameters'>Starting a user session with a user name and authentication parameters</h3>
 <blockquote>
@@ -467,7 +467,13 @@ parameters to secure the user session.</p>
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">failed</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">let</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
 <span class="p">}</span>
-</code></pre></div><h3 id='authentication-starting-a-user-session-starting-a-user-session-with-just-a-user-name-guest-user-session'>Starting a user session with just a user name (guest user session)</h3>
+</code></pre></div>
+<p>If you&#39;re using <a href="https://docs.chatkitty.com/platform/#chat-functions">ChatKitty Chat Functions</a>, you 
+can provide custom authentication logic or proxy user authentication through your backend using a 
+<strong>User Attempted Start Session</strong> chat function. The chat function will be passed the username and 
+authentication parameters from a <code>ChatKitty.startSession(StartSessionRequest)</code> call. Your logic will 
+determine if the user is allowed to start a session with their credentials.</p>
+<h3 id='authentication-starting-a-user-session-starting-a-user-session-with-just-a-user-name-guest-user-session'>Starting a user session with just a user name (guest user session)</h3>
 <blockquote>
 <p>Starting a guest user session</p>
 </blockquote>
