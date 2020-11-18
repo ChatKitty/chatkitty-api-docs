@@ -73,7 +73,7 @@ if (result.failed) {
 }
 ```
 
-### Begin a user session with just a user name (guest user session)
+### Starting a user session with just a user name (guest user session)
 > Starting a guest user session
 
 ```javascript
@@ -97,6 +97,15 @@ If your application has the **guest user** feature enabled, you can start a user
  Guest users are appropriate when your application in development, if your application supports anonymous chat, or if you don't need back-end authentication.
 </aside>
 
+## Ending a user session
+> Ending a user session
+
+```javascript
+kitty.endSession();
+```
+
+To end a user ChatKitty session, call the `ChatKitty.endSession()` method.
+
 # Current User
 > Get the current user
 
@@ -112,9 +121,11 @@ anytime by calling the `ChatKitty.getCurrentUser()` method.
 > Observing the current user changes
 
 ```javascript
-kitty.onCurrentUserChanged((user) => {
+let unsubscribe = kitty.onCurrentUserChanged((user) => {
   // handle new current user or current user changes
 });
+
+unsubscribe(); // call unsubscribe function when you're no longer interested in current user changes
 ```
 Get updates when the current user changes by using the `ChatKitty.onCurrentUserChanged((user: CurrentUser | null) => void)` 
 method. 
@@ -361,133 +372,85 @@ Administrators can send files messages with one, or many file attachments.
  System file messages can only be sent using the Platform API.
 </aside>
 
-## Get messages
-> Get messages inside a channel
-
-```javascript
-kitty.getChannelMessages(channel, function(result) {
-  if (result.isSuccess) {
-    let messages = result.messages
-    // Array of messages
-  }
-
-  if (result.isCancelled) {
-    // Handle request cancellation
-  }
-
-  if (result.isError) {
-    // Handle error
-  }
-  
-  // Pagination
-  if (result.next) {
-    kitty.getNextMessages(result, function(result) {
-      if (result.isSuccess) {
-        let nextMessages = result.messages
-      }
-    });
-  }
-});
-```
-
-You can get messages in a [channel](#channels) by calling the `ChatKitty.getChannelMessages(Channel, function)` method.
-
 ## Send a message
 > Send a message to a channel
 
 ```javascript
-kitty.sendChannelMessage(
-  channel,
-  new CreateTextMessageRequest('Hello world!'),
-  function(result) {
-    if (result.isSuccess) {
-      let message = result.message;
+let result = await kitty.sendMessage({
+  channel: channel,
+  body: messageText,
+});
 
-      // Handle message
-    }
+if (result.succeeded) {
+  let message = result.message; // Handle message
+}
 
-    if (result.isCancelled) {
-      // Handle request cancellation
-    }
-
-    if (result.isError) {
-      // Handle error
-    }
-  }
-);
+if (result.failed) {
+  let error = result.error; // Handle error
+}
 ```
 
-You can send a message to a [channel](#channels) by calling the `ChatKitty.sendChannelMessage(Channel, CreateMessageRequest, function)` method.
+You can send a message by calling the `ChatKitty.sendMessage(SendMessageRequest)` method.
 
-## Message delivery receipts
-With message delivery receipts, you can see when messages get delivered on another user's devices.
-
-When a user receives or fetches a message sent by another user for the first time, a delivery receipt is created.
-
-Delivery receipts are automatically created by the ChatKitty platform and this SDK.
-
-<aside class="notice">
- Delivery receipts are only created for messages sent inside <b>group channels</b>.
-</aside>
-
-## Get message delivery receipts
-> Get delivery receipts for a message
+## Get messages
+> Get messages inside a channel
 
 ```javascript
-kitty.getMessageDeliveryReceipts(
-  message,
-  function(result) {
-    if (result.isSuccess) {
-     for (let receipt of result.receipts) {
-        let user = receipt.user
-     }
+kitty
+  .getMessages({
+    channel: channel,
+  })
+  .then((result) => {
+    if (result.succeeded) {
+      let messages = result.paginator.items; // Handle messages
     }
-  }
-);
+
+    if (result.failed) {
+      let error = result.error; // Handle error
+    }
+  });
 ```
 
-You can get delivery receipts for a [message](#messages) by calling the `ChatKitty.getMessageDeliveryReceipts(Message, function)` method.
+You can get messages in a [channel](#channels) by calling the `ChatKitty.getChannelMessages(GetMessagesRequest)` method.
 
-## Message read receipts
-With message read receipts, you can see when messages are read by other users
+# Notifications
+Notifications inform a user of relevant actions related to another screen in your application from 
+their current screen. ChatKitty sends notifications to your app through the ChatKitty JavaScript SDK 
+when an action outside of an active chat session occurs. 
+You can listen for these notifications and use them to build in-app notification views.
 
-When a user reads a message for the first time, a read receipt is created.
-
-<aside class="notice">
- Read receipts are only created for messages sent inside <b>group channels</b>.
-</aside>
-
-## Read a message
-> Marking a message as read
+## Listening to in-app notifications
+> Listening for new in-app notifications
 
 ```javascript
-kitty.markMessageRead(
-  message,
-  function(result) {
-    if (result.isSuccess) {
-     // Handle success
-    }
-  }
-);
+let unsubscribe = kitty.onNotificationReceived((notification) => {
+  // handle notification
+});
+
+unsubscribe(); // call unsubscribe function when you're no longer interested in recieving notifications
 ```
 
-You can mark a [message](#messages) as read by calling the `ChatKitty.markMessageRead(Message, function)` method. Mark a message
-as read when a message is displayed to the current user.
+When an event outside of an active chat session happens, like a message sent, a notification is sent 
+to registered notification listeners. Register a notification listener using the 
+`ChatKitty.onNotificationReceived((notification: Notification) => void)` method.
 
-## Get message read receipts
-> Get read receipts for a message
+#### Notification types
+> Handling notification types
 
 ```javascript
-kitty.getReadReceipts(
-  message,
-  function(result) {
-    if (result.isSuccess) {
-     for (let receipt of result.receipts) {
-        let user = receipt.user
-     }
-    }
+kitty.onNotificationReceived((notification) => {
+  switch (notification.data.type) {
+    case "USER:SENT:MESSAGE":
+      // handle notification data
+      break;
+    case "SYSTEM:SENT:MESSAGE":
+      // handle notification data
+      break;
   }
-);
+});
 ```
 
-You can get read receipts for a message by calling the `ChatKitty.getMessageReadReceipts(Message, function)` method.
+Type | Description 
+---- | -----------
+`SYSTEM:SENT:MESSAGE` | Called when a system message was sent in another channel.
+`USER:SENT:MESSAGE` | Called when a user sent a message in another channel.
