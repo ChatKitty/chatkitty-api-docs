@@ -50,7 +50,7 @@ parameters to secure the user session.
 
 <aside class="notice">
  A username must be unique within a ChatKitty application.<br/>
- We recommend you use as a hashed email address or phone number as your ChatKitty usernames.
+ We recommend you use hashed email address or phone number as your ChatKitty usernames.
 </aside>
 
 ### Starting a user session with a user name and authentication parameters
@@ -72,6 +72,12 @@ if (result.failed) {
   let error = result.error; // Handle error
 }
 ```
+
+If you're using [ChatKitty Chat Functions](https://docs.chatkitty.com/platform/#chat-functions), you 
+can provide custom authentication logic or proxy user authentication through your backend using a 
+**User Attempted Start Session** chat function. The chat function will be passed the username and 
+authentication parameters from a `ChatKitty.startSession(StartSessionRequest)` call. Your logic will 
+determine if the user is allowed to start a session with their credentials.
 
 ### Starting a user session with just a user name (guest user session)
 > Starting a guest user session

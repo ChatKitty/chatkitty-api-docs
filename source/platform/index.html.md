@@ -9,6 +9,7 @@ toc_footers:
   - <a href='https://www.chatkitty.com'>&copy; ChatKitty 2020. All rights reserved</a>
 
 includes:
+  - platform_chat_functions
   - platform_open_api
   - platform_files
   - platform_errors
