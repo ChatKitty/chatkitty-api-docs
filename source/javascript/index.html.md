@@ -137,21 +137,21 @@ Get updates when the current user changes by using the `ChatKitty.onCurrentUserC
 method. 
 
 <aside class="notice">
- The observer function passed to onCurrentUserChanged is called when first registered, with the current user value.
+ The observer function passed to onCurrentUserChanged is called with the current user value when first registered.
 </aside>
 
 ## Updating the current user
 > Updating the current user
 
 ```javascript
-  kitty.updateCurrentUser((user) => {
-        user.properties = {
-          ...user.properties,
-          'new-property': newPropertyValue,
-        };
+kitty.updateCurrentUser((user) => {
+  user.properties = {
+    ...user.properties,
+    "new-property": newPropertyValue,
+  };
 
-        return user;
-      });
+  return user;
+});
 ```
 
 Update the current user by using the `ChatKitty.updateCurrentUser((user: CurrentUser) => CurrentUser)` 
