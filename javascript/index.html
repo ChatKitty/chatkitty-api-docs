@@ -532,7 +532,7 @@ method. </p>
 <blockquote>
 <p>Updating the current user</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">updateCurrentUser</span><span class="p">((</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">updateCurrentUser</span><span class="p">((</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="nx">user</span><span class="p">.</span><span class="nx">properties</span> <span class="o">=</span> <span class="p">{</span>
     <span class="p">...</span><span class="nx">user</span><span class="p">.</span><span class="nx">properties</span><span class="p">,</span>
     <span class="dl">"</span><span class="s2">new-property</span><span class="dl">"</span><span class="p">:</span> <span class="nx">newPropertyValue</span><span class="p">,</span>
@@ -659,7 +659,7 @@ start a chat session. </p>
 <blockquote>
 <p>Starting a chat session</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">startChatSession</span><span class="p">({</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">startChatSession</span><span class="p">({</span>
       <span class="na">channel</span><span class="p">:</span> <span class="nx">channel</span><span class="p">,</span>
       <span class="na">onReceivedMessage</span><span class="p">:</span> <span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{},</span>
     <span class="p">});</span>
