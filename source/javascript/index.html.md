@@ -144,7 +144,7 @@ method.
 > Updating the current user
 
 ```javascript
-kitty.updateCurrentUser((user) => {
+await kitty.updateCurrentUser((user) => {
   user.properties = {
     ...user.properties,
     "new-property": newPropertyValue,
@@ -290,7 +290,7 @@ start a chat session.
 > Starting a chat session
 
 ```javascript
-let result = await kitty.startChatSession({
+let result = kitty.startChatSession({
       channel: channel,
       onReceivedMessage: (message) => {},
     });
