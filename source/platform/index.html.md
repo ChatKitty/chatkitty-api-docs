@@ -23,7 +23,7 @@ The Platform API provides a RESTful interface for administrators and server-side
 their ChatKitty applications. 
 
 <aside class="success">
-ChatKitty provides an <a href="https://api.chatkitty.com/v1/explorer/index.html#hkey0=Content-Type&hval0=application/json&uri=/v1/applications/me">API Explorer</a> to
+ChatKitty provides an <a href="https://docs.chatkitty.com/platform/v1/">API Explorer</a> to
 access the Platform API.
 </aside>
 
