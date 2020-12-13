@@ -668,38 +668,40 @@ and the page would include a JSON array in its <code>_embedded</code> property n
 </tr>
 </tbody></table>
 <h1 id='chat-functions'>Chat Functions</h1>
-<p>ChatKitty provides Chat Functions, serverless cloud functions that allow you to define custom logic 
-for complex tasks like user authentication, and respond to chat events that happen within your application. </p>
+<p>ChatKitty provides Chat Functions, serverless cloud functions that allow you to define custom logic
+for complex tasks like user authentication, and respond to chat events that happen within your
+application.</p>
 
 <aside class="success">
 You can create, edit, test, and deploy chat functions from the 
 <a href="https://dashboard.chatkitty.com/functions">ChatKitty dashboard</a>.
 </aside>
 
-<p>Chat Functions let you write arbitrary code that runs any time a relevant event or action happens 
-inside your app. You can send push notifications, create emails or make HTTP calls to your backend, 
-as well as use a pre-initialized server-side ChatKitty SDK to make changes to your application in response 
-to user actions.</p>
+<p>Chat Functions let you write arbitrary code that runs any time a relevant event or action happens
+inside your app. You can send push notifications, create emails or make HTTP calls to your backend,
+as well as use a pre-initialized server-side ChatKitty SDK to make changes to your application in
+response to user actions.</p>
 
 <aside class="notice">
 To define ChatKitty Chat Functions, you'll need to be familiar with basic TypeScript or JavaScript.
 </aside>
 <h2 id='chat-functions-your-chat-runtime'>Your Chat Runtime</h2>
-<p>Your chat runtime provides the environment your chat functions run. This includes dependency NPM modules, 
-environment variables and custom code that executes before each function.</p>
+<p>Your chat runtime provides the environment your chat functions run. This includes dependency NPM
+modules, environment variables and custom code that executes before each function.</p>
 
-<p>You can use any <a href="https://www.npmjs.com/">NPM</a> package inside your Chat Functions as a Chat Runtime 
+<p>You can use any <a href="https://www.npmjs.com/">NPM</a> package inside your Chat Functions as a Chat Runtime
 dependency.</p>
 <h2 id='chat-functions-adding-a-chat-runtime-dependency'>Adding a chat runtime dependency</h2>
-<p>To add a chat runtime dependency, from your ChatKitty application dashboard, go to the &quot;Functions&quot; 
+<p>To add a chat runtime dependency, from your ChatKitty application dashboard, go to the &quot;Functions&quot;
 page:</p>
 
 <p>Then from the &quot;Functions&quot; page, go to the &quot;Runtime&quot; tab:</p>
 
-<p>From the &quot;Runtime&quot; tab you can add a new dependency using the name of the NPM package you want to install and 
-the version of the package you want to install.</p>
+<p>From the &quot;Runtime&quot; tab you can add a new dependency using the name of the NPM package you want to
+install and the version of the package you want to install.</p>
 
-<p>For example, installing version <code>7.24.0</code> of <a href="https://www.npmjs.com/package/firebase">the Firebase NPM package</a> 
+<p>For example, installing version <code>7.24.0</code>
+of <a href="https://www.npmjs.com/package/firebase">the Firebase NPM package</a>
 looks like this:</p>
 
 <aside class="warning">
@@ -708,21 +710,21 @@ Remember to click the "Save" icon to confirm your chat runtime dependencies chan
 
 <p>Using the package name <code>firebase</code> and the package version <code>7.24.0</code>.</p>
 
-<p>An equivalent <code>npm</code> command for this would be </p>
+<p>An equivalent <code>npm</code> command for this would be</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>npm <span class="nb">install </span>firebase@7.24.0
 </code></pre></div>
 <p>or with <code>yarn</code></p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>yarn add firebase@7.24.0
 </code></pre></div>
 <aside class="notice">
-You can import JavaScript modules from your dependencies into your chat functions and initilzation script 
+You can import JavaScript modules from your dependencies into your chat functions and initialization script 
 using the CommonJS require function. 
 </aside>
 <h2 id='chat-functions-adding-a-chat-runtime-initialization-script'>Adding a chat runtime initialization script</h2>
-<p>If you need to run initialization logic before running your chat function, you can add arbitrary code 
-using a chat runtime initialization script.</p>
+<p>If you need to run initialization logic before running your chat function, you can add arbitrary
+code using a chat runtime initialization script.</p>
 
-<p>To add an initialization script, from the &quot;Runtime&quot; tab, click the dropdown and select 
+<p>To add an initialization script, from the &quot;Runtime&quot; tab, click the dropdown and select
 &quot;Initialization Script&quot;.</p>
 
 <aside class="warning">
@@ -731,14 +733,17 @@ Remember to click the "Save" icon to confirm your chat runtime initialization sc
 <h2 id='chat-functions-defining-a-chat-function'>Defining a chat function</h2>
 <p>You can define chat functions from the &quot;Functions&quot; page of your ChatKitty application dashboard.</p>
 
-<p>Every chat function has two input parameters, an <strong>event</strong> that triggered the chat function call with 
-event data, and a <strong>context</strong> containing chat function and application specific data and helper objects, including 
-pre-initialized <a href="https://docs.chatkitty.com/platform/v1/">ChatKitty Platform API</a> clients.</p>
+<p>Every chat function has two input parameters, an <strong>event</strong> that triggered the chat function call
+with event data, and a <strong>context</strong> containing chat function and application specific data and helper
+objects, including pre-initialized <a href="https://docs.chatkitty.com/platform/v1/">ChatKitty Platform API</a>
+clients.</p>
 
-<p>Only events of a specific corresponding type can trigger a chat function. These types are referenced to 
-as <strong>trigger types</strong>. For example, whenever a user receives a ChatKitty notification, a <code>UserReceivedNotificationEvent</code> 
-event is created. If you&#39;ve defined a chat function with its corresponding trigger type, &quot;User Received Notification&quot;, 
-then the chat functions get called with the created <code>UserReceivedNotificationEvent</code>.</p>
+<p>Only events of a specific corresponding type can trigger a chat function. These types are referenced
+to as <strong>trigger types</strong>. For example, whenever a user receives a ChatKitty notification,
+a <code>UserReceivedNotificationEvent</code>
+event is created. If you&#39;ve defined a chat function with its corresponding trigger type, &quot;User
+Received Notification&quot;, then the chat functions get called with the
+created <code>UserReceivedNotificationEvent</code>.</p>
 
 <p>Chat functions automatically run when an event of their trigger type occurs.</p>
 
@@ -746,26 +751,26 @@ then the chat functions get called with the created <code>UserReceivedNotificati
 After saving a new chat function version using the code editor, your chat function gets deployed.
 </aside>
 <h2 id='chat-functions-blocking-and-non-blocking-chat-functions'>Blocking and non-blocking chat functions</h2>
-<p>A chat function can be blocking or non-blocking, depending on its trigger type. </p>
+<p>A chat function can be blocking or non-blocking, depending on its trigger type.</p>
 
-<p>Blocking chat functions run synchronously before an action related to your ChatKitty application, and 
-can be used to <em>modify the behavior</em> of your application.</p>
+<p>Blocking chat functions run synchronously before an action related to your ChatKitty application,
+and can be used to <em>modify the behavior</em> of your application.</p>
 
-<p>Non-blocking chat functions run after an action related to your ChatKitty application happens, and 
-can be used to include additional functionality or integrate an external system with your ChatKitty 
+<p>Non-blocking chat functions run after an action related to your ChatKitty application happens, and
+can be used to include additional functionality or integrate an external system with your ChatKitty
 application.</p>
 <h2 id='chat-functions-blocking-chat-function-types'>Blocking chat function types</h2><h3 id='chat-functions-blocking-chat-function-types-user-attempted-start-session'>User attempted start session</h3>
-<p>This function is triggered when a user attempts to connect to ChatKitty, starting a new 
-<em>user chat session</em>. Inside this function you can define custom logic to authenticate the user, 
-check their credentials, create the user&#39;s ChatKitty profile or hook into your own backend. This 
-function get passed in the username of the user attempting to start a session, and any authentication 
-parameters you include client-side using the <code>authParams</code> property.</p>
+<p>This function is triggered when a user attempts to connect to ChatKitty, starting a new
+<em>user chat session</em>. Inside this function you can define custom logic to authenticate the user,
+check their credentials, create the user&#39;s ChatKitty profile or hook into your own backend. This
+function get passed in the username of the user attempting to start a session, and any
+authentication parameters you include client-side using the <code>authParams</code> property.</p>
 <h2 id='chat-functions-non-blocking-chat-function-types'>Non-blocking chat function types</h2><h3 id='chat-functions-non-blocking-chat-function-types-user-received-notification'>User received notification</h3>
-<p>This function is triggered after a chat event a user should be notified about, (like a message sent in 
-a channel they belong into, or a reaction on their message) occurs. Inside this function you can define 
-custom logic to notify the user of the event that occurred (for example using an email sender or push 
-notification service). This function get passed in the user that received the notification, the 
-notification received, and a boolean true if the user is currently online.</p>
+<p>This function is triggered after a chat event a user should be notified about, (like a message sent
+in a channel they belong into, or a reaction on their message) occurs. Inside this function you can
+define custom logic to notify the user of the event that occurred (for example using an email sender
+or push notification service). This function get passed in the user that received the notification,
+the notification received, and a boolean true if the user is currently online.</p>
 <h1 id='open-api-documentation'>Open API Documentation</h1>
 <p>ChatKitty provides an Open API specification of its API endpoints and objects. </p>
 
