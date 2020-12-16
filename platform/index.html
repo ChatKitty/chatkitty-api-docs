@@ -290,7 +290,7 @@
   color: #859900;
 }
   </style>
-  <link href="../stylesheets/screen-171acb3b.css" rel="stylesheet" media="screen" />
+  <link href="../stylesheets/screen-645a5a69.css" rel="stylesheet" media="screen" />
   <link href="../stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
     <script src="../javascripts/all-e9bde216.js"></script>
 
@@ -695,6 +695,8 @@ dependency.</p>
 <p>To add a chat runtime dependency, from your ChatKitty application dashboard, go to the &quot;Functions&quot;
 page:</p>
 
+<p><img src="../images/chat-functions/chatkitty-side-menu-functions-40fc7e48.png" alt="ChatKitty Side Menu Functions" /></p>
+
 <p>Then from the &quot;Functions&quot; page, go to the &quot;Runtime&quot; tab:</p>
 
 <p>From the &quot;Runtime&quot; tab you can add a new dependency using the name of the NPM package you want to
@@ -704,18 +706,16 @@ install and the version of the package you want to install.</p>
 of <a href="https://www.npmjs.com/package/firebase">the Firebase NPM package</a>
 looks like this:</p>
 
+<p><img src="../images/chat-functions/chatkitty-runtime-add-dependency-example-b09d549e.png" alt="ChatKitty Runtime Add Dependency Example" /></p>
+
 <aside class="warning">
 Remember to click the "Save" icon to confirm your chat runtime dependencies changes.
 </aside>
 
 <p>Using the package name <code>firebase</code> and the package version <code>7.24.0</code>.</p>
 
-<p>An equivalent <code>npm</code> command for this would be</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>npm <span class="nb">install </span>firebase@7.24.0
-</code></pre></div>
-<p>or with <code>yarn</code></p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>yarn add firebase@7.24.0
-</code></pre></div>
+<p>An equivalent <code>npm</code> command for this would be <code>npm install firebase@7.24.0</code>.</p>
+
 <aside class="notice">
 You can import JavaScript modules from your dependencies into your chat functions and initialization script 
 using the CommonJS require function. 
@@ -724,14 +724,18 @@ using the CommonJS require function.
 <p>If you need to run initialization logic before running your chat function, you can add arbitrary
 code using a chat runtime initialization script.</p>
 
-<p>To add an initialization script, from the &quot;Runtime&quot; tab, click the dropdown and select
-&quot;Initialization Script&quot;.</p>
+<p>To add an initialization script, from the &quot;Runtime&quot; tab of the &quot;Functions&quot; page, click the dropdown and 
+select &quot;Initialization Script&quot;.</p>
+
+<p><img src="../images/chat-functions/chatkitty-runtime-initialization-script-9124113f.png" alt="ChatKitty Runtime Initialization Script" /></p>
 
 <aside class="warning">
 Remember to click the "Save" icon to confirm your chat runtime initialization script changes.
 </aside>
 <h2 id='chat-functions-defining-a-chat-function'>Defining a chat function</h2>
 <p>You can define chat functions from the &quot;Functions&quot; page of your ChatKitty application dashboard.</p>
+
+<p><img src="../images/chat-functions/chatkitty-chat-function-example-a2a180a8.png" alt="ChatKitty Chat Function Example" /></p>
 
 <p>Every chat function has two input parameters, an <strong>event</strong> that triggered the chat function call
 with event data, and a <strong>context</strong> containing chat function and application specific data and helper
