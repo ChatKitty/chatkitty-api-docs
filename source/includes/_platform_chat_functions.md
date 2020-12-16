@@ -31,6 +31,8 @@ dependency.
 To add a chat runtime dependency, from your ChatKitty application dashboard, go to the "Functions"
 page:
 
+![ChatKitty Side Menu Functions](images/chat-functions/chatkitty-side-menu-functions.png)
+
 Then from the "Functions" page, go to the "Runtime" tab:
 
 From the "Runtime" tab you can add a new dependency using the name of the NPM package you want to
@@ -40,23 +42,15 @@ For example, installing version `7.24.0`
 of [the Firebase NPM package](https://www.npmjs.com/package/firebase)
 looks like this:
 
+![ChatKitty Runtime Add Dependency Example](images/chat-functions/chatkitty-runtime-add-dependency-example.png)
+
 <aside class="warning">
 Remember to click the "Save" icon to confirm your chat runtime dependencies changes.
 </aside>
 
 Using the package name `firebase` and the package version `7.24.0`.
 
-An equivalent `npm` command for this would be
-
-```shell
-npm install firebase@7.24.0
-```
-
-or with `yarn`
-
-```shell
-yarn add firebase@7.24.0
-```
+An equivalent `npm` command for this would be `npm install firebase@7.24.0`.
 
 <aside class="notice">
 You can import JavaScript modules from your dependencies into your chat functions and initialization script 
@@ -68,8 +62,10 @@ using the CommonJS require function.
 If you need to run initialization logic before running your chat function, you can add arbitrary
 code using a chat runtime initialization script.
 
-To add an initialization script, from the "Runtime" tab, click the dropdown and select
-"Initialization Script".
+To add an initialization script, from the "Runtime" tab of the "Functions" page, click the dropdown and 
+select "Initialization Script".
+
+![ChatKitty Runtime Initialization Script](images/chat-functions/chatkitty-runtime-initialization-script.png)
 
 <aside class="warning">
 Remember to click the "Save" icon to confirm your chat runtime initialization script changes.
@@ -78,6 +74,8 @@ Remember to click the "Save" icon to confirm your chat runtime initialization sc
 ## Defining a chat function
 
 You can define chat functions from the "Functions" page of your ChatKitty application dashboard.
+
+![ChatKitty Chat Function Example](images/chat-functions/chatkitty-chat-function-example.png)
 
 Every chat function has two input parameters, an **event** that triggered the chat function call
 with event data, and a **context** containing chat function and application specific data and helper
