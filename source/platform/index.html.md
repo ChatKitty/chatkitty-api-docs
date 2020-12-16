@@ -4,6 +4,7 @@ title: Platform API Documentation
 language_tabs:
   - shell
   - http
+  - python
 
 toc_footers:
   - <a href='https://www.chatkitty.com'>&copy; ChatKitty 2020. All rights reserved</a>
@@ -69,6 +70,18 @@ acmesecret
 ----WebKitFormBoundary7MA4YWxkTrZu0gW
 ```
 
+```python
+import requests
+
+url = "https://authorization.chatkitty.com/oauth/token"
+
+payload = {'grant_type': 'client_credentials',
+'username': 'acme',
+'password': 'acmesecret'}
+
+response = requests.request("POST", url, data = payload, auth=('acme', 'acmesecret'))
+```
+
 > Returns a JSON response with the Bearer access token.
 
 ```json
@@ -101,16 +114,29 @@ You must replace <code>{{access_token}}</code> with an access token gotten using
 > This requests a user resource page
 
 ```shell
-curl --location --request GET '{{users_link}}' \
+curl --location --request GET '{{users_url}}' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer {{access_token}}'
 ```
 
 ```http
 GET / HTTP/1.1
-Host: {{users_link}}
+Host: {{users_url}}
 Content-Type: application/json
 Authorization: {{access_token}}
+```
+
+```python
+import requests
+
+url = "https://staging-api.chatkitty.com/v1/applications/2/users?page=0&size=20"
+
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {{access_token}}'
+}
+
+response = requests.request("GET", url, headers=headers)
 ```
 
 > The command above returns a user page HAL resource.
