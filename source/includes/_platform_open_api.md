@@ -1,8 +1,10 @@
 # Open API Documentation
 
-ChatKitty provides an Open API specification of its API endpoints and objects. 
+ChatKitty provides an Open API specification of its API endpoints and objects.
 
-![Platform Open API Overview Screenshot](images/platform-open-api/overview-screenshot.png)
+<a href="/platform/v1">
+<img src="/images/platform-open-api/overview-screenshot.png" alt="Platform Open API Overview Screenshot">
+</a>
 
 <aside class="success">
 Go to the <a href="https://docs.chatkitty.com/platform/v1/">ChatKitty Platform V1 Open API documentation</a> 
