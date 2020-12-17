@@ -706,7 +706,8 @@ response to user actions.</p>
 To define ChatKitty Chat Functions, you'll need to be familiar with basic TypeScript or JavaScript.
 </aside>
 <h2 id='chat-functions-your-chat-runtime'>Your Chat Runtime</h2>
-<p>Your chat runtime provides the environment your chat functions run. This includes dependency NPM
+<p>Your chat runtime provides the environment your chat functions run. This includes a pre-initialized 
+<a href="https://chatkitty.github.io/chatkitty-server-side-sdk-js/">ChatKitty Server-side SDK</a>, dependency NPM
 modules, environment variables and custom code that executes before each function.</p>
 
 <p>You can use any <a href="https://www.npmjs.com/">NPM</a> package inside your Chat Functions as a Chat Runtime
@@ -759,7 +760,7 @@ Remember to click the "Save" icon to confirm your chat runtime initialization sc
 
 <p>Every chat function has two input parameters, an <strong>event</strong> that triggered the chat function call
 with event data, and a <strong>context</strong> containing chat function and application specific data and helper
-objects, including pre-initialized <a href="https://docs.chatkitty.com/platform/v1/">ChatKitty Platform API</a>
+objects, including pre-initialized <a href="https://chatkitty.github.io/chatkitty-server-side-sdk-js/">ChatKitty Platform API</a>
 clients.</p>
 
 <p>Only events of a specific corresponding type can trigger a chat function. These types are referenced
