@@ -20,7 +20,8 @@ To define ChatKitty Chat Functions, you'll need to be familiar with basic TypeSc
 
 ## Your Chat Runtime
 
-Your chat runtime provides the environment your chat functions run. This includes dependency NPM
+Your chat runtime provides the environment your chat functions run. This includes a pre-initialized 
+[ChatKitty Server-side SDK](https://chatkitty.github.io/chatkitty-server-side-sdk-js/), dependency NPM
 modules, environment variables and custom code that executes before each function.
 
 You can use any [NPM](https://www.npmjs.com/) package inside your Chat Functions as a Chat Runtime
@@ -79,7 +80,7 @@ You can define chat functions from the "Functions" page of your ChatKitty applic
 
 Every chat function has two input parameters, an **event** that triggered the chat function call
 with event data, and a **context** containing chat function and application specific data and helper
-objects, including pre-initialized [ChatKitty Platform API](https://docs.chatkitty.com/platform/v1/)
+objects, including pre-initialized [ChatKitty Platform API](https://chatkitty.github.io/chatkitty-server-side-sdk-js/)
 clients.
 
 Only events of a specific corresponding type can trigger a chat function. These types are referenced
