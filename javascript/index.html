@@ -443,7 +443,10 @@
 <p>Create a <code>ChatKitty</code> instance by passing your application&#39;s API key to the 
 <code>ChatKitty.getInstance(string)</code> method as a parameter.</p>
 <h2 id='authentication-starting-a-user-session'>Starting a user session</h2>
-<p>To make calls to ChatKitty through the Chat SDK, a user session must be started.</p>
+<p>To make calls to ChatKitty through the Chat SDK, a user session must be <strong>started</strong>. A user session creates 
+an open connection to ChatKitty belonging a user throughout the duration of their usage of your application, 
+until the user session is <strong>ended</strong>. A user session is <strong>active</strong> from when it was started until it&#39;s ended 
+by the user, or the session connection is lost.</p>
 
 <p>You can start a user session using the unique <strong>username</strong> of a user and optional authentication 
 parameters to secure the user session.</p>
@@ -452,7 +455,11 @@ parameters to secure the user session.</p>
  A username must be unique within a ChatKitty application.<br/>
  We recommend you use hashed email address or phone number as your ChatKitty usernames.
 </aside>
-<h3 id='authentication-starting-a-user-session-starting-a-user-session-with-a-user-name-and-authentication-parameters'>Starting a user session with a user name and authentication parameters</h3>
+
+<aside class="notice">
+ Only one user session can be active at a time for a ChatKitty client instance.
+</aside>
+<h3 id='authentication-starting-a-user-session-starting-a-user-session-with-a-username-and-authentication-parameters'>Starting a user session with a username and authentication parameters</h3>
 <blockquote>
 <p>Starting a user session</p>
 </blockquote>
@@ -476,7 +483,7 @@ can provide custom authentication logic or proxy user authentication through you
 <strong>User Attempted Start Session</strong> chat function. The chat function will be passed the username and 
 authentication parameters from a <code>ChatKitty.startSession(StartSessionRequest)</code> call. Your logic will 
 determine if the user is allowed to start a session with their credentials.</p>
-<h3 id='authentication-starting-a-user-session-starting-a-user-session-with-just-a-user-name-guest-user-session'>Starting a user session with just a user name (guest user session)</h3>
+<h3 id='authentication-starting-a-user-session-starting-a-user-session-with-just-a-username-guest-user-session'>Starting a user session with just a username (guest user session)</h3>
 <blockquote>
 <p>Starting a guest user session</p>
 </blockquote>
@@ -678,6 +685,10 @@ start a chat session. </p>
 <p>Start a chat session by calling the <code>ChatKitty.startChatSession(StartChatSessionRequest)</code> method. 
 This method returns a <code>StartChatSessionResult</code> object with a <code>ChatSession</code>, which can be used to later 
 <a href="#chat-sessions-ending-a-chat-session">end the chat session</a>, if the session was successfully started.</p>
+
+<aside class="notice">
+ Before starting a chat session, a connection to ChatKitty must be established by <a href="#authentication-starting-a-user-session">starting a user session</a>. 
+</aside>
 <h2 id='chat-sessions-listening-to-chat-session-events'>Listening to chat session events</h2>
 <blockquote>
 <p>Registering chat session event handler methods when starting a chat session</p>
@@ -740,6 +751,10 @@ your chat session with the channel. </p>
 
 <aside class="notice">
  System file messages can only be sent using the Platform API.
+</aside>
+
+<aside class="notice">
+ Before sending or receiving messages, a chat session must be created for the channel the message belongs to by <a href="#chat-sessions-starting-a-chat-session">starting a chat session</a>. 
 </aside>
 <h2 id='messages-send-a-message'>Send a message</h2>
 <blockquote>
