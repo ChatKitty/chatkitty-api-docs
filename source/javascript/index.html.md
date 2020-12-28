@@ -43,7 +43,10 @@ Create a `ChatKitty` instance by passing your application's API key to the
 `ChatKitty.getInstance(string)` method as a parameter.
 
 ## Starting a user session
-To make calls to ChatKitty through the Chat SDK, a user session must be started.
+To make calls to ChatKitty through the Chat SDK, a user session must be **started**. A user session creates 
+an open connection to ChatKitty belonging a user throughout the duration of their usage of your application, 
+until the user session is **ended**. A user session is **active** from when it was started until it's ended 
+by the user, or the session connection is lost.
 
 You can start a user session using the unique **username** of a user and optional authentication 
 parameters to secure the user session.
@@ -53,7 +56,11 @@ parameters to secure the user session.
  We recommend you use hashed email address or phone number as your ChatKitty usernames.
 </aside>
 
-### Starting a user session with a user name and authentication parameters
+<aside class="notice">
+ Only one user session can be active at a time for a ChatKitty client instance.
+</aside>
+
+### Starting a user session with a username and authentication parameters
 > Starting a user session
 
 ```javascript
@@ -79,7 +86,7 @@ can provide custom authentication logic or proxy user authentication through you
 authentication parameters from a `ChatKitty.startSession(StartSessionRequest)` call. Your logic will 
 determine if the user is allowed to start a session with their credentials.
 
-### Starting a user session with just a user name (guest user session)
+### Starting a user session with just a username (guest user session)
 > Starting a guest user session
 
 ```javascript
@@ -308,6 +315,10 @@ Start a chat session by calling the `ChatKitty.startChatSession(StartChatSession
 This method returns a `StartChatSessionResult` object with a `ChatSession`, which can be used to later 
 [end the chat session](#chat-sessions-ending-a-chat-session), if the session was successfully started.
 
+<aside class="notice">
+ Before starting a chat session, a connection to ChatKitty must be established by <a href="#authentication-starting-a-user-session">starting a user session</a>. 
+</aside>
+
 ## Listening to chat session events
 > Registering chat session event handler methods when starting a chat session
 
@@ -374,6 +385,10 @@ Administrators can send files messages with one, or many file attachments.
 
 <aside class="notice">
  System file messages can only be sent using the Platform API.
+</aside>
+
+<aside class="notice">
+ Before sending or receiving messages, a chat session must be created for the channel the message belongs to by <a href="#chat-sessions-starting-a-chat-session">starting a chat session</a>. 
 </aside>
 
 ## Send a message
