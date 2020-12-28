@@ -362,6 +362,10 @@ End a chat session by calling either the `ChatSession`'s `end()` or `ChatKitty.e
 # Messages
 Users send messages through your application and administrators can send messages through the Platform API. 
 
+<aside class="notice">
+ Before sending or receiving messages, a chat session must be created for the channel the messages belong to by <a href="#chat-sessions-starting-a-chat-session">starting a chat session</a>. 
+</aside>
+
 ## Messages types
 There are four types of messages;
 
@@ -387,10 +391,6 @@ Administrators can send files messages with one, or many file attachments.
  System file messages can only be sent using the Platform API.
 </aside>
 
-<aside class="notice">
- Before sending or receiving messages, a chat session must be created for the channel the message belongs to by <a href="#chat-sessions-starting-a-chat-session">starting a chat session</a>. 
-</aside>
-
 ## Send a message
 > Send a message to a channel
 
@@ -410,6 +410,21 @@ if (result.failed) {
 ```
 
 You can send a message by calling the `ChatKitty.sendMessage(SendMessageRequest)` method.
+
+## Receiving messages in real-time
+> Receiving chat session messages in real-time
+
+```javascript
+kitty.startChatSession({
+ channel: channel,
+ onReceivedMessage: (message) => {
+  // Handle recevied message
+ },
+});
+```
+
+You can receive messages in real-time by [starting a chat session](#chat-sessions-starting-a-chat-session) 
+and registering a `onReceivedMessage` handler.
 
 ## Get messages
 > Get messages inside a channel
