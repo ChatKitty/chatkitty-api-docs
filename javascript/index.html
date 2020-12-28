@@ -393,6 +393,9 @@
                 <a href="#messages-send-a-message" class="toc-h2 toc-link" data-title="Send a message">Send a message</a>
               </li>
               <li>
+                <a href="#messages-receiving-messages-in-real-time" class="toc-h2 toc-link" data-title="Receiving messages in real-time">Receiving messages in real-time</a>
+              </li>
+              <li>
                 <a href="#messages-get-messages" class="toc-h2 toc-link" data-title="Get messages">Get messages</a>
               </li>
           </ul>
@@ -732,6 +735,10 @@ your chat session with the channel. </p>
 <p>End a chat session by calling either the <code>ChatSession</code>&#39;s <code>end()</code> or <code>ChatKitty.endChatSession(ChatSession)</code> method.</p>
 <h1 id='messages'>Messages</h1>
 <p>Users send messages through your application and administrators can send messages through the Platform API. </p>
+
+<aside class="notice">
+ Before sending or receiving messages, a chat session must be created for the channel the messages belong to by <a href="#chat-sessions-starting-a-chat-session">starting a chat session</a>. 
+</aside>
 <h2 id='messages-messages-types'>Messages types</h2>
 <p>There are four types of messages;</p>
 <h3 id='messages-messages-types-text-message'>Text Message</h3>
@@ -752,10 +759,6 @@ your chat session with the channel. </p>
 <aside class="notice">
  System file messages can only be sent using the Platform API.
 </aside>
-
-<aside class="notice">
- Before sending or receiving messages, a chat session must be created for the channel the message belongs to by <a href="#chat-sessions-starting-a-chat-session">starting a chat session</a>. 
-</aside>
 <h2 id='messages-send-a-message'>Send a message</h2>
 <blockquote>
 <p>Send a message to a channel</p>
@@ -774,6 +777,19 @@ your chat session with the channel. </p>
 <span class="p">}</span>
 </code></pre></div>
 <p>You can send a message by calling the <code>ChatKitty.sendMessage(SendMessageRequest)</code> method.</p>
+<h2 id='messages-receiving-messages-in-real-time'>Receiving messages in real-time</h2>
+<blockquote>
+<p>Receiving chat session messages in real-time</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">startChatSession</span><span class="p">({</span>
+ <span class="na">channel</span><span class="p">:</span> <span class="nx">channel</span><span class="p">,</span>
+ <span class="na">onReceivedMessage</span><span class="p">:</span> <span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Handle recevied message</span>
+ <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>You can receive messages in real-time by <a href="#chat-sessions-starting-a-chat-session">starting a chat session</a> 
+and registering a <code>onReceivedMessage</code> handler.</p>
 <h2 id='messages-get-messages'>Get messages</h2>
 <blockquote>
 <p>Get messages inside a channel</p>
