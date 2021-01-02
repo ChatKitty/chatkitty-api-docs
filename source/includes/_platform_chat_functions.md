@@ -18,6 +18,30 @@ response to user actions.
 To define ChatKitty Chat Functions, you'll need to be familiar with basic TypeScript or JavaScript.
 </aside>
 
+## Defining a chat function
+
+You can define chat functions from the "Functions" page of your ChatKitty application dashboard.
+
+![ChatKitty Chat Function Example](images/chat-functions/chatkitty-chat-function-example.png)
+
+Every chat function has two input parameters, an **event** that triggered the chat function call
+with event data, and a **context** containing chat function and application specific data and helper
+objects, including pre-initialized [ChatKitty Platform API](https://chatkitty.github.io/chatkitty-server-side-sdk-js/)
+clients.
+
+Only events of a specific corresponding type can trigger a chat function. These types are referenced
+to as **trigger types**. For example, whenever a user receives a ChatKitty notification,
+a `UserReceivedNotificationEvent`
+event is created. If you've defined a chat function with its corresponding trigger type, "User
+Received Notification", then the chat functions get called with the
+created `UserReceivedNotificationEvent`.
+
+Chat functions automatically run when an event of their trigger type occurs.
+
+<aside class="notice">
+After saving a new chat function version using the code editor, your chat function gets deployed.
+</aside>
+
 ## Your Chat Runtime
 
 Your chat runtime provides the environment your chat functions run. This includes a pre-initialized 
@@ -70,30 +94,6 @@ select "Initialization Script".
 
 <aside class="warning">
 Remember to click the "Save" icon to confirm your chat runtime initialization script changes.
-</aside>
-
-## Defining a chat function
-
-You can define chat functions from the "Functions" page of your ChatKitty application dashboard.
-
-![ChatKitty Chat Function Example](images/chat-functions/chatkitty-chat-function-example.png)
-
-Every chat function has two input parameters, an **event** that triggered the chat function call
-with event data, and a **context** containing chat function and application specific data and helper
-objects, including pre-initialized [ChatKitty Platform API](https://chatkitty.github.io/chatkitty-server-side-sdk-js/)
-clients.
-
-Only events of a specific corresponding type can trigger a chat function. These types are referenced
-to as **trigger types**. For example, whenever a user receives a ChatKitty notification,
-a `UserReceivedNotificationEvent`
-event is created. If you've defined a chat function with its corresponding trigger type, "User
-Received Notification", then the chat functions get called with the
-created `UserReceivedNotificationEvent`.
-
-Chat functions automatically run when an event of their trigger type occurs.
-
-<aside class="notice">
-After saving a new chat function version using the code editor, your chat function gets deployed.
 </aside>
 
 ## Blocking and non-blocking chat functions
