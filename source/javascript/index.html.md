@@ -1,5 +1,5 @@
 ---
-title: Web SDK Documentation
+title: JavaScript SDK Documentation
 
 language_tabs:
   - javascript
