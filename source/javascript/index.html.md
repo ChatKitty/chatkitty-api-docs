@@ -324,11 +324,29 @@ This method returns a `StartChatSessionResult` object with a `ChatSession`, whic
 
 ```javascript
 kitty.startChatSession({
-      channel: channel,
-      onReceivedMessage: (message) => {
-        // handle received messages
-      },
-    });
+ channel: channel,
+ onReceivedMessage: (message) => {
+  // handle received messages
+ },
+ onReceivedKeystrokes: (keystrokes) => {
+  // handle received typing keystrokes
+ },
+ onTypingStarted: (user) => {
+  // handle user starts typing
+ },
+ onTypingStopped: (user) => {
+  // handle user stops typing
+ },
+ onParticipantEnteredChat: (user) => {
+  // handle user who just entered the chat
+ },
+ onParticipantLeftChat: (user) => {
+  // handle user who just left the chat
+ },
+ onParticipantPresenceChanged: (user) => {
+  // handle user who became online, offline, do not distrub, invisible
+ },
+});
 ```
 
 When an event involving a chat session channel happens, like a message sent in the channel or another 
