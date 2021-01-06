@@ -710,12 +710,44 @@ the session is called.</p>
 <table><thead>
 <tr>
 <th>Name</th>
+<th>Parameter Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td><code>onReceivedMessage</code></td>
-<td>Called when the device receives a sent message.</td>
+<td><code>Message</code></td>
+<td>Called when a message is sent to this channel.</td>
+</tr>
+<tr>
+<td><code>onReceivedKeystrokes</code></td>
+<td><code>Keystrokes</code></td>
+<td>Called when typing keystrokes made by users actively chatting in this channel.</td>
+</tr>
+<tr>
+<td><code>onTypingStarted</code></td>
+<td><code>User</code></td>
+<td>Called when a user starts typing in this channel.</td>
+</tr>
+<tr>
+<td><code>onTypingStopped</code></td>
+<td><code>User</code></td>
+<td>Called when a user stops typing in this channel.</td>
+</tr>
+<tr>
+<td><code>onParticipantEnteredChat</code></td>
+<td><code>User</code></td>
+<td>Called when another user starts an active chat session in this channel.</td>
+</tr>
+<tr>
+<td><code>onParticipantLeftChat</code></td>
+<td><code>User</code></td>
+<td>Called when another user ends their active chat session in this channel.</td>
+</tr>
+<tr>
+<td><code>onParticipantPresenceChanged</code></td>
+<td><code>User</code></td>
+<td>Called when a member of this channel changes their presence status or goes online or offline.</td>
 </tr>
 </tbody></table>
 <h2 id='chat-sessions-ending-a-chat-session'>Ending a chat session</h2>
