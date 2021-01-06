@@ -353,6 +353,10 @@ When an event involving a chat session channel happens, like a message sent in t
 user joined the channel, a corresponding chat session event handler method registered when starting 
 the session is called.
 
+<aside class="notice">
+ All handler methods are optional, so you only needed to register handlers for chat events your application cares about.
+</aside>
+
 #### Chat session event handler methods
 Name | Parameter Type | Description 
 ---- | -------------- | -----------
