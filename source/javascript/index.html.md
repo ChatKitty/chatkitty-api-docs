@@ -336,9 +336,15 @@ user joined the channel, a corresponding chat session event handler method regis
 the session is called.
 
 #### Chat session event handler methods
-Name | Description 
----- | -----------
-`onReceivedMessage` | Called when the device receives a sent message.
+Name | Parameter Type | Description 
+---- | -------------- | -----------
+`onReceivedMessage` | `Message` | Called when a message is sent to this channel.
+`onReceivedKeystrokes` | `Keystrokes` | Called when typing keystrokes made by users actively chatting in this channel.
+`onTypingStarted` | `User` | Called when a user starts typing in this channel.
+`onTypingStopped` | `User` | Called when a user stops typing in this channel.
+`onParticipantEnteredChat` | `User` | Called when another user starts an active chat session in this channel.
+`onParticipantLeftChat` | `User` | Called when another user ends their active chat session in this channel.
+`onParticipantPresenceChanged` | `User` | Called when a member of this channel changes their presence status or goes online or offline.
 
 ## Ending a chat session
 > Ending a chat session using its chat session object
