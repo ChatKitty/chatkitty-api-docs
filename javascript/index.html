@@ -724,6 +724,10 @@ This method returns a <code>StartChatSessionResult</code> object with a <code>Ch
 <p>When an event involving a chat session channel happens, like a message sent in the channel or another 
 user joined the channel, a corresponding chat session event handler method registered when starting 
 the session is called.</p>
+
+<aside class="notice">
+ All handler methods are optional, so you only needed to register handlers for chat events your application cares about.
+</aside>
 <h4 id='chat-sessions-listening-to-chat-session-events-open-channel-chat-session-event-handler-methods'>Chat session event handler methods</h4>
 <table><thead>
 <tr>
