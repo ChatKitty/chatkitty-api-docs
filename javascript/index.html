@@ -697,11 +697,29 @@ This method returns a <code>StartChatSessionResult</code> object with a <code>Ch
 <p>Registering chat session event handler methods when starting a chat session</p>
 </blockquote>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">kitty</span><span class="p">.</span><span class="nx">startChatSession</span><span class="p">({</span>
-      <span class="na">channel</span><span class="p">:</span> <span class="nx">channel</span><span class="p">,</span>
-      <span class="na">onReceivedMessage</span><span class="p">:</span> <span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="c1">// handle received messages</span>
-      <span class="p">},</span>
-    <span class="p">});</span>
+ <span class="na">channel</span><span class="p">:</span> <span class="nx">channel</span><span class="p">,</span>
+ <span class="na">onReceivedMessage</span><span class="p">:</span> <span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// handle received messages</span>
+ <span class="p">},</span>
+ <span class="na">onReceivedKeystrokes</span><span class="p">:</span> <span class="p">(</span><span class="nx">keystrokes</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// handle received typing keystrokes</span>
+ <span class="p">},</span>
+ <span class="na">onTypingStarted</span><span class="p">:</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// handle user starts typing</span>
+ <span class="p">},</span>
+ <span class="na">onTypingStopped</span><span class="p">:</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// handle user stops typing</span>
+ <span class="p">},</span>
+ <span class="na">onParticipantEnteredChat</span><span class="p">:</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// handle user who just entered the chat</span>
+ <span class="p">},</span>
+ <span class="na">onParticipantLeftChat</span><span class="p">:</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// handle user who just left the chat</span>
+ <span class="p">},</span>
+ <span class="na">onParticipantPresenceChanged</span><span class="p">:</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// handle user who became online, offline, do not distrub, invisible</span>
+ <span class="p">},</span>
+<span class="p">});</span>
 </code></pre></div>
 <p>When an event involving a chat session channel happens, like a message sent in the channel or another 
 user joined the channel, a corresponding chat session event handler method registered when starting 
