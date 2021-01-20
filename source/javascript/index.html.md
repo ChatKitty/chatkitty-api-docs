@@ -20,13 +20,13 @@ ChatKitty is available as an [npm package](https://www.npmjs.com/package/chatkit
 > Install the ChatKitty npm package with yarn...
 
 ```shell
-yarn install chatkitty
+yarn add chatkitty
 ```
 
 > ...or with npm
 
 ```shell
-npm add chatkitty
+npm install chatkitty
 ```
 
 # Authentication
