@@ -367,6 +367,12 @@
               <li>
                 <a href="#channels-joining-a-channel" class="toc-h2 toc-link" data-title="Joining a channel">Joining a channel</a>
               </li>
+              <li>
+                <a href="#channels-getting-channel-members" class="toc-h2 toc-link" data-title="Getting channel members">Getting channel members</a>
+              </li>
+              <li>
+                <a href="#channels-checking-if-channel-is-unread" class="toc-h2 toc-link" data-title="Checking if channel is unread">Checking if channel is unread</a>
+              </li>
           </ul>
       </li>
       <li>
@@ -466,7 +472,7 @@ parameters to secure the user session.</p>
 <blockquote>
 <p>Starting a user session</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">startSession</span><span class="p">({</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">startSession</span><span class="p">({</span>
   <span class="na">username</span><span class="p">:</span> <span class="nx">email</span><span class="p">,</span>
   <span class="na">authParams</span><span class="p">:</span> <span class="p">{</span> <span class="c1">// parameters to pass to authentication chat function</span>
     <span class="na">password</span><span class="p">:</span> <span class="nx">password</span><span class="p">,</span> 
@@ -474,11 +480,11 @@ parameters to secure the user session.</p>
 <span class="p">});</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">succeeded</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">session</span><span class="p">;</span> <span class="c1">// Handle session</span>
+  <span class="kd">const</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">session</span><span class="p">;</span> <span class="c1">// Handle session</span>
 <span class="p">}</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">failed</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
+  <span class="kd">const</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>If you&#39;re using <a href="https://docs.chatkitty.com/platform/#chat-functions">ChatKitty Chat Functions</a>, you 
@@ -490,16 +496,16 @@ determine if the user is allowed to start a session with their credentials.</p>
 <blockquote>
 <p>Starting a guest user session</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">startSession</span><span class="p">({</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">startSession</span><span class="p">({</span>
   <span class="na">username</span><span class="p">:</span> <span class="nx">email</span><span class="p">,</span>
 <span class="p">});</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">succeeded</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">session</span><span class="p">;</span> <span class="c1">// Handle session</span>
+  <span class="kd">const</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">session</span><span class="p">;</span> <span class="c1">// Handle session</span>
 <span class="p">}</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">failed</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
+  <span class="kd">const</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>If your application has the <strong>guest user</strong> feature enabled, you can start a user session by calling the 
@@ -519,9 +525,9 @@ determine if the user is allowed to start a session with their credentials.</p>
 <blockquote>
 <p>Get the current user</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">getCurrentUser</span><span class="p">();</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">getCurrentUser</span><span class="p">();</span>
 
-<span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span> <span class="c1">// Handle user</span>
+<span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span> <span class="c1">// Handle user</span>
 </code></pre></div>
 <p>After starting a ChatKitty <a href="#authentication-starting-a-user-session">user session</a>, you can request the current user 
 anytime by calling the <code>ChatKitty.getCurrentUser()</code> method.</p>
@@ -529,7 +535,7 @@ anytime by calling the <code>ChatKitty.getCurrentUser()</code> method.</p>
 <blockquote>
 <p>Observing the current user changes</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">unsubscribe</span> <span class="o">=</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">onCurrentUserChanged</span><span class="p">((</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">unsubscribe</span> <span class="o">=</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">onCurrentUserChanged</span><span class="p">((</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="c1">// handle new current user or current user changes</span>
 <span class="p">});</span>
 
@@ -558,8 +564,9 @@ method. </p>
 method, taking the current user and returning a user with the changes to be applied.</p>
 <h1 id='channels'>Channels</h1>
 <p>Channels are the backbone of the ChatKitty chat experience. Users can join channels and receive 
-or send messages. ChatKitty broadcasts messages created in channels to <strong>channel members</strong> with active 
-<strong>chat sessions</strong> and sends <strong>push notifications</strong> to offline members.</p>
+or send messages. After a user joins a channel, the user becomes a <strong>channel member</strong>. ChatKitty broadcasts 
+messages created in channels to channel members with active <strong>chat sessions</strong> and sends <strong>push notifications</strong> 
+to offline members.</p>
 <h2 id='channels-channel-types'>Channel types</h2>
 <p>There are four types of channels;</p>
 <h3 id='channels-channel-types-public-channel'>Public Channel</h3>
@@ -582,17 +589,17 @@ Messages sent in open channels are <b>ephemeral</b> and not persisted by ChatKit
 <blockquote>
 <p>Creating a new channel</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">createChannel</span><span class="p">({</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">createChannel</span><span class="p">({</span>
   <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">PUBLIC</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">name</span><span class="p">:</span> <span class="nx">channelName</span><span class="p">,</span>
 <span class="p">});</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">succeeded</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">channel</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">channel</span><span class="p">;</span> <span class="c1">// Handle channel</span>
+  <span class="kd">const</span> <span class="nx">channel</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">channel</span><span class="p">;</span> <span class="c1">// Handle channel</span>
 <span class="p">}</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">failed</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
+  <span class="kd">const</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Create a new channel by using the <code>ChatKitty.createChannel(CreateChannelRequest)</code> method. A user is 
@@ -601,14 +608,14 @@ automatically a member of a group channel they created.</p>
 <blockquote>
 <p>Get channels the current user can begin chat sessions in</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">getChannels</span><span class="p">();</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">getChannels</span><span class="p">();</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">succeeded</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">channels</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">paginator</span><span class="p">.</span><span class="nx">items</span><span class="p">;</span> <span class="c1">// Handle channels</span>
+  <span class="kd">const</span> <span class="nx">channels</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">paginator</span><span class="p">.</span><span class="nx">items</span><span class="p">;</span> <span class="c1">// Handle channels</span>
 <span class="p">}</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">failed</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
+  <span class="kd">const</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>You can get channels the current user can chat in by calling the <code>ChatKitty.getChannels()</code> method.</p>
@@ -616,14 +623,14 @@ automatically a member of a group channel they created.</p>
 <blockquote>
 <p>Get group channels the current user can become a member of</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">getJoinableChannels</span><span class="p">();</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">getJoinableChannels</span><span class="p">();</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">succeeded</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">channels</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">paginator</span><span class="p">.</span><span class="nx">items</span><span class="p">;</span> <span class="c1">// Handle channels</span>
+  <span class="kd">const</span> <span class="nx">channels</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">paginator</span><span class="p">.</span><span class="nx">items</span><span class="p">;</span> <span class="c1">// Handle channels</span>
 <span class="p">}</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">failed</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
+  <span class="kd">const</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Get channels the current user can join, becoming a member, by calling the <code>ChatKitty.getJoinableChannels()</code> 
@@ -632,14 +639,14 @@ method.</p>
 <blockquote>
 <p>Getting a channel by id</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">getChannel</span><span class="p">(</span><span class="nx">channelId</span><span class="p">);</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">getChannel</span><span class="p">(</span><span class="nx">channelId</span><span class="p">);</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">succeeded</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">channel</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">channel</span><span class="p">;</span> <span class="c1">// Handle channel</span>
+  <span class="kd">const</span> <span class="nx">channel</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">channel</span><span class="p">;</span> <span class="c1">// Handle channel</span>
 <span class="p">}</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">failed</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
+  <span class="kd">const</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Get a channel by searchable properties like channel ID by using the <code>ChatKitty.getChannel(property)</code> 
@@ -651,15 +658,47 @@ method.</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">joinChannel</span><span class="p">({</span> <span class="na">channel</span><span class="p">:</span> <span class="nx">channel</span> <span class="p">});</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">succeeded</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">channel</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">channel</span><span class="p">;</span> <span class="c1">// Handle channel</span>
+  <span class="kd">const</span> <span class="nx">channel</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">channel</span><span class="p">;</span> <span class="c1">// Handle channel</span>
 <span class="p">}</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">failed</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
+  <span class="kd">const</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>The current user can join a group channel, becoming a member, by using the <code>ChatKitty.joinChannel(JoinChannelRequest)</code> 
 method.</p>
+<h2 id='channels-getting-channel-members'>Getting channel members</h2>
+<blockquote>
+<p>Getting channel members</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">getChannelMembers</span><span class="p">({</span>
+ <span class="na">channel</span><span class="p">:</span> <span class="nx">channel</span><span class="p">,</span>
+<span class="p">});</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">succeeded</span><span class="p">)</span> <span class="p">{</span>
+ <span class="kd">const</span> <span class="nx">members</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">paginator</span><span class="p">.</span><span class="nx">items</span><span class="p">;</span> <span class="c1">// Handle members</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">failed</span><span class="p">)</span> <span class="p">{</span>
+ <span class="kd">const</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>You can get a channel&#39;s members by calling the 
+<a href="https://chatkitty.github.io/chatkitty-js/classes/_lib_chatkitty_.chatkitty.html#getchannelmembers"><code>ChatKitty.getChannelMembers(GetChannelMembersRequest)</code> method</a>.</p>
+<h2 id='channels-checking-if-channel-is-unread'>Checking if channel is unread</h2>
+<blockquote>
+<p>Checking if a channel has unread messages</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">getChannelUnread</span><span class="p">({</span>
+ <span class="na">channel</span><span class="p">:</span> <span class="nx">channel</span><span class="p">,</span>
+<span class="p">});</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">succeeded</span><span class="p">)</span> <span class="p">{</span>
+ <span class="kd">const</span> <span class="nx">unread</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">unread</span><span class="p">;</span> <span class="c1">// Handle unread boolean</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A channel is unread if it has any unread messages by the current user. You can check if a channel is 
+unread by calling the <a href="https://chatkitty.github.io/chatkitty-js/classes/_lib_chatkitty_.chatkitty.html#getchannelunread"><code>ChatKitty.getChannelUnread(GetChannelUnreadRequest)</code> method</a>.</p>
 <h1 id='chat-sessions'>Chat Sessions</h1>
 <p>Before a user can begin sending and receiving real-time messages and use in-app chat features like 
 typing indicators, delivery and read receipts, emoji and like reactions, etc, their device needs to 
@@ -672,17 +711,17 @@ start a chat session. </p>
 <blockquote>
 <p>Starting a chat session</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">startChatSession</span><span class="p">({</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">startChatSession</span><span class="p">({</span>
       <span class="na">channel</span><span class="p">:</span> <span class="nx">channel</span><span class="p">,</span>
       <span class="na">onReceivedMessage</span><span class="p">:</span> <span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{},</span>
     <span class="p">});</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">succeeded</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">session</span><span class="p">;</span> <span class="c1">// Handle session</span>
+  <span class="kd">const</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">session</span><span class="p">;</span> <span class="c1">// Handle session</span>
 <span class="p">}</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">failed</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
+  <span class="kd">const</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Start a chat session by calling the <code>ChatKitty.startChatSession(StartChatSessionRequest)</code> method. 
@@ -817,17 +856,17 @@ your chat session with the channel. </p>
 <blockquote>
 <p>Send a message to a channel</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">({</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">({</span>
   <span class="na">channel</span><span class="p">:</span> <span class="nx">channel</span><span class="p">,</span>
   <span class="na">body</span><span class="p">:</span> <span class="nx">messageText</span><span class="p">,</span>
 <span class="p">});</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">succeeded</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span> <span class="c1">// Handle message</span>
+  <span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span> <span class="c1">// Handle message</span>
 <span class="p">}</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">failed</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
+  <span class="kd">const</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>You can send a message by calling the <code>ChatKitty.sendMessage(SendMessageRequest)</code> method.</p>
@@ -848,16 +887,16 @@ and registering a <code>onReceivedMessage</code> handler.</p>
 <blockquote>
 <p>Get messages inside a channel</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">getMessages</span><span class="p">({</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">getMessages</span><span class="p">({</span>
   <span class="na">channel</span><span class="p">:</span> <span class="nx">channel</span><span class="p">,</span>
 <span class="p">});</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">succeeded</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">messages</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">paginator</span><span class="p">.</span><span class="nx">items</span><span class="p">;</span> <span class="c1">// Handle messages</span>
+  <span class="kd">const</span> <span class="nx">messages</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">paginator</span><span class="p">.</span><span class="nx">items</span><span class="p">;</span> <span class="c1">// Handle messages</span>
 <span class="p">}</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">failed</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
+  <span class="kd">const</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>You can get messages in a <a href="#channels">channel</a> by calling the <code>ChatKitty.getChannelMessages(GetMessagesRequest)</code> method.</p>
@@ -870,7 +909,7 @@ You can listen for these notifications and use them to build in-app notification
 <blockquote>
 <p>Listening for new in-app notifications</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">unsubscribe</span> <span class="o">=</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">onNotificationReceived</span><span class="p">((</span><span class="nx">notification</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">unsubscribe</span> <span class="o">=</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">onNotificationReceived</span><span class="p">((</span><span class="nx">notification</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="c1">// handle notification</span>
 <span class="p">});</span>
 
@@ -897,15 +936,18 @@ to registered notification listeners. Register a notification listener using the
 <table><thead>
 <tr>
 <th>Type</th>
+<th>Additional Data Properties</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td><code>SYSTEM:SENT:MESSAGE</code></td>
+<td><code>{ channelId: number, message: Message }</code></td>
 <td>Called when a system message was sent in another channel.</td>
 </tr>
 <tr>
 <td><code>USER:SENT:MESSAGE</code></td>
+<td><code>{ channelId: number, message: Message }</code></td>
 <td>Called when a user sent a message in another channel.</td>
 </tr>
 </tbody></table>
