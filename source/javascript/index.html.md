@@ -64,7 +64,7 @@ parameters to secure the user session.
 > Starting a user session
 
 ```javascript
-let result = await kitty.startSession({
+const result = await kitty.startSession({
   username: email,
   authParams: { // parameters to pass to authentication chat function
     password: password, 
@@ -72,11 +72,11 @@ let result = await kitty.startSession({
 });
 
 if (result.succeeded) {
-  let session = result.session; // Handle session
+  const session = result.session; // Handle session
 }
 
 if (result.failed) {
-  let error = result.error; // Handle error
+  const error = result.error; // Handle error
 }
 ```
 
@@ -90,16 +90,16 @@ determine if the user is allowed to start a session with their credentials.
 > Starting a guest user session
 
 ```javascript
-let result = await kitty.startSession({
+const result = await kitty.startSession({
   username: email,
 });
 
 if (result.succeeded) {
-  let session = result.session; // Handle session
+  const session = result.session; // Handle session
 }
 
 if (result.failed) {
-  let error = result.error; // Handle error
+  const error = result.error; // Handle error
 }
 ```
 
@@ -123,9 +123,9 @@ To end a user ChatKitty session, call the `ChatKitty.endSession()` method.
 > Get the current user
 
 ```javascript
-let result = await kitty.getCurrentUser();
+const result = await kitty.getCurrentUser();
 
-let user = result.user; // Handle user
+const user = result.user; // Handle user
 ```
 After starting a ChatKitty [user session](#authentication-starting-a-user-session), you can request the current user 
 anytime by calling the `ChatKitty.getCurrentUser()` method.
@@ -134,7 +134,7 @@ anytime by calling the `ChatKitty.getCurrentUser()` method.
 > Observing the current user changes
 
 ```javascript
-let unsubscribe = kitty.onCurrentUserChanged((user) => {
+const unsubscribe = kitty.onCurrentUserChanged((user) => {
   // handle new current user or current user changes
 });
 
@@ -166,8 +166,9 @@ method, taking the current user and returning a user with the changes to be appl
 
 # Channels
 Channels are the backbone of the ChatKitty chat experience. Users can join channels and receive 
-or send messages. ChatKitty broadcasts messages created in channels to **channel members** with active 
-**chat sessions** and sends **push notifications** to offline members.
+or send messages. After a user joins a channel, the user becomes a **channel member**. ChatKitty broadcasts 
+messages created in channels to channel members with active **chat sessions** and sends **push notifications** 
+to offline members.
 
 ## Channel types
 There are four types of channels;
@@ -196,17 +197,17 @@ Messages sent in open channels are <b>ephemeral</b> and not persisted by ChatKit
 > Creating a new channel
 
 ```javascript
-let result = await kitty.createChannel({
+const result = await kitty.createChannel({
   type: "PUBLIC",
   name: channelName,
 });
 
 if (result.succeeded) {
-  let channel = result.channel; // Handle channel
+  const channel = result.channel; // Handle channel
 }
 
 if (result.failed) {
-  let error = result.error; // Handle error
+  const error = result.error; // Handle error
 }
 ```
 
@@ -217,14 +218,14 @@ automatically a member of a group channel they created.
 > Get channels the current user can begin chat sessions in
 
 ```javascript
-let result = await kitty.getChannels();
+const result = await kitty.getChannels();
 
 if (result.succeeded) {
-  let channels = result.paginator.items; // Handle channels
+  const channels = result.paginator.items; // Handle channels
 }
 
 if (result.failed) {
-  let error = result.error; // Handle error
+  const error = result.error; // Handle error
 }
 ```
 
@@ -234,14 +235,14 @@ You can get channels the current user can chat in by calling the `ChatKitty.getC
 > Get group channels the current user can become a member of
 
 ```javascript
-let result = await kitty.getJoinableChannels();
+const result = await kitty.getJoinableChannels();
 
 if (result.succeeded) {
-  let channels = result.paginator.items; // Handle channels
+  const channels = result.paginator.items; // Handle channels
 }
 
 if (result.failed) {
-  let error = result.error; // Handle error
+  const error = result.error; // Handle error
 }
 ```
 
@@ -252,14 +253,14 @@ method.
 > Getting a channel by id
 
 ```javascript
-let result = await kitty.getChannel(channelId);
+const result = await kitty.getChannel(channelId);
 
 if (result.succeeded) {
-  let channel = result.channel; // Handle channel
+  const channel = result.channel; // Handle channel
 }
 
 if (result.failed) {
-  let error = result.error; // Handle error
+  const error = result.error; // Handle error
 }
 ```
 
@@ -273,16 +274,52 @@ method.
 const result = await kitty.joinChannel({ channel: channel });
 
 if (result.succeeded) {
-  let channel = result.channel; // Handle channel
+  const channel = result.channel; // Handle channel
 }
 
 if (result.failed) {
-  let error = result.error; // Handle error
+  const error = result.error; // Handle error
 }
 ```
 
 The current user can join a group channel, becoming a member, by using the `ChatKitty.joinChannel(JoinChannelRequest)` 
 method.
+
+## Getting channel members
+> Getting channel members
+
+```javascript
+const result = await kitty.getChannelMembers({
+ channel: channel,
+});
+
+if (result.succeeded) {
+ const members = result.paginator.items; // Handle members
+}
+
+if (result.failed) {
+ const error = result.error; // Handle error
+}
+```
+
+You can get a channel's members by calling the 
+[`ChatKitty.getChannelMembers(GetChannelMembersRequest)` method](https://chatkitty.github.io/chatkitty-js/classes/_lib_chatkitty_.chatkitty.html#getchannelmembers).
+
+## Checking if channel is unread
+> Checking if a channel has unread messages
+
+```javascript
+const result = await kitty.getChannelUnread({
+ channel: channel,
+});
+
+if (result.succeeded) {
+ const unread = result.unread; // Handle unread boolean
+}
+```
+
+A channel is unread if it has any unread messages by the current user. You can check if a channel is 
+unread by calling the [`ChatKitty.getChannelUnread(GetChannelUnreadRequest)` method](https://chatkitty.github.io/chatkitty-js/classes/_lib_chatkitty_.chatkitty.html#getchannelunread).
 
 # Chat Sessions
 Before a user can begin sending and receiving real-time messages and use in-app chat features like 
@@ -297,17 +334,17 @@ start a chat session.
 > Starting a chat session
 
 ```javascript
-let result = kitty.startChatSession({
+const result = kitty.startChatSession({
       channel: channel,
       onReceivedMessage: (message) => {},
     });
 
 if (result.succeeded) {
-  let session = result.session; // Handle session
+  const session = result.session; // Handle session
 }
 
 if (result.failed) {
-  let error = result.error; // Handle error
+  const error = result.error; // Handle error
 }
 ```
 
@@ -423,17 +460,17 @@ Administrators can send files messages with one, or many file attachments.
 > Send a message to a channel
 
 ```javascript
-let result = await kitty.sendMessage({
+const result = await kitty.sendMessage({
   channel: channel,
   body: messageText,
 });
 
 if (result.succeeded) {
-  let message = result.message; // Handle message
+  const message = result.message; // Handle message
 }
 
 if (result.failed) {
-  let error = result.error; // Handle error
+  const error = result.error; // Handle error
 }
 ```
 
@@ -458,16 +495,16 @@ and registering a `onReceivedMessage` handler.
 > Get messages inside a channel
 
 ```javascript
-let result = await kitty.getMessages({
+const result = await kitty.getMessages({
   channel: channel,
 });
 
 if (result.succeeded) {
-  let messages = result.paginator.items; // Handle messages
+  const messages = result.paginator.items; // Handle messages
 }
 
 if (result.failed) {
-  let error = result.error; // Handle error
+  const error = result.error; // Handle error
 }
 ```
 
@@ -483,7 +520,7 @@ You can listen for these notifications and use them to build in-app notification
 > Listening for new in-app notifications
 
 ```javascript
-let unsubscribe = kitty.onNotificationReceived((notification) => {
+const unsubscribe = kitty.onNotificationReceived((notification) => {
   // handle notification
 });
 
@@ -510,7 +547,7 @@ kitty.onNotificationReceived((notification) => {
 });
 ```
 
-Type | Description 
----- | -----------
-`SYSTEM:SENT:MESSAGE` | Called when a system message was sent in another channel.
-`USER:SENT:MESSAGE` | Called when a user sent a message in another channel.
+Type | Additional Data Properties | Description 
+---- | ------------------------- | -----------
+`SYSTEM:SENT:MESSAGE` | `{ channelId: number, message: Message }`| Called when a system message was sent in another channel.
+`USER:SENT:MESSAGE` | `{ channelId: number, message: Message }` | Called when a user sent a message in another channel.

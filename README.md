@@ -51,7 +51,7 @@ with multi-platform frameworks like React-Native and Ionic.
 Sample code:
 
 ```js
-let kitty = ChatKitty.getInstance(CHATKITTY_API_KEY);
+const kitty = ChatKitty.getInstance(CHATKITTY_API_KEY);
 
 useEffect(() => {
   // start real-time chat session
