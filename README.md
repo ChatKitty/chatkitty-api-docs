@@ -1,6 +1,6 @@
 # ChatKitty API Docs
 
-Source code for https://docs.chatkitty.com/
+Source code for https://docs.chatkitty.com
 
 <p align="center">
   <img src="https://www.chatkitty.com/images/banner-logo-dark.png" alt="ChatKitty: Cloud Chat Platform" width="315">
