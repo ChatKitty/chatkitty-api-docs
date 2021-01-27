@@ -235,7 +235,7 @@ You can get channels the current user can chat in by calling the `ChatKitty.getC
 > Get group channels the current user can become a member of
 
 ```javascript
-const result = await kitty.getJoinableChannels();
+const result = await kitty.getChannels({ joinable: true });
 
 if (result.succeeded) {
   const channels = result.paginator.items; // Handle channels
@@ -246,7 +246,7 @@ if (result.failed) {
 }
 ```
 
-Get channels the current user can join, becoming a member, by calling the `ChatKitty.getJoinableChannels()` 
+Get channels the current user can join, becoming a member, by calling the `ChatKitty.getChannels({ joinable: true })` 
 method.
 
 ## Getting a channel
