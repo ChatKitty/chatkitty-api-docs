@@ -623,7 +623,7 @@ automatically a member of a group channel they created.</p>
 <blockquote>
 <p>Get group channels the current user can become a member of</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">getJoinableChannels</span><span class="p">();</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">getChannels</span><span class="p">({</span> <span class="na">joinable</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">succeeded</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="nx">channels</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">paginator</span><span class="p">.</span><span class="nx">items</span><span class="p">;</span> <span class="c1">// Handle channels</span>
@@ -633,7 +633,7 @@ automatically a member of a group channel they created.</p>
   <span class="kd">const</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Get channels the current user can join, becoming a member, by calling the <code>ChatKitty.getJoinableChannels()</code> 
+<p>Get channels the current user can join, becoming a member, by calling the <code>ChatKitty.getChannels({ joinable: true })</code> 
 method.</p>
 <h2 id='channels-getting-a-channel'>Getting a channel</h2>
 <blockquote>
