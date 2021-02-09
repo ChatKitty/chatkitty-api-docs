@@ -854,11 +854,40 @@ your chat session with the channel. </p>
 </aside>
 <h2 id='messages-send-a-message'>Send a message</h2>
 <blockquote>
-<p>Send a message to a channel</p>
+<p>Sending a text message to a channel</p>
 </blockquote>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">({</span>
   <span class="na">channel</span><span class="p">:</span> <span class="nx">channel</span><span class="p">,</span>
   <span class="na">body</span><span class="p">:</span> <span class="nx">messageText</span><span class="p">,</span>
+<span class="p">});</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">succeeded</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span> <span class="c1">// Handle message</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">failed</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p>Sending a file message to a channel</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">({</span>
+ <span class="na">channel</span><span class="p">:</span> <span class="nx">channel</span><span class="p">,</span>
+ <span class="na">file</span><span class="p">:</span> <span class="nx">file</span><span class="p">,</span>
+ <span class="na">progressListener</span><span class="p">:</span> <span class="p">{</span>
+  <span class="na">onStarted</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+   <span class="c1">// Handle file upload started</span>
+  <span class="p">},</span>
+
+  <span class="na">onProgress</span><span class="p">:</span> <span class="p">(</span><span class="nx">progress</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+   <span class="c1">// Handle file upload process</span>
+  <span class="p">},</span>
+
+  <span class="na">onCompleted</span><span class="p">:</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+   <span class="c1">// Handle file upload completed</span>
+  <span class="p">},</span>
+ <span class="p">},</span>
 <span class="p">});</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">succeeded</span><span class="p">)</span> <span class="p">{</span>
