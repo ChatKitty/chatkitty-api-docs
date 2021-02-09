@@ -457,12 +457,42 @@ Administrators can send files messages with one, or many file attachments.
 </aside>
 
 ## Send a message
-> Send a message to a channel
+> Sending a text message to a channel
 
 ```javascript
 const result = await kitty.sendMessage({
   channel: channel,
   body: messageText,
+});
+
+if (result.succeeded) {
+  const message = result.message; // Handle message
+}
+
+if (result.failed) {
+  const error = result.error; // Handle error
+}
+```
+
+> Sending a file message to a channel
+
+```javascript
+const result = await kitty.sendMessage({
+ channel: channel,
+ file: file,
+ progressListener: {
+  onStarted: () => {
+   // Handle file upload started
+  },
+
+  onProgress: (progress) => {
+   // Handle file upload process
+  },
+
+  onCompleted: (result) => {
+   // Handle file upload completed
+  },
+ },
 });
 
 if (result.succeeded) {
