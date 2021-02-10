@@ -194,12 +194,30 @@ Messages sent in open channels are <b>ephemeral</b> and not persisted by ChatKit
 </aside>
 
 ## Creating a channel
-> Creating a new channel
+> Creating a new public channel
 
 ```javascript
 const result = await kitty.createChannel({
   type: "PUBLIC",
   name: channelName,
+});
+
+if (result.succeeded) {
+  const channel = result.channel; // Handle channel
+}
+
+if (result.failed) {
+  const error = result.error; // Handle error
+}
+```
+
+> Creating a new direct channel
+
+```javascript
+const result = await kitty.createChannel({
+  type: "DIRECT",
+  name: channelName,
+  members: [{ id: userId }, { id: anotherUserId }],
 });
 
 if (result.succeeded) {
