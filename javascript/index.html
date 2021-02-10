@@ -587,11 +587,28 @@ Messages sent in open channels are <b>ephemeral</b> and not persisted by ChatKit
 </aside>
 <h2 id='channels-creating-a-channel'>Creating a channel</h2>
 <blockquote>
-<p>Creating a new channel</p>
+<p>Creating a new public channel</p>
 </blockquote>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">createChannel</span><span class="p">({</span>
   <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">PUBLIC</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">name</span><span class="p">:</span> <span class="nx">channelName</span><span class="p">,</span>
+<span class="p">});</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">succeeded</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">channel</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">channel</span><span class="p">;</span> <span class="c1">// Handle channel</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">failed</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span> <span class="c1">// Handle error</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p>Creating a new direct channel</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">createChannel</span><span class="p">({</span>
+  <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">DIRECT</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">name</span><span class="p">:</span> <span class="nx">channelName</span><span class="p">,</span>
+  <span class="na">members</span><span class="p">:</span> <span class="p">[{</span> <span class="na">id</span><span class="p">:</span> <span class="nx">userId</span> <span class="p">},</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="nx">anotherUserId</span> <span class="p">}],</span>
 <span class="p">});</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">succeeded</span><span class="p">)</span> <span class="p">{</span>
