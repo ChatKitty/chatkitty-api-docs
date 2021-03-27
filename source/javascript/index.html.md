@@ -303,6 +303,20 @@ if (result.failed) {
 The current user can join a group channel, becoming a member, by using the `ChatKitty.joinChannel(JoinChannelRequest)` 
 method.
 
+## Listening for joined channels
+> Listening for joined channels
+
+```javascript
+const unsubscribe = kitty.onJoinedChannel((channel) => {
+  // handle channel
+});
+
+unsubscribe(); // call unsubscribe function when you're no longer interested in recieving updates
+```
+
+When user joins a channel or is added to a channel by another user or through the Platform API, registered 
+**on joined channel** listeners are notified. Register a listener using the `ChatKitty.onJoinedChannel((channel: Channel) => void)` method.
+
 ## Getting channel members
 > Getting channel members
 
