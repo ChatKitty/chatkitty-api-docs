@@ -368,6 +368,9 @@
                 <a href="#channels-joining-a-channel" class="toc-h2 toc-link" data-title="Joining a channel">Joining a channel</a>
               </li>
               <li>
+                <a href="#channels-listening-for-joined-channels" class="toc-h2 toc-link" data-title="Listening for joined channels">Listening for joined channels</a>
+              </li>
+              <li>
                 <a href="#channels-getting-channel-members" class="toc-h2 toc-link" data-title="Getting channel members">Getting channel members</a>
               </li>
               <li>
@@ -684,6 +687,18 @@ method.</p>
 </code></pre></div>
 <p>The current user can join a group channel, becoming a member, by using the <code>ChatKitty.joinChannel(JoinChannelRequest)</code> 
 method.</p>
+<h2 id='channels-listening-for-joined-channels'>Listening for joined channels</h2>
+<blockquote>
+<p>Listening for joined channels</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">unsubscribe</span> <span class="o">=</span> <span class="nx">kitty</span><span class="p">.</span><span class="nx">onJoinedChannel</span><span class="p">((</span><span class="nx">channel</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// handle channel</span>
+<span class="p">});</span>
+
+<span class="nx">unsubscribe</span><span class="p">();</span> <span class="c1">// call unsubscribe function when you're no longer interested in recieving updates</span>
+</code></pre></div>
+<p>When user joins a channel or is added to a channel by another user or through the Platform API, registered 
+<strong>on joined channel</strong> listeners are notified. Register a listener using the <code>ChatKitty.onJoinedChannel((channel: Channel) =&gt; void)</code> method.</p>
 <h2 id='channels-getting-channel-members'>Getting channel members</h2>
 <blockquote>
 <p>Getting channel members</p>
