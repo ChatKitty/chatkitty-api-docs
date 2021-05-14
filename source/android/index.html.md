@@ -137,18 +137,10 @@ or send messages. ChatKitty broadcasts messages created in channels to **channel
 
 ## Channel Types
 
-There are four types of channels;
-
-### Open Channel
-Open channels provide Twitch-style chats where many users can join the chat without invites and send 
-messages. 
-
-<aside class="notice">
-Messages sent in open channels are <b>ephemeral</b> and not persisted by ChatKitty.
-</aside>
+There are three types of channels;
 
 ### Public Channel
-Users can join public channels by themselves (like an open chat) or via invites from an existing channel member.
+Users can join public channels by themselves or via invites from an existing channel member.
 ChatKitty persists messages sent in public channels by default but this behaviour can be configured.
 
 ### Private Channel
