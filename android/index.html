@@ -483,16 +483,9 @@ anytime by calling the <code>ChatKitty.getCurrentUser(ChatKittyCallback&lt;GetCu
 or send messages. ChatKitty broadcasts messages created in channels to <strong>channel members</strong> with active 
 <strong>chat sessions</strong> and sends <strong>push notifications</strong> to offline members.</p>
 <h2 id='channels-channel-types'>Channel Types</h2>
-<p>There are four types of channels;</p>
-<h3 id='channels-channel-types-open-channel'>Open Channel</h3>
-<p>Open channels provide Twitch-style chats where many users can join the chat without invites and send 
-messages. </p>
-
-<aside class="notice">
-Messages sent in open channels are <b>ephemeral</b> and not persisted by ChatKitty.
-</aside>
+<p>There are three types of channels;</p>
 <h3 id='channels-channel-types-public-channel'>Public Channel</h3>
-<p>Users can join public channels by themselves (like an open chat) or via invites from an existing channel member.
+<p>Users can join public channels by themselves or via invites from an existing channel member.
 ChatKitty persists messages sent in public channels by default but this behaviour can be configured.</p>
 <h3 id='channels-channel-types-private-channel'>Private Channel</h3>
 <p>Users can only join private channels via invites from an existing channel member.
